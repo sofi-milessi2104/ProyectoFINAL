@@ -1,7 +1,7 @@
 <?php
 // Definimos las credenciales para la conexión a la base de datos
 $host = "localhost";       // Servidor donde está la base de datos (local en este caso)
-$dbname = "Nobredb"; // Nombre de la base de datos
+$dbname = "hotel2"; // Nombre de la base de datos
 $username = "root";        // Usuario de la base de datos (por defecto en XAMPP o WAMP)
 $password = "";            // Contraseña del usuario (vacía por defecto en XAMPP/WAMP)
 
