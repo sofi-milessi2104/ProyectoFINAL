@@ -17,7 +17,7 @@ function agregarReserva($nombre, $apellido, $email, $adultos, $niños, $fecha_in
     }
 }
 
-function eliminarHabitacion($id) {
+function eliminarReserva($id) {
     global $reservaModel;
     if ($reservaModel->eliminar($id)) {
         echo json_encode(["message" => "Reserva eliminada correctamente."]);

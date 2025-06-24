@@ -8,16 +8,16 @@ function obtenerPromocion() {
     echo json_encode($promocionModel->obtenerPromocion());
 }
 
-function agregarHabitacion($tipo_hab,$descripcion_hab,$cantidad) {
+function agregarPromocion($tipo_promo) {
     global $promocionModel;
-    if ($promocionModel->agregar($tipo_hab,$descripcion_hab,$cantidad)) {
-        echo json_encode(["message" => "Habitacion agregada correctamente."]);
+    if ($promocionModel->agregar($tipo_promo)) {
+        echo json_encode(["message" => "Promocion agregada correctamente."]);
     } else {
-        echo json_encode(["message" => "Error al agregar la habitacion."]);
+        echo json_encode(["message" => "Error al agregar la promocion."]);
     }
 }
 
-function eliminarHabitacion($id) {
+function eliminarPromocion($id) {
     global $promocionModel;
     if ($promocionModel->eliminar($id)) {
         echo json_encode(["message" => "Habitacion eliminada correctamente."]);
