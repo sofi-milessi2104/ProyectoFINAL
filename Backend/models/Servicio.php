@@ -14,7 +14,7 @@ class Servicio {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function agregar($tipo_servicio, $precio, $descripcion_servicio,) {
+    public function agregar($tipo_servicio, $precio, $descripcion_servicio) {
         $stmt = $this->pdo->prepare("INSERT INTO servicios (tipo_servicio, precio, descripcion_servicio) VALUES (:tipo_servicio, :precio, :descripcion_servicio)");
         return $stmt->execute(["tipo_servicio" => $tipo_servicio, "precio" => $precio, "descripcion_servicio" => $descripcion_servicio]);
     }

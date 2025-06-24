@@ -5,7 +5,7 @@ $promocionModel = new Promocion($pdo);
 
 function obtenerPromocion() {
     global $promocionModel;
-    echo json_encode($promocionModel->obtenerhabitacion());
+    echo json_encode($promocionModel->obtenerPromocion());
 }
 
 function agregarHabitacion($tipo_hab,$descripcion_hab,$cantidad) {

@@ -5,7 +5,7 @@ $habitacionModel = new Habitacion($pdo);
 
 function obtenerHabitacion() {
     global $habitacionModel;
-    echo json_encode($habitacionModel->obtenerhabitacion());
+    echo json_encode($habitacionModel->obtenerHabitacion());
 }
 
 function agregarHabitacion($tipo_hab,$descripcion_hab,$cantidad) {
