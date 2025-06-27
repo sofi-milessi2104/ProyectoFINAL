@@ -10,7 +10,7 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 if ($requestMethod == "GET") {
     $solicitud = $_GET["url"];
-    if ($solicitud == "admin") {
+if ($solicitud == "admin") {
     obtenerAdmin();
 } else if ($solicitud == "habitacion") {
     obtenerHabitacion();

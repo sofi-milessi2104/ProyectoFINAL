@@ -8,8 +8,8 @@ class Servicio {
         $this->pdo = $pdo;
     }
 
-    public function obtenerTodos() {
-        $stmt = $this->pdo->prepare("SELECT * FROM servicios");
+    public function obtenerServicio() {
+        $stmt = $this->pdo->prepare("SELECT * FROM servicio");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

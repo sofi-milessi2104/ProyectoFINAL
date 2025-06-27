@@ -8,8 +8,8 @@ class Habitacion {
         $this->pdo = $pdo;
     }
 
-    public function obtenerTodos() {
-        $stmt = $this->pdo->prepare("SELECT * FROM habitaciones");
+    public function obtenerHabitacion() {
+        $stmt = $this->pdo->prepare("SELECT * FROM habitacion");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

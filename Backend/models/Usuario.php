@@ -8,8 +8,8 @@ class Usuario {
         $this->pdo = $pdo;
     }
 
-    public function obtenerTodos() {
-        $stmt = $this->pdo->prepare("SELECT * FROM usuarios");
+    public function obtenerUsuario() {
+        $stmt = $this->pdo->prepare("SELECT * FROM usuario");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
