@@ -8,8 +8,8 @@ class Reserva {
         $this->pdo = $pdo;
     }
 
-    public function obtenerTodos() {
-        $stmt = $this->pdo->prepare("SELECT * FROM reservas");
+    public function obtenerReserva() {
+        $stmt = $this->pdo->prepare("SELECT * FROM reserva");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

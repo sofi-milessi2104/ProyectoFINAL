@@ -8,8 +8,8 @@ class Promocion {
         $this->pdo = $pdo;
     }
 
-    public function obtenerTodos() {
-        $stmt = $this->pdo->prepare("SELECT * FROM promociones");
+    public function obtenerPromocion() {
+        $stmt = $this->pdo->prepare("SELECT * FROM promocion");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

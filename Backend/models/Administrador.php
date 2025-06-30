@@ -8,8 +8,8 @@ class Admin {
         $this->pdo = $pdo;
     }
 
-    public function obtenerTodos() {
-        $stmt = $this->pdo->prepare("SELECT * FROM administradores");
+    public function obtenerAdmin() {
+        $stmt = $this->pdo->prepare("SELECT * FROM administrador");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
