@@ -1,25 +1,25 @@
 <?php
-require "../models/Admin.php";
+require "../models/Administrador.php";
 
-$adminModel = new Admin($pdo);
+$administradorModel = new Administrador($pdo);
 
-function obtenerAdmin() {
-    global $adminModel;
-    echo json_encode($adminModel->obtenerAdmin());
+function obtenerAdministrador() {
+    global $administradorModel;
+    echo json_encode($administradorModel->obtenerAdministrador());
 }
 
-function agregarAdmin($nombre_completo, $email, $area) {
-    global $adminModel;
-    if ($adminModel->agregar($nombre_completo, $email, $area)) {
+function agregarAdministrador($nombre_completo, $email, $area) {
+    global $administradorModel;
+    if ($administradorModel->agregar($nombre_completo, $email, $area)) {
         echo json_encode(["message" => "Administrador agregado correctamente."]);
     } else {
         echo json_encode(["message" => "Error al agregar el administrador."]);
     }
 }
 
-function eliminarAdmin($id) {
-    global $adminModel;
-    if ($adminModel->eliminar($id)) {
+function eliminarAdministrador($id) {
+    global $administradorModel;
+    if ($administradorModel->eliminar($id)) {
         echo json_encode(["message" => "Administrador eliminado correctamente."]);
     } else {
         echo json_encode(["message" => "Error al eliminar el administrador."]);

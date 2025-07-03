@@ -30,7 +30,7 @@ if ($solicitud == "admin") {
 elseif ($requestMethod == "POST") {
     $solicitud = $_GET["url"] ?? null;
 
-    if ($solicitud == "admin") {
+    if ($solicitud == "administrador") {
         $nombre_completo = $_POST["nombre_completo"];
         $email = $_POST["email"];
         $area = $_POST["area"];
@@ -41,10 +41,12 @@ elseif ($requestMethod == "POST") {
         $tipo_hab = $_POST["tipo_hab"];
         $descripcion_hab = $_POST["descripcion_hab"];
         $cantidad = $_POST["cantidad"];
+        echo "Datos recibidos: Tipo de Habitación: $tipo_hab, Descripción: $descripcion_hab, Cantidad: $cantidad";
         agregarHabitacion($tipo_hab,$descripcion_hab,$cantidad);
         global $habitacionModel;
     } elseif ($solicitud == "promocion") {
         $tipo_promo = $_POST["tipo_promo"];
+        echo "Datos recibidos: Tipo de Promoción: $tipo_promo";
         agregarPromocion($tipo_promo);
         global $promocionModel;
     } elseif ($solicitud == "reserva") {
@@ -60,12 +62,14 @@ elseif ($requestMethod == "POST") {
         $promoción = $_POST["promoción"];
         $huesped = $_POST["huesped"];
         $tarjeta = $_POST["tarjeta"];
+        echo "Datos recibidos: Nombre: $nombre, Apellido: $apellido, Email: $email, Adultos: $adultos, Niños: $niños, Fecha Inicio: $fecha_inicio, Fecha Fin: $fecha_fin, Tipo de Habitación: $tipo_hab, Tipo de Servicio: $tipo_servicio, Promoción: $promoción, Huesped: $huesped, Tarjeta: $tarjeta";
         agregarReserva($nombre, $apellido, $email, $adultos, $niños, $fecha_inicio, $fecha_fin, $tipo_hab, $tipo_servicio, $promoción, $huesped, $tarjeta);
         global $reservaModel;
     } elseif ($solicitud == "servicio") {
         $tipo_servicio = $_POST["tipo_servicio"];
         $precio = $_POST["precio"];
         $descripcion_servicio = $_POST["descripcion_servicio"];
+        echo "Datos recibidos: Tipo de Servicio: $tipo_servicio, Precio: $precio, Descripción: $descripcion_servicio";
         agregarServicio($tipo_servicio, $precio, $descripcion_servicio);
         global $servicioModel;
     } elseif ($solicitud == "usuario") {
@@ -73,6 +77,7 @@ elseif ($requestMethod == "POST") {
         $apellido = $_POST["apellido"];
         $email = $_POST["email"];
         $celular = $_POST["celular"];
+        echo "Datos recibidos: Nombre: $nombre, Apellido: $apellido, Email: $email, Celular: $celular";
         agregarUsuario($nombre, $apellido, $email, $celular);
         global $usuarioModel;
     } else {
