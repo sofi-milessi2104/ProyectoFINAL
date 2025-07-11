@@ -1,17 +1,3 @@
-:root {
-    --color-primary-dark: #2F4F7F; /* Azul oscuro elegante */
-    --color-primary-blue: #3A6EA5; /* Azul medio, ideal para acentos principales */
-    --color-accent-teal: #1F7C8A; /* Teal/Aguamarina, vibrante y fresco */
-    --color-light-peach: #F5E8E4; /* Melocotón muy suave, luminoso */
-    --color-cream: #F8F7F3; /* Crema/Blanco roto, muy luminoso */
-    --color-white: #FFFFFF;
-    --color-black: #000000;
-    --color-text-dark: #333333; /* Gris oscuro para texto principal */
-    --color-text-light: #666666; /* Gris más claro para texto secundario */
-    --color-border-light: #E0E0E0; /* Para bordes sutiles */
-}
-
-
 /* Generales y Reseteo Básico */
 * {
     margin: 0;
@@ -33,7 +19,7 @@ body {
 }
 
 /* Header y Navegación */
-.main-header {
+header {
     background-color: var(--color-white); /* Fondo del header, blanco luminoso */
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     position: relative;
@@ -47,12 +33,12 @@ body {
     padding: 15px 20px;
 }
 
-.main-nav .logo img {
+.main-nav .logo {
     height: 60px; /* Ajusta el tamaño de tu logo si es necesario */
     vertical-align: middle;
 }
 
-.main-nav .nav-list {
+.nav-list {
     list-style: none;
     display: flex;
 }
@@ -74,7 +60,7 @@ body {
 }
 
 /* Sección Hero (Banner principal) */
-.hero-section {
+.info {
     background: url('../img/1.jpg') no-repeat center center/cover; /* Usaremos tu imagen 1.jpg */
     color: var(--color-white);
     text-align: center;
@@ -87,7 +73,7 @@ body {
     z-index: 0;
 }
 
-.hero-section::before { /* Capa oscura para mejor lectura del texto */
+.info::before { /* Capa oscura para mejor lectura del texto */
     content: '';
     position: absolute;
     top: 0;
@@ -220,75 +206,4 @@ p {
 
 .main-footer .social-links a:hover {
     color: var(--color-accent-teal);
-}
-
-/* Media Queries para Responsividad */
-@media (max-width: 992px) {
-    .hero-section h1 {
-        font-size: 3em;
-    }
-    h2 {
-        font-size: 2.2em;
-    }
-}
-
-@media (max-width: 768px) {
-    .main-nav {
-        flex-direction: column;
-        padding: 10px 20px;
-    }
-    .main-nav .logo img {
-        height: 50px;
-        margin-bottom: 10px;
-    }
-    .main-nav .nav-list {
-        margin-top: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .main-nav .nav-list li {
-        margin: 5px 15px;
-    }
-    .hero-section {
-        height: 450px;
-        padding: 80px 20px;
-    }
-    .hero-section h1 {
-        font-size: 2.5em;
-    }
-    .hero-section p {
-        font-size: 1.1em;
-    }
-    h2 {
-        font-size: 2em;
-        margin-bottom: 30px;
-    }
-    .section-padding {
-        padding: 60px 0;
-    }
-}
-
-@media (max-width: 576px) {
-    .hero-section h1 {
-        font-size: 2em;
-    }
-    .hero-section p {
-        font-size: 1em;
-    }
-    .btn-primary {
-        padding: 12px 25px;
-        font-size: 0.9em;
-    }
-    .features-grid {
-        grid-template-columns: 1fr;
-    }
-    .feature-item {
-        padding: 30px;
-    }
-    h3 {
-        font-size: 1.5em;
-    }
-    p {
-        font-size: 1em;
-    }
 }
