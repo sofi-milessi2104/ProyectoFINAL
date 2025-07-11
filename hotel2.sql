@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-06-2025 a las 20:22:56
+-- Tiempo de generación: 03-07-2025 a las 20:28:32
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -24,15 +24,24 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `admin`
+-- Estructura de tabla para la tabla `administrador`
 --
 
-CREATE TABLE `admin` (
+CREATE TABLE `administrador` (
   `ci` int(11) NOT NULL,
-  `nombre completo` varchar(100) NOT NULL,
+  `nombre_completo` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `area` set('Recursos humanos','Administración','Gerencia') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `administrador`
+--
+
+INSERT INTO `administrador` (`ci`, `nombre_completo`, `email`, `area`) VALUES
+(10123456, 'Laura Fernández', 'laura.fernandez@empresa.com', 'Recursos humanos'),
+(10234567, 'Carlos Gómez', 'carlos.gomez@empresa.com', 'Administración'),
+(10345678, 'Ana Torres', 'ana.torres@empresa.com', 'Gerencia');
 
 -- --------------------------------------------------------
 
@@ -47,6 +56,13 @@ CREATE TABLE `habitacion` (
   `cantidad` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `habitacion`
+--
+
+INSERT INTO `habitacion` (`id_hab`, `tipo_hab`, `descripcion_hab`, `cantidad`) VALUES
+(1, 'loft', 'Habitación tipo loft con vista al jardín', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -57,6 +73,18 @@ CREATE TABLE `promocion` (
   `id_promo` int(11) NOT NULL,
   `tipo_promo` set('DaySpa','DayUse','Cupón','FamilyPlan','Media pensión','temporada') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `promocion`
+--
+
+INSERT INTO `promocion` (`id_promo`, `tipo_promo`) VALUES
+(1, 'DaySpa'),
+(2, 'DayUse'),
+(3, 'Cupón'),
+(4, 'FamilyPlan'),
+(5, 'Media pensión'),
+(6, 'temporada');
 
 -- --------------------------------------------------------
 
@@ -77,8 +105,19 @@ CREATE TABLE `reserva` (
   `tipo_servicio` set('Restaurante','Spa & Masajes','Gym','Sauna','Piscina interior','Piscina exterior','Estacionamiento') NOT NULL,
   `promoción` set('DaySpa','DayUse','Cupón','FamilyPlan','Media pensión','temporada') NOT NULL,
   `huesped` set('si','no') NOT NULL,
-  `tarjeta` int(100) NOT NULL
+  `tarjeta` varchar(20) NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reserva`
+--
+
+INSERT INTO `reserva` (`id_reserva`, `nombre`, `apellido`, `email`, `adultos`, `niños`, `fecha_inicio`, `fecha_fin`, `tipo_hab`, `tipo_servicio`, `promoción`, `huesped`, `tarjeta`, `id_usuario`) VALUES
+(1, 'Mateo', 'Pérez', 'mateo.perez@example.com', '1', '', '2025-08-01', '2025-08-03', 'suit', 'Restaurante,Gym', 'Cupón', 'no', '2345678901234567', 1),
+(2, 'Sofía', 'González', 'sofia.gonzalez@example.com', '2', '2', '2025-09-05', '2025-09-10', 'river loft', 'Piscina exterior,Estacionamiento', 'FamilyPlan', 'si', '3456789012345678', 2),
+(3, 'Juan', 'Rodríguez', 'juan.rodriguez@example.com', '3', '1', '2025-07-20', '2025-07-25', 'super loft', 'Restaurante,Spa & Masajes', 'Media pensión', 'no', '4567890123456789', 3),
+(4, 'Valentina', 'Fernández', 'valentina.fernandez@example.com', '1', '', '2025-10-01', '2025-10-05', 'river suit', 'Gym,Piscina interior', 'DayUse', 'si', '5678901234567890', 4);
 
 -- --------------------------------------------------------
 
@@ -93,6 +132,19 @@ CREATE TABLE `servicio` (
   `descripcion_servicio` varchar(400) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `servicio`
+--
+
+INSERT INTO `servicio` (`id_servicio`, `tipo_servicio`, `precio`, `descripcion_servicio`) VALUES
+(1, 'Restaurante', 25000, 'Servicio de restaurante con menú a la carta y desayuno buffet incluido.'),
+(2, 'Spa & Masajes', 40000, 'Sesión de spa completa con masajes relajantes y aromaterapia.'),
+(3, 'Gym', 15000, 'Acceso ilimitado al gimnasio totalmente equipado durante la estadía.'),
+(4, 'Sauna', 12000, 'Uso de sauna seca y húmeda, ideal para relajación.'),
+(5, 'Piscina interior', 20000, 'Piscina climatizada abierta todo el año con zona de relajación.'),
+(6, 'Piscina exterior', 18000, 'Piscina al aire libre con servicio de bar y camastros.'),
+(7, 'Estacionamiento', 10000, 'Estacionamiento privado con vigilancia las 24 horas.');
+
 -- --------------------------------------------------------
 
 --
@@ -104,17 +156,27 @@ CREATE TABLE `usuario` (
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) NOT NULL,
   `email` text NOT NULL,
-  `celular` int(15) NOT NULL
+  `celular` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id_usuario`, `nombre`, `apellido`, `email`, `celular`) VALUES
+(1, 'Mateo', 'Pérez', 'mateo.perez@example.com', '59892345678'),
+(2, 'Sofía', 'González', 'sofia.gonzalez@example.com', '59893456789'),
+(3, 'Juan', 'Rodríguez', 'juan.rodriguez@example.com', '59894567890'),
+(4, 'Valentina', 'Fernández', 'valentina.fernandez@example.com', '59895678901');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `admin`
+-- Indices de la tabla `administrador`
 --
-ALTER TABLE `admin`
+ALTER TABLE `administrador`
   ADD PRIMARY KEY (`ci`);
 
 --
@@ -133,7 +195,8 @@ ALTER TABLE `promocion`
 -- Indices de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  ADD PRIMARY KEY (`id_reserva`);
+  ADD PRIMARY KEY (`id_reserva`),
+  ADD KEY `fk_reserva_usuario` (`id_usuario`);
 
 --
 -- Indices de la tabla `servicio`
@@ -152,50 +215,50 @@ ALTER TABLE `usuario`
 --
 
 --
--- AUTO_INCREMENT de la tabla `admin`
+-- AUTO_INCREMENT de la tabla `administrador`
 --
-ALTER TABLE `admin`
-  MODIFY `ci` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `administrador`
+  MODIFY `ci` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10345679;
 
 --
 -- AUTO_INCREMENT de la tabla `habitacion`
 --
 ALTER TABLE `habitacion`
-  MODIFY `id_hab` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_hab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `promocion`
 --
 ALTER TABLE `promocion`
-  MODIFY `id_promo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_promo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `servicio`
 --
 ALTER TABLE `servicio`
-  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `usuario`
+-- Filtros para la tabla `reserva`
 --
-ALTER TABLE `usuario`
-  ADD CONSTRAINT `reserva_servicio` FOREIGN KEY (`id_usuario`) REFERENCES `reserva` (`id_reserva`);
+ALTER TABLE `reserva`
+  ADD CONSTRAINT `fk_reserva_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

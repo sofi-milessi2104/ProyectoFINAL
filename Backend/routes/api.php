@@ -1,5 +1,5 @@
 <?php
-require "../controllers/admin.php";
+require "../controllers/administrador.php";
 require "../controllers/habitacion.php";
 require "../controllers/promocion.php";
 require "../controllers/reserva.php";
@@ -10,8 +10,8 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 if ($requestMethod == "GET") {
     $solicitud = $_GET["url"];
-if ($solicitud == "admin") {
-    obtenerAdmin();
+if ($solicitud == "administrador") {
+    obtenerAdministrador();
 } else if ($solicitud == "habitacion") {
     obtenerHabitacion();
 } else if ($solicitud == "promocion") {
