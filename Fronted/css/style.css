@@ -8,8 +8,8 @@
 body {
     font-family: 'Montserrat', sans-serif; /* Sugiero una fuente más moderna, si no la tienes, usa Arial */
     line-height: 1.6;
-    color: var(--color-text-dark);
-    background-color: var(--color-cream); /* Fondo general luminoso */
+    color: black;
+    background-color: cadetblue; /* Fondo general luminoso */
 }
 
 .container {
@@ -20,7 +20,7 @@ body {
 
 /* Header y Navegación */
 header {
-    background-color: var(--color-white); /* Fondo del header, blanco luminoso */
+    background-color: white; /* Fondo del header, blanco luminoso */
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     position: relative;
     z-index: 100; /* Asegura que el nav esté sobre otros elementos */
@@ -34,7 +34,7 @@ header {
 }
 
 .main-nav .logo {
-    height: 60px; /* Ajusta el tamaño de tu logo si es necesario */
+    height: 100px; /* Ajusta el tamaño de tu logo si es necesario */
     vertical-align: middle;
 }
 
@@ -49,27 +49,24 @@ header {
 
 .main-nav .nav-list a {
     text-decoration: none;
-    color: var(--color-text-dark); /* Color de los enlaces */
+    color: black; /* Color de los enlaces */
     font-weight: bold;
     padding: 5px 0;
     transition: color 0.3s ease;
 }
 
 .main-nav .nav-list a:hover {
-    color: var(--color-primary-blue); /* Color al pasar el mouse */
+    color: blue; /* Color al pasar el mouse */
 }
 
-.main-nav.encabezado{
-    
-}
 
 /* Sección Hero (Banner principal) */
 .info {
     background: url('../img/1.jpg') no-repeat center center/cover; /* Usaremos tu imagen 1.jpg */
-    color: var(--color-white);
+    color: white;
     text-align: center;
     padding: 100px 20px;
-    height: 550px; /* Altura del banner, puedes ajustar */
+    height: 400px; /* Altura del banner, puedes ajustar */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,7 +93,7 @@ header {
     font-size: 3.5em;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-    color: var(--color-white);
+    color: white;
 }
 
 .hero-section p {
@@ -139,7 +136,7 @@ h2 {
     text-align: center;
     margin-bottom: 50px;
     font-size: 2.8em;
-    color: var(--color-primary-dark); /* Color oscuro para encabezados importantes */
+    color: white; /* Color oscuro para encabezados importantes */
     font-weight: 700;
 }
 
@@ -201,7 +198,7 @@ p {
 }
 
 .main-footer .social-links a {
-    color: var(--color-white);
+    color: white;
     font-size: 1.8em; /* Íconos más grandes */
     margin: 0 12px;
     text-decoration: none;
@@ -222,3 +219,8 @@ p {
             border: none;
             background: transparent;
         }
+
+.galeria{
+    background-color: white;
+    padding: 150px;
+}
