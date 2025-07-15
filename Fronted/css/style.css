@@ -59,6 +59,10 @@ header {
     color: var(--color-primary-blue); /* Color al pasar el mouse */
 }
 
+.main-nav.encabezado{
+    
+}
+
 /* Sección Hero (Banner principal) */
 .info {
     background: url('../img/1.jpg') no-repeat center center/cover; /* Usaremos tu imagen 1.jpg */

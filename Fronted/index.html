@@ -11,13 +11,13 @@
 <body>
 
     <header>
-        <nav class="main-nav">
-            <div class="logo">
+        <nav id="main-nav" class="main-nav">
+            <div id="logo" class="logo">
                 <a href="index.html">
                     <img src="img/logo.png" alt="Logo del Hotel">
                 </a>
             </div>
-            <ul class="nav-list">
+            <ul is="nav-list" class="nav-list">
                 <li><a href="#index">Inicio</a></li>
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#habitaciones">Habitaciones</a></li>
@@ -38,6 +38,7 @@
             </section>
 
      <section id="servicios" class="servicios">
+        <link rel="stylesheet" href="js/servicio.js">
             <div class="container">
                 <h2>Lo Que Nos Destaca</h2>
                 <div class="features-grid">
@@ -62,23 +63,9 @@
         </section>
 
         <div id="habitaciones" class="habitaciones">
+                <link rel="stylesheet" href="js/habitacion.js">
             <h2>Habitaciones</h2>
-            <div class="habitaciones-grid">
-                <div class="habitacion">
-                    <img src="img/habitacion1.jpg" alt="Habitación 1">
-                    <h3>Habitación Deluxe</h3>
-                    <p>Disfruta de una estancia lujosa en nuestra habitación Deluxe.</p>
-                </div>
-                <div class="habitacion">
-                    <img src="img/habitacion2.jpg" alt="Habitación 2">
-                    <h3>Habitación Familiar</h3>
-                    <p>Ideal para familias, con espacio y comodidades para todos.</p>
-                </div>
-                <div class="habitacion">
-                    <img src="img/habitacion3.jpg" alt="Habitación 3">
-                    <h3>Suite Presidencial</h3>
-                    <p>La máxima expresión de lujo y confort en nuestra Suite Presidencial.</p>
-                </div>
+            <div id="contenedor-habitacion" class="contenedor-habitacion">
             </div>
         </div>
 
