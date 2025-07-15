@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
 </head>
 <body>
 
@@ -25,10 +26,7 @@
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
-        <section id="encabezado" class="encabezado">
-            <h1>Bienvenido al Hotel Costa Colonia</h1>
-            <p>Tu lugar ideal para unas vacaciones inolvidables.</p>
-        </section>
+        
     </header>
 
     <main>
@@ -54,12 +52,32 @@
         </div>
 
         <div id="galería">
-            <h2>Galería</h2>
-            <div id="galeria">
-                <img src="img/1.jpeg" alt="Imagen 1">
-                <img src="img/2.jpeg" alt="Imagen 2">
-                <img src="img/3.jpeg" alt="Imagen 3">
-                <img src="img/4.jpeg" alt="Imagen 4">
+            <div id="galeria" class="galeria">
+        <h1 class="mb-4">Galería de Fotos</h1>
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="col">
+                <div class="gallery-card">
+                    <img src="./img/1.jpeg" alt="Foto 1" class="gallery-img">
+                </div>
+            </div>
+            <div class="col">
+                <div class="gallery-card">
+                    <img src="./img/2.jpeg" alt="Foto 2" class="gallery-img">
+                </div>
+            </div>
+            <div class="col">
+                <div class="gallery-card">
+                    <img src="./img/3.jpeg" alt="Foto 3" class="gallery-img">
+                </div>
+            </div>
+            <div class="col">
+                <div class="gallery-card">
+                    <img src="./img/4.jpeg" alt="Foto 4" class="gallery-img">
+                </div>
+            </div>
+
+        </div>
+    </div>
          </div>
 
         <section id="ubicacion" class="ubicacion">
@@ -71,11 +89,11 @@
 
     <footer id="contacto">
         <div class="container">
-            <p>&copy; 2025 Hotel [Nombre de tu Hotel]. Todos los derechos reservados.</p>
+            <p>&copy; 2025 Hotel Costa Colonia. Todos los derechos reservados.</p>
             <div class="social-links">
-                <a href="#"><i class="icon-facebook"></i></a>
-                <a href="#"><i class="icon-instagram"></i></a>
-                <a href="#"><i class="icon-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-square-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-square-x-twitter"></i></a>
             </div>
         </div>
     </footer>
