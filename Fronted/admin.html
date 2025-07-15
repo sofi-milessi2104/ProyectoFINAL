@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="./admin.css">
+ <title>Sesión</title>
+</head>
+
+<body>
+
+    <a id="btn"  href="Sesión 2.html"> Traducir <i class='bx bx-transfer'></i></a>
+
+    <div class="container" id="container">
+        <div class="form-container sign-in">
+            <form id="Form">
+                <h1>Iniciar Sesión</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class='bx bxl-google'></i></i></a>
+                    <a href="#" class="icon"><i class='bx bxl-facebook'></i></a>
+                    <a href="#" class="icon"><i class='bx bxl-github'></i></a>
+                    <a href="#" class="icon"><i class='bx bxl-youtube'></i></a>
+                </div>
+                <span>Usa tu cuenta de Usuario</span>
+                 <label for="nombre_completo">Nombre Completo:</label>
+            <input type="text" id="nombre_completo" name="nombre_completo" required>
+            <br>
+            <label for="cedula">Cédula de identidad:</label>
+            <input type="number" id="cedula" name="cedula" required>
+            <br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <label for="area">Área:</label>
+            <select id="area" name="area" required>
+                <option value="">Seleccione un área</option>
+                <option value="Recursos Humanos">Recursos Humanos</option>
+                <option value="Administración">Administración</option>
+                <option value="Finanzas">Gerencia</option>
+                <option value="Otro">Otro</option>
+            </select>
+                <a href="#">¿Olvidaste tu contraseña?</a>
+                <input type="submit" id="Iniciar_button" value="iniciar">
+
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>¡Bienvenido de Vuelta!</h1>
+                    <p>Inicie sesión con  sus datos personales para utilizar todas las funciones del sitio</p>
+                    <button class="hidden" id="login">Iniciar Sesión</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Registrate con tus datos personales para utilizar todas las funciones del sitio</p>
+                    <button class="hidden" id="register">Registrarse</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
