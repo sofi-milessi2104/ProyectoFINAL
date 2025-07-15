@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-07-2025 a las 20:28:32
+-- Tiempo de generación: 15-07-2025 a las 19:27:41
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -53,15 +53,17 @@ CREATE TABLE `habitacion` (
   `id_hab` int(11) NOT NULL,
   `tipo_hab` set('loft','river loft','suit','river suit','super loft') NOT NULL,
   `descripcion_hab` varchar(400) NOT NULL,
-  `cantidad` int(3) NOT NULL
+  `cantidad` int(3) NOT NULL,
+  `imagen` varchar(255) NOT NULL,
+  `precio` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `habitacion`
 --
 
-INSERT INTO `habitacion` (`id_hab`, `tipo_hab`, `descripcion_hab`, `cantidad`) VALUES
-(1, 'loft', 'Habitación tipo loft con vista al jardín', 2);
+INSERT INTO `habitacion` (`id_hab`, `tipo_hab`, `descripcion_hab`, `cantidad`, `imagen`, `precio`) VALUES
+(1, 'suit', 'Esta es una espaciosa suite con una sala de estar separada que permite una cama adicional. Cuenta con un cómodo albornoz y zapatillas.', 20, '', 0.00);
 
 -- --------------------------------------------------------
 
