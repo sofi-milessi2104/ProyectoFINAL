@@ -11,13 +11,13 @@
 <body>
 
     <header>
-        <nav class="main-nav">
-            <div class="logo">
+        <nav id="main-nav" class="main-nav">
+            <div id="logo" class="logo">
                 <a href="index.html">
                     <img src="img/logo.png" alt="Logo del Hotel">
                 </a>
             </div>
-            <ul class="nav-list">
+            <ul is="nav-list" class="nav-list">
                 <li><a href="#index">Inicio</a></li>
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#habitaciones">Habitaciones</a></li>
@@ -38,47 +38,18 @@
             </section>
 
      <section id="servicios" class="servicios">
+        <link rel="stylesheet" href="js/servicio.js">
             <div class="container">
                 <h2>Lo Que Nos Destaca</h2>
-                <div class="features-grid">
-                    <div class="tipo-item">
-                        <h3><i class="icon-wifi"></i> Wi-Fi Gratuito</h3>
-                        <p>Mantente conectado con nuestro internet de alta velocidad.</p>
-                    </div>
-                    <div class="tipo-item>
-                        <h3><i class="icon-pool"></i> Piscina Climatizada</h3>
-                        <p>Relájate en nuestra espectacular piscina.</p>
-                    </div>
-                    <div class="tipo-item">
-                        <h3><i class="icon-restaurant"></i> Restaurante Gourmet</h3>
-                        <p>Saborea la mejor gastronomía local e internacional.</p>
-                    </div>
-                    <div class="tipo-item">
-                        <h3><i class="icon-parking"></i> Estacionamiento</h3>
-                        <p>Comodidad y seguridad para tu vehículo.</p>
-                    </div>
+                <div id="contenedor-servicio" class="contenedor-servicio">
                 </div>
             </div>
         </section>
 
         <div id="habitaciones" class="habitaciones">
+                <link rel="stylesheet" href="js/habitacion.js">
             <h2>Habitaciones</h2>
-            <div class="habitaciones-grid">
-                <div class="habitacion">
-                    <img src="img/habitacion1.jpg" alt="Habitación 1">
-                    <h3>Habitación Deluxe</h3>
-                    <p>Disfruta de una estancia lujosa en nuestra habitación Deluxe.</p>
-                </div>
-                <div class="habitacion">
-                    <img src="img/habitacion2.jpg" alt="Habitación 2">
-                    <h3>Habitación Familiar</h3>
-                    <p>Ideal para familias, con espacio y comodidades para todos.</p>
-                </div>
-                <div class="habitacion">
-                    <img src="img/habitacion3.jpg" alt="Habitación 3">
-                    <h3>Suite Presidencial</h3>
-                    <p>La máxima expresión de lujo y confort en nuestra Suite Presidencial.</p>
-                </div>
+            <div id="contenedor-habitacion" class="contenedor-habitacion">
             </div>
         </div>
 
