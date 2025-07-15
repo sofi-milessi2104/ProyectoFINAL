@@ -41,7 +41,9 @@ elseif ($requestMethod == "POST") {
         $tipo_hab = $_POST["tipo_hab"];
         $descripcion_hab = $_POST["descripcion_hab"];
         $cantidad = $_POST["cantidad"];
-        echo "Datos recibidos: Tipo de Habitación: $tipo_hab, Descripción: $descripcion_hab, Cantidad: $cantidad";
+        $imagen = $_POST["imagen"];
+        $precio = $_POST["precio"];
+        echo "Datos recibidos: Tipo de Habitación: $tipo_hab, Descripción: $descripcion_hab, Cantidad: $cantidad, Imagen: $imagen, Precio: $precio";
         agregarHabitacion($tipo_hab,$descripcion_hab,$cantidad);
         global $habitacionModel;
     } elseif ($solicitud == "promocion") {
