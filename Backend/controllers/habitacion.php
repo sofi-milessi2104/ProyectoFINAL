@@ -8,9 +8,9 @@ function obtenerHabitacion() {
     echo json_encode($habitacionModel->obtenerHabitacion());
 }
 
-function agregarHabitacion($tipo_hab,$descripcion_hab,$cantidad) {
+function agregarHabitacion($tipo_hab,$descripcion_hab,$cantidad,$imagen,$precio) {
     global $habitacionModel;
-    if ($habitacionModel->agregar($tipo_hab,$descripcion_hab,$cantidad)) {
+    if ($habitacionModel->agregar($tipo_hab,$descripcion_hab,$cantidad,$imagen,$precio)) {
         echo json_encode(["message" => "Habitacion agregada correctamente."]);
     } else {
         echo json_encode(["message" => "Error al agregar la habitacion."]);
