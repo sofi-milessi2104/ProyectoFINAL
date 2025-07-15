@@ -33,11 +33,6 @@ header {
     padding: 15px 20px;
 }
 
-.main-nav .logo {
-    height: 100px; /* Ajusta el tamaño de tu logo si es necesario */
-    vertical-align: middle;
-}
-
 .nav-list {
     list-style: none;
     display: flex;
@@ -62,7 +57,7 @@ header {
 
 /* Sección Hero (Banner principal) */
 .info {
-    background: url('../img/1.jpg') no-repeat center center/cover; /* Usaremos tu imagen 1.jpg */
+    background: url('../img/14.jpeg') no-repeat center center/cover; /* Usaremos tu imagen 1.jpg */
     color: white;
     text-align: center;
     padding: 100px 20px;
@@ -176,17 +171,8 @@ p {
     display: block;
     font-size: 3.5em; /* Íconos más grandes */
     margin-bottom: 20px;
-    color: var(--color-accent-teal); /* Color de acento para íconos */
+    color: white; /* Color de acento para íconos */
 }
-
-/* Puedes usar íconos de Font Awesome o SVG. Por ahora, usaremos texto como placeholder */
-.icon-wifi::before { content: "📡"; }
-.icon-pool::before { content: "🏊"; }
-.icon-restaurant::before { content: "🍽️"; }
-.icon-parking::before { content: "🅿️"; }
-.icon-facebook::before { content: "📘"; }
-.icon-instagram::before { content: "📸"; }
-.icon-twitter::before { content: "🐦"; }
 
 
 /* Footer */
@@ -223,4 +209,9 @@ p {
 .galeria{
     background-color: white;
     padding: 150px;
+}
+
+.ubicacion{
+    background-color: cadetblue;
+    width: 100%;
 }
