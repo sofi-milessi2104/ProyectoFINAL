@@ -31,10 +31,27 @@ elseif ($requestMethod == "POST") {
     $solicitud = $_GET["url"] ?? null;
 
     if ($solicitud == "administrador") {
+        if (isset($_POST["email"]) && isset($_POST["area"])) {
+            require_once "../models/AdministradorModel.php";
+            $adminModel = new AdministradorModel();
+            $admin = $adminModel->login($_POST["email"], $_POST["area"]); 
+            if ($admin) {
+                echo json_encode([
+                    "status" => true,
+                    "rol" => "admin",
+                    "data" => $admin
+                ]);
+            } else {
+                echo json_encode([
+                    "status" => false,
+                    "message" => "No autorizado"
+                ]);
+            }
+            exit;
+        }
         $nombre_completo = $_POST["nombre_completo"];
         $email = $_POST["email"];
         $area = $_POST["area"];
-        echo "Dattos recibidos: Nombre Completo: $nombre_completo, Email: $email, Area: $area";
         agregarAdmin($nombre_completo, $email, $area);
         global $adminModel;
     } elseif ($solicitud == "habitacion") {
