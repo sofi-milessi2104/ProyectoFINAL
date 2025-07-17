@@ -3,39 +3,26 @@ async function obtenerHabitacion() {
         const respuesta=await fetch("../Backend/routes/api.php?url=habitacion");
         const habitacion=await respuesta.json();
         console.log(habitacion);
-        const contenedor=document.getElementById("contenedor-habitacion");
-        contenedor.innerHTML=crearCards()(habitacion);
-    }catch(error){
-        console.error("Error al obtener las habitaciones" + error);
-    }
-}
+        const contenedor=document.getElementById ("contenedor-habitacion");
+        contenedor.innerHTML=crearCards(habitacion);
 
-function crearCards(habitaciones) {
-    return habitaciones.map(habitacion => `
+    }catch (error){
+        console.error("Error al obtener habitacion" + error);
+    }
+    }
+
+    function crearCards(habitaciones) {
+    return habitaciones.map(hab => `
         <div class="card">
-            <div class="tilt">
-                <div class="img">
-                    <img src="${habitacion.imagen}" alt="${habitacion.tipo_hab}">
-                </div>
-            </div>
-            <div class="info">
-                <h2 class="title">${habitacion.tipo_hab}</h2>
-                <p class="desc">${habitacion.descripcion}</p>
-                <div class="bottom">
-                    <div class="price">
-                        <span class="new">$${habitacion.precio}</span>
-                    </div>
-                    <a href="info.html" class="btn">
-                        <span>Ver más</span>
-                    </a>
-                </div>
-                <div class="meta">
-                    <div class="stock">${habitacion.disponibilidad}</div>
-                </div>
+            <img src="../img/18.jpeg" alt="River loft" class="card-img">
+            <div class="card-body">
+                <h3>${hab.tipo_hab}</h3>
+                <p>${hab.descripcion_hab}</p>
+                <p><strong>Disponible:</strong> ${hab.cantidad}</p>
+                <p><strong>Precio:</strong> $${parseFloat(hab.precio).toFixed(2)}</p>
             </div>
         </div>
-    `).join('');
+    `).join("");
 }
 
-// Llama a la función para obtener las habitaciones al cargar la página
 document.addEventListener("DOMContentLoaded", obtenerHabitacion);

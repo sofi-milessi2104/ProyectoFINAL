@@ -8,21 +8,21 @@ function obtenerHabitacion() {
     echo json_encode($habitacionModel->obtenerHabitacion());
 }
 
-function agregarHabitacion($tipo_hab,$descripcion_hab,$cantidad,$imagen,$precio) {
+function agregarHabitacion($tipo_hab, $descripcion_hab, $cantidad, $imagen, $precio) {
     global $habitacionModel;
-    if ($habitacionModel->agregar($tipo_hab,$descripcion_hab,$cantidad,$imagen,$precio)) {
-        echo json_encode(["message" => "Habitacion agregada correctamente."]);
+    if ($habitacionModel->agregar($tipo_hab, $descripcion_hab, $cantidad, $imagen, $precio)) {
+        echo json_encode(["message" => "Habitación agregada correctamente."]);
     } else {
-        echo json_encode(["message" => "Error al agregar la habitacion."]);
+        echo json_encode(["message" => "Error al agregar la habitación."]);
     }
 }
 
 function eliminarHabitacion($id) {
     global $habitacionModel;
     if ($habitacionModel->eliminar($id)) {
-        echo json_encode(["message" => "Habitacion eliminada correctamente."]);
+        echo json_encode(["message" => "Habitación eliminada correctamente."]);
     } else {
-        echo json_encode(["message" => "Error al eliminar la habitacion."]);
+        echo json_encode(["message" => "Error al eliminar la habitación."]);
     }
 }
 ?>
