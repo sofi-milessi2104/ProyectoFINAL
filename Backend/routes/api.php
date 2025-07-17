@@ -31,12 +31,19 @@ elseif ($requestMethod == "POST") {
     $solicitud = $_GET["url"] ?? null;
 
     if ($solicitud == "administrador") {
+        $ci = $_POST["ci"];
         $nombre_completo = $_POST["nombre_completo"];
         $email = $_POST["email"];
         $area = $_POST["area"];
-        echo "Dattos recibidos: Nombre Completo: $nombre_completo, Email: $email, Area: $area";
-        agregarAdmin($nombre_completo, $email, $area);
+        echo "Datos recibidos: CI: $ci, Nombre Completo: $nombre_completo, Email: $email, Area: $area";
+        agregarAdmin($ci, $nombre_completo, $email, $area);
         global $adminModel;
+    }elseif ($solicitud == "login") {
+          $email = $_POST["email"];
+        $password = $_POST["password"];
+      //  echo "Datos recibidos: Email: $email, Contraseña: $password";
+        loginAdministrador($email, $password);
+    }
     } elseif ($solicitud == "habitacion") {
         $tipo_hab = $_POST["tipo_hab"];
         $descripcion_hab = $_POST["descripcion_hab"];
@@ -85,6 +92,6 @@ elseif ($requestMethod == "POST") {
     } else {
         echo json_encode(["error" => "Ruta no encontrada"]);
     }
-}
+
 
 ?>

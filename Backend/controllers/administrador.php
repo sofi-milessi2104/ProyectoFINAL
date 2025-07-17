@@ -26,4 +26,14 @@ function eliminarAdministrador($id) {
     }
 }
 
+function loginAdministrador($email, $password) {
+    global $administradorModel;
+    $resultado = $administradorModel->login($email, $password);
+    if ($resultado) {
+        echo json_encode(["status" => true, "message" => "Credenciales correctas"]);
+    } else {
+        echo json_encode(["status" => false, "message" => "Credenciales incorrectas"]);
+    }
+}
+
 ?> 

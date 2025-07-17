@@ -24,5 +24,11 @@ class Administrador {
         return $stmt->execute(["id" => $id]);
     }
 
+    public function login($email, $password) {
+        $stmt = $this->pdo->prepare("SELECT * FROM administrador WHERE email = :email AND password = :password");
+        $stmt->execute(["email" => $email, "password" => $password]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
 ?>
