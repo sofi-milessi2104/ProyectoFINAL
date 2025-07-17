@@ -31,10 +31,11 @@ elseif ($requestMethod == "POST") {
     $solicitud = $_GET["url"] ?? null;
 
     if ($solicitud == "administrador") {
-        if (isset($_POST["email"]) && isset($_POST["area"])) {
-            require_once "../models/AdministradorModel.php";
+        if (isset($_POST["nombre_completo"]) && isset($_POST["ci"])) {
+            require_once "../models/Administrador.php";
             $adminModel = new AdministradorModel();
-            $admin = $adminModel->login($_POST["email"], $_POST["area"]); 
+            $admin = $adminModel->login($_POST["nombre_completo"], $_POST["ci"]); // Debes tener este método
+
             if ($admin) {
                 echo json_encode([
                     "status" => true,
@@ -49,10 +50,13 @@ elseif ($requestMethod == "POST") {
             }
             exit;
         }
+
+        // Registro de admin (lo que ya tienes)
+        $ci = $_POST["ci"];
         $nombre_completo = $_POST["nombre_completo"];
         $email = $_POST["email"];
         $area = $_POST["area"];
-        agregarAdmin($nombre_completo, $email, $area);
+        agregarAdmin($ci, $nombre_completo, $email, $area);
         global $adminModel;
     } elseif ($solicitud == "habitacion") {
         $tipo_hab = $_POST["tipo_hab"];

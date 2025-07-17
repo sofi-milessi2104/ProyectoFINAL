@@ -8,9 +8,9 @@ function obtenerAdministrador() {
     echo json_encode($administradorModel->obtenerAdministrador());
 }
 
-function agregarAdministrador($nombre_completo, $email, $area) {
+function agregarAdministrador($ci, $nombre_completo, $email, $area) {
     global $administradorModel;
-    if ($administradorModel->agregar($nombre_completo, $email, $area)) {
+    if ($administradorModel->agregar($ci, $nombre_completo, $email, $area)) {
         echo json_encode(["message" => "Administrador agregado correctamente."]);
     } else {
         echo json_encode(["message" => "Error al agregar el administrador."]);
@@ -25,4 +25,5 @@ function eliminarAdministrador($id) {
         echo json_encode(["message" => "Error al eliminar el administrador."]);
     }
 }
-?>
+
+?> 
