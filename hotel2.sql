@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-07-2025 a las 19:27:41
+-- Tiempo de generación: 17-07-2025 a las 19:05:30
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -51,19 +51,23 @@ INSERT INTO `administrador` (`ci`, `nombre_completo`, `email`, `area`) VALUES
 
 CREATE TABLE `habitacion` (
   `id_hab` int(11) NOT NULL,
-  `tipo_hab` set('loft','river loft','suit','river suit','super loft') NOT NULL,
+  `tipo_hab` set('loft','river loft','suit','river suit','suit loft') NOT NULL,
   `descripcion_hab` varchar(400) NOT NULL,
-  `cantidad` int(3) NOT NULL,
+  `disponible` tinyint(1) NOT NULL,
   `imagen` varchar(255) NOT NULL,
-  `precio` decimal(10,2) NOT NULL
+  `precio` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `habitacion`
 --
 
-INSERT INTO `habitacion` (`id_hab`, `tipo_hab`, `descripcion_hab`, `cantidad`, `imagen`, `precio`) VALUES
-(1, 'suit', 'Esta es una espaciosa suite con una sala de estar separada que permite una cama adicional. Cuenta con un cómodo albornoz y zapatillas.', 20, '', 0.00);
+INSERT INTO `habitacion` (`id_hab`, `tipo_hab`, `descripcion_hab`, `disponible`, `imagen`, `precio`) VALUES
+(1, 'suit', 'Esta es una espaciosa suite con una sala de estar separada que permite una cama adicional. Cuenta con un cómodo albornoz y zapatillas.', 0, '', '3.438'),
+(2, 'river suit', 'Esta suite cuenta con baño privado, cocina, ventanales y una terraza con una espléndida vista al río, además de muebles de madera y cortinas de color beige. Hay un salón con sofá cama, TV LCD, reproductor de DVD, microondas, secador de pelo y conexión WIFI gratis.', 1, '', '6.849'),
+(3, 'loft', 'Este loft cuenta con baño privado, zona de cocina, ventanales y terraza, así como muebles de madera y cortinas de color beige. Hay TV LCD, reproductor de DVD, secador de pelo y conexión WiFi gratis. No se pueden acomodar camas supletorias.', 1, '', '10.273'),
+(4, 'river loft', 'Este loft cuenta con baño privado, cocina, ventanales de techo a suelo y una terraza con una espléndida vista al río, además de muebles de madera y cortinas color beige. Hay TV LCD, reproductor de DVD, secador de pelo y conexión WiFi gratis. No se pueden acomodar camas supletorias.', 1, '', '13.755'),
+(5, 'suit loft', 'Esta suite cuenta con baño privado, zona de cocina y un balcón doble con una espléndida vista al río, así como muebles de madera y cortinas de color beige. Hay TV LCD, reproductor de DVD, microondas, secador de pelo y conexión WiFi gratuita. No se pueden acomodar camas supletorias.', 1, '', '17.123');
 
 -- --------------------------------------------------------
 
@@ -96,30 +100,25 @@ INSERT INTO `promocion` (`id_promo`, `tipo_promo`) VALUES
 
 CREATE TABLE `reserva` (
   `id_reserva` int(11) NOT NULL,
-  `nombre` varchar(40) NOT NULL,
-  `apellido` varchar(40) NOT NULL,
-  `email` varchar(100) NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
   `adultos` set('1','2','3') NOT NULL,
   `niños` set('1','2') NOT NULL,
   `fecha_inicio` date NOT NULL,
   `fecha_fin` date NOT NULL,
-  `tipo_hab` set('loft','river loft','suit','river suit','super loft') NOT NULL,
-  `tipo_servicio` set('Restaurante','Spa & Masajes','Gym','Sauna','Piscina interior','Piscina exterior','Estacionamiento') NOT NULL,
-  `promoción` set('DaySpa','DayUse','Cupón','FamilyPlan','Media pensión','temporada') NOT NULL,
-  `huesped` set('si','no') NOT NULL,
-  `tarjeta` varchar(20) NOT NULL,
-  `id_usuario` int(11) DEFAULT NULL
+  `id_habitacion` int(11) NOT NULL,
+  `id_servicio` int(11) NOT NULL,
+  `tarjeta` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `reserva`
 --
 
-INSERT INTO `reserva` (`id_reserva`, `nombre`, `apellido`, `email`, `adultos`, `niños`, `fecha_inicio`, `fecha_fin`, `tipo_hab`, `tipo_servicio`, `promoción`, `huesped`, `tarjeta`, `id_usuario`) VALUES
-(1, 'Mateo', 'Pérez', 'mateo.perez@example.com', '1', '', '2025-08-01', '2025-08-03', 'suit', 'Restaurante,Gym', 'Cupón', 'no', '2345678901234567', 1),
-(2, 'Sofía', 'González', 'sofia.gonzalez@example.com', '2', '2', '2025-09-05', '2025-09-10', 'river loft', 'Piscina exterior,Estacionamiento', 'FamilyPlan', 'si', '3456789012345678', 2),
-(3, 'Juan', 'Rodríguez', 'juan.rodriguez@example.com', '3', '1', '2025-07-20', '2025-07-25', 'super loft', 'Restaurante,Spa & Masajes', 'Media pensión', 'no', '4567890123456789', 3),
-(4, 'Valentina', 'Fernández', 'valentina.fernandez@example.com', '1', '', '2025-10-01', '2025-10-05', 'river suit', 'Gym,Piscina interior', 'DayUse', 'si', '5678901234567890', 4);
+INSERT INTO `reserva` (`id_reserva`, `id_usuario`, `adultos`, `niños`, `fecha_inicio`, `fecha_fin`, `id_habitacion`, `id_servicio`, `tarjeta`) VALUES
+(1, 1, '1', '', '2025-08-01', '2025-08-03', 4, 5, '2345678901234567'),
+(2, 2, '2', '2', '2025-09-05', '2025-09-10', 2, 96, '3456789012345678'),
+(3, 3, '3', '1', '2025-07-20', '2025-07-25', 16, 3, '4567890123456789'),
+(4, 4, '1', '', '2025-10-01', '2025-10-05', 8, 20, '5678901234567890');
 
 -- --------------------------------------------------------
 
@@ -226,7 +225,7 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `habitacion`
 --
 ALTER TABLE `habitacion`
-  MODIFY `id_hab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_hab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `promocion`

@@ -12,14 +12,15 @@ async function obtenerHabitacion() {
     }
 
     function crearCards(habitaciones) {
-    return habitaciones.map(hab => `
+    return habitaciones.map((hab, i) => `
         <div class="card">
-            <img src="../img/18.jpeg" alt="River loft" class="card-img">
+            <img src="../Fronted/img/1.jpeg${hab.imagen}" alt="${hab.tipo_hab}" class="card-img">
             <div class="card-body">
                 <h3>${hab.tipo_hab}</h3>
                 <p>${hab.descripcion_hab}</p>
-                <p><strong>Disponible:</strong> ${hab.cantidad}</p>
-                <p><strong>Precio:</strong> $${parseFloat(hab.precio).toFixed(2)}</p>
+                <p><strong>Disponible:</strong> ${hab.cantidad ? 'Sí': 'Sí'}</p>
+                <p><strong>Precio:</strong> $${hab.precio}</p>
+                <button onclick="abrirModal(${i})">Ver más</button>
             </div>
         </div>
     `).join("");
