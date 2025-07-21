@@ -19,7 +19,7 @@ function agregarEventoForm() {
         e.preventDefault();
         let email = form.email.value;
         let password = form.password.value;
-        iniciarSesionAdministrador(nombreemailcompleto, password);
+        iniciarSesionAdministrador(email, password);
     }
 }
 

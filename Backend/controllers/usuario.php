@@ -25,4 +25,15 @@ function eliminarUsuario($id) {
         echo json_encode(["message" => "Error al eliminar el usuario."]);
     }
 }
+
+function loginUsuario($email, $password) {
+    global $usuarioModel;
+    $resultado = $usuarioModel->login($email, $password);
+    if ($resultado) {
+        echo json_encode(["status" => true, "message" => "Credenciales correctas"]);
+    } else {
+        echo json_encode(["status" => false, "message" => "Credenciales incorrectas"]);
+    }
+}
+
 ?>

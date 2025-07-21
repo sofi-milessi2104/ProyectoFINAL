@@ -23,5 +23,12 @@ class Usuario {
         $stmt = $this->pdo->prepare("DELETE FROM usuarios WHERE id_usuario = :id");
         return $stmt->execute(["id" => $id]);
     }
+
+        public function login1($email, $password) {
+        $stmt = $this->pdo->prepare("SELECT * FROM usuario WHERE email = :email AND password = :password");
+        $stmt->execute(["email" => $email, "password" => $password]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
 ?>

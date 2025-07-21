@@ -89,6 +89,11 @@ elseif ($requestMethod == "POST") {
         echo "Datos recibidos: Nombre: $nombre, Apellido: $apellido, Email: $email, Celular: $celular";
         agregarUsuario($nombre, $apellido, $email, $celular);
         global $usuarioModel;
+    }elseif ($solicitud == "login1") {
+          $email = $_POST["email"];
+        $password = $_POST["password"];
+      //  echo "Datos recibidos: Email: $email, Contraseña: $password";
+        loginUsuario($email, $password);
     } else {
         echo json_encode(["error" => "Ruta no encontrada"]);
     }
