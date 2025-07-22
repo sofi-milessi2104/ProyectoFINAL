@@ -89,7 +89,7 @@ elseif ($requestMethod == "POST") {
         echo "Datos recibidos: Nombre: $nombre, Apellido: $apellido, Email: $email, Celular: $celular";
         agregarUsuario($nombre, $apellido, $email, $celular);
         global $usuarioModel;
-    }elseif ($solicitud == "login1") {
+    }elseif ($solicitud == "login") {
           $email = $_POST["email"];
         $password = $_POST["password"];
       //  echo "Datos recibidos: Email: $email, Contraseña: $password";

@@ -24,7 +24,7 @@ class Usuario {
         return $stmt->execute(["id" => $id]);
     }
 
-        public function login1($email, $password) {
+        public function login($email, $password) {
         $stmt = $this->pdo->prepare("SELECT * FROM usuario WHERE email = :email AND password = :password");
         $stmt->execute(["email" => $email, "password" => $password]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
