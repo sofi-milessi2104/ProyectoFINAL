@@ -14,12 +14,12 @@ class Habitacion {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function agregar($tipo_hab, $descripcion_hab, $cantidad, $imagen, $precio) {
-        $stmt = $this->pdo->prepare("INSERT INTO habitacion (tipo_hab, descripcion_hab, cantidad, imagen, precio) VALUES (:tipo_hab, :descripcion_hab, :cantidad, :imagen, :precio)");
+    public function agregar($tipo_hab, $descripcion_hab, $disponible, $imagen, $precio) {
+        $stmt = $this->pdo->prepare("INSERT INTO habitacion (tipo_hab, descripcion_hab, disponible, imagen, precio) VALUES (:tipo_hab, :descripcion_hab, :disponible, :imagen, :precio)");
         return $stmt->execute([
             "tipo_hab" => $tipo_hab,
             "descripcion_hab" => $descripcion_hab,
-            "cantidad" => $cantidad,
+            "cantidad" => $disponible,
             "imagen" => $imagen,
             "precio" => $precio
         ]);
