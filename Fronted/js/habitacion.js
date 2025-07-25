@@ -28,9 +28,9 @@ function crearCards(habitaciones) {
 
 const contenidoHabitaciones = {
     0: {
-        titulo: 'Habitación Deluxe',
-        descripcion: 'Incluye jacuzzi, vista al mar, desayuno incluido.',
-        imagenes: ['deluxe1.jpg', 'deluxe2.jpg', 'deluxe3.jpg']
+        titulo: 'Suite',
+        descripcion: 'Tamaño de la habitacion: 60 m². <br>Incluye: Un sofá cama <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-120q-17 0-28.5-11.5T160-160v-40q-50 0-85-35t-35-85v-200q0-50 35-85t85-35v-80q0-50 35-85t85-35h400q50 0 85 35t35 85v80q50 0 85 35t35 85v200q0 50-35 85t-85 35v40q0 17-11.5 28.5T760-120q-17 0-28.5-11.5T720-160v-40H240v40q0 17-11.5 28.5T200-120Zm-40-160h640q17 0 28.5-11.5T840-320v-200q0-17-11.5-28.5T800-560q-17 0-28.5 11.5T760-520v160H200v-160q0-17-11.5-28.5T160-560q-17 0-28.5 11.5T120-520v200q0 17 11.5 28.5T160-280Zm120-160h400v-80q0-27 11-49t29-39v-112q0-17-11.5-28.5T680-760H280q-17 0-28.5 11.5T240-720v112q18 17 29 39t11 49v80Zm200 0Zm0 160Zm0-80Z"/></svg> y una cama doble grande <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M200-200h-40l-26-80H80v-201q0-33 23.5-56t56.5-23v-120q0-33 23.5-56.5T240-760h480q33 0 56.5 23.5T800-680v120q33 0 56.5 23.5T880-480v200h-54l-26 80h-40l-26-80H226l-26 80Zm320-360h200v-120H520v120Zm-280 0h200v-120H240v120Zm-80 200h640v-120H160v120Zm640 0H160h640Z"/></svg>',
+        imagenes: ['Suite.jpeg','Suite 4.jpg', 'Suite 2.jpeg', 'Suite 3.jpeg']
     },
     1: {
         titulo: 'Habitación Doble',
@@ -52,16 +52,17 @@ document.addEventListener('click', function (e) {
         modal.innerHTML = `
             <div class="modal-box">
                 <h2>${contenido.titulo}</h2>
-                <p>${contenido.descripcion}</p>
-                <div class="modal-imgs">
-                    ${contenido.imagenes.map(img => `
-                        <img src="../Fronted/img/${img}" alt="${contenido.titulo}" style="max-width: 100%; margin-top: 10px;">
-                    `).join("")}
+                <div class="modal-carousel">
+                    <button class="carousel-prev">&lt;</button>
+                    <img id="carousel-img" src="../Fronted/img/${contenido.imagenes[0]}" alt="${contenido.titulo}">
+                    <button class="carousel-next">&gt;</button>
                 </div>
+                <p>${contenido.descripcion}</p>
                 <button class="cerrar-modal">Cerrar</button>
             </div>
         `;
 
+        // Cierre del modal
         modal.querySelector('.cerrar-modal').addEventListener('click', () => {
             modal.remove();
         });
@@ -72,9 +73,25 @@ document.addEventListener('click', function (e) {
             }
         });
 
+        // Carrusel JS
+        let indexImg = 0;
+        const imgElement = modal.querySelector('#carousel-img');
+        const btnPrev = modal.querySelector('.carousel-prev');
+        const btnNext = modal.querySelector('.carousel-next');
+
+        btnPrev.addEventListener('click', () => {
+            indexImg = (indexImg - 1 + contenido.imagenes.length) % contenido.imagenes.length;
+            imgElement.src = `../Fronted/img/${contenido.imagenes[indexImg]}`;
+        });
+
+        btnNext.addEventListener('click', () => {
+            indexImg = (indexImg + 1) % contenido.imagenes.length;
+            imgElement.src = `../Fronted/img/${contenido.imagenes[indexImg]}`;
+        });
+
         document.body.appendChild(modal);
     }
 });
 
-
+// Esto se mantiene si usás obtenerHabitacion()
 document.addEventListener("DOMContentLoaded", obtenerHabitacion);
