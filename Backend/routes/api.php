@@ -44,6 +44,12 @@ elseif ($requestMethod == "POST") {
       //  echo "Datos recibidos: Email: $email, Contraseña: $password";
         loginAdministrador($email, $password);
     }
+    elseif ($solicitud == "loginUsr") {
+          $email = $_POST["email"];
+        $password = $_POST["password"];
+      //  echo "Datos recibidos: Email: $email, Contraseña: $password";
+        loginUsuario($email, $password);
+    }
     } elseif ($solicitud == "habitacion") {
         $tipo_hab = $_POST["tipo_hab"];
         $descripcion_hab = $_POST["descripcion_hab"];
@@ -89,12 +95,7 @@ elseif ($requestMethod == "POST") {
         echo "Datos recibidos: Nombre: $nombre, Apellido: $apellido, Email: $email, Celular: $celular";
         agregarUsuario($nombre, $apellido, $email, $celular);
         global $usuarioModel;
-    }elseif ($solicitud == "login") {
-          $email = $_POST["email"];
-        $password = $_POST["password"];
-      //  echo "Datos recibidos: Email: $email, Contraseña: $password";
-        loginUsuario($email, $password);
-    } else {
+    }else{
         echo json_encode(["error" => "Ruta no encontrada"]);
     }
 
