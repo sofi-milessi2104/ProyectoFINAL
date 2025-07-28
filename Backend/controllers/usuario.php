@@ -8,9 +8,9 @@ function obtenerUsuario() {
     echo json_encode($usuarioModel->obtenerUsuario());
 }
 
-function agregarUsuario($nombre, $apellido, $email, $celular) {
+function loginAddUser($nombre, $apellido, $email, $celular, $password) {
     global $usuarioModel;
-    if ($usuarioModel->agregar($nombre, $apellido, $email, $celular)) {
+    if ($usuarioModel->loginAdd($nombre, $apellido, $email, $celular, $password)) {
         echo json_encode(["message" => "Usuario agregado correctamente."]);
     } else {
         echo json_encode(["message" => "Error al agregar el usuario."]);

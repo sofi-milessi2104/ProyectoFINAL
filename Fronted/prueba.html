@@ -15,7 +15,7 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up">
-            <form id="form2">
+            <form action="../Backend/routes/api.php?url=loginAddUsr" method="POST" id="frmAddUsuario">
                 <h1>Crear Cuenta</h1>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class='bx bxl-google'></i></a>
@@ -24,10 +24,11 @@
                     <a href="#" class="icon"><i class='bx bxl-youtube'></i></a>
                 </div>
                 <span>Ingresa tus datos para registrarte</span>
-                <input type="text" id="usernameRegistro" placeholder="Nombre de Usuario">
-                <input type="email" id="correo" placeholder="Correo Electrónico">
-                <input type="password" id="contraseñaRegistro" placeholder="Contraseña">
-                <input type="password" id="confirmarContrasena" placeholder="Confirmar Contraseña">
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre del usuario" required>
+                <input type="text" id="apellido" name="apellido" placeholder="Apellido del usuario" required>
+                <input type="email" id="addemail" name="email" placeholder="Correo Electrónico" required>
+                <input type="text" id="celular" name="celular" placeholder="Celular del usuario" required>
+               <input type="password" id="addpassword" name="password" placeholder="Contraseña" required>
                 <button>Registrarse</button>
             </form>
         </div>
