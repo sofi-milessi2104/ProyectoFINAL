@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-07-2025 a las 23:23:26
+-- Tiempo de generación: 28-07-2025 a las 23:44:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -31,17 +31,18 @@ CREATE TABLE `administrador` (
   `ci` int(11) NOT NULL,
   `nombre_completo` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `area` set('Recursos humanos','Administración','Gerencia') NOT NULL
+  `area` set('Recursos humanos','Administración','Gerencia') NOT NULL,
+  `password` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `administrador`
 --
 
-INSERT INTO `administrador` (`ci`, `nombre_completo`, `email`, `area`) VALUES
-(10123456, 'Laura Fernández', 'laura.fernandez@empresa.com', 'Recursos humanos'),
-(10234567, 'Carlos Gómez', 'carlos.gomez@empresa.com', 'Administración'),
-(10345678, 'Ana Torres', 'ana.torres@empresa.com', 'Gerencia');
+INSERT INTO `administrador` (`ci`, `nombre_completo`, `email`, `area`, `password`) VALUES
+(10123456, 'Laura Fernández', 'laura.fernandez@empresa.com', 'Recursos humanos', ''),
+(10234567, 'Carlos Gómez', 'carlos.gomez@empresa.com', 'Administración', ''),
+(10345678, 'Ana Torres', 'ana.torres@empresa.com', 'Gerencia', '');
 
 -- --------------------------------------------------------
 
@@ -157,18 +158,19 @@ CREATE TABLE `usuario` (
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) NOT NULL,
   `email` text NOT NULL,
-  `celular` varchar(20) NOT NULL
+  `celular` varchar(20) NOT NULL,
+  `password` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nombre`, `apellido`, `email`, `celular`) VALUES
-(1, 'Mateo', 'Pérez', 'mateo.perez@example.com', '59892345678'),
-(2, 'Sofía', 'González', 'sofia.gonzalez@example.com', '59893456789'),
-(3, 'Juan', 'Rodríguez', 'juan.rodriguez@example.com', '59894567890'),
-(4, 'Valentina', 'Fernández', 'valentina.fernandez@example.com', '59895678901');
+INSERT INTO `usuario` (`id_usuario`, `nombre`, `apellido`, `email`, `celular`, `password`) VALUES
+(1, 'Mateo', 'Pérez', 'mateo.perez@example.com', '59892345678', ''),
+(2, 'Sofía', 'González', 'sofia.gonzalez@example.com', '59893456789', ''),
+(3, 'Juan', 'Rodríguez', 'juan.rodriguez@example.com', '59894567890', ''),
+(4, 'Valentina', 'Fernández', 'valentina.fernandez@example.com', '59895678901', '');
 
 --
 -- Índices para tablas volcadas
