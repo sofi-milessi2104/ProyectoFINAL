@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-07-2025 a las 19:05:30
+-- Tiempo de generación: 28-07-2025 a las 23:23:26
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -51,7 +51,7 @@ INSERT INTO `administrador` (`ci`, `nombre_completo`, `email`, `area`) VALUES
 
 CREATE TABLE `habitacion` (
   `id_hab` int(11) NOT NULL,
-  `tipo_hab` set('loft','river loft','suit','river suit','suit loft') NOT NULL,
+  `tipo_hab` set('Loft','River Loft','Suit','River Suit','Suit Loft') NOT NULL,
   `descripcion_hab` varchar(400) NOT NULL,
   `disponible` tinyint(1) NOT NULL,
   `imagen` varchar(255) NOT NULL,
@@ -63,11 +63,11 @@ CREATE TABLE `habitacion` (
 --
 
 INSERT INTO `habitacion` (`id_hab`, `tipo_hab`, `descripcion_hab`, `disponible`, `imagen`, `precio`) VALUES
-(1, 'suit', 'Esta es una espaciosa suite con una sala de estar separada que permite una cama adicional. Cuenta con un cómodo albornoz y zapatillas.', 0, '', '3.438'),
-(2, 'river suit', 'Esta suite cuenta con baño privado, cocina, ventanales y una terraza con una espléndida vista al río, además de muebles de madera y cortinas de color beige. Hay un salón con sofá cama, TV LCD, reproductor de DVD, microondas, secador de pelo y conexión WIFI gratis.', 1, '', '6.849'),
-(3, 'loft', 'Este loft cuenta con baño privado, zona de cocina, ventanales y terraza, así como muebles de madera y cortinas de color beige. Hay TV LCD, reproductor de DVD, secador de pelo y conexión WiFi gratis. No se pueden acomodar camas supletorias.', 1, '', '10.273'),
-(4, 'river loft', 'Este loft cuenta con baño privado, cocina, ventanales de techo a suelo y una terraza con una espléndida vista al río, además de muebles de madera y cortinas color beige. Hay TV LCD, reproductor de DVD, secador de pelo y conexión WiFi gratis. No se pueden acomodar camas supletorias.', 1, '', '13.755'),
-(5, 'suit loft', 'Esta suite cuenta con baño privado, zona de cocina y un balcón doble con una espléndida vista al río, así como muebles de madera y cortinas de color beige. Hay TV LCD, reproductor de DVD, microondas, secador de pelo y conexión WiFi gratuita. No se pueden acomodar camas supletorias.', 1, '', '17.123');
+(1, 'Suit', 'Esta es una espaciosa suite con una sala de estar separada que permite una cama adicional. Cuenta con un cómodo albornoz y zapatillas.', 3, 'Suite.jpeg', '3.438'),
+(2, 'River Suit', 'Esta suite cuenta con baño privado, cocina, ventanales y una terraza con una espléndida vista al río, además de muebles de madera y cortinas de color beige. Hay un salón con sofá cama, TV LCD, reproductor de DVD, microondas, secador de pelo y conexión WIFI gratis.', 1, 'River Suite.jpeg', '6.849'),
+(3, 'Loft', 'Este loft cuenta con baño privado, zona de cocina, ventanales y terraza, así como muebles de madera y cortinas de color beige. Hay TV LCD, reproductor de DVD, secador de pelo y conexión WiFi gratis. No se pueden acomodar camas supletorias.', 1, 'Loft.jpeg', '10.273'),
+(4, 'River Loft', 'Este loft cuenta con baño privado, cocina, ventanales de techo a suelo y una terraza con una espléndida vista al río, además de muebles de madera y cortinas color beige. Hay TV LCD, reproductor de DVD, secador de pelo y conexión WiFi gratis. No se pueden acomodar camas supletorias.', 1, 'River Loft.jpeg', '13.755'),
+(5, 'Suit Loft', 'Esta suite cuenta con baño privado, zona de cocina y un balcón doble con una espléndida vista al río, así como muebles de madera y cortinas de color beige. Hay TV LCD, reproductor de DVD, microondas, secador de pelo y conexión WiFi gratuita. No se pueden acomodar camas supletorias.', 1, 'Super Loft.jpeg', '17.123');
 
 -- --------------------------------------------------------
 
