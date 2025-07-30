@@ -26,14 +26,18 @@ class Usuario {
     }
 
         public function login($email, $password) {
-        $stmt = $this->pdo->prepare("SELECT * FROM usuario WHERE email = :email");
-        $stmt->execute(["email" => $email]);
-        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($usuario && password_verify($password, $usuario['password'])) {
-            return $usuario;
-        }
+    $stmt = $this->pdo->prepare("SELECT * FROM usuario WHERE email = :email");
+    $stmt->execute(["email" => $email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && password_verify($password, $user['password'])) {
+        return $user;
+        
+    } else {
         return false;
     }
+}
+
 
 }
 ?>

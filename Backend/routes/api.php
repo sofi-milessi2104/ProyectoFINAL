@@ -49,7 +49,6 @@ elseif ($requestMethod == "POST") {
         $password = $_POST["password"];
       //  echo "Datos recibidos: Email: $email, Contraseña: $password";
         loginUsuario($email, $password);
-    
     }
     elseif ($solicitud == "loginAddUsr") {
           $nombre = $_POST["nombre"];
