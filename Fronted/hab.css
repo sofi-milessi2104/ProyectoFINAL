@@ -88,9 +88,17 @@
     overflow-y: auto;
     max-height: 90vh;
     position: relative;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
-.modal-box .cerrar-modal {
+.modal-box::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+
+.modal-box .reservar-modal {
     margin-top: 20px;
     background-color: #dc3545;
     color: white;
@@ -118,7 +126,7 @@
     padding: 20px;
     border-radius: 16px;
     width: 90%;
-    max-width: 600px;
+    max-width: 800px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.15);
     text-align: center;
     max-height: 90vh;
@@ -190,7 +198,7 @@
 }
 
 
-.modal-box .cerrar-modal {
+.modal-box .reservar-modal {
     margin-top: 15px;
     padding: 10px 20px;
     background-color: #85B4FF;
@@ -202,12 +210,12 @@
     transition: background-color 0.3s, transform 0.2s;
 }
 
-.modal-box .cerrar-modal:hover {
+.modal-box .reservar-modal:hover {
     background-color: #A8CFFF;
     transform: scale(1.05);
 }
 
-.modal-box .cerrar-modal:active {
+.modal-box .reservar-modal:active {
     transform: scale(0.98);
 }
 
@@ -226,12 +234,12 @@
 }
 
 .modal-carousel {
-    flex: 1 1 45%;
+    flex: 1 1 48%; 
+    max-width: 360px; 
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    max-width: 280px;
 }
 
 .modal-carousel img {
@@ -241,6 +249,7 @@
     border-radius: 12px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
+
 
 .modal-descripcion {
     flex: 1 1 50%;
@@ -266,4 +275,23 @@
         text-align: center;
         margin-top: 15px;
     }
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.cerrar-modal svg {
+    width: 24px;
+    height: 24px;
+    fill: #333;
+}
+
+.cerrar-modal:hover svg {
+    fill: #000;
 }
