@@ -99,7 +99,7 @@
 
 
 .modal-box .reservar-modal {
-    margin-top: 20px;
+    margin-top: 15px;
     background-color: #dc3545;
     color: white;
     padding: 10px 20px;
@@ -123,7 +123,7 @@
 
 .modal-box {
     background-color: #f3f8ff;
-    padding: 20px;
+    padding: 15px;
     border-radius: 16px;
     width: 90%;
     max-width: 800px;
@@ -199,7 +199,7 @@
 
 
 .modal-box .reservar-modal {
-    margin-top: 15px;
+    margin-top: 1px;
     padding: 10px 20px;
     background-color: #85B4FF;
     color: white;
@@ -295,3 +295,11 @@
 .cerrar-modal:hover svg {
     fill: #000;
 }
+
+
+.servicios-linea {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
