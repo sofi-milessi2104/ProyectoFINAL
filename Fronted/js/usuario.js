@@ -57,12 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (registerBtn) {
         registerBtn.addEventListener('click', () => {
             container.classList.add("active");
+
         });
     }
 
     if (loginBtn) {
         loginBtn.addEventListener('click', () => {
             container.classList.remove("active");
+                
         });
     }
 
