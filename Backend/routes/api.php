@@ -5,6 +5,7 @@ require "../controllers/promocion.php";
 require "../controllers/reserva.php";
 require "../controllers/servicio.php";
 require "../controllers/usuario.php";
+require "../routes/log.php";
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
@@ -35,7 +36,7 @@ elseif ($requestMethod == "POST") {
         $nombre_completo = $_POST["nombre_completo"];
         $email = $_POST["email"];
         $area = $_POST["area"];
-        echo "Datos recibidos: CI: $ci, Nombre Completo: $nombre_completo, Email: $email, Area: $area";
+       // echo "Datos recibidos: CI: $ci, Nombre Completo: $nombre_completo, Email: $email, Area: $area";
         agregarAdmin($ci, $nombre_completo, $email, $area);
         global $adminModel;
     }elseif ($solicitud == "login") {
@@ -70,8 +71,10 @@ elseif ($requestMethod == "POST") {
         global $habitacionModel;
     } elseif ($solicitud == "promocion") {
         $tipo_promo = $_POST["tipo_promo"];
-        echo "Datos recibidos: Tipo de Promoción: $tipo_promo";
-        agregarPromocion($tipo_promo);
+        $descripcion_promo = $_POST["descripcion_promo"];
+        $precio = $_POST["precio"];
+        //echo "Datos recibidos: Tipo de Promoción: $tipo_promo, Descripción: $descripcion_promo, Precio: $precio";
+        agregarPromocion($tipo_promo, $descripcion_promo, $precio);
         global $promocionModel;
     } elseif ($solicitud == "reserva") {
         $nombre = $_POST["nombre"];

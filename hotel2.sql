@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-08-2025 a las 18:55:50
+-- Tiempo de generación: 28-07-2025 a las 23:44:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -78,20 +78,23 @@ INSERT INTO `habitacion` (`id_hab`, `tipo_hab`, `descripcion_hab`, `disponible`,
 
 CREATE TABLE `promocion` (
   `id_promo` int(11) NOT NULL,
-  `tipo_promo` set('DaySpa','DayUse','Cupón','FamilyPlan','Media pensión','temporada') NOT NULL
+  `tipo_promo` set('DaySpa','DayUse','Cupón','FamilyPlan','Media pensión','temporada') NOT NULL,
+  `descripcion_promo` varchar(550) NOT NULL,
+  `img_promo` varchar(255) NOT NULL,
+  `precio_promo` varchar(24) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `promocion`
 --
 
-INSERT INTO `promocion` (`id_promo`, `tipo_promo`) VALUES
-(1, 'DaySpa'),
-(2, 'DayUse'),
-(3, 'Cupón'),
-(4, 'FamilyPlan'),
-(5, 'Media pensión'),
-(6, 'temporada');
+INSERT INTO `promocion` (`id_promo`, `tipo_promo`, `descripcion_promo`, `img_promo`, `precio_promo`) VALUES
+(1, 'DaySpa', 'La promo DaySpa es una experiencia de relajación pensada para quienes buscan desconectarse por un día sin necesidad de hospedarse. Incluye acceso por el día a nuestras instalaciones de spa, como jacuzzi, sauna y piscina climatizada, un masaje relajante de 45 minutos, aromaterapia, música ambiente, infusiones detox, snacks saludables y acceso a zonas de descanso y jardines privados.', '11.jpeg', '1790'),
+(2, 'DayUse', 'La promo DayUse está diseñada para quienes necesitan descansar, trabajar o simplemente disfrutar de unas horas de privacidad en un ambiente cómodo y seguro sin pasar la noche. Incluye el uso de una habitación por el día, acceso a Wi-Fi, aire acondicionado, TV, baño privado y todos los servicios del hotel durante un horario limitado, ideal para escapadas, reuniones discretas o pausas entre viajes.', '20.jpeg', '1359'),
+(3, 'Cupón', 'Aprovecha nuestro cupón de descuento y obtené un precio especial en tu próxima visita. Presentando el cupón al momento de la reserva o check-in, accedés a un porcentaje de descuento exclusivo en nuestros servicios seleccionados, ya sea alojamiento, spa, dayuse u otras experiencias del hotel. Válido por tiempo limitado y sujeto a disponibilidad. No acumulable con otras promociones. Reservá ahora y disfrutá más, pagando menos.', '', '799'),
+(4, 'FamilyPlan', 'Con la promo FamilyPlan, toda la familia disfruta más por menos. Incluye alojamiento en habitación familiar, desayuno para todos los integrantes, acceso a áreas recreativas como piscina y zona de juegos, y beneficios especiales para niños, como alojamiento sin cargo adicional para menores de cierta edad compartiendo habitación con adultos. Es la opción ideal para escapadas en familia, con comodidad, ahorro y entretenimiento garantizado. Válido todos los días, sujeto a disponibilidad y con reserva anticipada. FamilyPlan es la forma más fácil de ', 'Super Loft 2.jpeg', '2149'),
+(5, 'Media pensión', 'La opción de media pensión incluye alojamiento con desayuno y cena incluidos, ideal para quienes buscan comodidad y tranquilidad sin preocuparse por dónde comer. Las comidas se sirven en nuestro restaurante con menú fijo o a la carta, según disponibilidad, e incluyen opciones para adultos y niños. Bebidas no incluidas, salvo indicación contraria.', '13.jpeg', '750'),
+(6, 'temporada', 'Disfrutá nuestra promoción de temporada, pensada para que aproveches al máximo lo mejor de cada estación. Ya sea en verano con actividades al aire libre y acceso a la piscina, en otoño con paisajes increíbles y tardes tranquilas, en invierno con ambientes cálidos y ofertas en spa, o en primavera con jardines florecidos y experiencias al aire libre, cada estación tiene su encanto.', '7.jpeg', '1420');
 
 -- --------------------------------------------------------
 
