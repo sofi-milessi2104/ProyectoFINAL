@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-07-2025 a las 23:44:42
+-- Tiempo de generación: 07-08-2025 a las 18:55:50
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -40,7 +40,7 @@ CREATE TABLE `administrador` (
 --
 
 INSERT INTO `administrador` (`ci`, `nombre_completo`, `email`, `area`, `password`) VALUES
-(10123456, 'Laura Fernández', 'laura.fernandez@empresa.com', 'Recursos humanos', ''),
+(10123456, 'Laura Fernández', 'laura.fernandez@empresa.com', 'Recursos humanos', '2345tuabuela'),
 (10234567, 'Carlos Gómez', 'carlos.gomez@empresa.com', 'Administración', ''),
 (10345678, 'Ana Torres', 'ana.torres@empresa.com', 'Gerencia', '');
 
@@ -130,22 +130,22 @@ INSERT INTO `reserva` (`id_reserva`, `id_usuario`, `adultos`, `niños`, `fecha_i
 CREATE TABLE `servicio` (
   `id_servicio` int(11) NOT NULL,
   `tipo_servicio` set('Restaurante','Spa & Masajes','Gym','Sauna','Piscina interior','Piscina exterior','Estacionamiento') NOT NULL,
-  `precio` int(6) NOT NULL,
-  `descripcion_servicio` varchar(400) NOT NULL
+  `descripcion_servicio` varchar(400) NOT NULL,
+  `imagen` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `servicio`
 --
 
-INSERT INTO `servicio` (`id_servicio`, `tipo_servicio`, `precio`, `descripcion_servicio`) VALUES
-(1, 'Restaurante', 25000, 'Servicio de restaurante con menú a la carta y desayuno buffet incluido.'),
-(2, 'Spa & Masajes', 40000, 'Sesión de spa completa con masajes relajantes y aromaterapia.'),
-(3, 'Gym', 15000, 'Acceso ilimitado al gimnasio totalmente equipado durante la estadía.'),
-(4, 'Sauna', 12000, 'Uso de sauna seca y húmeda, ideal para relajación.'),
-(5, 'Piscina interior', 20000, 'Piscina climatizada abierta todo el año con zona de relajación.'),
-(6, 'Piscina exterior', 18000, 'Piscina al aire libre con servicio de bar y camastros.'),
-(7, 'Estacionamiento', 10000, 'Estacionamiento privado con vigilancia las 24 horas.');
+INSERT INTO `servicio` (`id_servicio`, `tipo_servicio`, `descripcion_servicio`, `imagen`) VALUES
+(1, 'Restaurante', 'Servicio de restaurante con menú a la carta y desayuno buffet incluido.', 'Restaurante.jpeg'),
+(2, 'Spa & Masajes', 'Sesión de spa completa con masajes relajantes.', 'Spa.jpeg'),
+(3, 'Gym', 'Acceso ilimitado al gimnasio durante la estadía.', 'Gimnasio.jpeg'),
+(4, 'Sauna', 'Uso de sauna seca y húmeda, ideal para relajación.', 'Sauna.jpeg'),
+(5, 'Piscina interior', 'Piscina climatizada abierta todo el año.', 'Piscina cerrada.jpeg'),
+(6, 'Piscina exterior', 'Piscina al aire libre con camastros.', 'Piscina al aire libre.jpeg'),
+(7, 'Estacionamiento', 'Estacionamiento privado con vigilancia las 24 horas.', '');
 
 -- --------------------------------------------------------
 
@@ -167,7 +167,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nombre`, `apellido`, `email`, `celular`, `password`) VALUES
-(1, 'Mateo', 'Pérez', 'mateo.perez@example.com', '59892345678', ''),
+(1, 'Mateo', 'Pérez', 'mateo.perez@example.com', '59892345678', '5678jaja'),
 (2, 'Sofía', 'González', 'sofia.gonzalez@example.com', '59893456789', ''),
 (3, 'Juan', 'Rodríguez', 'juan.rodriguez@example.com', '59894567890', ''),
 (4, 'Valentina', 'Fernández', 'valentina.fernandez@example.com', '59895678901', '');

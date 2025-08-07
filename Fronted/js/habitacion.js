@@ -140,5 +140,5 @@ document.addEventListener('click', function (e) {
 
 });
 
-// Esto se mantiene si usás obtenerHabitacion()
+
 document.addEventListener("DOMContentLoaded", obtenerHabitacion);

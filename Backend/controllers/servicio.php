@@ -8,9 +8,9 @@ function obtenerServicio() {
     echo json_encode($servicioModel->obtenerServicio());
 }
 
-function agregarServicio($tipo_servicio, $precio, $descripcion_servicio) {
+function agregarServicio($tipo_servicio, $descripcion_servicio, $imagen) {
     global $servicioModel;
-    if ($servicioModel->agregar($tipo_servicio, $precio, $descripcion_servicio)) {
+    if ($servicioModel->agregar($tipo_servicio, $descripcion_servicio, $imagen)) {
         echo json_encode(["message" => "Servicio agregado correctamente."]);
     } else {
         echo json_encode(["message" => "Error al agregar el servicio."]);

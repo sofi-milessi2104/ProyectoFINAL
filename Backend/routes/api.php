@@ -91,10 +91,10 @@ elseif ($requestMethod == "POST") {
         global $reservaModel;
     } elseif ($solicitud == "servicio") {
         $tipo_servicio = $_POST["tipo_servicio"];
-        $precio = $_POST["precio"];
         $descripcion_servicio = $_POST["descripcion_servicio"];
-        echo "Datos recibidos: Tipo de Servicio: $tipo_servicio, Precio: $precio, Descripción: $descripcion_servicio";
-        agregarServicio($tipo_servicio, $precio, $descripcion_servicio);
+        $imagen = $_POST["imagen"];
+        echo "Datos recibidos: Tipo de Servicio: $tipo_servicio, Descripción: $descripcion_servicio, Imagen: $imagen";
+        agregarServicio($tipo_servicio, $descripcion_servicio, $imagen);
         global $servicioModel;
     } elseif ($solicitud == "usuario") {
         $nombre = $_POST["nombre"];
