@@ -8,9 +8,9 @@ function obtenerPromocion() {
     echo json_encode($promocionModel->obtenerPromocion());
 }
 
-function agregarPromocion($tipo_promo) {
+function agregarPromocion($tipo_promo, $descripcion_promo, $img_promo, $precio_promo) {
     global $promocionModel;
-    if ($promocionModel->agregar($tipo_promo)) {
+    if ($promocionModel->agregar($tipo_promo, $descripcion_promo, $img_promo, $precio_promo)) {
         echo json_encode(["message" => "Promocion agregada correctamente."]);
     } else {
         echo json_encode(["message" => "Error al agregar la promocion."]);
