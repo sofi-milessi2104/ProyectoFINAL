@@ -6,10 +6,10 @@
 }
 
 body {
-    font-family: 'Montserrat', sans-serif; /* Sugiero una fuente más moderna, si no la tienes, usa Arial */
+    font-family: 'Montserrat', sans-serif; 
     line-height: 1.6;
     color: black;
-    background-color: cadetblue; /* Fondo general luminoso */
+    background-color: cadetblue; 
 }
 
 .container {
@@ -18,9 +18,8 @@ body {
     padding: 0 20px;
 }
 
-/* Header y Navegación */
 header {
-    background-color: white; /* Fondo del header, blanco luminoso */
+    background-color: white; 
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     position: relative;
     z-index: 100; /* Asegura que el nav esté sobre otros elementos */
@@ -44,24 +43,23 @@ header {
 
 .main-nav .nav-list a {
     text-decoration: none;
-    color: black; /* Color de los enlaces */
+    color: black;
     font-weight: bold;
     padding: 5px 0;
     transition: color 0.3s ease;
 }
 
 .main-nav .nav-list a:hover {
-    color: blue; /* Color al pasar el mouse */
+    color: blue; 
 }
 
 
-/* Sección Hero (Banner principal) */
 .info {
-    background: url('../img/14.jpeg') no-repeat center center/cover; /* Usaremos tu imagen 1.jpg */
+    background: url('../img/14.jpeg') no-repeat center center/cover; 
     color: white;
     text-align: center;
     padding: 100px 20px;
-    height: 400px; /* Altura del banner, puedes ajustar */
+    height: 400px; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,14 +67,14 @@ header {
     z-index: 0;
 }
 
-.info::before { /* Capa oscura para mejor lectura del texto */
+.info::before { 
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.4); /* Opacidad del overlay más suave */
+    background-color: rgba(0, 0, 0, 0.4); 
     z-index: -1;
 }
 
@@ -99,8 +97,8 @@ header {
 
 .btn-primary {
     display: inline-block;
-    background-color: var(--color-primary-blue); /* Color del botón principal */
-    color: var(--color-white);
+    background-color: blue; 
+    color: white;
     padding: 15px 30px;
     text-decoration: none;
     border-radius: 5px;
@@ -110,55 +108,54 @@ header {
 }
 
 .btn-primary:hover {
-    background-color: var(--color-accent-teal); /* Cambio de color al pasar el mouse */
+    background-color: teal; 
     transform: translateY(-2px);
 }
 
-/* Secciones Generales del Contenido Principal */
 .main-content {
     padding: 40px 0;
 }
 
 .section-padding {
-    padding: 80px 0; /* Mayor padding para más espacio y luminosidad */
+    padding: 80px 0; 
 }
 
 .bg-light {
-    background-color: var(--color-light-peach); /* Fondo de sección suave */
+    background-color: lightpink; 
 }
 
 h2 {
     text-align: center;
     margin-bottom: 50px;
     font-size: 2.8em;
-    color: white; /* Color oscuro para encabezados importantes */
+    color: white; 
     font-weight: 700;
 }
 
 h3 {
-    color: var(--color-primary-blue); /* Color para sub-encabezados */
+    color: blue; 
     font-size: 1.8em;
     margin-bottom: 15px;
 }
 
 p {
-    color: var(--color-text-light); /* Color más suave para párrafos */
+    color: lightgray; 
     font-size: 1.1em;
 }
 
 /* Sección de Características/Lo que nos destaca */
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Mayor tamaño mínimo */
-    gap: 40px; /* Mayor espacio entre elementos */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 40px; 
     text-align: center;
 }
 
 .feature-item {
-    background-color: var(--color-white);
-    padding: 40px; /* Mayor padding interno */
-    border-radius: 10px; /* Bordes más suaves */
-    box-shadow: 0 8px 15px rgba(0,0,0,0.08); /* Sombra más pronunciada pero suave */
+    background-color: white;
+    padding: 40px; 
+    border-radius: 10px; 
+    box-shadow: 0 8px 15px rgba(0,0,0,0.08); 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -169,30 +166,28 @@ p {
 
 .feature-item [class^="icon-"] {
     display: block;
-    font-size: 3.5em; /* Íconos más grandes */
+    font-size: 3.5em;
     margin-bottom: 20px;
-    color: white; /* Color de acento para íconos */
+    color: white; 
 }
 
-
-/* Footer */
 .main-footer {
-    background-color: var(--color-primary-dark); /* Fondo oscuro del footer */
-    color: var(--color-white);
-    padding: 40px 0; /* Mayor padding */
+    background-color: darkslategray; 
+    color: white;
+    padding: 40px 0; 
     text-align: center;
 }
 
 .main-footer .social-links a {
     color: white;
-    font-size: 1.8em; /* Íconos más grandes */
+    font-size: 1.8em;
     margin: 0 12px;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .main-footer .social-links a:hover {
-    color: var(--color-accent-teal);
+    color: teal;
 }
 
 .gallery-img {
@@ -267,8 +262,6 @@ p {
   color: #555;
 }
 
-
-
 .card-body button {
   margin-top: 10px;
   padding: 10px 20px;
@@ -289,8 +282,6 @@ p {
 .card-body button:active {
   transform: scale(0.98);
 }
-
-
 
 .modal-overlay {
     position: fixed;
@@ -521,7 +512,6 @@ p {
 .cerrar-modal:hover svg {
     fill: #000;
 }
-
 
 .servicios-linea {
   display: flex;
