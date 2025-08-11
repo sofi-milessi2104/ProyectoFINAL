@@ -2,7 +2,7 @@ async function obtenerPromocion() {
     try{
         const respuesta=await fetch("../Backend/routes/api.php?url=promocion");
         const promocion=await respuesta.json();
-        console.log(pro);
+        console.log(promocion);
         const contenedor=document.getElementById ("contenedor-promocion");
         contenedor.innerHTML=crearCards(promocion);
 
@@ -19,7 +19,7 @@ function crearCards(promociones) {
                 <h3>${promo.tipo_promo}</h3>
                 <p>${promo.descripcion_promo}</p>
                 <p><strong>Precio:</strong> $${promo.precio_promo}</p>
-                <button class="btn-ver-mas" data-id="${i}">Ver más</button>
+                <button class="btn-reserva-promocion">Reservar</button>
             </div>
         </div>
     `).join("");
