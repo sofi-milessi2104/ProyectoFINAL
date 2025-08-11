@@ -16,10 +16,10 @@ function crearCards(habitaciones) {
         <div class="card">
             <img src="../Fronted/img/${hab.imagen}" alt="${hab.tipo_hab}" class="card-img">
             <div class="card-body">
-                <h3>${hab.tipo_hab}</h3>
-                <p>${hab.descripcion_hab}</p>
-                <p><strong>Disponible:</strong> ${hab.disponible ? 'Sí' : 'No'}</p>
-                <p><strong>Precio:</strong> $${hab.precio}</p>
+                <h3 class="h3-hab">${hab.tipo_hab}</h3>
+                <p class= "p-hab">${hab.descripcion_hab}</p>
+                <p class= "p-hab"><strong>Disponible:</strong> ${hab.disponible ? 'Sí' : 'No'}</p>
+                <p class= "p-hab"><strong>Precio:</strong> $${hab.precio}</p>
                 <button class="btn-ver-mas" data-id="${i}">Ver más</button>
             </div>
         </div>
