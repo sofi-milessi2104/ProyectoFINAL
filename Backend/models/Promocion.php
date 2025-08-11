@@ -14,9 +14,9 @@ class Promocion {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function agregar($tipo_promo) {
-        $stmt = $this->pdo->prepare("INSERT INTO promociones (tipo_promo) VALUES (:tipo_promo)");
-        return $stmt->execute(["tipo_promo" => $tipo_promo]);
+    public function agregar($tipo_promo, $descripcion_promo, $img_promo, $precio_promo) {
+        $stmt = $this->pdo->prepare("INSERT INTO promociones (tipo_promo, descripcion_promo, img_promo, precio_promo) VALUES (:tipo_promo, :descripcion_promo, :img_promo, :precio_promo)");
+        return $stmt->execute(["tipo_promo" => $tipo_promo, "descripcion_promo" => $descripcion_promo, "img_promo" => $img_promo, "precio_promo" => $precio_promo]);
     }
 
     public function eliminar($id) {
