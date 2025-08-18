@@ -31,27 +31,25 @@ if ($solicitud == "administrador") {
 elseif ($requestMethod == "POST") {
     $solicitud = $_GET["url"] ?? null;
 
-    if ($solicitud == "administrador") {
+    if ($solicitud == "loginAddAdm") {
         $ci = $_POST["ci"];
         $nombre_completo = $_POST["nombre_completo"];
         $email = $_POST["email"];
         $area = $_POST["area"];
+        $password = $_POST["password"];
        // echo "Datos recibidos: CI: $ci, Nombre Completo: $nombre_completo, Email: $email, Area: $area";
-        agregarAdmin($ci, $nombre_completo, $email, $area);
-        global $adminModel;
+        loginAddAdmin($ci, $nombre_completo, $email, $area, $password);
     }elseif ($solicitud == "login") {
           $email = $_POST["email"];
         $password = $_POST["password"];
       //  echo "Datos recibidos: Email: $email, Contraseña: $password";
         loginAdministrador($email, $password);
-    }
-    elseif ($solicitud == "loginUsr") {
+    } elseif ($solicitud == "loginUsr") {
           $email = $_POST["email"];
         $password = $_POST["password"];
       //  echo "Datos recibidos: Email: $email, Contraseña: $password";
         loginUsuario($email, $password);
-    }
-    elseif ($solicitud == "loginAddUsr") {
+    } elseif ($solicitud == "loginAddUsr") {
           $nombre = $_POST["nombre"];
         $apellido = $_POST["apellido"];
         $email = $_POST["email"];
@@ -59,8 +57,7 @@ elseif ($requestMethod == "POST") {
         $password = $_POST["password"];
       //  echo "Datos recibidos: Email: $email, Contraseña: $password";
         loginAddUser($nombre, $apellido, $email, $celular, $password);
-    } 
-    elseif ($solicitud == "habitacion") {
+    } elseif ($solicitud == "habitacion") {
         $tipo_hab = $_POST["tipo_hab"];
         $descripcion_hab = $_POST["descripcion_hab"];
         $cantidad = $_POST["cantidad"];
