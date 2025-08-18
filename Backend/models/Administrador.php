@@ -14,9 +14,10 @@ class Administrador {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function agregar($ci, $nombre_completo, $email, $area) {
-        $stmt = $this->pdo->prepare("INSERT INTO administrador (ci, nombre_completo, email, area) VALUES (:ci, :nombre_completo, :email, :area)");
-        return $stmt->execute(["ci" => $ci, "nombre_completo" => $nombre_completo, "email" => $email, "area" => $area]);
+    public function loginAdd($ci, $nombre_completo, $email, $area, $password) {
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $this->pdo->prepare("INSERT INTO administrador (ci, nombre_completo, email, area, password) VALUES (:ci, :nombre_completo, :email, :area, :password)");
+        return $stmt->execute(["ci" => $ci, "nombre_completo" => $nombre_completo, "email" => $email, "area" => $area, "password" => $password]);
     }
 
     public function eliminar($id) {
