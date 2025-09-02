@@ -11,7 +11,11 @@ function obtenerUsuario() {
 function loginAddUser($nombre, $apellido, $email, $celular, $password) {
     global $usuarioModel;
     if ($usuarioModel->loginAdd($nombre, $apellido, $email, $celular, $password)) {
-        echo json_encode(["message" => "Usuario agregado correctamente."]);
+        echo json_encode([
+            "status" => true,
+            "rol" => "usuario",
+            "data" => $resultado
+        ]);
     } else {
         echo json_encode(["message" => "Error al agregar el usuario."]);
     }
@@ -30,7 +34,11 @@ function loginUsuario($email, $password) {
     global $usuarioModel;
     $resultado = $usuarioModel->login($email, $password);
     if ($resultado) {
-        echo json_encode(["status" => true, "message" => "Credenciales correctas"]);
+        echo json_encode([
+            "status" => true,
+            "rol" => "usuario",
+            "data" => $resultado
+        ]);
     } else {
         echo json_encode(["status" => false, "message" => "Credenciales incorrectas"]);
     }

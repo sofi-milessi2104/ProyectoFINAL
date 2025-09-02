@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="login.css">
-<script type="module" src="./js/usuario.js"></script>   
+    <link rel="stylesheet" href="css/login.css">
+
  <title>Sesión</title>
 </head>
 
@@ -15,7 +15,7 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up">
-            <form action="../Backend/routes/api.php?url=loginAddUsr" method="POST" id="frmAddUsuario">
+            <form id="frmAddUsuario">
                 <h1>Crear Cuenta</h1>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class='bx bxl-google'></i></a>
@@ -34,7 +34,7 @@
         </div>
 
         <div class="form-container sign-in">
-                   <form action="../Backend/routes/api.php?url=loginUsr" method="POST" id="frmUsuario">
+                   <form  method="POST" id="frmUsuario">
                 <h1>Iniciar Sesión</h1>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class='bx bxl-google'></i></i></a>
@@ -60,11 +60,12 @@
                 <div class="toggle-panel toggle-right">
                     <h1>Hello, Friend!</h1>
                     <p>Registrate con tus datos personales para utilizar todas las funciones del sitio</p>
-                    <button class="hidden" id="register">Registrarse</button>
+                  
+                     <input type="submit" id="register" value="Registrarse">
                 </div>
             </div>
         </div>
     </div>
-
+<script type="module" src="./js/usuario.js"></script>
 </body>
 </html>

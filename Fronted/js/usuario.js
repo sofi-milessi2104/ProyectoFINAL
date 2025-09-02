@@ -3,7 +3,7 @@ async function obtenerUsuario() {
         const respuesta = await fetch("../Backend/routes/api.php?url=usuario");
         const usuario = await respuesta.json();
         console.log(usuario);
-        agregarEventoForm(); 
+        agregarEventoForm();
         console.log(usuario);
     } catch (error) {
         console.error("Error al obtener los usuarios: " + error);
@@ -14,7 +14,9 @@ async function obtenerUsuario() {
 
 
 function agregarEventoForm() {
-    let form = document.querySelector("#Form");
+    let form = document.querySelector("#frmUsuario");
+     let formAdd = document.querySelector("#frmAddUsuario");
+    
     if (!form) return;
     form.onsubmit = (e) => {
         e.preventDefault();
@@ -22,11 +24,23 @@ function agregarEventoForm() {
         let password = form.password.value;
         iniciarSesionUsuario(email, password);
     }
+    if (!formAdd) return;
+    formAdd.onsubmit = (e) => {
+        e.preventDefault();
+        let nombre = formAdd.nombre.value;
+        let apellido = formAdd.apellido.value;
+        let email = formAdd.email.value;
+        let celular = formAdd.celular.value;
+        let password = formAdd.password.value;
+        loginAddUser(nombre, apellido, email, celular, password);
+    }
+
 }
 
 async function iniciarSesionUsuario(email, password) {
     try {
-        const url = "../Backend/routes/api.php?url=usuario";
+        //alert("Iniciando sesión...");
+        const url = "../Backend/routes/api.php?url=loginUsr";
         const data = new FormData();
         data.append("email", email);
         data.append("password", password);
@@ -36,15 +50,45 @@ async function iniciarSesionUsuario(email, password) {
             body: data
         });
         const resultado = await respuesta.json();
-
-        if (resultado.status && resultado.rol === "usuario") {
+     
+        if (resultado.status == true) {
+              // alert("login"+resultado.status)
             window.localStorage.setItem("sesionUser", JSON.stringify(resultado.data));
-            window.location.href = "Fronted/index.html";
+            window.location.href = "../fronted/index.html"; // <-- Cambia aquí la ruta
         } else {
             alert("No tienes permisos de usuario o los datos son incorrectos.");
         }
     } catch (error) {
-        alert("Error al iniciar sesión.");
+        alert("Error al iniciar sesión " + error);
+    }
+}
+
+async function loginAddUser(nombre, apellido, email, celular, password) {
+    try {
+        //alert("Iniciando sesión...");
+        const url = "../Backend/routes/api.php?url=loginAddUsr";
+        const data = new FormData();
+        data.append("nombre", nombre);
+        data.append("apellido", apellido);
+        data.append("email", email);
+        data.append("celular", celular);
+        data.append("password", password);
+
+        const respuesta = await fetch(url, {
+            method: "POST",
+            body: data
+        });
+        const resultado = await respuesta.json();
+     
+        if (resultado.status == true) {
+              // alert("login"+resultado.status)
+            window.localStorage.setItem("sesionUser", JSON.stringify(resultado.data));
+            window.location.href = "../fronted/index.html"; // <-- Cambia aquí la ruta
+        } else {
+            alert("No pudiste crear una cuenta correctamente");
+        }
+    } catch (error) {
+        alert("Error al crear cuenta " + error);
     }
 }
 
@@ -64,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginBtn) {
         loginBtn.addEventListener('click', () => {
             container.classList.remove("active");
-                
+
         });
     }
 
