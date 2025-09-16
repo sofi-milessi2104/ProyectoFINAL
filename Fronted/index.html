@@ -1,107 +1,167 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Costa Colonia - Bienvenido</title>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="hab.css">
-    <script src="js/habitacion.js"></script>
-    <script src="js/servicio.js"></script>
-    <script src="js/promocion.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Hotel Costa Colonia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  </head>
+
+
+  <body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-2 shadow-sm sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand me-5 fw-bold fs-3 h-2font" href="index.html"><img src="img/logo.png" alt="Hotel Costa Colonia" width="150" height="30"></a>
+    <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active me-2" aria-current="page" href="#">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link me-2" href="habitaciones.html">Habitaciones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link me-2" href="servicios.html">Servicios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link me-2" href="promociones.html">Promociones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link me-2" href="restaurante.html">Restaurante</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link me-2" href="contacto.html">Contacto</a>
+        </li>
+      </ul>
+      <div class="d-flex">
+        <a href="usuario.html" class="btn-login ">Login</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+ <!-- Carrusel de fotos Hotel-->
+
+ <div class="container-fluid px-lg-4 mt-a">
+ <div class="swiper swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <img src="img/Piscina al aire libre de noche.jpeg" />
+      </div>
+       <div class="swiper-slide">
+        <img src="img/Entrada.jpeg" />
+      </div>
+       <div class="swiper-slide">
+        <img src="img/Comida.jpeg" />
+      </div>
+       <div class="swiper-slide">
+        <img src="img/Piscina al aire libre.jpeg" />
+      </div>
+       <div class="swiper-slide">
+        <img src="img/Gimnasio.jpeg" />
+      </div>
+    </div>
+ </div>
+ </div>
     
-</head>
-<body>
-    <header>
-        <nav id="main-nav" class="main-nav">
-            <div id="logo" class="logo">
-                <a href="index.html">
-                    <img src="img/logo.png" alt="Logo del Hotel id="logo-img">
-                </a>
-            </div>
-            <ul is="nav-list" class="nav-list">
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#../servicios.html">Servicios</a></li>
-                <li><a href="#habitaciones">Habitaciones</a></li>
-                <li><a href="#galeria">Galería</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-        
-    </header>
+<!-- Checking el form de Habitaciones-->
 
-    <main>
-        <section id="info" class="info">
-              <h2>Vacaciones <span class="fuente-premium">premium</span> todo el año</h2>
-            </section>
-
-        <section id="promocion" class="promocion">
-       
-            <div class="container">
-                <h2>Elige una de nuestras promociones</h2>
-                <div id="contenedor-promocion">
-                </div>
-            </div>
-        </section>
-
-        <section id="servicios" class="servicios">
-                <h2>Lo Que Nos Destaca</h2>
-                <div id="contenedor-servicio">
-                </div>
-        </section>
-
-        <div id="habitaciones" class="habitaciones">
-            <h2>Nuestras Habitaciones</h2>
-            <div id="contenedor-habitacion">
-            </div>
+<div class="container availability-form">
+  <div class="row">
+    <div class="col-lg-12 bg-white shadow p-4 rounded">
+      <h5 class="mb-4">Consultar disponibilidad</h5>
+      <form >
+        <div class="row align-items-end">
+          <div class="col-lg-3 mb-3">
+            <label class="form-label"> Registro de entrada</label>
+            <input type="date" class="form-control shadow-none">
+          </div>
+           <div class="col-lg-3 mb-3">
+            <label class="form-label"> Registro de salida</label>
+            <input type="date" class="form-control shadow-none">
+          </div>
+          <div class="col-lg-3 mb-3">
+            <label class="form-label">Adultos</label>
+            <select class="form-select shadow-none" >
+              <option value="1">Uno</option>
+              <option value="2">Dos</option>
+              <option value="3">Tres</option>
+              <option value="4">Cuatro</option>
+              <option value="5">Cinco</option>
+            </select>
+          </div>
+           <div class="col-lg-2 mb-3">
+            <label class="form-label">Niños</label>
+            <select class="form-select shadow-none" >
+              <option value="1">Uno</option>
+              <option value="2">Dos</option>
+              <option value="3">Tres</option>
+              <option value="4">Cuatro</option>
+              <option value="5">Cinco</option>
+            </select>
+          </div>
+          <div class="col-lg-1 mb-lg-3 mt-2">
+            <button type="submit" class="btn-buscardisponibilidad">Buscar</button>
+          </div>
         </div>
+      </form>
+    </div>
+  </div>
+ </div> 
 
-        <div id="galeria" class="galeria">
-            <h1 class="mb-4">Galería de Fotos</h1>        
-            <div class="row row-cols-1 row-cols-md-4 g-4">
-                
-                </div>
-                <div class="col">
-                    <div class="gallery-card">
-                        <img src="./img/Entrada.jpeg" alt="Foto 2" class="gallery-img">
-                    </div>
-                <div class="col">
-                    <div class="gallery-card">
-                        <img src="./img/Spa.jpeg" alt="Foto 1" class="gallery-img">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="gallery-card">
-                        <img src="./img/Piscina al aire libre.jpeg" alt="Foto 3" class="gallery-img">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="gallery-card">
-                        <img src="./img/Loft 4.jpeg" alt="Foto 4" class="gallery-img">
-                    </div>
-                </div>
-            </div>
-        </div>
+ <!-- Habitaciones -->
 
-        <section id="ubicacion" class="ubicacion">
-            <h2>Ubicación del Hotel</h2>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2604.503963496409!2d-57.847579925283654!3d-34.454692773008034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a31361622efd89%3A0x23c9ed881b1ed9c8!2sCosta%20Colonia%20Boutique%20Hotel!5e1!3m2!1ses!2suy!4v1752196825463!5m2!1ses!2suy" width=100% height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </section>
+ <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Nuestras Habitaciones</h2>
 
-        </main>
+ <div class="container">
+  <div class="row">
+    <div class="col-lg-4 col-md-6 my-3">
 
-    <footer id="contacto">
-        <div class="container">
-            <div class="iconos">
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            </div>
-             <p>&copy; 2025 Hotel Costa Colonia. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+       <div class="card border-0 shadow" style="max-width:350px; margin:auto;">
+         <img src="img/Super Loft.jpeg" class="card-img-top" >
+      
+         <div class="card-body">
+          <h5>Super Loft</h5>
+          <div class="Caracteristicas mb-4">
+            <h6 class=" mb-1">Caracteristicas</h6>
+            <span class="badge rounded-pill bg-light text-dark text-wrap ">
+              TV
+            </span>
+            <span class="badge rounded-pill bg-light text-dark text-wrap ">
+              Cocina
+            </span>
+            <span class="badge rounded-pill bg-light text-dark text-wrap ">
+              Balcón Doble
+            </span>
+            <span class="badge rounded-pill bg-light text-dark text-wrap ">
+              Conexión Wi-Fi
+            </span>
+          </div>
+          <a href="habitaciones.html" class="btn btn-primary">Ver más</a>
+         </div>
 
-    </body>
+</div>
+
+    </div>
+    <div class="col-lg-12 text-center mt-5">
+       <a href="habitaciones.html"class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">Mas Habitaciones >>></a>
+    </div>
+  </div>
+ </div> 
+
+<br><br><br>
+<br><br><br>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script type="module" src="./js/index.js"></script>
+</body>
 </html>
