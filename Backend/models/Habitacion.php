@@ -19,7 +19,7 @@ class Habitacion {
         return $stmt->execute([
             "tipo_hab" => $tipo_hab,
             "descripcion_hab" => $descripcion_hab,
-            "cantidad" => $disponible,
+            "disponible" => $disponible,
             "imagen" => $imagen,
             "precio" => $precio
         ]);
