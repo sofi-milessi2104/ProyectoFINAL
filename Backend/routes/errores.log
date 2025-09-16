@@ -75,3 +75,4 @@ Stack trace:
 #2 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\routes\api.php(41): loginAddAdmin('10345678', 'Ana Torres', 'ana.torres@empr...', 'Gerencia', 'TorresSoyyo9647')
 #3 {main}
   thrown in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Administrador.php on line 20
+[16-Sep-2025 18:42:07 Europe/Berlin] PHP Warning:  Undefined variable $resultado in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 17
