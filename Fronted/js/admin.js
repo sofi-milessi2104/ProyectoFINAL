@@ -13,7 +13,7 @@ async function obtenerAdministrador() {
 }
 
 function agregarEventoForm() {
-    let form = document.querySelector("#Form");
+    let form = document.querySelector("#frmAdministrador");
     if (!form) return;
     form.onsubmit = (e) => {
         e.preventDefault();
@@ -25,7 +25,7 @@ function agregarEventoForm() {
 
 async function iniciarSesionAdministrador(email, password) {
     try {
-        const url = "../Backend/routes/api.php?url=administrador";
+        const url = "../Backend/routes/api.php?url=login";
         const data = new FormData();
         data.append("email", email);
         data.append("password", password);
@@ -36,9 +36,9 @@ async function iniciarSesionAdministrador(email, password) {
         });
         const resultado = await respuesta.json();
 
-        if (resultado.status && resultado.rol === "administrador") {
+        if (resultado.status == true) {
             window.localStorage.setItem("sesionAdmin", JSON.stringify(resultado.data));
-            window.location.href = "Fronted/index.html";
+            window.location.href = "../fronted/index.html";
         } else {
             alert("No tienes permisos de administrador o los datos son incorrectos.");
         }
