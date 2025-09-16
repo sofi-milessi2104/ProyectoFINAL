@@ -20,7 +20,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link me-2" href="index.html">Inicio</a>
+          <a class="nav-link active me-2" aria-current="page" href="index.html">Inicio</a>
         </li>
         <li class="nav-item">
           <a class="nav-link me-2" href="habitaciones.html">Habitaciones</a>
@@ -50,7 +50,89 @@
   <div class="h-line bg-dark"></div>
 </div>
 
-<div id="contenedor-habitacion"></div>
+<div class="container">
+  <div class="row">
+    <!-- Columna izquierda (Filtros) -->
+    <div class="col-lg-3 col-md-4 mb-lg-0 mb-4">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white rounded shadow">
+        <div class="container-fluid flex-lg-column align-items-stretch">
+          <h4 class="mt-2">Filtros</h4>
+          <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#filterDropdown" aria-controls="filterDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="filterDropdown">
+
+            <!-- Bloque 1: Fechas -->
+            <div class="border bg-light p-3 rounded mb-3">
+              <h5 class="mb-3" style="font-size: 18px;">Consultar Disponibilidad</h5>
+              <label class="form-label">Check-in</label>
+              <input type="date" class="form-control shadow-none mb-3">
+              <label class="form-label">Check-out</label>
+              <input type="date" class="form-control shadow-none">
+            </div>
+
+            <!-- Bloque 2: Servicios -->
+            <div class="border bg-light p-3 rounded mb-3">
+              <h5 class="mb-3" style="font-size: 18px;">Servicios</h5>
+              <div class="mb-2">
+                <input type="checkbox" id="f1" class="form-check-input shadow-none">
+                <label class="form-check-label" for="f1">Restaurante</label>
+              </div>
+              <div class="mb-2">
+                <input type="checkbox" id="f2" class="form-check-input shadow-none">
+                <label class="form-check-label" for="f2">Spa & Masajes</label>
+              </div>
+              <div class="mb-2">
+                <input type="checkbox" id="f3" class="form-check-input shadow-none">
+                <label class="form-check-label" for="f3">Gimnasio</label>
+              </div>
+              <div class="mb-2">
+                <input type="checkbox" id="f4" class="form-check-input shadow-none">
+                <label class="form-check-label" for="f4">Sauna</label>
+              </div>
+              <div class="mb-2">
+                <input type="checkbox" id="f5" class="form-check-input shadow-none">
+                <label class="form-check-label" for="f5">Piscina interior</label>
+              </div>
+              <div class="mb-2">
+                <input type="checkbox" id="f6" class="form-check-input shadow-none">
+                <label class="form-check-label" for="f6">Piscina exterior</label>
+              </div>
+              <div class="mb-2">
+                <input type="checkbox" id="f7" class="form-check-input shadow-none">
+                <label class="form-check-label" for="f7">Estacionamiento</label>
+              </div>
+            </div>
+
+            <!-- Bloque 3: Cantidad de personas -->
+            <div class="border bg-light p-3 rounded mb-3">
+              <h5 class="mb-3" style="font-size: 18px;">Cantidad de personas</h5>
+              <div class="d-flex">
+                <div class="me-3">
+                  <label class="form-label">Adultos</label>
+                  <input type="number" class="form-control shadow-none">
+                </div>
+                <div>
+                  <label class="form-label">Niños</label>
+                  <input type="number" class="form-control shadow-none">
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Columna derecha (Habitaciones) -->
+    <div class="col-lg-9 col-md-8">
+      <div id="contenedor-habitacion"></div>
+    </div>
+  </div>
+</div>
+
+
+
 
 
 <footer class="footer">
