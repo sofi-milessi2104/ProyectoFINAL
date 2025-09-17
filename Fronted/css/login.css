@@ -247,3 +247,9 @@ body{
   cursor: pointer;
   text-decoration: none;
 }
+
+.btn_LoginAdmin {
+  display: inline-flex;        
+  align-items: center;          
+  gap: 8px;  
+}
