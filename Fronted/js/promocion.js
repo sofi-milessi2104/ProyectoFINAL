@@ -1,29 +1,160 @@
+let todasLasPromociones = [];
+
 async function obtenerPromocion() {
-    try{
-        const respuesta=await fetch("../Backend/routes/api.php?url=promocion");
-        const promocion=await respuesta.json();
-        console.log(promocion);
-        const contenedor=document.getElementById ("contenedor-promocion");
-        contenedor.innerHTML=crearCards(promocion);
+  try {
+    const respuesta = await fetch("../Backend/routes/api.php?url=promocion");
+    const promocionesBD = await respuesta.json();
 
-    }catch (error){
-        console.error("Error al obtener promocion" + error);
-    }
-    }
+    const serviciosPorPromocion = {
+      "DaySpa": ["Spa", "Masaje","Jacuzzi","Piscina", "Aromaterapia"],
+      "DayUse": ["Habitación por un Dia", "TV", "Balcón Privado", "Minibar", "WIFI", "Mesas y Sillas"],
+      "FamilyPlan": ["Alojamiento", "Piscina", "Desayuno", "Juegos"],
+      "Media Pensión": ["Alojamiento", "Desayuno", "Cena"],
+      "Temporada": ["Piscina", "Vistas Increibles"]
+    };
 
-function crearCards(promociones) {
-    return promociones.map((promo, i) => `
-        <div class="card">
-            <img src="../Fronted/img/${promo.img_promo}" alt="${promo.tipo_promo}" class="card-img">
-            <div class="card-body">
-                <h3>${promo.tipo_promo}</h3>
-                <p>${promo.descripcion_promo}</p>
-                <p><strong>Precio:</strong> $${promo.precio_promo}</p>
-                <button class="btn-reserva-promocion">Reservar</button>
-            </div>
-        </div>
-    `).join("");
+    todasLasPromociones = promocionesBD.map(promo => {
+      // Nota: Tu BD tiene "Suit Loft", pero tus filtros y datos tienen "Super Loft".
+      // Lo corregí en tus filtros, pero si tu BD devuelve "Suit Loft", el servicio será un array vacío.
+      // Revisa si el campo en tu BD es "Suit Loft" o "Super Loft" y ajústalo.
+      const tipoHabitacionCorrecto = promo.tipo_promo === 'Suit Loft' ? 'Super Loft' : promo.tipo_promo;
+      return {
+        ...promo,
+        servicios_romo: serviciosPorPromocion[tipoPromocionCorrecto] || []
+      };
+    });
+
+    console.log("Promociones obtenidas y procesadas:", todasLasPromociones);
+
+    renderizarPromociones(todasLasPromociones);
+
+  } catch (error) {
+    console.error("Error al obtener habitaciones: " + error);
+    document.getElementById("contenedor-habitacion").innerHTML = `
+      <div class="alert alert-danger text-center" role="alert">
+        Ocurrió un error al cargar las habitaciones. Por favor, inténtelo de nuevo más tarde.
+      </div>
+    `;
+  }
 }
 
+function renderizarPromociones(promociones) {
+  const contenedor = document.getElementById("contenedor-promociones");
+  if (promociones.length === 0) {
+    contenedor.innerHTML = `
+      <div class="alert alert-warning text-center" role="alert">
+        No se encontraron promociones que coincidan con los filtros.
+      </div>
+    `;
+  } else {
+    contenedor.innerHTML = crearCards(promociones);
+  }
+  agregarEventListeners();
+}
 
-obtenerPromocion();
+function aplicarFiltros() {
+  // Se ha mejorado la selección de elementos para evitar errores de 'null'
+  const tipoPromocion = Array.from(document.querySelectorAll('#filterDropdown input[type="checkbox"]:checked')).map(el => el.value);
+  const precioMin = document.getElementById('precio-min')?.value || '';
+  const precioMax = document.getElementById('precio-max')?.value || '';
+  const checkInDate = document.getElementById('check-in-date')?.value || '';
+  const checkOutDate = document.getElementById('check-out-date')?.value || '';
+
+  const promocionesFiltradas = todasLasPromociones.filter(promo => {
+    const coincideTipo = tipoPromocion.length === 0 || tipoPromocion.includes(promo.tipo_promo);
+    
+    const precio = parseFloat(promo.precio.replace('.', ''));
+    const coincidePrecio = (!precioMin || precio >= parseFloat(precioMin)) && (!precioMax || precio <= parseFloat(precioMax));
+
+    const coincideFechas = true; 
+
+    return coincideTipo && coincidePrecio && coincideFechas;
+  });
+
+  renderizarPromociones(promocionesFiltradas);
+}
+
+function crearCards(promociones) {
+  return `
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 px-4">
+          ${promociones.map(promo => {
+            // Procesa la descripción para crear una lista, incluso si es un solo párrafo
+            const itemsDescripcion = promo.descripcion_promo
+              .split('\r\n')
+              .map(item => item.trim().replace(/^-/, '').trim())
+              .filter(item => item.length > 0);
+
+            return `
+              <div class="card mb-4 border-0 shadow">
+                <div class="row g-0 p-3 align-items-center">
+                  <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
+                    <img src="../Fronted/img/${promo.imagen}" class="img-fluid rounded" alt="${promo.tipo_hab}">
+                  </div>
+                  <div class="col-md-5 px-lg-3 px-md-3 px-0">
+                    <h5 class="mb-3">${promo.tipo_promo}</h5>
+                    <div class="features mb-3">
+                      <h6 class="mb-1">Descripción</h6>
+                      <ul class="list-unstyled">
+                        ${itemsDescripcion.map(item => `
+                          <li>
+                            <span class="badge rounded-pill bg-light text-dark text-wrap">
+                              ${item}
+                            </span>
+                          </li>
+                        `).join('')}
+                      </ul>
+                    </div>
+                    <div class="features mb-3">
+                      <h6 class="mb-1">Servicios</h6>
+                      <div class="d-flex flex-wrap">
+                        ${promo.servicios_promo.map(servicio => `
+                          <span class="badge rounded-pill bg-light text-dark text-wrap me-1 mb-1">
+                            ${servicio}
+                          </span>
+                        `).join('')}
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <span class="badge ${hab.disponible ? 'bg-success' : 'bg-danger'}">
+                        ${hab.disponible ? 'Disponible' : 'No disponible'}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
+                    <h6 class="mb-4">$${hab.precio} por noche</h6>
+                    <button class="btn btn-sm w-100 btn-outline-primary btn-reservar" data-id="${hab.id_hab}">Reservar ahora</button>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function agregarEventListeners() {
+  const botonesReservar = document.querySelectorAll('.btn-reservar');
+  botonesReservar.forEach(boton => {
+    boton.addEventListener('click', (event) => {
+      const idHabitacion = event.target.dataset.id;
+      console.log(`Botón de reserva para la habitación con ID: ${idHabitacion} clickeado.`);
+      window.location.href = 'reserva.html';
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  obtenerHabitacion();
+  
+  document.querySelectorAll('#filterDropdown input').forEach(input => {
+    if (input.type === 'checkbox') {
+      input.addEventListener('change', aplicarFiltros);
+    } else {
+      input.addEventListener('input', aplicarFiltros);
+    }
+  });
+});
