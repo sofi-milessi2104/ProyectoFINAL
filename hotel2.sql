@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-09-2025 a las 03:04:56
+-- Tiempo de generación: 18-09-2025 a las 19:24:04
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -139,13 +139,13 @@ CREATE TABLE `servicio` (
 --
 
 INSERT INTO `servicio` (`id_servicio`, `tipo_servicio`, `descripcion_servicio`, `imagen`) VALUES
-(1, 'Restaurante', 'Servicio de restaurante con menú a la carta y desayuno buffet incluido.', 'Restaurante.jpeg'),
-(2, 'Spa & Masajes', 'Sesión de spa completa con masajes relajantes.', 'Spa.jpeg'),
-(3, 'Gym', 'Acceso ilimitado al gimnasio durante la estadía.', 'Gimnasio.jpeg'),
-(4, 'Sauna', 'Uso de sauna seca y húmeda, ideal para relajación.', 'Sauna.jpeg'),
-(5, 'Piscina interior', 'Piscina climatizada abierta todo el año.', 'Piscina cerrada.jpeg'),
-(6, 'Piscina exterior', 'Piscina al aire libre con camastros.', 'Piscina al aire libre.jpeg'),
-(7, 'Estacionamiento', 'Estacionamiento privado con vigilancia las 24 horas.', '');
+(1, 'Restaurante', 'Restaurante y bar: platos tradicionales y locales con estilo gourmet. Con Room Service y desayuno buffet incluido en todas las tarifas.', 'Restaurante.jpeg'),
+(2, 'Spa & Masajes', 'Sesión de spa completa con masajes relajantes (con cargo adicional).', 'Spa.jpeg'),
+(3, 'Gym', 'Accede al gimnasio durante la estadía (con cargo adicional).', 'Gimnasio.jpeg'),
+(4, 'Sauna', 'Sauna seca, ideal para relajación (con cargo adicional).', 'Sauna.jpeg'),
+(5, 'Piscina interior', 'Piscina climatizada todo el año.', 'Piscina interior - cerrada.jpeg'),
+(6, 'Piscina exterior', 'Piscina climatizada en verano con solárium y servicio de comida y bebida.', 'Piscina al aire libre.jpeg'),
+(7, 'Estacionamiento', 'Estacionamiento descubierto gratuito y limitado.', 'Estacionamiento.jpg');
 
 -- --------------------------------------------------------
 
