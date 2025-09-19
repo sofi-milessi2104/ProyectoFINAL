@@ -14,13 +14,10 @@ async function obtenerPromocion() {
     };
 
     todasLasPromociones = promocionesBD.map(promo => {
-      // Nota: Tu BD tiene "Suit Loft", pero tus filtros y datos tienen "Super Loft".
-      // Lo corregí en tus filtros, pero si tu BD devuelve "Suit Loft", el servicio será un array vacío.
-      // Revisa si el campo en tu BD es "Suit Loft" o "Super Loft" y ajústalo.
-      const tipoHabitacionCorrecto = promo.tipo_promo === 'Suit Loft' ? 'Super Loft' : promo.tipo_promo;
+      const tipoPromocionCorrecto = promo.tipo_promo === 'DaySpa' ? 'temporada' : promo.tipo_promo;
       return {
         ...promo,
-        servicios_romo: serviciosPorPromocion[tipoPromocionCorrecto] || []
+        servicios_promo: serviciosPorPromocion[tipoPromocionCorrecto] || []
       };
     });
 
@@ -29,10 +26,10 @@ async function obtenerPromocion() {
     renderizarPromociones(todasLasPromociones);
 
   } catch (error) {
-    console.error("Error al obtener habitaciones: " + error);
-    document.getElementById("contenedor-habitacion").innerHTML = `
+    console.error("Error al obtener promociones: " + error);
+    document.getElementById("contenedor-promociones").innerHTML = `
       <div class="alert alert-danger text-center" role="alert">
-        Ocurrió un error al cargar las habitaciones. Por favor, inténtelo de nuevo más tarde.
+        Ocurrió un error al cargar las promociones. Por favor, inténtelo de nuevo más tarde.
       </div>
     `;
   }
@@ -53,19 +50,16 @@ function renderizarPromociones(promociones) {
 }
 
 function aplicarFiltros() {
-  // Se ha mejorado la selección de elementos para evitar errores de 'null'
+
   const tipoPromocion = Array.from(document.querySelectorAll('#filterDropdown input[type="checkbox"]:checked')).map(el => el.value);
   const precioMin = document.getElementById('precio-min')?.value || '';
   const precioMax = document.getElementById('precio-max')?.value || '';
-  const checkInDate = document.getElementById('check-in-date')?.value || '';
-  const checkOutDate = document.getElementById('check-out-date')?.value || '';
 
   const promocionesFiltradas = todasLasPromociones.filter(promo => {
     const coincideTipo = tipoPromocion.length === 0 || tipoPromocion.includes(promo.tipo_promo);
     
     const precio = parseFloat(promo.precio.replace('.', ''));
     const coincidePrecio = (!precioMin || precio >= parseFloat(precioMin)) && (!precioMax || precio <= parseFloat(precioMax));
-
     const coincideFechas = true; 
 
     return coincideTipo && coincidePrecio && coincideFechas;
@@ -80,7 +74,6 @@ function crearCards(promociones) {
       <div class="row">
         <div class="col-lg-12 col-md-12 px-4">
           ${promociones.map(promo => {
-            // Procesa la descripción para crear una lista, incluso si es un solo párrafo
             const itemsDescripcion = promo.descripcion_promo
               .split('\r\n')
               .map(item => item.trim().replace(/^-/, '').trim())
@@ -90,7 +83,7 @@ function crearCards(promociones) {
               <div class="card mb-4 border-0 shadow">
                 <div class="row g-0 p-3 align-items-center">
                   <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
-                    <img src="../Fronted/img/${promo.imagen}" class="img-fluid rounded" alt="${promo.tipo_hab}">
+                    <img src="../Fronted/img/${promo.img_promo}" class="img-fluid rounded" alt="${promo.tipo_promo}">
                   </div>
                   <div class="col-md-5 px-lg-3 px-md-3 px-0">
                     <h5 class="mb-3">${promo.tipo_promo}</h5>
@@ -116,15 +109,10 @@ function crearCards(promociones) {
                         `).join('')}
                       </div>
                     </div>
-                    <div class="mt-2">
-                      <span class="badge ${hab.disponible ? 'bg-success' : 'bg-danger'}">
-                        ${hab.disponible ? 'Disponible' : 'No disponible'}
-                      </span>
-                    </div>
                   </div>
                   <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
-                    <h6 class="mb-4">$${hab.precio} por noche</h6>
-                    <button class="btn btn-sm w-100 btn-outline-primary btn-reservar" data-id="${hab.id_hab}">Reservar ahora</button>
+                    <h6 class="mb-4">$${promo.precio_promo} por noche</h6>
+                    <button class="btn btn-sm w-100 btn-outline-primary btn-reservar" data-id="${promo.id_promo}">Reservar ahora</button>
                   </div>
                 </div>
               </div>
@@ -140,15 +128,15 @@ function agregarEventListeners() {
   const botonesReservar = document.querySelectorAll('.btn-reservar');
   botonesReservar.forEach(boton => {
     boton.addEventListener('click', (event) => {
-      const idHabitacion = event.target.dataset.id;
-      console.log(`Botón de reserva para la habitación con ID: ${idHabitacion} clickeado.`);
+      const idPromocion = event.target.dataset.id;
+      console.log(`Botón de reserva para la promoción con ID: ${idPromocion} clickeado.`);
       window.location.href = 'reserva.html';
     });
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  obtenerHabitacion();
+  obtenerPromocion();
   
   document.querySelectorAll('#filterDropdown input').forEach(input => {
     if (input.type === 'checkbox') {
