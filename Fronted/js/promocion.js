@@ -74,10 +74,10 @@ function crearCards(promociones) {
       <div class="row">
         <div class="col-lg-12 col-md-12 px-4">
           ${promociones.map(promo => {
-            const itemsDescripcion = promo.descripcion_promo
-              .split('\r\n')
-              .map(item => item.trim().replace(/^-/, '').trim())
-              .filter(item => item.length > 0);
+          const itemsDescripcion = (promo.descripcion_promo || '')
+            .split('\r\n')
+            .map(item => item.trim().replace(/^-/, '').trim())
+            .filter(item => item.length > 0);
 
             return `
               <div class="card mb-4 border-0 shadow">
