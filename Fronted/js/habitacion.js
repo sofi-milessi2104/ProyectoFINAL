@@ -14,9 +14,6 @@ async function obtenerHabitacion() {
     };
 
     todasLasHabitaciones = habitacionesBD.map(hab => {
-      // Nota: Tu BD tiene "Suit Loft", pero tus filtros y datos tienen "Super Loft".
-      // Lo corregí en tus filtros, pero si tu BD devuelve "Suit Loft", el servicio será un array vacío.
-      // Revisa si el campo en tu BD es "Suit Loft" o "Super Loft" y ajústalo.
       const tipoHabitacionCorrecto = hab.tipo_hab === 'Suit Loft' ? 'Super Loft' : hab.tipo_hab;
       return {
         ...hab,
@@ -53,7 +50,6 @@ function renderizarHabitaciones(habitaciones) {
 }
 
 function aplicarFiltros() {
-  // Se ha mejorado la selección de elementos para evitar errores de 'null'
   const tipoHabitacion = Array.from(document.querySelectorAll('#filterDropdown input[type="checkbox"]:checked')).map(el => el.value);
   const precioMin = document.getElementById('precio-min')?.value || '';
   const precioMax = document.getElementById('precio-max')?.value || '';
@@ -80,7 +76,6 @@ function crearCards(habitaciones) {
       <div class="row">
         <div class="col-lg-12 col-md-12 px-4">
           ${habitaciones.map(hab => {
-            // Procesa la descripción para crear una lista, incluso si es un solo párrafo
             const itemsDescripcion = hab.descripcion_hab
               .split('\r\n')
               .map(item => item.trim().replace(/^-/, '').trim())
