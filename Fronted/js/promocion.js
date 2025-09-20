@@ -8,9 +8,10 @@ async function obtenerPromocion() {
     const serviciosPorPromocion = {
       "DaySpa": ["Spa", "Masaje","Jacuzzi","Piscina", "Aromaterapia"],
       "DayUse": ["Habitación por un Dia", "TV", "Balcón Privado", "Minibar", "WIFI", "Mesas y Sillas"],
+      "Cupón":["5% Descuento"],
       "FamilyPlan": ["Alojamiento", "Piscina", "Desayuno", "Juegos"],
-      "Media Pensión": ["Alojamiento", "Desayuno", "Cena"],
-      "Temporada": ["Piscina", "Vistas Increibles"]
+      "Media pensión": ["Alojamiento", "Desayuno", "Cena"],
+      "temporada": ["Piscina", "Vistas Increibles"]
     };
 
     todasLasPromociones = promocionesBD.map(promo => {
@@ -50,7 +51,6 @@ function renderizarPromociones(promociones) {
 }
 
 function aplicarFiltros() {
-
   const tipoPromocion = Array.from(document.querySelectorAll('#filterDropdown input[type="checkbox"]:checked')).map(el => el.value);
   const precioMin = document.getElementById('precio-min')?.value || '';
   const precioMax = document.getElementById('precio-max')?.value || '';
@@ -58,7 +58,7 @@ function aplicarFiltros() {
   const promocionesFiltradas = todasLasPromociones.filter(promo => {
     const coincideTipo = tipoPromocion.length === 0 || tipoPromocion.includes(promo.tipo_promo);
     
-    const precio = parseFloat(promo.precio.replace('.', ''));
+    const precio = parseFloat(promo.precio_promo.replace('.', ''));
     const coincidePrecio = (!precioMin || precio >= parseFloat(precioMin)) && (!precioMax || precio <= parseFloat(precioMax));
     const coincideFechas = true; 
 
