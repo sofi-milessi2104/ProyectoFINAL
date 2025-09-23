@@ -31,15 +31,7 @@ if ($solicitud == "administrador") {
 elseif ($requestMethod == "POST") {
     $solicitud = $_GET["url"] ?? null;
 
-    if ($solicitud == "loginAddAdm") {
-        $ci = $_POST["ci"];
-        $nombre_completo = $_POST["nombre_completo"];
-        $email = $_POST["email"];
-        $area = $_POST["area"];
-        $password = $_POST["password"];
-       // echo "Datos recibidos: CI: $ci, Nombre Completo: $nombre_completo, Email: $email, Area: $area";
-        loginAddAdmin($ci, $nombre_completo, $email, $area, $password);
-    }elseif ($solicitud == "login") {
+    if ($solicitud == "login") {
           $email = $_POST["email"];
         $password = $_POST["password"];
       //  echo "Datos recibidos: Email: $email, Contraseña: $password";
