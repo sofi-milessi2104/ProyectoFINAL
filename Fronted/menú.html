@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/menú.css">
+    <title>Menú</title>
+</head>
+<body>
+    
+    <div class="menu-container">
+        <h1 class="menu-title">Our Menu</h1>
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-category="all">All</button>
+            <button class="filter-btn" data-category="entradas">Entradas</button>
+            <button class="filter-btn" data-category="principales">Principales</button>
+            <button class="filter-btn" data-category="ensaladas">Ensaladas</button>
+            <button class="filter-btn" data-category="pizzas">Pizzas</button>
+            <button class="filter-btn" data-category="postres">Postres</button>
+            <button class="filter-btn" data-category="vegetarian">Vegetarian</button>
+            <button class="filter-btn" data-category="gluten-free">Gluten-Free</button>
+        </div>
+
+        <div class="menu-grid">
+            <div class="menu-item" data-category="entradas">
+                <h3 class="item-name">Empanadas de lomo</h3>
+                <p class="item-description">Cortado a cuchillo, con dip de salsa criolla (2 unidades).</p>
+                <span class="item-price">USD 10</span>
+            </div>
+            <div class="menu-item" data-category="entradas vegetarian gluten-free">
+                <h3 class="item-name">Provoleta capresse</h3>
+                <p class="item-description">Con tomates secos, tomates cherry, albahaca y oliva, con tostadas de focaccia.</p>
+                <span class="item-price">USD 13</span>
+            </div>
+            <div class="menu-item" data-category="entradas">
+                <h3 class="item-name">Sopa de verduras</h3>
+                <p class="item-description">Sopa de verduras de estación, con crutons de pan y chips de bondiola ahumada.</p>
+                <span class="item-price">USD 10</span>
+            </div>
+
+            <div class="menu-item" data-category="principales">
+                <h3 class="item-name">Ojo de Bife</h3>
+                <p class="item-description">En manteca de finas hierbas, con papas a la mostaza y miel y dip de chimichurri.</p>
+                <span class="item-price">USD 29</span>
+            </div>
+            <div class="menu-item" data-category="principales">
+                <h3 class="item-name">Milanesa de lomo</h3>
+                <p class="item-description">Empanado en panko, queso colonia gratinado, cherrys confitados, cebolla salteada y papas bastón.</p>
+                <span class="item-price">USD 26</span>
+            </div>
+            <div class="menu-item" data-category="principales">
+                <h3 class="item-name">Chivito Gourmet</h3>
+                <p class="item-description">Pan casero, lomo, jamón, muzzarella, tomates asados, rúcula, huevo, con papas rústicas y salsa criolla.</p>
+                <span class="item-price">USD 26</span>
+            </div>
+            <div class="menu-item" data-category="principales gluten-free">
+                <h3 class="item-name">Salmón grille</h3>
+                <p class="item-description">Con salsa de camarones, con mix de verdes, cherrys, rabanitos, pepino y repollo morado.</p>
+                <span class="item-price">USD 31</span>
+            </div>
+            <div class="menu-item" data-category="principales">
+                <h3 class="item-name">Pappardelle con salsa</h3>
+                <p class="item-description">Con salsa de Frutos del Mar. Opción de salsa: Ragú de Pollo.</p>
+                <span class="item-price">USD 25</span>
+            </div>
+            <div class="menu-item" data-category="principales vegetarian gluten-free">
+                <h3 class="item-name">Pastas Sin Gluten</h3>
+                <p class="item-description">Salsa a elección (pesto genovés, fileto o rosa).</p>
+                <span class="item-price">USD 25</span>
+            </div>
+            <div class="menu-item" data-category="principales vegetarian">
+                <h3 class="item-name">Lasaña de verduras</h3>
+                <p class="item-description">Zucchini, berenjena, cebolla y espinaca con salsa especiada de tomate y queso colonia.</p>
+                <span class="item-price">USD 22</span>
+            </div>
+
+            <div class="menu-item" data-category="ensaladas">
+                <h3 class="item-name">Ensalada de pollo crispy</h3>
+                <p class="item-description">Mix de verdes, tomates cherry, rabanito, repollo morado, queso colonia y lactonesa de cilantro y lima.</p>
+                <span class="item-price">USD 17</span>
+            </div>
+            <div class="menu-item" data-category="ensaladas vegetarian gluten-free">
+                <h3 class="item-name">Ensalada de quinoa y palta</h3>
+                <p class="item-description">Con huevo poché, verduras asadas, queso brie, tomates cherry y mix de verdes.</p>
+                <span class="item-price">USD 17</span>
+            </div>
+
+            <div class="menu-item" data-category="pizzas">
+                <h3 class="item-name">Clásica Napolitana</h3>
+                <p class="item-description">Salsa de tomate, muzzarella, tomates y orégano.</p>
+                <span class="item-price">USD 20</span>
+            </div>
+            <div class="menu-item" data-category="pizzas vegetarian">
+                <h3 class="item-name">Capresse</h3>
+                <p class="item-description">Salsa de tomate, muzzarella, tomates y albahaca.</p>
+                <span class="item-price">USD 20</span>
+            </div>
+            <div class="menu-item" data-category="pizzas">
+                <h3 class="item-name">Morena</h3>
+                <p class="item-description">Salsa de tomate, bondiola ahumada, rúcula, muzzarella y queso Colonia.</p>
+                <span class="item-price">USD 22</span>
+            </div>
+            <div class="menu-item" data-category="pizzas vegetarian">
+                <h3 class="item-name">4 Quesos</h3>
+                <p class="item-description">Salsa de tomates, muzzarella, queso colonia, parmesano y azul.</p>
+                <span class="item-price">USD 22</span>
+            </div>
+            <div class="menu-item" data-category="pizzas gluten-free">
+                <h3 class="item-name">Apta Celíacos</h3>
+                <p class="item-description">Muzzarella, queso colonia, parmesano y azul.</p>
+                <span class="item-price">USD 22</span>
+            </div>
+
+            <div class="menu-item" data-category="postres vegetarian">
+                <h3 class="item-name">Torta húmeda de chocolate</h3>
+                <p class="item-description">Con salsa de frutos rojos.</p>
+                <span class="item-price">USD 12</span>
+            </div>
+            <div class="menu-item" data-category="postres vegetarian">
+                <h3 class="item-name">Key Lima Pie</h3>
+                <p class="item-description">Tarta de limón sobre masa de chocolate.</p>
+                <span class="item-price">USD 10</span>
+            </div>
+            <div class="menu-item" data-category="postres vegetarian">
+                <h3 class="item-name">Panqueques con dulce de leche</h3>
+                <p class="item-description">Con garrapiñada de almendras.</p>
+                <span class="item-price">USD 7</span>
+            </div>
+            <div class="menu-item" data-category="postres vegetarian gluten-free">
+                <h3 class="item-name">Ensalada de Frutas</h3>
+                <p class="item-description">Frescas frutas de estación.</p>
+                <span class="item-price">USD 8</span>
+            </div>
+            <div class="menu-item" data-category="postres vegetarian gluten-free">
+                <h3 class="item-name">Helado (2 bochas)</h3>
+                <p class="item-description">Sabores: frutilla a la crema, chocolate, crema americana, dulce de leche granizado y limón.</p>
+                <span class="item-price">USD 8</span>
+            </div>
+
+            <div class="menu-item" data-category="ninos">
+                <h3 class="item-name">Milanesa de lomo</h3>
+                <p class="item-description">Con papas crinkle.</p>
+                <span class="item-price">USD 14</span>
+            </div>
+            <div class="menu-item" data-category="ninos vegetarian">
+                <h3 class="item-name">Spaghettis</h3>
+                <p class="item-description">Con fileto o manteca.</p>
+                <span class="item-price">USD 11</span>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
+
+<script src="js/menú.js"></script>
