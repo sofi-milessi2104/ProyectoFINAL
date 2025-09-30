@@ -1,12 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/reserva.js"></script>
-    <title>Reserva</title>
+    <title>Reserva de Hotel - Proceso Moderno</title>
+    <link rel="stylesheet" href="css/reserva.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div id="contenedor-reserva"></div>
+    <div class="checkout-container">
+        <div class="order-summary">
+            <h1 class="hotel-name">Reserva en **Luxor Hotel** 🏨</h1>
+            <div class="summary-details">
+                <h3>Detalles de la Reserva</h3>
+                <div id="summary-content">
+                    <p><strong>Entrada:</strong> <span id="summary-fecha-inicio">-- / -- / --</span></p>
+                    <p><strong>Salida:</strong> <span id="summary-fecha-fin">-- / -- / --</span></p>
+                    <p><strong>Huéspedes:</strong> <span id="summary-huespedes">0 adulto(s), 0 niño(s)</span></p>
+                    <p><strong>Habitación:</strong> <span id="summary-habitacion">No seleccionada</span></p>
+                    <p><strong>Servicios:</strong> <span id="summary-servicios">Ninguno</span></p>
+                </div>
+                <div class="total-price">
+                    <p>Total Estimado</p>
+                    <span>$<span id="summary-precio-total">0</span></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="payment-form" id="app">
+            </div>
+    </div>
+
+    <script src="js/reserva.js"></script>
 </body>
 </html>
