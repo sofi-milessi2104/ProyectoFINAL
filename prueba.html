@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de Hotel - Proceso Moderno</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+        h2, h3 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .step-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .step-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        input[type="date"], input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dcdfe6;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input[type="date"]:focus, input[type="text"]:focus, select:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        #next-step-1, #next-step-2 {
+            background-color: #2ecc71;
+            color: #fff;
+        }
+        #next-step-1:hover, #next-step-2:hover { background-color: #27ae60; }
+        #back-step-1, #back-step-2 {
+            background-color: #95a5a6;
+            color: #fff;
+        }
+        #back-step-1:hover, #back-step-2:hover { background-color: #7f8c8d; }
+        #submit-btn {
+            background-color: #3498db;
+            color: #fff;
+        }
+        #submit-btn:hover { background-color: #2980b9; }
+
+        /* Estilos de la galería de habitaciones */
+        .room-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .room-card {
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .room-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .room-card.selected {
+            border: 3px solid #3498db;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+        }
+        .room-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .room-info {
+            padding: 15px;
+            text-align: center;
+        }
+        .room-info h4 {
+            margin: 0 0 10px;
+            color: #2c3e50;
+        }
+        .room-info p {
+            margin: 0 0 10px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        .room-info .price {
+            font-weight: bold;
+            color: #2ecc71;
+            font-size: 1.2em;
+        }
+
+        /* Estilos para la galería de servicios */
+        .service-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .service-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #ecf0f1;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .service-item:hover {
+            background-color: #dce1e6;
+        }
+        .service-item input[type="checkbox"] {
+            transform: scale(1.2);
+            accent-color: #3498db;
+        }
+        
+        /* Estilos del resumen de reserva */
+        .summary-details {
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .summary-details p {
+            margin: 10px 0;
+            color: #333;
+        }
+        .summary-details p strong {
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const app = document.getElementById('app');
+            let currentStep = 1;
+            const reservaData = {}; // Objeto para guardar los datos de la reserva
+
+            // --- Datos simulados del backend ---
+            const habitaciones = [
+                { id_hab: 1, tipo_hab: 'Suit', descripcion_hab: 'Espaciosa suite con sala de estar.', imagen: 'https://via.placeholder.com/400x300.png?text=Suite', precio: 3438 },
+                { id_hab: 2, tipo_hab: 'River Suit', descripcion_hab: 'Suite con vista al río y balcón.', imagen: 'https://via.placeholder.com/400x300.png?text=River+Suite', precio: 6849 },
+                { id_hab: 3, tipo_hab: 'Loft', descripcion_hab: 'Loft moderno con cocina.', imagen: 'https://via.placeholder.com/400x300.png?text=Loft', precio: 10273 },
+                { id_hab: 4, tipo_hab: 'River Loft', descripcion_hab: 'Loft con grandes ventanales y vista al río.', imagen: 'https://via.placeholder.com/400x300.png?text=River+Loft', precio: 13755 },
+                { id_hab: 5, tipo_hab: 'Super Loft', descripcion_hab: 'Superficie extra y balcón doble.', imagen: 'https://via.placeholder.com/400x300.png?text=Super+Loft', precio: 17123 }
+            ];
+
+            const servicios = [
+                { id_servicio: 1, tipo_servicio: 'Restaurante', descripcion: 'Platos gourmet.', imagen: 'https://via.placeholder.com/100.png?text=Restaurante' },
+                { id_servicio: 2, tipo_servicio: 'Spa & Masajes', descripcion: 'Relajantes sesiones.', imagen: 'https://via.placeholder.com/100.png?text=Spa' },
+                { id_servicio: 3, tipo_servicio: 'Gym', descripcion: 'Acceso completo.', imagen: 'https://via.placeholder.com/100.png?text=Gym' },
+                { id_servicio: 4, tipo_servicio: 'Sauna', descripcion: 'Sauna seca para relajación.', imagen: 'https://via.placeholder.com/100.png?text=Sauna' },
+                { id_servicio: 5, tipo_servicio: 'Piscina interior', descripcion: 'Climatizada todo el año.', imagen: 'https://via.placeholder.com/100.png?text=Piscina' },
+                { id_servicio: 6, tipo_servicio: 'Piscina exterior', descripcion: 'Con solárium.', imagen: 'https://via.placeholder.com/100.png?text=Piscina' },
+                { id_servicio: 7, tipo_servicio: 'Estacionamiento', descripcion: 'Descubierto, gratuito y limitado.', imagen: 'https://via.placeholder.com/100.png?text=Parking' }
+            ];
+            // --- Fin de datos simulados ---
+
+            const renderStep = () => {
+                app.innerHTML = '';
+                let content;
+
+                if (currentStep === 1) {
+                    content = createStep1();
+                } else if (currentStep === 2) {
+                    content = createStep2();
+                } else if (currentStep === 3) {
+                    content = createStep3();
+                }
+
+                app.appendChild(content);
+            };
+
+            const createStep1 = () => {
+                const step1 = document.createElement('div');
+                step1.className = 'step-content active';
+                step1.innerHTML = `
+                    <h2>Paso 1: Fechas y Huéspedes</h2>
+                    <form id="step1-form">
+                        <div class="form-group">
+                            <label for="fecha-inicio">Fecha de Entrada</label>
+                            <input type="date" id="fecha-inicio" name="fecha_inicio" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha-fin">Fecha de Salida</label>
+                            <input type="date" id="fecha-fin" name="fecha_fin" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="adultos">Adultos</label>
+                            <select id="adultos" name="adultos" required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ninos">Niños</label>
+                            <select id="ninos" name="ninos">
+                                <option value="">Ninguno</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                        </div>
+                        <div class="button-group">
+                            <button type="submit" id="next-step-1">Siguiente</button>
+                        </div>
+                    </form>
+                `;
+
+                step1.querySelector('#step1-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const fechaInicio = step1.querySelector('#fecha-inicio').value;
+                    const fechaFin = step1.querySelector('#fecha-fin').value;
+                    
+                    if (new Date(fechaFin) <= new Date(fechaInicio)) {
+                        alert('La fecha de salida debe ser posterior a la de entrada.');
+                        return;
+                    }
+
+                    reservaData.fecha_inicio = fechaInicio;
+                    reservaData.fecha_fin = fechaFin;
+                    reservaData.adultos = step1.querySelector('#adultos').value;
+                    reservaData.niños = step1.querySelector('#ninos').value;
+                    
+                    console.log('Fechas y huéspedes guardados. Pasando al paso 2...');
+                    currentStep = 2;
+                    renderStep();
+                });
+
+                return step1;
+            };
+
+            const createStep2 = () => {
+                const step2 = document.createElement('div');
+                step2.className = 'step-content active';
+                step2.innerHTML = `
+                    <h2>Paso 2: Elige Habitación y Servicios</h2>
+                    <h3>Selecciona una Habitación</h3>
+                    <div class="room-gallery"></div>
+                    <h3 style="margin-top: 30px;">Agrega Servicios Adicionales</h3>
+                    <div class="service-list"></div>
+                    <div class="button-group">
+                        <button type="button" id="back-step-1">Atrás</button>
+                        <button type="button" id="next-step-2">Siguiente</button>
+                    </div>
+                `;
+
+                const roomGallery = step2.querySelector('.room-gallery');
+                habitaciones.forEach(hab => {
+                    const card = document.createElement('div');
+                    card.className = 'room-card';
+                    card.innerHTML = `
+                        <img src="${hab.imagen}" alt="${hab.tipo_hab}">
+                        <div class="room-info">
+                            <h4>${hab.tipo_hab}</h4>
+                            <p>${hab.descripcion_hab}</p>
+                            <span class="price">$${hab.precio}</span>
+                        </div>
+                    `;
+                    card.addEventListener('click', () => {
+                        document.querySelectorAll('.room-card').forEach(c => c.classList.remove('selected'));
+                        card.classList.add('selected');
+                        reservaData.id_habitacion = hab.id_hab;
+                        reservaData.precio = hab.precio;
+                        reservaData.tipo_hab = hab.tipo_hab;
+                        console.log('Habitación seleccionada:', hab.tipo_hab);
+                    });
+                    roomGallery.appendChild(card);
+                });
+
+                const serviceList = step2.querySelector('.service-list');
+                reservaData.servicios = [];
+                servicios.forEach(serv => {
+                    const item = document.createElement('div');
+                    item.className = 'service-item';
+                    item.innerHTML = `
+                        <input type="checkbox" id="service-${serv.id_servicio}" value="${serv.id_servicio}">
+                        <label for="service-${serv.id_servicio}">${serv.tipo_servicio}</label>
+                    `;
+                    item.querySelector('input').addEventListener('change', (e) => {
+                        const isChecked = e.target.checked;
+                        const serviceId = parseInt(e.target.value);
+                        if (isChecked) {
+                            reservaData.servicios.push(serviceId);
+                        } else {
+                            reservaData.servicios = reservaData.servicios.filter(id => id !== serviceId);
+                        }
+                        console.log('Servicios seleccionados:', reservaData.servicios);
+                    });
+                    serviceList.appendChild(item);
+                });
+
+                step2.querySelector('#back-step-1').addEventListener('click', () => {
+                    currentStep = 1;
+                    renderStep();
+                });
+                
+                step2.querySelector('#next-step-2').addEventListener('click', () => {
+                    if (!reservaData.id_habitacion) {
+                        alert('Debes seleccionar una habitación para continuar.');
+                        return;
+                    }
+                    console.log('Habitación y servicios guardados. Pasando al paso 3...');
+                    currentStep = 3;
+                    renderStep();
+                });
+
+                return step2;
+            };
+
+            const createStep3 = () => {
+                const step3 = document.createElement('div');
+                step3.className = 'step-content active';
+                step3.innerHTML = `
+                    <h2>Paso 3: Confirmación y Pago</h2>
+                    <div class="summary-details">
+                        <h3>Resumen de la Reserva</h3>
+                        <p><strong>Fecha de Entrada:</strong> ${reservaData.fecha_inicio}</p>
+                        <p><strong>Fecha de Salida:</strong> ${reservaData.fecha_fin}</p>
+                        <p><strong>Huéspedes:</strong> ${reservaData.adultos} adulto(s), ${reservaData.niños || '0'} niño(s)</p>
+                        <p><strong>Habitación:</strong> ${reservaData.tipo_hab} ($${reservaData.precio})</p>
+                        <p><strong>Servicios Adicionales:</strong> ${reservaData.servicios.length > 0 ? reservaData.servicios.map(id => servicios.find(s => s.id_servicio === id).tipo_servicio).join(', ') : 'Ninguno'}</p>
+                    </div>
+                    <form id="step3-form" style="margin-top: 30px;">
+                        <div class="form-group">
+                            <label for="tarjeta">Tarjeta de Crédito</label>
+                            <input type="text" id="tarjeta" name="tarjeta" required pattern="[0-9]{16}" placeholder="xxxxxxxxxxxxxxxx">
+                            <small>Introduce 16 dígitos sin espacios</small>
+                        </div>
+                        <div class="button-group">
+                            <button type="button" id="back-step-2">Atrás</button>
+                            <button type="submit" id="submit-btn">Confirmar y Pagar</button>
+                        </div>
+                    </form>
+                `;
+                
+                step3.querySelector('#back-step-2').addEventListener('click', () => {
+                    currentStep = 2;
+                    renderStep();
+                });
+
+                step3.querySelector('#step3-form').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    reservaData.tarjeta = e.target.querySelector('#tarjeta').value;
+                    
+                    try {
+                        const response = await fetch('controllers/reserva.php', { // <--- URL del controlador
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                action: 'agregarReserva', // <--- Nueva propiedad para el controlador
+                                id_usuario: 1, // Ejemplo, debería ser dinámico
+                                adultos: reservaData.adultos,
+                                niños: reservaData.niños,
+                                fecha_inicio: reservaData.fecha_inicio,
+                                fecha_fin: reservaData.fecha_fin,
+                                id_habitacion: reservaData.id_habitacion,
+                                id_servicio: reservaData.servicios,
+                                tarjeta: reservaData.tarjeta,
+                            }),
+                        });
+                        
+                        const result = await response.json();
+
+                        if (response.ok && result.success) {
+                            alert('¡Reserva realizada con éxito! 🎉');
+                            location.reload(); 
+                        } else {
+                            alert('Error en la reserva: ' + result.message);
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('Hubo un problema al conectar con el servidor.');
+                    }
+                });
+                return step3;
+            };
+
+            renderStep();
+        });
+    </script>
+</body>
+</html>

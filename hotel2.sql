@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-09-2025 a las 19:24:04
+-- Tiempo de generación: 30-09-2025 a las 21:59:18
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -40,9 +40,9 @@ CREATE TABLE `administrador` (
 --
 
 INSERT INTO `administrador` (`ci`, `nombre_completo`, `email`, `area`, `password`) VALUES
-(10123456, 'Laura Fernández', 'laura.fernandez@empresa.com', 'Recursos humanos', '2345tuabuela'),
-(10234567, 'Carlos Gómez', 'carlos.gomez@empresa.com', 'Administración', ''),
-(10345678, 'Ana Torres', 'ana.torres@empresa.com', 'Gerencia', '');
+(10123456, 'Laura Fernández', 'laura.fernandez@empresa.com', 'Recursos humanos', '$2y$10$uROVCguTKX84gvgm/hOlWeAY46hHWdNeze8bv8NfqUq8XvROIhJNS'),
+(10234567, 'Carlos Gómez', 'carlos.gomez@empresa.com', 'Administración', '$2y$10$Rq0am3TcdtNlBG8kRni65ecHw08.kml.YyIRXSNKuNYu/SiZ15JIO'),
+(10345678, 'Ana Torres', 'ana.torres@empresa.com', 'Gerencia', '$2y$10$gAzFGSbwNFAn0idd7zwTpecyi3NKdUAabMlinGS6bPph2Veihtdfa');
 
 -- --------------------------------------------------------
 
@@ -52,7 +52,7 @@ INSERT INTO `administrador` (`ci`, `nombre_completo`, `email`, `area`, `password
 
 CREATE TABLE `habitacion` (
   `id_hab` int(11) NOT NULL,
-  `tipo_hab` set('Loft','River Loft','Suit','River Suit','Super Loft') NOT NULL,
+  `tipo_hab` set('Loft','River Loft','Suite','River Suite','Super Loft') NOT NULL,
   `descripcion_hab` varchar(400) NOT NULL,
   `disponible` tinyint(1) NOT NULL,
   `imagen` varchar(255) NOT NULL,
@@ -64,11 +64,11 @@ CREATE TABLE `habitacion` (
 --
 
 INSERT INTO `habitacion` (`id_hab`, `tipo_hab`, `descripcion_hab`, `disponible`, `imagen`, `precio`) VALUES
-(1, 'Suit', 'Esta es una espaciosa suite con una sala de estar separada que permite una cama adicional. Cuenta con un cómodo albornoz y zapatillas.', 0, 'Suite.jpeg', '3.438'),
-(2, 'River Suit', 'Esta suite cuenta con baño privado, cocina, ventanales y una terraza con una espléndida vista al río, además de muebles de madera y cortinas de color beige. Hay un salón con sofá cama, TV LCD, reproductor de DVD, microondas, secador de pelo y conexión WIFI gratis.', 1, 'River Suite.jpeg', '6.849'),
-(3, 'Loft', 'Este loft cuenta con baño privado, zona de cocina, ventanales y terraza, así como muebles de madera y cortinas de color beige. Hay TV LCD, reproductor de DVD, secador de pelo y conexión WiFi gratis. No se pueden acomodar camas supletorias.', 1, 'Loft.jpeg', '10.273'),
-(4, 'River Loft', 'Este loft cuenta con baño privado, cocina, ventanales de techo a suelo y una terraza con una espléndida vista al río, además de muebles de madera y cortinas color beige. Hay TV LCD, reproductor de DVD, secador de pelo y conexión WiFi gratis. No se pueden acomodar camas supletorias.', 1, 'River Loft.jpeg', '13.755'),
-(5, 'Super Loft', 'Esta suite cuenta con baño privado, zona de cocina y un balcón doble con una espléndida vista al río, así como muebles de madera y cortinas de color beige. Hay TV LCD, reproductor de DVD, microondas, secador de pelo y conexión WiFi gratuita. No se pueden acomodar camas supletorias.', 1, 'Super Loft.jpeg', '17.123');
+(1, 'Suite', 'Esta es una espaciosa suite con una sala de estar separada que permite una cama adicional. Cuenta con un cómodo albornoz y zapatillas.', 0, 'Suite.jpeg', '3.438'),
+(2, 'River Suite', 'Esta suite cuenta con baño privado, cocina, ventanales y una terraza con una espléndida vista al río, además de muebles de madera y cortinas de color beige. Hay un salón con sofá cama, TV LCD, reproductor de DVD, microondas, secador de pelo y conexión WIFI gratis.', 0, 'River Suite.jpeg', '6.849'),
+(3, 'Loft', 'Este loft cuenta con baño privado, zona de cocina, ventanales y terraza, así como muebles de madera y cortinas de color beige. Hay TV LCD, reproductor de DVD, secador de pelo y conexión WiFi gratis. No se pueden acomodar camas supletorias.', 0, 'Loft.jpeg', '10.273'),
+(4, 'River Loft', 'Este loft cuenta con baño privado, cocina, ventanales de techo a suelo y una terraza con una espléndida vista al río, además de muebles de madera y cortinas color beige. Hay TV LCD, reproductor de DVD, secador de pelo y conexión WiFi gratis. No se pueden acomodar camas supletorias.', 0, 'River Loft.jpeg', '13.755'),
+(5, 'Super Loft', 'Esta suite cuenta con baño privado, zona de cocina y un balcón doble con una espléndida vista al río, así como muebles de madera y cortinas de color beige. Hay TV LCD, reproductor de DVD, microondas, secador de pelo y conexión WiFi gratuita. No se pueden acomodar camas supletorias.', 0, 'Super Loft.jpeg', '17.123');
 
 -- --------------------------------------------------------
 
@@ -78,20 +78,23 @@ INSERT INTO `habitacion` (`id_hab`, `tipo_hab`, `descripcion_hab`, `disponible`,
 
 CREATE TABLE `promocion` (
   `id_promo` int(11) NOT NULL,
-  `tipo_promo` set('DaySpa','DayUse','Cupón','FamilyPlan','Media pensión','temporada') NOT NULL
+  `tipo_promo` set('DaySpa','DayUse','Cupón','FamilyPlan','Media pensión','temporada') NOT NULL,
+  `descripcion_promo` varchar(550) NOT NULL,
+  `img_promo` varchar(255) NOT NULL,
+  `precio_promo` varchar(24) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `promocion`
 --
 
-INSERT INTO `promocion` (`id_promo`, `tipo_promo`) VALUES
-(1, 'DaySpa'),
-(2, 'DayUse'),
-(3, 'Cupón'),
-(4, 'FamilyPlan'),
-(5, 'Media pensión'),
-(6, 'temporada');
+INSERT INTO `promocion` (`id_promo`, `tipo_promo`, `descripcion_promo`, `img_promo`, `precio_promo`) VALUES
+(1, 'DaySpa', 'Experiencia de relajación sin hospedaje.\nIncluye acceso al spa (jacuzzi, sauna, piscina climatizada), masaje de 45 min, aromaterapia, música, infusiones detox, snacks saludables y áreas de descanso.', 'Spa.jpeg', '1790'),
+(2, 'DayUse', 'Uso de habitación durante el día, sin pernocte.\nIdeal para descansar, trabajar o tener privacidad. Incluye Wi-Fi, aire acondicionado, TV, baño privado y servicios del hotel.', 'Comida.jpeg', '1359'),
+(3, 'Cupón', 'Descuento exclusivo en servicios seleccionados (alojamiento, spa, dayuse, etc.).\nSe aplica presentando el cupón en la reserva o check-in.\nNo acumulable, válido por tiempo limitado y sujeto a disponibilidad.', '1.jpg', '799'),
+(4, 'FamilyPlan', 'Alojamiento familiar con desayuno, acceso a áreas recreativas y beneficios para niños (alojamiento gratis para menores acompañados).\nIdeal para escapadas familiares con ahorro y diversión.\nVálido todos los días con reserva anticipada.', 'Super Loft 2.jpeg', '3500'),
+(5, 'Media pensión', 'Incluye desayuno y cena en el restaurante del hotel.\nComodidad sin preocuparse por dónde comer.\nBebidas no incluidas (salvo aclaración).', 'River Suite.jpeg', '2700'),
+(6, 'temporada', 'Beneficios y actividades especiales según la estación (verano, otoño, invierno, primavera).\nCada temporada ofrece experiencias únicas adaptadas al clima y al entorno.', 'Piscina al aire libre.jpeg', '1420');
 
 -- --------------------------------------------------------
 
@@ -119,7 +122,11 @@ INSERT INTO `reserva` (`id_reserva`, `id_usuario`, `adultos`, `niños`, `fecha_i
 (1, 1, '1', '', '2025-08-01', '2025-08-03', 4, 5, '2345678901234567'),
 (2, 2, '2', '2', '2025-09-05', '2025-09-10', 2, 96, '3456789012345678'),
 (3, 3, '3', '1', '2025-07-20', '2025-07-25', 16, 3, '4567890123456789'),
-(4, 4, '1', '', '2025-10-01', '2025-10-05', 8, 20, '5678901234567890');
+(4, 4, '1', '', '2025-10-01', '2025-10-05', 8, 20, '5678901234567890'),
+(5, 5, '1', '1', '2025-09-24', '2025-09-28', 3, 3, '5658214723264198'),
+(6, 6, '3', '2', '2025-09-27', '2025-10-11', 5, 6, '4565821398710265'),
+(7, 7, '2', '2', '2025-10-01', '2025-10-29', 4, 3, '4569871236665781'),
+(8, 7, '1', '', '2025-10-01', '2025-10-29', 2, 3, '5862493157862158');
 
 -- --------------------------------------------------------
 
@@ -170,7 +177,10 @@ INSERT INTO `usuario` (`id_usuario`, `nombre`, `apellido`, `email`, `celular`, `
 (1, 'Mateo', 'Pérez', 'mateo.perez@example.com', '59892345678', '5678jaja'),
 (2, 'Sofía', 'González', 'sofia.gonzalez@example.com', '59893456789', ''),
 (3, 'Juan', 'Rodríguez', 'juan.rodriguez@example.com', '59894567890', ''),
-(4, 'Valentina', 'Fernández', 'valentina.fernandez@example.com', '59895678901', '');
+(4, 'Valentina', 'Fernández', 'valentina.fernandez@example.com', '59895678901', ''),
+(5, 'Pablo', 'Martinez', 'pablojaja@gmail.com', '45484746421598762', 'password_default'),
+(6, 'Carla', 'Jolela', 'caluta@gmail.com', '565845126', 'password_default'),
+(7, 'Patricia', 'Lola', 'particia@gmail.com', '459236847', 'password_default');
 
 --
 -- Índices para tablas volcadas
@@ -239,7 +249,7 @@ ALTER TABLE `promocion`
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `servicio`
@@ -251,7 +261,7 @@ ALTER TABLE `servicio`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas
