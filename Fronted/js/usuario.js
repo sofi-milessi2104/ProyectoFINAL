@@ -39,7 +39,6 @@ function agregarEventoForm() {
 
 async function iniciarSesionUsuario(email, password) {
     try {
-        //alert("Iniciando sesión...");
         const url = "../Backend/routes/api.php?url=loginUsr";
         const data = new FormData();
         data.append("email", email);
@@ -52,9 +51,8 @@ async function iniciarSesionUsuario(email, password) {
         const resultado = await respuesta.json();
      
         if (resultado.status == true) {
-              // alert("login"+resultado.status)
             window.localStorage.setItem("sesionUser", JSON.stringify(resultado.data));
-            window.location.href = "../fronted/index.html"; // <-- Cambia aquí la ruta
+            window.location.href = "../fronted/index.html";
         } else {
             alert("No tienes permisos de usuario o los datos son incorrectos.");
         }
@@ -65,7 +63,6 @@ async function iniciarSesionUsuario(email, password) {
 
 async function loginAddUser(nombre, apellido, email, celular, password) {
     try {
-        //alert("Iniciando sesión...");
         const url = "../Backend/routes/api.php?url=loginAddUsr";
         const data = new FormData();
         data.append("nombre", nombre);
@@ -81,9 +78,8 @@ async function loginAddUser(nombre, apellido, email, celular, password) {
         const resultado = await respuesta.json();
      
         if (resultado.status == true) {
-              // alert("login"+resultado.status)
             window.localStorage.setItem("sesionUser", JSON.stringify(resultado.data));
-            window.location.href = "../fronted/index.html"; // <-- Cambia aquí la ruta
+            window.location.href = "../fronted/index.html";
         } else {
             alert("No pudiste crear una cuenta correctamente");
         }
@@ -92,7 +88,6 @@ async function loginAddUser(nombre, apellido, email, celular, password) {
     }
 }
 
-//Eventos del form
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('container');
     const registerBtn = document.getElementById('register');

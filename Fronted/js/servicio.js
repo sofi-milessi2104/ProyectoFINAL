@@ -1,7 +1,5 @@
-// Variable global para almacenar los datos de los servicios
 let todosLosServicios = [];
 
-// Función para obtener los datos de los servicios de la API
 async function obtenerServicios() {
     try {
         const respuesta = await fetch("../Backend/routes/api.php?url=servicio");
@@ -10,7 +8,6 @@ async function obtenerServicios() {
         todosLosServicios = serviciosBD;
         console.log("Servicios obtenidos y procesados:", todosLosServicios);
 
-        // Renderiza las tarjetas de servicios al obtener los datos
         renderizarServicios(todosLosServicios);
     } catch (error) {
         console.error("Error al obtener servicios: " + error);
@@ -25,7 +22,6 @@ async function obtenerServicios() {
     }
 }
 
-// Función para renderizar las tarjetas de servicios en el HTML
 function renderizarServicios(servicios) {
     const contenedor = document.getElementById("contenedor-servicios");
     if (!contenedor) {
@@ -44,7 +40,6 @@ function renderizarServicios(servicios) {
     }
 }
 
-// Función para generar el código HTML de las tarjetas de servicios
 function crearCardsServicios(servicios) {
     return `
         <div class="container">
@@ -69,31 +64,26 @@ function crearCardsServicios(servicios) {
     `;
 }
 
-// Función para manejar los filtros de tipo de servicio
 function manejarFiltros() {
     const checkboxes = document.querySelectorAll('#filterDropdown input[type="checkbox"]');
     const tiposSeleccionados = [];
 
-    // Recorre las casillas para ver cuáles están marcadas
     checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
             tiposSeleccionados.push(checkbox.value);
         }
     });
 
-    // Filtra los servicios
     const serviciosFiltrados = (tiposSeleccionados.length === 0)
-        ? todosLosServicios // Si no hay nada seleccionado, muestra todo
+        ? todosLosServicios
         : todosLosServicios.filter(servicio => tiposSeleccionados.includes(servicio.tipo_servicio));
 
     renderizarServicios(serviciosFiltrados);
 }
 
-// Inicia la carga de servicios y configura los escuchadores de eventos
 document.addEventListener("DOMContentLoaded", () => {
     obtenerServicios();
 
-    // Agrega un escuchador de eventos a cada casilla de verificación del filtro
     const checkboxes = document.querySelectorAll('#filterDropdown input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', manejarFiltros);
