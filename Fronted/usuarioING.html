@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/login.css">
+
+ <title>Login</title>
+</head>
+
+<body>
+
+    <a id="btn"  href="usuario.html"> Translate <i class='bx bx-transfer'></i></a>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form id="frmAddUsuario">
+                <h1>Sign Up</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class='bx bxl-google'></i></a>
+                    <a href="#" class="icon"><i class='bx bxl-facebook'></i></i></a>
+                    <a href="#" class="icon"><i class='bx bxl-github'></i></a>
+                    <a href="#" class="icon"><i class='bx bxl-youtube'></i></a>
+                </div>
+                <span>Enter your information to sign up</span>
+                <input type="text" id="nombre" name="nombre" placeholder="User's Name" required>
+                <input type="text" id="apellido" name="apellido" placeholder="User's Last Name" required>
+                <input type="email" id="addemail" name="email" placeholder="Email Address" required>
+                <input type="text" id="celular" name="celular" placeholder="User's Phone" required>
+               <input type="password" id="addpassword" name="password" placeholder="Password" required>
+                <button>Sign Up</button>
+            </form>
+        </div>
+
+        <div class="form-container sign-in">
+                   <form  method="POST" id="frmUsuario">
+                <h1>Sign In</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class='bx bxl-google'></i></i></a>
+                    <a href="#" class="icon"><i class='bx bxl-facebook'></i></a>
+                    <a href="#" class="icon"><i class='bx bxl-github'></i></a>
+                    <a href="#" class="icon"><i class='bx bxl-youtube'></i></a>
+                </div>
+                <span>Use your User account</span>
+              <input type="email" id="email" name="email" placeholder="User's Email" required>
+               <input type="password" id="password" name="password" placeholder="Password" required>
+                <a href="#">Forgot your password?</a>
+                <input type="submit" id="Iniciar_button" value="Sign In">
+                 <a class="btn_LoginAdmin" href="adminING.html">Login Admin<svg xmlns="http://www.w3.org/2000/svg" height="19px" viewBox="0 -960 960 960" width="19px" fill="#666666"><path d="M480-440q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0-80q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0 440q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-400Zm0-315-240 90v189q0 54 15 105t41 96q42-21 88-33t96-12q50 0 96 12t88 33q26-45 41-96t15-105v-189l-240-90Zm0 515q-36 0-70 8t-65 22q29 30 63 52t72 34q38-12 72-34t63-52q-31-14-65-22t-70-8Z"/></svg></a>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>¡Welcome back!</h1>
+                    <p>Log in with your personal information to access all the features of the site.</p>
+                    <button class="hidden" id="login">Sign In</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Sign up with your personal information to access all the features of the site</p>
+
+                     <input type="submit" id="register" value="Sign Up">
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="module" src="./js/usuario.js"></script>
+</body>
+</html>
