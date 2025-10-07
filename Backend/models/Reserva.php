@@ -1,4 +1,5 @@
 <?php
+<?php
 require "../config/database.php";
 
 class Reserva {
@@ -14,13 +15,27 @@ class Reserva {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function agregar($nombre, $apellido, $email, $adultos, $niños, $fecha_inicio, $fecha_fin, $tipo_hab, $tipo_servicio, $promoción, $huesped, $tarjeta) {
-        $stmt = $this->pdo->prepare("INSERT INTO reservas (nombre, apellido, email, adultos, niños, fecha_inicio, fecha_fin, tipo_hab, tipo_servicio, promoción, huesped, tarjeta) VALUES (:nombre, :apellido, :email, :adultos, :niños, :fecha_inicio, :fecha_fin, :tipo_hab, :tipo_servicio, :promoción, :huesped, :tarjeta)");
-        return $stmt->execute(["nombre" => $nombre, "apellido" => $apellido, "email" => $email, "adultos" => $adultos, "niños" => $niños, "fecha_inicio" => $fecha_inicio, "fecha_fin" => $fecha_fin, "tipo_hab" => $tipo_hab, "tipo_servicio" => $tipo_servicio, "promoción" => $promoción, "huesped" => $huesped, "tarjeta" => $tarjeta]);
+public function agregar($id_usuario, $adultos, $niños, $fecha_inicio, $fecha_fin, $id_habitacion, $id_servicio, $tarjeta) {
+    try {
+        $stmt = $this->pdo->prepare("INSERT INTO reserva (id_usuario, adultos, niños, fecha_inicio, fecha_fin, id_habitacion, id_servicio, tarjeta) VALUES (:id_usuario, :adultos, :niños, :fecha_inicio, :fecha_fin, :id_habitacion, :id_servicio, :tarjeta)");
+        return $stmt->execute([
+            "id_usuario" => $id_usuario,
+            "adultos" => $adultos,
+            "niños" => $niños,
+            "fecha_inicio" => $fecha_inicio,
+            "fecha_fin" => $fecha_fin,
+            "id_habitacion" => $id_habitacion,
+            "id_servicio" => $id_servicio,
+            "tarjeta" => $tarjeta
+        ]);
+    } catch (PDOException $e) {
+        error_log("Error al agregar reserva: " . $e->getMessage());
+        return false;
     }
+}
 
     public function eliminar($id) {
-        $stmt = $this->pdo->prepare("DELETE FROM reservas WHERE id_reserva = :id");
+        $stmt = $this->pdo->prepare("DELETE FROM reserva WHERE id_reserva = :id");
         return $stmt->execute(["id" => $id]);
     }
 }

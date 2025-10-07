@@ -13,27 +13,24 @@ document.addEventListener('DOMContentLoaded', () => {
         tarjeta: null
     };
 
-    // --- Datos simulados del backend ---
     const habitaciones = [
-        { id_hab: 1, tipo_hab: 'Suit', descripcion_hab: 'Espaciosa suite con sala de estar.', imagen: 'https://via.placeholder.com/400x300.png?text=Suite', precio: 3438 },
-        { id_hab: 2, tipo_hab: 'River Suit', descripcion_hab: 'Suite con vista al río y balcón.', imagen: 'https://via.placeholder.com/400x300.png?text=River+Suite', precio: 6849 },
-        { id_hab: 3, tipo_hab: 'Loft', descripcion_hab: 'Loft moderno con cocina.', imagen: 'https://via.placeholder.com/400x300.png?text=Loft', precio: 10273 },
-        { id_hab: 4, tipo_hab: 'River Loft', descripcion_hab: 'Loft con grandes ventanales y vista al río.', imagen: 'https://via.placeholder.com/400x300.png?text=River+Loft', precio: 13755 },
-        { id_hab: 5, tipo_hab: 'Super Loft', descripcion_hab: 'Superficie extra y balcón doble.', imagen: 'https://via.placeholder.com/400x300.png?text=Super+Loft', precio: 17123 }
+        { id_hab: 1, tipo_hab: 'Suit', imagen: 'http://localhost/ProyectoFinal/Fronted/img/Suite.jpeg', precio: 3.438 },
+        { id_hab: 2, tipo_hab: 'River Suit', imagen: 'http://localhost/ProyectoFinal/Fronted/img/River%20Suite.jpeg', precio: 6.849 },
+        { id_hab: 3, tipo_hab: 'Loft', imagen: 'http://localhost/ProyectoFinal/Fronted/img/Loft.jpeg', precio: 10.273 },
+        { id_hab: 4, tipo_hab: 'River Loft', imagen: 'http://localhost/ProyectoFinal/Fronted/img/River%20Loft.jpeg', precio: 13.755 },
+        { id_hab: 5, tipo_hab: 'Super Loft', imagen: 'http://localhost/ProyectoFinal/Fronted/img/Super%20Loft.jpeg', precio: 17.123 }
     ];
 
     const servicios = [
-        { id_servicio: 1, tipo_servicio: 'Restaurante', precio_servicio: 500, imagen: 'https://via.placeholder.com/100.png?text=Restaurante' },
-        { id_servicio: 2, tipo_servicio: 'Spa & Masajes', precio_servicio: 800, imagen: 'https://via.placeholder.com/100.png?text=Spa' },
-        { id_servicio: 3, tipo_servicio: 'Gym', precio_servicio: 0, imagen: 'https://via.placeholder.com/100.png?text=Gym' },
-        { id_servicio: 4, tipo_servicio: 'Sauna', precio_servicio: 300, imagen: 'https://via.placeholder.com/100.png?text=Sauna' },
+        { id_servicio: 1, tipo_servicio: 'Restaurante', precio_servicio: 0, imagen: 'https://via.placeholder.com/100.png?text=Restaurante' },
+        { id_servicio: 2, tipo_servicio: 'Spa & Masajes', precio_servicio: 500, imagen: 'https://via.placeholder.com/100.png?text=Spa' },
+        { id_servicio: 3, tipo_servicio: 'Gym', precio_servicio: 500, imagen: 'https://via.placeholder.com/100.png?text=Gym' },
+        { id_servicio: 4, tipo_servicio: 'Sauna', precio_servicio: 500, imagen: 'https://via.placeholder.com/100.png?text=Sauna' },
         { id_servicio: 5, tipo_servicio: 'Piscina interior', precio_servicio: 0, imagen: 'https://via.placeholder.com/100.png?text=Piscina' },
         { id_servicio: 6, tipo_servicio: 'Piscina exterior', precio_servicio: 0, imagen: 'https://via.placeholder.com/100.png?text=Piscina' },
         { id_servicio: 7, tipo_servicio: 'Estacionamiento', precio_servicio: 0, imagen: 'https://via.placeholder.com/100.png?text=Parking' }
     ];
-    // --- Fin de datos simulados ---
 
-    // Función para calcular la diferencia de días entre dos fechas
     const diffInDays = (date1, date2) => {
         if (!date1 || !date2) return 0;
         const oneDay = 24 * 60 * 60 * 1000;
@@ -42,11 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.round(Math.abs((firstDate - secondDate) / oneDay));
     };
 
-    // Función para actualizar el panel de resumen
     const updateSummary = () => {
         const dias = diffInDays(reservaData.fecha_inicio, reservaData.fecha_fin);
         
-        // Cálculo de precios
         const precioBase = reservaData.precio * dias;
         const precioServicios = reservaData.servicios.reduce((total, id) => {
             const servicio = servicios.find(s => s.id_servicio === id);
@@ -54,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 0);
         const precioTotal = precioBase + precioServicios;
 
-        // Actualizar los elementos del DOM
         document.getElementById('summary-fecha-inicio').textContent = reservaData.fecha_inicio ? new Date(reservaData.fecha_inicio).toLocaleDateString('es-ES') : '-- / -- / --';
         document.getElementById('summary-fecha-fin').textContent = reservaData.fecha_fin ? new Date(reservaData.fecha_fin).toLocaleDateString('es-ES') : '-- / -- / --';
         document.getElementById('summary-huespedes').textContent = `${reservaData.adultos} adulto(s), ${reservaData.niños || 0} niño(s)`;
@@ -77,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         app.appendChild(content);
-        updateSummary(); // Actualizar el resumen al renderizar cada paso
+        updateSummary(); 
     };
 
     const createStep1 = () => {
@@ -113,7 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </form>
         `;
 
-        // Event listener para actualizar el resumen dinámicamente
         ['fecha-inicio', 'fecha-fin', 'adultos', 'ninos'].forEach(id => {
             const element = step1.querySelector(`#${id}`);
             if (element) {
@@ -272,41 +265,41 @@ document.addEventListener('DOMContentLoaded', () => {
             renderStep();
         });
 
-        step3.querySelector('#step3-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // Recolección de datos para simulación
-            reservaData.tarjeta = e.target.querySelector('#tarjeta').value;
-            reservaData.nombre_tarjeta = e.target.querySelector('#nombre').value;
-            reservaData.vencimiento = e.target.querySelector('#vencimiento').value;
-            reservaData.cvc = e.target.querySelector('#cvc').value;
-            
-            alert('Procesando pago...');
-            
-            // Log de datos simulados a enviar al "backend"
-            console.log('Datos a enviar:', {
-                action: 'agregarReserva',
-                id_usuario: 1, 
-                adultos: reservaData.adultos,
-                niños: reservaData.niños,
-                fecha_inicio: reservaData.fecha_inicio,
-                fecha_fin: reservaData.fecha_fin,
-                id_habitacion: reservaData.id_habitacion,
-                id_servicios: reservaData.servicios,
-                tarjeta: reservaData.tarjeta,
-                total: document.getElementById('summary-precio-total').textContent.replace('.', '') // Limpiar formato de miles si existe
-            });
+step3.querySelector('#step3-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-            // SIMULACIÓN DE PAGO EXITOSO:
-            setTimeout(() => {
-                alert('¡Reserva realizada con éxito! 🎉 Su total de $' + document.getElementById('summary-precio-total').textContent + ' ha sido cargado.');
-                // window.location.reload(); // Descomentar para recargar y volver al paso 1
-            }, 1000);
+    reservaData.tarjeta = e.target.querySelector('#tarjeta').value;
+    reservaData.nombre_tarjeta = e.target.querySelector('#nombre').value;
+    reservaData.vencimiento = e.target.querySelector('#vencimiento').value;
+    reservaData.cvc = e.target.querySelector('#cvc').value;
 
+
+    const payload = {
+        action: 'agregarReserva',
+        id_usuario: null, 
+        adultos: reservaData.adultos.toString(),
+        niños: reservaData.niños.toString(),  
+        fecha_inicio: reservaData.fecha_inicio,
+        fecha_fin: reservaData.fecha_fin,
+        id_habitacion: reservaData.id_habitacion,
+        id_servicio: reservaData.servicios.length > 0 ? reservaData.servicios[0] : 1,
+        tarjeta: reservaData.tarjeta
+    };
+
+    try {
+        const res = await fetch('http://localhost/ProyectoFINAL/Backend/controllers/reserva.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
         });
+        const data = await res.json();
+        alert(data.message || '¡Reserva realizada con éxito!');
+    } catch (err) {
+        alert('Error al realizar la reserva.');
+    }
+});
         return step3;
     };
 
-    // Iniciar la aplicación
     renderStep();
 });
