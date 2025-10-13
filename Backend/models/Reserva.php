@@ -1,6 +1,4 @@
 <?php
-require "../config/database.php";
-
 class Reserva {
     private $pdo;
 
@@ -8,48 +6,55 @@ class Reserva {
         $this->pdo = $pdo;
     }
 
-    public function obtenerReserva() {
-        $stmt = $this->pdo->prepare("SELECT * FROM reserva");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function agregar($id_usuario, $adultos, $ninos, $fecha_inicio, $fecha_fin, $id_habitacion, $id_servicio, $tarjeta, $nombre_tarjeta = null, $vencimiento = null, $cvc = null) {
+    public function agregarReserva($data) {
         try {
-            $id_servicio_str = is_array($id_servicio) ? implode(',', $id_servicio) : $id_servicio;
+            $this->pdo->beginTransaction();
 
             $stmt = $this->pdo->prepare("
-                INSERT INTO reserva 
-                (id_usuario, adultos, niños, fecha_inicio, fecha_fin, id_habitacion, id_servicio, tarjeta, nombre_tarjeta, vencimiento, cvc) 
-                VALUES (:id_usuario, :adultos, :ninos, :fecha_inicio, :fecha_fin, :id_habitacion, :id_servicio, :tarjeta, :nombre_tarjeta, :vencimiento, :cvc)
+                INSERT INTO reserva (
+                    id_usuario, adultos, niños, fecha_inicio, fecha_fin,
+                    id_habitacion, tarjeta, nombre_tarjeta, vencimiento, cvc
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ");
-            $result = $stmt->execute([
-                "id_usuario" => $id_usuario,
-                "adultos" => $adultos,
-                "ninos" => $ninos,
-                "fecha_inicio" => $fecha_inicio,
-                "fecha_fin" => $fecha_fin,
-                "id_habitacion" => $id_habitacion,
-                "id_servicio" => $id_servicio_str,
-                "tarjeta" => $tarjeta,
-                "nombre_tarjeta" => $nombre_tarjeta,
-                "vencimiento" => $vencimiento,
-                "cvc" => $cvc
+
+            $stmt->execute([
+                $data['id_usuario'] ?? null,
+                $data['adultos'] ?? '1',
+                $data['niños'] ?? '0',
+                $data['fecha_inicio'],
+                $data['fecha_fin'],
+                $data['id_habitacion'],
+                $data['tarjeta'],
+                $data['nombre_tarjeta'] ?? null,
+                $data['vencimiento'] ?? null,
+                $data['cvc'] ?? null
             ]);
-            
-            if ($result) {
-                error_log("Reserva agregada exitosamente con ID: " . $this->pdo->lastInsertId());
+
+            $id_reserva = $this->pdo->lastInsertId();
+
+            // Insertar servicios (si hay)
+            if (!empty($data['servicios']) && is_array($data['servicios'])) {
+                $stmtServ = $this->pdo->prepare("
+                    INSERT INTO reserva_servicio (id_reserva, id_servicio)
+                    VALUES (?, ?)
+                ");
+                foreach ($data['servicios'] as $id_servicio) {
+                    $stmtServ->execute([$id_reserva, $id_servicio]);
+                }
             }
-            return $result;
+
+            $this->pdo->commit();
+            return [
+                'success' => true,
+                'message' => 'Reserva realizada con éxito',
+                'id_reserva' => $id_reserva
+            ];
         } catch (PDOException $e) {
-            error_log("Error al agregar reserva: " . $e->getMessage());
-            return false;
+            $this->pdo->rollBack();
+            return [
+                'success' => false,
+                'message' => 'Error al guardar la reserva: ' . $e->getMessage()
+            ];
         }
     }
-
-    public function eliminar($id) {
-        $stmt = $this->pdo->prepare("DELETE FROM reserva WHERE id_reserva = :id");
-        return $stmt->execute(["id" => $id]);
-    }
 }
-?>

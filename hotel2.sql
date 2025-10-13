@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-10-2025 a las 18:40:23
+-- Tiempo de generación: 13-10-2025 a las 20:15:34
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -106,11 +106,10 @@ CREATE TABLE `reserva` (
   `id_reserva` int(11) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
   `adultos` set('1','2','3') NOT NULL,
-  `niños` set('1','2') NOT NULL,
+  `niños` set('0','1','2') NOT NULL,
   `fecha_inicio` date NOT NULL,
   `fecha_fin` date NOT NULL,
   `id_habitacion` int(11) NOT NULL,
-  `id_servicio` int(11) NOT NULL,
   `tarjeta` varchar(20) NOT NULL,
   `nombre_tarjeta` varchar(255) DEFAULT NULL,
   `vencimiento` varchar(10) DEFAULT NULL,
@@ -121,15 +120,26 @@ CREATE TABLE `reserva` (
 -- Volcado de datos para la tabla `reserva`
 --
 
-INSERT INTO `reserva` (`id_reserva`, `id_usuario`, `adultos`, `niños`, `fecha_inicio`, `fecha_fin`, `id_habitacion`, `id_servicio`, `tarjeta`, `nombre_tarjeta`, `vencimiento`, `cvc`) VALUES
-(1, 1, '1', '', '2025-08-01', '2025-08-03', 4, 5, '2345678901234567', NULL, NULL, NULL),
-(2, 2, '2', '2', '2025-09-05', '2025-09-10', 2, 96, '3456789012345678', NULL, NULL, NULL),
-(3, 3, '3', '1', '2025-07-20', '2025-07-25', 16, 3, '4567890123456789', NULL, NULL, NULL),
-(4, 4, '1', '', '2025-10-01', '2025-10-05', 8, 20, '5678901234567890', NULL, NULL, NULL),
-(5, 5, '1', '1', '2025-09-24', '2025-09-28', 3, 3, '5658214723264198', NULL, NULL, NULL),
-(6, 6, '3', '2', '2025-09-27', '2025-10-11', 5, 6, '4565821398710265', NULL, NULL, NULL),
-(7, 7, '2', '2', '2025-10-01', '2025-10-29', 4, 3, '4569871236665781', NULL, NULL, NULL),
-(8, 7, '1', '', '2025-10-01', '2025-10-29', 2, 3, '5862493157862158', NULL, NULL, NULL);
+INSERT INTO `reserva` (`id_reserva`, `id_usuario`, `adultos`, `niños`, `fecha_inicio`, `fecha_fin`, `id_habitacion`, `tarjeta`, `nombre_tarjeta`, `vencimiento`, `cvc`) VALUES
+(1, 1, '1', '', '2025-08-01', '2025-08-03', 4, '2345678901234567', NULL, NULL, NULL),
+(2, 2, '2', '2', '2025-09-05', '2025-09-10', 2, '3456789012345678', NULL, NULL, NULL),
+(3, 3, '3', '1', '2025-07-20', '2025-07-25', 16, '4567890123456789', NULL, NULL, NULL),
+(4, 4, '1', '', '2025-10-01', '2025-10-05', 8, '5678901234567890', NULL, NULL, NULL),
+(5, 5, '1', '1', '2025-09-24', '2025-09-28', 3, '5658214723264198', NULL, NULL, NULL),
+(6, 6, '3', '2', '2025-09-27', '2025-10-11', 5, '4565821398710265', NULL, NULL, NULL),
+(7, 7, '2', '2', '2025-10-01', '2025-10-29', 4, '4569871236665781', NULL, NULL, NULL),
+(8, 7, '1', '', '2025-10-01', '2025-10-29', 2, '5862493157862158', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reserva_servicio`
+--
+
+CREATE TABLE `reserva_servicio` (
+  `id_reserva` int(11) NOT NULL,
+  `id_servicio` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -215,6 +225,13 @@ ALTER TABLE `reserva`
   ADD KEY `fk_reserva_usuario` (`id_usuario`);
 
 --
+-- Indices de la tabla `reserva_servicio`
+--
+ALTER TABLE `reserva_servicio`
+  ADD PRIMARY KEY (`id_reserva`,`id_servicio`),
+  ADD KEY `id_servicio` (`id_servicio`);
+
+--
 -- Indices de la tabla `servicio`
 --
 ALTER TABLE `servicio`
@@ -275,6 +292,13 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `reserva`
   ADD CONSTRAINT `fk_reserva_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
+
+--
+-- Filtros para la tabla `reserva_servicio`
+--
+ALTER TABLE `reserva_servicio`
+  ADD CONSTRAINT `reserva_servicio_ibfk_1` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id_reserva`),
+  ADD CONSTRAINT `reserva_servicio_ibfk_2` FOREIGN KEY (`id_servicio`) REFERENCES `servicio` (`id_servicio`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
