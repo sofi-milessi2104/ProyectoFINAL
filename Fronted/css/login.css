@@ -60,9 +60,11 @@ body{
     cursor: pointer;
 }
 
-.container button.hidden{
+.container button.hidden,
+.register-btn.hidden {
     background-color: transparent;
-    border-color: #fff;
+    border: 1px solid #fff;
+    color: #fff;
 }
 
 .container form{
@@ -252,4 +254,18 @@ body{
   display: inline-flex;        
   align-items: center;          
   gap: 8px;  
+}
+
+.register-btn {
+    background-color: #669cda;
+    color: #fff;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
 }
