@@ -1,45 +1,41 @@
 <?php
 require "../models/Reserva.php";
 
-$reservaModel = new Reserva($pdo);
+$reservaModel = new Reserva($pdo); 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
     if ($input && isset($input['action']) && $input['action'] === 'agregarReserva') {
-        agregarReserva(
-            $input['id_usuario'] ?? null,
+        $id_usuario = $input['id_usuario'] ?? 1; 
+        $result = $reservaModel->agregar(
+            $id_usuario,
             $input['adultos'] ?? '1',
-            $input['niños'] ?? '1',
+            $input['ninos'] ?? '0', 
             $input['fecha_inicio'] ?? '',
             $input['fecha_fin'] ?? '',
             $input['id_habitacion'] ?? null,
-            $input['id_servicio'] ?? null,
-            $input['tarjeta'] ?? ''
+            $input['id_servicio'] ?? null, 
+            $input['tarjeta'] ?? '',
+            $input['nombre_tarjeta'] ?? null,
+            $input['vencimiento'] ?? null,
+            $input['cvc'] ?? null
         );
+        
+        if ($result) {
+            echo json_encode(["success" => true, "message" => "Reserva agregada correctamente."]);
+        } else {
+            echo json_encode(["success" => false, "message" => "Error al agregar la reserva. Revisa los logs."]);
+        }
+        exit;
+    }
+} elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
+    if ($_GET['action'] === 'obtener') {
+        header('Content-Type: application/json');
+        echo json_encode($reservaModel->obtenerReserva());
         exit;
     }
 }
 
-function obtenerReserva() {
-    global $reservaModel;
-    echo json_encode($reservaModel->obtenerReserva());
-}
-
-function agregarReserva($id_usuario, $adultos, $niños, $fecha_inicio, $fecha_fin, $id_habitacion, $id_servicio, $tarjeta) {
-    global $reservaModel;
-    if ($reservaModel->agregar($id_usuario, $adultos, $niños, $fecha_inicio, $fecha_fin, $id_habitacion, $id_servicio, $tarjeta)) {
-        echo json_encode(["message" => "Reserva agregada correctamente."]);
-    } else {
-        echo json_encode(["message" => "Error al agregar la reserva."]);
-    }
-}
-
-function eliminarReserva($id) {
-    global $reservaModel;
-    if ($reservaModel->eliminar($id)) {
-        echo json_encode(["message" => "Reserva eliminada correctamente."]);
-    } else {
-        echo json_encode(["message" => "Error al eliminar la reserva."]);
-    }
-}
+http_response_code(405);
+echo json_encode(["error" => "Método no permitido"]);
 ?>
