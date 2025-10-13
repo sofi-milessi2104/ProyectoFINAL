@@ -3,7 +3,15 @@ let todasLasHabitaciones = [];
 async function obtenerHabitacion() {
   try {
     const respuesta = await fetch("../Backend/routes/api.php?url=habitacion");
-    const habitacionesBD = await respuesta.json();
+    const texto = await respuesta.text();
+    console.log("Respuesta cruda de la API:", texto); // <-- Depuración
+
+    let habitacionesBD;
+    try {
+      habitacionesBD = JSON.parse(texto);
+    } catch (jsonError) {
+      throw new Error("La respuesta no es JSON válido: " + jsonError.message);
+    }
 
     const serviciosPorHabitacion = {
       "Suit": ["Wifi", "TV", "Doble Balcón", "Minibar", "Microondas", "Mesas y Sillas"],
