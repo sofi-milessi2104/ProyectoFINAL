@@ -1,5 +1,4 @@
 <?php
-<?php
 require "../config/database.php";
 
 class Reserva {
