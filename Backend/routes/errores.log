@@ -1,0 +1,1 @@
+[13-Oct-2025 18:25:49 Europe/Berlin] PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 262144 bytes) in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php on line 13

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-09-2025 a las 21:59:18
+-- Tiempo de generación: 13-10-2025 a las 18:40:23
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -64,11 +64,11 @@ CREATE TABLE `habitacion` (
 --
 
 INSERT INTO `habitacion` (`id_hab`, `tipo_hab`, `descripcion_hab`, `disponible`, `imagen`, `precio`) VALUES
-(1, 'Suite', 'Esta es una espaciosa suite con una sala de estar separada que permite una cama adicional. Cuenta con un cómodo albornoz y zapatillas.', 0, 'Suite.jpeg', '3.438'),
-(2, 'River Suite', 'Esta suite cuenta con baño privado, cocina, ventanales y una terraza con una espléndida vista al río, además de muebles de madera y cortinas de color beige. Hay un salón con sofá cama, TV LCD, reproductor de DVD, microondas, secador de pelo y conexión WIFI gratis.', 0, 'River Suite.jpeg', '6.849'),
-(3, 'Loft', 'Este loft cuenta con baño privado, zona de cocina, ventanales y terraza, así como muebles de madera y cortinas de color beige. Hay TV LCD, reproductor de DVD, secador de pelo y conexión WiFi gratis. No se pueden acomodar camas supletorias.', 0, 'Loft.jpeg', '10.273'),
-(4, 'River Loft', 'Este loft cuenta con baño privado, cocina, ventanales de techo a suelo y una terraza con una espléndida vista al río, además de muebles de madera y cortinas color beige. Hay TV LCD, reproductor de DVD, secador de pelo y conexión WiFi gratis. No se pueden acomodar camas supletorias.', 0, 'River Loft.jpeg', '13.755'),
-(5, 'Super Loft', 'Esta suite cuenta con baño privado, zona de cocina y un balcón doble con una espléndida vista al río, así como muebles de madera y cortinas de color beige. Hay TV LCD, reproductor de DVD, microondas, secador de pelo y conexión WiFi gratuita. No se pueden acomodar camas supletorias.', 0, 'Super Loft.jpeg', '17.123');
+(1, 'Suite', 'Esta es una espaciosa suite con una sala de estar separada que permite una cama adicional. Cuenta con un cómodo albornoz y zapatillas.', 8, 'Suite.jpeg', '3.438'),
+(2, 'River Suite', 'Esta suite cuenta con baño privado, cocina, ventanales y una terraza con una espléndida vista al río, además de muebles de madera y cortinas de color beige. Hay un salón con sofá cama, TV LCD, reproductor de DVD, microondas, secador de pelo y conexión WIFI gratis.', 20, 'River Suite.jpeg', '6.849'),
+(3, 'Loft', 'Este loft cuenta con baño privado, zona de cocina, ventanales y terraza, así como muebles de madera y cortinas de color beige. Hay TV LCD, reproductor de DVD, secador de pelo y conexión WiFi gratis. No se pueden acomodar camas supletorias.', 15, 'Loft.jpeg', '10.273'),
+(4, 'River Loft', 'Este loft cuenta con baño privado, cocina, ventanales de techo a suelo y una terraza con una espléndida vista al río, además de muebles de madera y cortinas color beige. Hay TV LCD, reproductor de DVD, secador de pelo y conexión WiFi gratis. No se pueden acomodar camas supletorias.', 3, 'River Loft.jpeg', '13.755'),
+(5, 'Super Loft', 'Esta suite cuenta con baño privado, zona de cocina y un balcón doble con una espléndida vista al río, así como muebles de madera y cortinas de color beige. Hay TV LCD, reproductor de DVD, microondas, secador de pelo y conexión WiFi gratuita. No se pueden acomodar camas supletorias.', 2, 'Super Loft.jpeg', '17.123');
 
 -- --------------------------------------------------------
 
@@ -111,22 +111,25 @@ CREATE TABLE `reserva` (
   `fecha_fin` date NOT NULL,
   `id_habitacion` int(11) NOT NULL,
   `id_servicio` int(11) NOT NULL,
-  `tarjeta` varchar(20) NOT NULL
+  `tarjeta` varchar(20) NOT NULL,
+  `nombre_tarjeta` varchar(255) DEFAULT NULL,
+  `vencimiento` varchar(10) DEFAULT NULL,
+  `cvc` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `reserva`
 --
 
-INSERT INTO `reserva` (`id_reserva`, `id_usuario`, `adultos`, `niños`, `fecha_inicio`, `fecha_fin`, `id_habitacion`, `id_servicio`, `tarjeta`) VALUES
-(1, 1, '1', '', '2025-08-01', '2025-08-03', 4, 5, '2345678901234567'),
-(2, 2, '2', '2', '2025-09-05', '2025-09-10', 2, 96, '3456789012345678'),
-(3, 3, '3', '1', '2025-07-20', '2025-07-25', 16, 3, '4567890123456789'),
-(4, 4, '1', '', '2025-10-01', '2025-10-05', 8, 20, '5678901234567890'),
-(5, 5, '1', '1', '2025-09-24', '2025-09-28', 3, 3, '5658214723264198'),
-(6, 6, '3', '2', '2025-09-27', '2025-10-11', 5, 6, '4565821398710265'),
-(7, 7, '2', '2', '2025-10-01', '2025-10-29', 4, 3, '4569871236665781'),
-(8, 7, '1', '', '2025-10-01', '2025-10-29', 2, 3, '5862493157862158');
+INSERT INTO `reserva` (`id_reserva`, `id_usuario`, `adultos`, `niños`, `fecha_inicio`, `fecha_fin`, `id_habitacion`, `id_servicio`, `tarjeta`, `nombre_tarjeta`, `vencimiento`, `cvc`) VALUES
+(1, 1, '1', '', '2025-08-01', '2025-08-03', 4, 5, '2345678901234567', NULL, NULL, NULL),
+(2, 2, '2', '2', '2025-09-05', '2025-09-10', 2, 96, '3456789012345678', NULL, NULL, NULL),
+(3, 3, '3', '1', '2025-07-20', '2025-07-25', 16, 3, '4567890123456789', NULL, NULL, NULL),
+(4, 4, '1', '', '2025-10-01', '2025-10-05', 8, 20, '5678901234567890', NULL, NULL, NULL),
+(5, 5, '1', '1', '2025-09-24', '2025-09-28', 3, 3, '5658214723264198', NULL, NULL, NULL),
+(6, 6, '3', '2', '2025-09-27', '2025-10-11', 5, 6, '4565821398710265', NULL, NULL, NULL),
+(7, 7, '2', '2', '2025-10-01', '2025-10-29', 4, 3, '4569871236665781', NULL, NULL, NULL),
+(8, 7, '1', '', '2025-10-01', '2025-10-29', 2, 3, '5862493157862158', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 

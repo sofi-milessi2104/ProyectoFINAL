@@ -11,21 +11,21 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 if ($requestMethod == "GET") {
     $solicitud = $_GET["url"];
-if ($solicitud == "administrador") {
-    obtenerAdministrador();
-} else if ($solicitud == "habitacion") {
-    obtenerHabitacion();
-} else if ($solicitud == "promocion") {
-    obtenerPromocion();
-} else if ($solicitud == "reserva") {
-    obtenerReserva();
-} else if ($solicitud == "servicio") {
-    obtenerServicio();
-} else if ($solicitud == "usuario") {
-    obtenerUsuario();
-}else {
-    echo json_encode(["error" => "Ruta no encontrada"]);    
-}
+    if ($solicitud == "administrador") {
+        obtenerAdministrador();
+    } else if ($solicitud == "habitacion") { 
+        obtenerHabitacion();
+    } else if ($solicitud == "promocion") {
+        obtenerPromocion();
+    } else if ($solicitud == "reserva") {
+        obtenerReserva();
+    } else if ($solicitud == "servicio") {
+        obtenerServicio();
+    } else if ($solicitud == "usuario") {
+        obtenerUsuario();
+    } else {
+        echo json_encode(["error" => "Ruta no encontrada"]);    
+    }
 }
 
 elseif ($requestMethod == "POST") {
@@ -78,8 +78,11 @@ elseif ($requestMethod == "POST") {
         $promoción = $_POST["promoción"];
         $huesped = $_POST["huesped"];
         $tarjeta = $_POST["tarjeta"];
-        echo "Datos recibidos: Nombre: $nombre, Apellido: $apellido, Email: $email, Adultos: $adultos, Niños: $niños, Fecha Inicio: $fecha_inicio, Fecha Fin: $fecha_fin, Tipo de Habitación: $tipo_hab, Tipo de Servicio: $tipo_servicio, Promoción: $promoción, Huesped: $huesped, Tarjeta: $tarjeta";
-        agregarReserva($nombre, $apellido, $email, $adultos, $niños, $fecha_inicio, $fecha_fin, $tipo_hab, $tipo_servicio, $promoción, $huesped, $tarjeta);
+        $nombre_tarjeta = $_POST["nombre_tarjeta"];
+        $vencimiento = $_POST["vencimiento"];
+        $cvc = $_POST["cvc"];
+        echo "Datos recibidos: Nombre: $nombre, Apellido: $apellido, Email: $email, Adultos: $adultos, Niños: $niños, Fecha Inicio: $fecha_inicio, Fecha Fin: $fecha_fin, Tipo de Habitación: $tipo_hab, Tipo de Servicio: $tipo_servicio, Promoción: $promoción, Huesped: $huesped, Tarjeta: $tarjeta, nombre_tarjeta: $nombre_tarjeta, vencimiento: $vencimiento, cvc: $cvc";
+        agregarReserva($nombre, $apellido, $email, $adultos, $niños, $fecha_inicio, $fecha_fin, $tipo_hab, $tipo_servicio, $promoción, $huesped, $tarjeta, $nombre_tarjeta, $vencimiento, $cvc);
         global $reservaModel;
     } elseif ($solicitud == "servicio") {
         $tipo_servicio = $_POST["tipo_servicio"];
@@ -99,6 +102,5 @@ elseif ($requestMethod == "POST") {
     }else{
         echo json_encode(["error" => "Ruta no encontrada"]);
     }}
-
 
 ?>
