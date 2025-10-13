@@ -1,41 +1,38 @@
 <?php
-require "../models/Reserva.php";
+// Configuración de errores para desarrollo
+ini_set('display_errors', 0);       // No mostrar errores en pantalla
+ini_set('log_errors', 1);           // Guardar errores en log
+error_reporting(E_ALL);
 
-$reservaModel = new Reserva($pdo); 
+require_once "../config/database.php";
+require_once "../models/Reserva.php";
+require_once "../models/Reserva_servicio.php";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $input = json_decode(file_get_contents('php://input'), true);
-    if ($input && isset($input['action']) && $input['action'] === 'agregarReserva') {
-        $id_usuario = $input['id_usuario'] ?? 1; 
-        $result = $reservaModel->agregar(
-            $id_usuario,
-            $input['adultos'] ?? '1',
-            $input['ninos'] ?? '0', 
-            $input['fecha_inicio'] ?? '',
-            $input['fecha_fin'] ?? '',
-            $input['id_habitacion'] ?? null,
-            $input['id_servicio'] ?? null, 
-            $input['tarjeta'] ?? '',
-            $input['nombre_tarjeta'] ?? null,
-            $input['vencimiento'] ?? null,
-            $input['cvc'] ?? null
-        );
-        
-        if ($result) {
-            echo json_encode(["success" => true, "message" => "Reserva agregada correctamente."]);
-        } else {
-            echo json_encode(["success" => false, "message" => "Error al agregar la reserva. Revisa los logs."]);
-        }
-        exit;
-    }
-} elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
-    if ($_GET['action'] === 'obtener') {
-        header('Content-Type: application/json');
-        echo json_encode($reservaModel->obtenerReserva());
-        exit;
-    }
+header("Content-Type: application/json; charset=UTF-8");
+
+// Leer JSON enviado desde JS
+$input = json_decode(file_get_contents("php://input"), true);
+
+// Validación básica
+if (!$input) {
+    echo json_encode(['success' => false, 'message' => 'Datos inválidos o no recibidos']);
+    exit;
 }
 
-http_response_code(405);
-echo json_encode(["error" => "Método no permitido"]);
-?>
+$reservaModel = new Reserva($pdo);
+$reservaServicioModel = new Reserva_servicio($pdo);
+
+try {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($input['action']) && $input['action'] === 'agregarReserva') {
+        $resultado = $reservaModel->agregarReserva($input);
+        echo json_encode($resultado);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Acción no válida o método incorrecto']);
+    }
+} catch (Exception $e) {
+    // Capturar cualquier error y devolverlo en JSON
+    echo json_encode([
+        'success' => false,
+        'message' => 'Error en el servidor: ' . $e->getMessage()
+    ]);
+}

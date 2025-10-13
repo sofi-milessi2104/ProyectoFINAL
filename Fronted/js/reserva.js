@@ -22,13 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const servicios = [
-        { id_servicio: 1, tipo_servicio: 'Restaurante', precio_servicio: 0, imagen: 'https://via.placeholder.com/100.png?text=Restaurante' },
-        { id_servicio: 2, tipo_servicio: 'Spa & Masajes', precio_servicio: 500, imagen: 'https://via.placeholder.com/100.png?text=Spa' },
-        { id_servicio: 3, tipo_servicio: 'Gym', precio_servicio: 500, imagen: 'https://via.placeholder.com/100.png?text=Gym' },
-        { id_servicio: 4, tipo_servicio: 'Sauna', precio_servicio: 500, imagen: 'https://via.placeholder.com/100.png?text=Sauna' },
-        { id_servicio: 5, tipo_servicio: 'Piscina interior', precio_servicio: 0, imagen: 'https://via.placeholder.com/100.png?text=Piscina' },
-        { id_servicio: 6, tipo_servicio: 'Piscina exterior', precio_servicio: 0, imagen: 'https://via.placeholder.com/100.png?text=Piscina' },
-        { id_servicio: 7, tipo_servicio: 'Estacionamiento', precio_servicio: 0, imagen: 'https://via.placeholder.com/100.png?text=Parking' }
+        { id_servicio: 1, tipo_servicio: 'Restaurante', precio_servicio: 0, imagen: 'http://localhost/ProyectoFinal/Fronted/img/Restaurante.jpeg' },
+        { id_servicio: 2, tipo_servicio: 'Spa & Masajes', precio_servicio: 500, imagen: 'http://localhost/ProyectoFinal/Fronted/img/Spa.jpeg' },
+        { id_servicio: 3, tipo_servicio: 'Gym', precio_servicio: 500, imagen: 'http://localhost/ProyectoFinal/Fronted/img/Gimnasio.jpeg' },
+        { id_servicio: 4, tipo_servicio: 'Sauna', precio_servicio: 500, imagen: 'http://localhost/ProyectoFinal/Fronted/img/Sauna.jpeg' },
+        { id_servicio: 5, tipo_servicio: 'Piscina interior', precio_servicio: 0, imagen: 'http://localhost/ProyectoFinal/Fronted/img/Piscina%20interior%20-%20cerrada.jpeg' },
+        { id_servicio: 6, tipo_servicio: 'Piscina exterior', precio_servicio: 0, imagen: 'http://localhost/ProyectoFinal/Fronted/img/Piscina%20al%20aire%20libre.jpeg' },
+        { id_servicio: 7, tipo_servicio: 'Estacionamiento', precio_servicio: 0, imagen: 'http://localhost/ProyectoFinal/Fronted/img/Estacionamiento.jpg' }
     ];
 
     const diffInDays = (date1, date2) => {
@@ -229,19 +229,14 @@ document.addEventListener('DOMContentLoaded', () => {
         step3.innerHTML = `
             <h2>Paso 3: Pago y Confirmación</h2>
             <form id="step3-form">
-                <h3>Información de Pago</h3>
-                
                 <div class="form-group">
                     <label for="tarjeta">Número de Tarjeta</label>
                     <input type="text" id="tarjeta" name="tarjeta" required pattern="[0-9]{16}" placeholder="4242424242424242">
-                    <small style="color: #777;">Introduce 16 dígitos sin espacios</small>
                 </div>
-                
                 <div class="form-group">
                     <label for="nombre">Nombre en la Tarjeta</label>
                     <input type="text" id="nombre" name="nombre" required placeholder="Jane Doe">
                 </div>
-
                 <div class="expiration-cvc">
                     <div class="form-group">
                         <label for="vencimiento">Vencimiento (MM/AA)</label>
@@ -252,18 +247,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         <input type="text" id="cvc" name="cvc" required pattern="[0-9]{3,4}" placeholder="123">
                     </div>
                 </div>
-
                 <div class="button-group">
                     <button type="button" id="back-step-2" class="back-btn">Atrás</button>
                     <button type="submit" id="submit-btn" class="next-btn">Confirmar y Pagar</button>
                 </div>
             </form>
         `;
-        
-        step3.querySelector('#back-step-2').addEventListener('click', () => {
-            currentStep = 2;
-            renderStep();
-        });
 
 step3.querySelector('#step3-form').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -273,33 +262,91 @@ step3.querySelector('#step3-form').addEventListener('submit', async (e) => {
     reservaData.vencimiento = e.target.querySelector('#vencimiento').value;
     reservaData.cvc = e.target.querySelector('#cvc').value;
 
-
     const payload = {
         action: 'agregarReserva',
-        id_usuario: null, 
+        id_usuario: null,
         adultos: reservaData.adultos.toString(),
-        niños: reservaData.niños.toString(),  
+        niños: reservaData.niños.toString(),
         fecha_inicio: reservaData.fecha_inicio,
         fecha_fin: reservaData.fecha_fin,
         id_habitacion: reservaData.id_habitacion,
-        id_servicio: reservaData.servicios.length > 0 ? reservaData.servicios[0] : 1,
-        tarjeta: reservaData.tarjeta
+        servicios: reservaData.servicios,
+        tarjeta: reservaData.tarjeta,
+        nombre_tarjeta: reservaData.nombre_tarjeta,
+        vencimiento: reservaData.vencimiento,
+        cvc: reservaData.cvc
     };
 
+    const loader = document.getElementById('loader-overlay');
+    const modal = document.getElementById('confirm-modal');
+    const resumenDiv = document.getElementById('resumen-reserva');
+
+    // Mostrar loader
+    loader.style.display = 'flex';
+
     try {
-        const res = await fetch('http://localhost/ProyectoFINAL/Backend/controllers/reserva.php', {
+        const res = await fetch('http://localhost/ProyectoFinal/Backend/controllers/reserva.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
+
         const data = await res.json();
-        alert(data.message || '¡Reserva realizada con éxito!');
+
+        // Ocultar loader
+        loader.style.display = 'none';
+
+        if (data.success) {
+            // Limpiar formulario
+            e.target.reset();
+            reservaData.tarjeta = null;
+            reservaData.nombre_tarjeta = null;
+            reservaData.vencimiento = null;
+            reservaData.cvc = null;
+
+            // Mostrar resumen en modal
+            const dias = diffInDays(reservaData.fecha_inicio, reservaData.fecha_fin);
+            const serviciosStr = reservaData.servicios.length > 0 ? reservaData.servicios.map(id => servicios.find(s => s.id_servicio === id).tipo_servicio).join(', ') : 'Ninguno';
+            const total = reservaData.precio * dias + reservaData.servicios.reduce((t,id)=> { const s = servicios.find(x=>x.id_servicio===id); return t + (s?s.precio_servicio:0)*dias; },0);
+
+            resumenDiv.innerHTML = `
+                <p><strong>Habitación:</strong> ${reservaData.tipo_hab || 'N/A'}</p>
+                <p><strong>Fechas:</strong> ${reservaData.fecha_inicio} a ${reservaData.fecha_fin}</p>
+                <p><strong>Adultos:</strong> ${reservaData.adultos}, <strong>Niños:</strong> ${reservaData.niños}</p>
+                <p><strong>Servicios:</strong> ${serviciosStr}</p>
+                <p><strong>Total:</strong> $${total.toLocaleString('es-ES')}</p>
+            `;
+
+            modal.style.display = 'block';
+
+        } else {
+            alert(data.message || 'Error al realizar la reserva.');
+        }
+
     } catch (err) {
+        loader.style.display = 'none';
+        console.error("Error al realizar la reserva:", err);
         alert('Error al realizar la reserva.');
     }
 });
+
+// Cerrar modal
+document.getElementById('cerrar-modal').addEventListener('click', () => {
+    document.getElementById('confirm-modal').style.display = 'none';
+    // Opcional: volver al paso 1
+    currentStep = 1;
+    renderStep();
+});
+
+
         return step3;
     };
 
     renderStep();
+
+    const cerrarModalBtn = document.getElementById('cerrar-modal');
+    cerrarModalBtn.addEventListener('click', () => {
+        window.location.href = 'index.html';
+    });
+
 });
