@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Sitio Web</title>
+    <style>
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .language-btn {
+            background: #4285f4;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+            min-width: 150px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .language-dropdown.show {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .language-option:hover {
+            background: #f5f5f5;
+        }
+        
+        .language-option:last-child {
+            border-bottom: none;
+        }
+        
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+        
+        body {
+            top: 0px !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Selector de idioma personalizado -->
+    <div class="language-selector">
+        <button class="language-btn" onclick="toggleDropdown()">
+            🌐 Idioma
+        </button>
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
+            <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
+            <div class="language-option" onclick="changeLanguage('fr')">🇫🇷 Français</div>
+            <div class="language-option" onclick="changeLanguage('de')">🇩🇪 Deutsch</div>
+            <div class="language-option" onclick="changeLanguage('it')">🇮🇹 Italiano</div>
+            <div class="language-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
+        </div>
+    </div>
+
+    <!-- Contenido de tu sitio -->
+    <div class="content">
+        <h1>Bienvenido a mi sitio web</h1>
+        <p>Este es un párrafo de ejemplo que será traducido automáticamente.</p>
+        <p>Puedes agregar cualquier contenido que necesites traducir.</p>
+    </div>
+
+    <!-- Div para Google Translate (oculto) -->
+    <div id="google_translate_element" style="display: none;"></div>
+
+    <script>
+        // Inicializar Google Translate
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'es',
+                includedLanguages: 'en,es,fr,de,it,pt',
+                layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
+            }, 'google_translate_element');
+        }
+
+        // Cargar script de Google Translate
+        function loadGoogleTranslate() {
+            const script = document.createElement('script');
+            script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+            document.head.appendChild(script);
+        }
+
+        // Mostrar/ocultar dropdown
+        function toggleDropdown() {
+            const dropdown = document.getElementById('languageDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        // Cambiar idioma
+        function changeLanguage(lang) {
+            const select = document.querySelector('.goog-te-combo');
+            if (select) {
+                select.value = lang;
+                select.dispatchEvent(new Event('change'));
+            }
+            toggleDropdown(); // Cerrar dropdown
+        }
+
+        // Cerrar dropdown al hacer clic fuera
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('languageDropdown');
+            const button = document.querySelector('.language-btn');
+            
+            if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        // Cargar Google Translate cuando la página esté lista
+        document.addEventListener('DOMContentLoaded', loadGoogleTranslate);
+    </script>
+</body>
+</html>
