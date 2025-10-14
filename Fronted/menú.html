@@ -4,11 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/menú.css">
+    <link rel="stylesheet" href="css/translate.css">
     <script src="js/menú.js"></script>
     <title>Menú</title>
 </head>
 <body>
-    
+
+    <div class="language-selector">
+    <button class="language-btn" onclick="toggleDropdown()">🌐 Idioma</button>
+    <div class="language-dropdown" id="languageDropdown">
+        <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
+        <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
+        <div class="language-option" onclick="changeLanguage('fr')">🇫🇷 Français</div>
+        <div class="language-option" onclick="changeLanguage('de')">🇩🇪 Deutsch</div>
+        <div class="language-option" onclick="changeLanguage('it')">🇮🇹 Italiano</div>
+        <div class="language-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
+    </div>
+</div>
+
+<!-- Div oculto requerido por Google Translate -->
+<div id="google_translate_element" style="display: none;"></div>
+
+
     <div class="menu-container">
     <div class="menu-header">
         <img src="img/logoMorena.png" alt="Logo Morena" class="menu-logo">
@@ -153,6 +170,8 @@
             </div>
         </div>
     </div>
+
+<script src="js/translate.js"></script>
 
 </body>
 </html>
