@@ -3,7 +3,14 @@ let todasLasHabitaciones = [];
 async function obtenerHabitacion() {
   try {
     const respuesta = await fetch("../Backend/routes/api.php?url=habitacion");
-    const habitacionesBD = await respuesta.json();
+    const data = await respuesta.json();
+
+    // Validar que el backend devolvió un array
+    if (!data.habitaciones || !Array.isArray(data.habitaciones)) {
+      throw new Error("El backend no devolvió un array de habitaciones");
+    }
+
+    const habitacionesBD = data.habitaciones;
 
     const serviciosPorHabitacion = {
       "Suit": ["Wifi", "TV", "Doble Balcón", "Minibar", "Microondas", "Mesas y Sillas"],
@@ -22,9 +29,8 @@ async function obtenerHabitacion() {
     });
 
     console.log("Habitaciones obtenidas y procesadas:", todasLasHabitaciones);
-    
     renderizarHabitaciones(todasLasHabitaciones);
-    
+
   } catch (error) {
     console.error("Error al obtener habitaciones: " + error);
     document.getElementById("contenedor-habitacion").innerHTML = `
@@ -37,7 +43,7 @@ async function obtenerHabitacion() {
 
 function renderizarHabitaciones(habitaciones) {
   const contenedor = document.getElementById("contenedor-habitacion");
-  if (habitaciones.length === 0) {
+  if (!habitaciones || habitaciones.length === 0) {
     contenedor.innerHTML = `
       <div class="alert alert-warning text-center" role="alert">
         No se encontraron habitaciones que coincidan con los filtros.
@@ -62,7 +68,7 @@ function aplicarFiltros() {
     const precio = parseFloat(hab.precio.replace('.', ''));
     const coincidePrecio = (!precioMin || precio >= parseFloat(precioMin)) && (!precioMax || precio <= parseFloat(precioMax));
 
-    const coincideFechas = true; 
+    const coincideFechas = true; // Aquí podrías validar disponibilidad por fechas si tu backend lo soporta
 
     return coincideTipo && coincidePrecio && coincideFechas;
   });
@@ -76,7 +82,7 @@ function crearCards(habitaciones) {
       <div class="row">
         <div class="col-lg-12 col-md-12 px-4">
           ${habitaciones.map(hab => {
-            const itemsDescripcion = hab.descripcion_hab
+            const itemsDescripcion = (hab.descripcion_hab || '')
               .split('\r\n')
               .map(item => item.trim().replace(/^-/, '').trim())
               .filter(item => item.length > 0);
@@ -137,6 +143,7 @@ function agregarEventListeners() {
     boton.addEventListener('click', (event) => {
       const idHabitacion = event.target.dataset.id;
       console.log(`Botón de reserva para la habitación con ID: ${idHabitacion} clickeado.`);
+      // Aquí puedes guardar el idHabitacion si quieres pasarlo a reserva.html
       window.location.href = 'reserva.html';
     });
   });
