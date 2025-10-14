@@ -14,6 +14,20 @@
 
   <body class="bg-light">
 
+      <div class="language-selector">
+        <button class="language-btn" onclick="toggleDropdown()">
+            🌐 Idioma
+        </button>
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
+            <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
+            <div class="language-option" onclick="changeLanguage('fr')">🇫🇷 Français</div>
+            <div class="language-option" onclick="changeLanguage('de')">🇩🇪 Deutsch</div>
+            <div class="language-option" onclick="changeLanguage('it')">🇮🇹 Italiano</div>
+            <div class="language-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
+        </div>
+    </div>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-2 shadow-sm sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand me-5 fw-bold fs-3 h-2font" href="index.html"><img src="img/logo.png" alt="Hotel Costa Colonia" width="150" height="30"></a>
