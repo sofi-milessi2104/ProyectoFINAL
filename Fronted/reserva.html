@@ -5,9 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reserva de Hotel - Proceso Moderno</title>
     <link rel="stylesheet" href="css/reserva.css">
+    <link rel="stylesheet" href="css/translate2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+
+        <div class="language-selector">
+    <button class="language-btn" onclick="toggleDropdown()">🌐 Idioma</button>
+    <div class="language-dropdown" id="languageDropdown">
+        <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
+        <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
+        <div class="language-option" onclick="changeLanguage('fr')">🇫🇷 Français</div>
+        <div class="language-option" onclick="changeLanguage('de')">🇩🇪 Deutsch</div>
+        <div class="language-option" onclick="changeLanguage('it')">🇮🇹 Italiano</div>
+        <div class="language-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
+    </div>
+</div>
+
+<!-- Div oculto requerido por Google Translate -->
+<div id="google_translate_element" style="display: none;"></div>
+
     <div class="checkout-container">
         <div class="order-summary">
             <h1 class="hotel-name">Reserva en Hotel Costa Colonia</h1>
