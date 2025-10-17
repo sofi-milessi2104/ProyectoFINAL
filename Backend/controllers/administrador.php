@@ -1,4 +1,5 @@
 <?php
+require "../config/database.php";
 require "../models/Administrador.php";
 
 $administradorModel = new Administrador($pdo);

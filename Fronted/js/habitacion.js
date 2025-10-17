@@ -5,16 +5,19 @@ async function obtenerHabitacion() {
     const respuesta = await fetch("../Backend/routes/api.php?url=habitacion");
     const data = await respuesta.json();
 
-    // Validar que el backend devolvió un array
-    if (!data.habitaciones || !Array.isArray(data.habitaciones)) {
+    console.log("Respuesta cruda del backend:", data);
+
+    // ✅ El backend devuelve directamente un array
+    if (!Array.isArray(data)) {
       throw new Error("El backend no devolvió un array de habitaciones");
     }
 
-    const habitacionesBD = data.habitaciones;
+    const habitacionesBD = data;
 
+    // ✅ Nombres corregidos para coincidir con el backend
     const serviciosPorHabitacion = {
-      "Suit": ["Wifi", "TV", "Doble Balcón", "Minibar", "Microondas", "Mesas y Sillas"],
-      "River Suit": ["Wifi", "TV", "Balcón Privado", "Minibar", "Microondas", "Mesas y Sillas"],
+      "Suite": ["Wifi", "TV", "Doble Balcón", "Minibar", "Microondas", "Mesas y Sillas"],
+      "River Suite": ["Wifi", "TV", "Balcón Privado", "Minibar", "Microondas", "Mesas y Sillas"],
       "Loft": ["Wifi", "TV", "Balcón", "Minibar", "Microondas", "Jarra Eléctrica"],
       "River Loft": ["Wifi", "TV", "Balcón", "Minibar", "Microondas", "Mesas y Sillas"],
       "Super Loft": ["Wifi", "TV", "Microondas", "Balcón doble"]
@@ -64,8 +67,8 @@ function aplicarFiltros() {
 
   const habitacionesFiltradas = todasLasHabitaciones.filter(hab => {
     const coincideTipo = tipoHabitacion.length === 0 || tipoHabitacion.includes(hab.tipo_hab);
-    
-    const precio = parseFloat(hab.precio.replace('.', ''));
+
+    const precio = parseFloat(hab.precio.toString().replace('.', ''));
     const coincidePrecio = (!precioMin || precio >= parseFloat(precioMin)) && (!precioMax || precio <= parseFloat(precioMax));
 
     const coincideFechas = true; // Aquí podrías validar disponibilidad por fechas si tu backend lo soporta
@@ -151,7 +154,7 @@ function agregarEventListeners() {
 
 document.addEventListener("DOMContentLoaded", () => {
   obtenerHabitacion();
-  
+
   document.querySelectorAll('#filterDropdown input').forEach(input => {
     if (input.type === 'checkbox') {
       input.addEventListener('change', aplicarFiltros);

@@ -1,4 +1,5 @@
 <?php
+require "../config/database.php";
 require "../models/Habitacion.php";
 
 $habitacionModel = new Habitacion($pdo);

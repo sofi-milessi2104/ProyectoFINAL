@@ -1,4 +1,5 @@
 <?php
+require "../config/database.php";
 require "../models/Servicio.php";
 
 $servicioModel = new Servicio($pdo);
@@ -26,3 +27,4 @@ function eliminarServicio($id) {
     }
 }
 ?>
+

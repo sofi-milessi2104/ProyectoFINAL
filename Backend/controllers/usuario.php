@@ -1,4 +1,5 @@
 <?php
+require "../config/database.php";
 require "../models/Usuario.php";
 
 $usuarioModel = new Usuario($pdo);

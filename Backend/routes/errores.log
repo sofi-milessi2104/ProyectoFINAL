@@ -1,1 +1,21 @@
 [13-Oct-2025 18:25:49 Europe/Berlin] PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 262144 bytes) in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php on line 13
+[17-Oct-2025 22:45:52 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined function obtenerReserva() in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php:30
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 30
+[17-Oct-2025 22:52:59 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined function obtenerReserva() in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php:29
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 29
+[17-Oct-2025 22:53:36 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined function obtenerReserva() in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php:29
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 29
+[17-Oct-2025 22:54:55 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined function obtenerReserva() in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php:26
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 26
+[17-Oct-2025 23:18:42 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined function obtenerReserva() in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php:26
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 26

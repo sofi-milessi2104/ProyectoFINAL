@@ -1,4 +1,5 @@
 <?php
+require "../config/database.php";
 require "../models/Promocion.php";
 
 $promocionModel = new Promocion($pdo);
