@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-10-2025 a las 20:15:34
+-- Tiempo de generación: 17-10-2025 a las 22:27:21
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -123,12 +123,23 @@ CREATE TABLE `reserva` (
 INSERT INTO `reserva` (`id_reserva`, `id_usuario`, `adultos`, `niños`, `fecha_inicio`, `fecha_fin`, `id_habitacion`, `tarjeta`, `nombre_tarjeta`, `vencimiento`, `cvc`) VALUES
 (1, 1, '1', '', '2025-08-01', '2025-08-03', 4, '2345678901234567', NULL, NULL, NULL),
 (2, 2, '2', '2', '2025-09-05', '2025-09-10', 2, '3456789012345678', NULL, NULL, NULL),
-(3, 3, '3', '1', '2025-07-20', '2025-07-25', 16, '4567890123456789', NULL, NULL, NULL),
-(4, 4, '1', '', '2025-10-01', '2025-10-05', 8, '5678901234567890', NULL, NULL, NULL),
 (5, 5, '1', '1', '2025-09-24', '2025-09-28', 3, '5658214723264198', NULL, NULL, NULL),
 (6, 6, '3', '2', '2025-09-27', '2025-10-11', 5, '4565821398710265', NULL, NULL, NULL),
 (7, 7, '2', '2', '2025-10-01', '2025-10-29', 4, '4569871236665781', NULL, NULL, NULL),
-(8, 7, '1', '', '2025-10-01', '2025-10-29', 2, '5862493157862158', NULL, NULL, NULL);
+(8, 7, '1', '', '2025-10-01', '2025-10-29', 2, '5862493157862158', NULL, NULL, NULL),
+(9, NULL, '1', '0', '2025-10-13', '2025-10-19', 1, '7410258963258741', 'Patricia lara', '02/12', '569'),
+(10, NULL, '1', '0', '2025-10-13', '2025-10-19', 1, '2588545693210458', 'Patricia lara', '02/12', '869'),
+(11, NULL, '1', '0', '2025-10-13', '2025-10-19', 1, '7777774444111258', 'Patricia lara', '02/12', '568'),
+(12, NULL, '1', '0', '2025-10-13', '2025-10-19', 1, '4242424242424242', 'Patricia lara', '02/12', '457'),
+(13, NULL, '1', '2', '2025-10-21', '2025-11-01', 1, '7410258963258741', 'Clara sofia', '03/15', '741'),
+(14, NULL, '3', '2', '2025-10-22', '2025-10-29', 1, '7896541230589647', 'Pablo Martinm', '11/16', '742'),
+(15, NULL, '2', '1', '2025-10-30', '2025-11-06', 5, '1983566478924221', 'Sofia Milessi', '01/31', '475'),
+(16, NULL, '1', '1', '2025-10-31', '2025-11-09', 1, '7894563215896423', 'Pamela Antonia', '06/25', '486'),
+(17, NULL, '1', '0', '2025-10-13', '2025-10-31', 1, '7854236914785623', 'Sandra Palacios', '12/25', '693'),
+(18, NULL, '3', '2', '2025-10-13', '2025-10-19', 2, '4589632147856498', 'Joel Caras', '12/24', '586'),
+(19, NULL, '1', '0', '2025-10-16', '2025-10-26', 1, '4545454545454545', 'Jane Die', '12/26', '586'),
+(20, NULL, '1', '0', '2025-10-16', '2025-10-30', 1, '4242424242424242', 'Joel Juares', '12/28', '475'),
+(21, NULL, '1', '2', '2025-10-31', '2025-11-01', 5, '7879658475968574', 'Lara Nara', '12/26', '896');
 
 -- --------------------------------------------------------
 
@@ -141,6 +152,37 @@ CREATE TABLE `reserva_servicio` (
   `id_servicio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `reserva_servicio`
+--
+
+INSERT INTO `reserva_servicio` (`id_reserva`, `id_servicio`) VALUES
+(9, 5),
+(10, 6),
+(11, 2),
+(12, 2),
+(12, 5),
+(12, 7),
+(13, 2),
+(14, 2),
+(14, 5),
+(14, 7),
+(15, 1),
+(15, 2),
+(15, 4),
+(16, 2),
+(16, 5),
+(17, 2),
+(18, 1),
+(18, 2),
+(18, 5),
+(19, 1),
+(19, 4),
+(20, 3),
+(20, 5),
+(21, 2),
+(21, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -151,21 +193,22 @@ CREATE TABLE `servicio` (
   `id_servicio` int(11) NOT NULL,
   `tipo_servicio` set('Restaurante','Spa & Masajes','Gym','Sauna','Piscina interior','Piscina exterior','Estacionamiento') NOT NULL,
   `descripcion_servicio` varchar(400) NOT NULL,
-  `imagen` varchar(255) NOT NULL
+  `imagen` varchar(255) NOT NULL,
+  `id_promo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `servicio`
 --
 
-INSERT INTO `servicio` (`id_servicio`, `tipo_servicio`, `descripcion_servicio`, `imagen`) VALUES
-(1, 'Restaurante', 'Restaurante y bar: platos tradicionales y locales con estilo gourmet. Con Room Service y desayuno buffet incluido en todas las tarifas.', 'Restaurante.jpeg'),
-(2, 'Spa & Masajes', 'Sesión de spa completa con masajes relajantes (con cargo adicional).', 'Spa.jpeg'),
-(3, 'Gym', 'Accede al gimnasio durante la estadía (con cargo adicional).', 'Gimnasio.jpeg'),
-(4, 'Sauna', 'Sauna seca, ideal para relajación (con cargo adicional).', 'Sauna.jpeg'),
-(5, 'Piscina interior', 'Piscina climatizada todo el año.', 'Piscina interior - cerrada.jpeg'),
-(6, 'Piscina exterior', 'Piscina climatizada en verano con solárium y servicio de comida y bebida.', 'Piscina al aire libre.jpeg'),
-(7, 'Estacionamiento', 'Estacionamiento descubierto gratuito y limitado.', 'Estacionamiento.jpg');
+INSERT INTO `servicio` (`id_servicio`, `tipo_servicio`, `descripcion_servicio`, `imagen`, `id_promo`) VALUES
+(1, 'Restaurante', 'Restaurante y bar: platos tradicionales y locales con estilo gourmet. Con Room Service y desayuno buffet incluido en todas las tarifas.', 'Restaurante.jpeg', 4),
+(2, 'Spa & Masajes', 'Sesión de spa completa con masajes relajantes (con cargo adicional).', 'Spa.jpeg', 2),
+(3, 'Gym', 'Accede al gimnasio durante la estadía (con cargo adicional).', 'Gimnasio.jpeg', 5),
+(4, 'Sauna', 'Sauna seca, ideal para relajación (con cargo adicional).', 'Sauna.jpeg', 1),
+(5, 'Piscina interior', 'Piscina climatizada todo el año.', 'Piscina interior - cerrada.jpeg', 3),
+(6, 'Piscina exterior', 'Piscina climatizada en verano con solárium y servicio de comida y bebida.', 'Piscina al aire libre.jpeg', 6),
+(7, 'Estacionamiento', 'Estacionamiento descubierto gratuito y limitado.', 'Estacionamiento.jpg', 4);
 
 -- --------------------------------------------------------
 
@@ -179,21 +222,22 @@ CREATE TABLE `usuario` (
   `apellido` varchar(50) NOT NULL,
   `email` text NOT NULL,
   `celular` varchar(20) NOT NULL,
-  `password` varchar(250) NOT NULL
+  `password` varchar(250) NOT NULL,
+  `id_ci` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nombre`, `apellido`, `email`, `celular`, `password`) VALUES
-(1, 'Mateo', 'Pérez', 'mateo.perez@example.com', '59892345678', '5678jaja'),
-(2, 'Sofía', 'González', 'sofia.gonzalez@example.com', '59893456789', ''),
-(3, 'Juan', 'Rodríguez', 'juan.rodriguez@example.com', '59894567890', ''),
-(4, 'Valentina', 'Fernández', 'valentina.fernandez@example.com', '59895678901', ''),
-(5, 'Pablo', 'Martinez', 'pablojaja@gmail.com', '45484746421598762', 'password_default'),
-(6, 'Carla', 'Jolela', 'caluta@gmail.com', '565845126', 'password_default'),
-(7, 'Patricia', 'Lola', 'particia@gmail.com', '459236847', 'password_default');
+INSERT INTO `usuario` (`id_usuario`, `nombre`, `apellido`, `email`, `celular`, `password`, `id_ci`) VALUES
+(1, 'Mateo', 'Pérez', 'mateo.perez@example.com', '59892345678', '5678jaja', 10123456),
+(2, 'Sofía', 'González', 'sofia.gonzalez@example.com', '59893456789', '', 10123456),
+(3, 'Juan', 'Rodríguez', 'juan.rodriguez@example.com', '59894567890', '', 10123456),
+(4, 'Valentina', 'Fernández', 'valentina.fernandez@example.com', '59895678901', '', 10123456),
+(5, 'Pablo', 'Martinez', 'pablojaja@gmail.com', '45484746421598762', 'password_default', 10123456),
+(6, 'Carla', 'Jolela', 'caluta@gmail.com', '565845126', 'password_default', 10123456),
+(7, 'Patricia', 'Lola', 'particia@gmail.com', '459236847', 'password_default', 10123456);
 
 --
 -- Índices para tablas volcadas
@@ -222,7 +266,8 @@ ALTER TABLE `promocion`
 --
 ALTER TABLE `reserva`
   ADD PRIMARY KEY (`id_reserva`),
-  ADD KEY `fk_reserva_usuario` (`id_usuario`);
+  ADD KEY `fk_reserva_usuario` (`id_usuario`),
+  ADD KEY `fk_reserva_hab` (`id_habitacion`);
 
 --
 -- Indices de la tabla `reserva_servicio`
@@ -235,13 +280,15 @@ ALTER TABLE `reserva_servicio`
 -- Indices de la tabla `servicio`
 --
 ALTER TABLE `servicio`
-  ADD PRIMARY KEY (`id_servicio`);
+  ADD PRIMARY KEY (`id_servicio`),
+  ADD KEY `servicioPromo` (`id_promo`);
 
 --
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id_usuario`);
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD KEY `adminUsuario` (`id_ci`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -269,7 +316,7 @@ ALTER TABLE `promocion`
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `servicio`
@@ -291,6 +338,7 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `reserva`
 --
 ALTER TABLE `reserva`
+  ADD CONSTRAINT `fk_reserva_hab` FOREIGN KEY (`id_habitacion`) REFERENCES `habitacion` (`id_hab`),
   ADD CONSTRAINT `fk_reserva_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
 
 --
@@ -299,6 +347,18 @@ ALTER TABLE `reserva`
 ALTER TABLE `reserva_servicio`
   ADD CONSTRAINT `reserva_servicio_ibfk_1` FOREIGN KEY (`id_reserva`) REFERENCES `reserva` (`id_reserva`),
   ADD CONSTRAINT `reserva_servicio_ibfk_2` FOREIGN KEY (`id_servicio`) REFERENCES `servicio` (`id_servicio`);
+
+--
+-- Filtros para la tabla `servicio`
+--
+ALTER TABLE `servicio`
+  ADD CONSTRAINT `servicioPromo` FOREIGN KEY (`id_promo`) REFERENCES `promocion` (`id_promo`);
+
+--
+-- Filtros para la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `adminUsuario` FOREIGN KEY (`id_ci`) REFERENCES `administrador` (`ci`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
