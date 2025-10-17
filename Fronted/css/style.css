@@ -135,3 +135,7 @@ input[type=number] {
   display: flex;
   align-items: center;   
 }
+
+body {
+  top: 0px !important;
+}
