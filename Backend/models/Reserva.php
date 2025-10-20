@@ -32,7 +32,6 @@ class Reserva {
 
             $id_reserva = $this->pdo->lastInsertId();
 
-            // Insertar servicios (si hay)
             if (!empty($data['servicios']) && is_array($data['servicios'])) {
                 $stmtServ = $this->pdo->prepare("
                     INSERT INTO reserva_servicio (id_reserva, id_servicio)
