@@ -11,22 +11,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
   <body class="bg-light">
-
-        <div class="language-selector">
-    <button class="language-btn" onclick="toggleDropdown()">🌐 Idioma</button>
-    <div class="language-dropdown" id="languageDropdown">
-        <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
-        <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
-        <div class="language-option" onclick="changeLanguage('fr')">🇫🇷 Français</div>
-        <div class="language-option" onclick="changeLanguage('de')">🇩🇪 Deutsch</div>
-        <div class="language-option" onclick="changeLanguage('it')">🇮🇹 Italiano</div>
-        <div class="language-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
-    </div>
-</div>
-
-<!-- Div oculto requerido por Google Translate -->
-<div id="google_translate_element" style="display: none;"></div>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-2 shadow-sm sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand me-5 fw-bold fs-3 h-2font" href="index.html"><img src="img/logo.png" alt="Hotel Costa Colonia" width="150" height="30"></a>
@@ -51,8 +35,23 @@
           <a class="nav-link me-2" href="restaurante.html">Restaurante</a>
         </li>
       </ul>
-      <div class="d-flex">
-        <a href="usuario.html" class="btn-login ">Login</a>
+      <div class="d-flex align-items-center gap-2">
+        <a href="usuario.html" class="btn-login">Login</a>
+      
+        <div class="language-selector position-relative m-0">
+          <button class="language-btn" onclick="toggleDropdown()">🌐 Idioma</button>
+          <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
+            <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
+            <div class="language-option" onclick="changeLanguage('fr')">🇫🇷 Français</div>
+            <div class="language-option" onclick="changeLanguage('de')">🇩🇪 Deutsch</div>
+            <div class="language-option" onclick="changeLanguage('it')">🇮🇹 Italiano</div>
+            <div class="language-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
+          </div>
+        </div>
+        <!-- Div oculto requerido por Google Translate -->
+        <div id="google_translate_element" style="display: none;"></div>
+     
       </div>
     </div>
   </div>
@@ -159,5 +158,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
   </body>
 </html>
-
+<script src="js/translate.js"></script>
 <script src="js/servicio.js"></script>
