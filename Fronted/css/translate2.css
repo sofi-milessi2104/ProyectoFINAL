@@ -1,12 +1,10 @@
 /* Selector de idioma fijo arriba a la derecha */
 .language-selector {
-    position: fixed;
-    top: 24px;
-    right: 24px;
-    z-index: 2000;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    margin-left: 10px;
 }
 
 /* Botón principal */
@@ -36,7 +34,7 @@
 .language-dropdown {
     display: none;
     position: absolute;
-    top: 48px;
+    top: 15px;
     right: 0;
     background: #fff;
     border: 1px solid #ddd;
