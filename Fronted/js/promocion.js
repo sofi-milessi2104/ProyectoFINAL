@@ -110,10 +110,6 @@ function crearCards(promociones) {
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
-                    <h6 class="mb-4">$${promo.precio_promo} por noche</h6>
-                    <button class="btn btn-sm w-100 btn-outline-primary btn-reservar" data-id="${promo.id_promo}">Reservar ahora</button>
-                  </div>
                 </div>
               </div>
             `;
