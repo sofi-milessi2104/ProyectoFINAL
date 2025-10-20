@@ -1,24 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const app = document.getElementById('app');
-    let currentStep = 1;
-    const reservaData = {
-        fecha_inicio: null,
-        fecha_fin: null,
-        adultos: 1,
-        niños: 0,
-        id_habitacion: null,
-        tipo_hab: null,
-        precio: 0,
-        servicios: [],
-        tarjeta: null
-    };
-
+    let currentStep = 1; // ⭐ AJUSTE CLAVE: Siempre comienza en el Paso 1
+    
+    // 1. Definición de habitaciones y servicios
     const habitaciones = [
-        { id_hab: 1, tipo_hab: 'Suit', imagen: 'http://localhost/ProyectoFinal/Fronted/img/Suite.jpeg', precio: 3.438 },
-        { id_hab: 2, tipo_hab: 'River Suit', imagen: 'http://localhost/ProyectoFinal/Fronted/img/River%20Suite.jpeg', precio: 6.849 },
-        { id_hab: 3, tipo_hab: 'Loft', imagen: 'http://localhost/ProyectoFinal/Fronted/img/Loft.jpeg', precio: 10.273 },
-        { id_hab: 4, tipo_hab: 'River Loft', imagen: 'http://localhost/ProyectoFinal/Fronted/img/River%20Loft.jpeg', precio: 13.755 },
-        { id_hab: 5, tipo_hab: 'Super Loft', imagen: 'http://localhost/ProyectoFinal/Fronted/img/Super%20Loft.jpeg', precio: 17.123 }
+        { id_hab: 1, tipo_hab: 'Suit', imagen: 'http://localhost/ProyectoFinal/Fronted/img/Suite.jpeg', precio: 3438 },
+        { id_hab: 2, tipo_hab: 'River Suit', imagen: 'http://localhost/ProyectoFinal/Fronted/img/River%20Suite.jpeg', precio: 6849 },
+        { id_hab: 3, tipo_hab: 'Loft', imagen: 'http://localhost/ProyectoFinal/Fronted/img/Loft.jpeg', precio: 10273 },
+        { id_hab: 4, tipo_hab: 'River Loft', imagen: 'http://localhost/ProyectoFinal/Fronted/img/River%20Loft.jpeg', precio: 13755 },
+        { id_hab: 5, tipo_hab: 'Super Loft', imagen: 'http://localhost/ProyectoFinal/Fronted/img/Super%20Loft.jpeg', precio: 17123 }
     ];
 
     const servicios = [
@@ -31,16 +21,53 @@ document.addEventListener('DOMContentLoaded', () => {
         { id_servicio: 7, tipo_servicio: 'Estacionamiento', precio_servicio: 0, imagen: 'http://localhost/ProyectoFinal/Fronted/img/Estacionamiento.jpg' }
     ];
 
+    // 2. Cargar datos de localStorage para preselección
+    const preselectedRoomId = localStorage.getItem('selected_room_id');
+    let initialRoom = {};
+    if (preselectedRoomId) {
+        const roomFromStorage = habitaciones.find(h => h.id_hab.toString() === preselectedRoomId);
+        if (roomFromStorage) {
+            initialRoom = {
+                id_habitacion: roomFromStorage.id_hab,
+                tipo_hab: roomFromStorage.tipo_hab,
+                precio: roomFromStorage.precio,
+            };
+            // ⚠️ Importante: Mantenemos el currentStep en 1 aquí para que inicie en el Paso 1
+        }
+    }
+    
+    // 3. Limpiamos el localStorage INMEDIATAMENTE después de cargar la habitación,
+    // para que la próxima vez que se cargue reserva.html sin venir de un botón, 
+    // no tenga una habitación preseleccionada.
+    if (preselectedRoomId) {
+        localStorage.removeItem('selected_room_id');
+    }
+
+    const reservaData = {
+        fecha_inicio: null,
+        fecha_fin: null,
+        adultos: 1,
+        niños: 0,
+        id_habitacion: initialRoom.id_habitacion || null, // Se carga si existe
+        tipo_hab: initialRoom.tipo_hab || null,           // Se carga si existe
+        precio: initialRoom.precio || 0,                 // Se carga si existe
+        servicios: [],
+        tarjeta: null
+    };
+
+    // ... (El resto de las funciones auxiliares se mantienen igual) ...
+
     const diffInDays = (date1, date2) => {
         if (!date1 || !date2) return 0;
         const oneDay = 24 * 60 * 60 * 1000;
         const firstDate = new Date(date1);
         const secondDate = new Date(date2);
-        return Math.round(Math.abs((firstDate - secondDate) / oneDay));
+        const days = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+        return days > 0 ? days : 0;
     };
 
     const updateSummary = () => {
-        const dias = diffInDays(reservaData.fecha_inicio, reservaData.fecha_fin);
+        const dias = diffInDays(reservaData.fecha_inicio, reservaData.fecha_fin) || 1; 
         
         const precioBase = reservaData.precio * dias;
         const precioServicios = reservaData.servicios.reduce((total, id) => {
@@ -49,11 +76,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 0);
         const precioTotal = precioBase + precioServicios;
 
-        document.getElementById('summary-fecha-inicio').textContent = reservaData.fecha_inicio ? new Date(reservaData.fecha_inicio).toLocaleDateString('es-ES') : '-- / -- / --';
-        document.getElementById('summary-fecha-fin').textContent = reservaData.fecha_fin ? new Date(reservaData.fecha_fin).toLocaleDateString('es-ES') : '-- / -- / --';
+        document.getElementById('summary-fecha-inicio').textContent = reservaData.fecha_inicio ? new Date(reservaData.fecha_inicio + 'T00:00:00').toLocaleDateString('es-ES') : '-- / -- / --';
+        document.getElementById('summary-fecha-fin').textContent = reservaData.fecha_fin ? new Date(reservaData.fecha_fin + 'T00:00:00').toLocaleDateString('es-ES') : '-- / -- / --';
         document.getElementById('summary-huespedes').textContent = `${reservaData.adultos} adulto(s), ${reservaData.niños || 0} niño(s)`;
-        document.getElementById('summary-habitacion').textContent = reservaData.tipo_hab ? `${reservaData.tipo_hab} ($${reservaData.precio} x ${dias} noches)` : 'No seleccionada';
-        document.getElementById('summary-servicios').textContent = reservaData.servicios.length > 0 ? reservaData.servicios.map(id => servicios.find(s => s.id_servicio === id).tipo_servicio).join(', ') : 'Ninguno';
+        
+        // ⭐ Clave: La habitación ya aparece en el resumen si fue preseleccionada
+        const habitacionTexto = reservaData.tipo_hab 
+            ? `${reservaData.tipo_hab} ($${reservaData.precio.toLocaleString('es-ES')} x ${dias} noches)` 
+            : 'No seleccionada';
+        document.getElementById('summary-habitacion').textContent = habitacionTexto;
+        
+        document.getElementById('summary-servicios').textContent = reservaData.servicios.length > 0 
+            ? reservaData.servicios.map(id => servicios.find(s => s.id_servicio === id).tipo_servicio).join(', ') 
+            : 'Ninguno';
+        
         document.getElementById('summary-precio-total').textContent = precioTotal.toLocaleString('es-ES');
     };
 
@@ -143,12 +179,33 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const createStep2 = () => {
+        const roomPreselected = !!initialRoom.id_habitacion; // Usa 'initialRoom' para verificar si fue preseleccionada
+        
+        // Contenido condicional: Oculta la galería si la habitación fue preseleccionada
+        const roomSelectionContent = roomPreselected 
+            ? `
+                <div class="alert alert-info" style="
+                    padding: 15px; 
+                    background-color: #e0f7fa; 
+                    border: 1px solid #b2ebf2; 
+                    border-radius: 4px; 
+                    color: #006064; 
+                    margin-bottom: 25px;
+                ">
+                    Ya ha seleccionado la habitación <strong>${reservaData.tipo_hab}</strong>. 
+                    Proceda a seleccionar servicios adicionales. Si desea cambiar la habitación, use el botón "Atrás".
+                </div>
+              `
+            : `
+                <h3>Selecciona una Habitación</h3>
+                <div class="room-gallery"></div>
+              `;
+
         const step2 = document.createElement('div');
         step2.className = 'step-content active';
         step2.innerHTML = `
             <h2>Paso 2: Elige Habitación y Servicios</h2>
-            <h3>Selecciona una Habitación</h3>
-            <div class="room-gallery"></div>
+            ${roomSelectionContent}
             <h3>Agrega Servicios Adicionales (Precio por noche)</h3>
             <div class="service-list"></div>
             <div class="button-group">
@@ -157,30 +214,33 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
-        const roomGallery = step2.querySelector('.room-gallery');
-        habitaciones.forEach(hab => {
-            const card = document.createElement('div');
-            card.className = 'room-card';
-            if (reservaData.id_habitacion === hab.id_hab) {
-                 card.classList.add('selected');
-            }
-            card.innerHTML = `
-                <img src="${hab.imagen}" alt="${hab.tipo_hab}">
-                <div class="room-info">
-                    <h4>${hab.tipo_hab}</h4>
-                    <p>$${hab.precio} / Noche</p>
-                </div>
-            `;
-            card.addEventListener('click', () => {
-                document.querySelectorAll('.room-card').forEach(c => c.classList.remove('selected'));
-                card.classList.add('selected');
-                reservaData.id_habitacion = hab.id_hab;
-                reservaData.precio = hab.precio;
-                reservaData.tipo_hab = hab.tipo_hab;
-                updateSummary();
+        // Renderizar galería de habitaciones SOLO si no hay una preseleccionada
+        if (!roomPreselected) {
+            const roomGallery = step2.querySelector('.room-gallery');
+            habitaciones.forEach(hab => {
+                const card = document.createElement('div');
+                card.className = 'room-card';
+                if (reservaData.id_habitacion === hab.id_hab) {
+                     card.classList.add('selected');
+                }
+                card.innerHTML = `
+                    <img src="${hab.imagen}" alt="${hab.tipo_hab}">
+                    <div class="room-info">
+                        <h4>${hab.tipo_hab}</h4>
+                        <p>$${hab.precio.toLocaleString('es-ES')} / Noche</p>
+                    </div>
+                `;
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.room-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    reservaData.id_habitacion = hab.id_hab;
+                    reservaData.precio = hab.precio;
+                    reservaData.tipo_hab = hab.tipo_hab;
+                    updateSummary();
+                });
+                roomGallery.appendChild(card);
             });
-            roomGallery.appendChild(card);
-        });
+        }
 
         const serviceList = step2.querySelector('.service-list');
         servicios.forEach(serv => {
@@ -189,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
             item.className = 'service-item';
             item.innerHTML = `
                 <input type="checkbox" id="service-${serv.id_servicio}" value="${serv.id_servicio}" ${isSelected ? 'checked' : ''}>
-                <label for="service-${serv.id_servicio}">${serv.tipo_servicio} (${serv.precio_servicio > 0 ? '$' + serv.precio_servicio : 'Gratis'})</label>
+                <label for="service-${serv.id_servicio}">${serv.tipo_servicio} (${serv.precio_servicio > 0 ? '$' + serv.precio_servicio.toLocaleString('es-ES') : 'Gratis'})</label>
             `;
             item.querySelector('input').addEventListener('change', (e) => {
                 const isChecked = e.target.checked;
@@ -254,91 +314,87 @@ document.addEventListener('DOMContentLoaded', () => {
             </form>
         `;
 
-step3.querySelector('#step3-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
+        step3.querySelector('#step3-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-    reservaData.tarjeta = e.target.querySelector('#tarjeta').value;
-    reservaData.nombre_tarjeta = e.target.querySelector('#nombre').value;
-    reservaData.vencimiento = e.target.querySelector('#vencimiento').value;
-    reservaData.cvc = e.target.querySelector('#cvc').value;
+            reservaData.tarjeta = e.target.querySelector('#tarjeta').value;
+            reservaData.nombre_tarjeta = e.target.querySelector('#nombre').value;
+            reservaData.vencimiento = e.target.querySelector('#vencimiento').value;
+            reservaData.cvc = e.target.querySelector('#cvc').value;
 
-    const payload = {
-        action: 'agregarReserva',
-        id_usuario: null,
-        adultos: reservaData.adultos.toString(),
-        niños: reservaData.niños.toString(),
-        fecha_inicio: reservaData.fecha_inicio,
-        fecha_fin: reservaData.fecha_fin,
-        id_habitacion: reservaData.id_habitacion,
-        servicios: reservaData.servicios,
-        tarjeta: reservaData.tarjeta,
-        nombre_tarjeta: reservaData.nombre_tarjeta,
-        vencimiento: reservaData.vencimiento,
-        cvc: reservaData.cvc
-    };
+            const payload = {
+                action: 'agregarReserva',
+                id_usuario: null, 
+                adultos: reservaData.adultos.toString(),
+                niños: reservaData.niños.toString(),
+                fecha_inicio: reservaData.fecha_inicio,
+                fecha_fin: reservaData.fecha_fin,
+                id_habitacion: reservaData.id_habitacion,
+                servicios: reservaData.servicios,
+                tarjeta: reservaData.tarjeta,
+                nombre_tarjeta: reservaData.nombre_tarjeta,
+                vencimiento: reservaData.vencimiento,
+                cvc: reservaData.cvc
+            };
 
-    const loader = document.getElementById('loader-overlay');
-    const modal = document.getElementById('confirm-modal');
-    const resumenDiv = document.getElementById('resumen-reserva');
+            const loader = document.getElementById('loader-overlay');
+            const modal = document.getElementById('confirm-modal');
+            const resumenDiv = document.getElementById('resumen-reserva');
 
-    // Mostrar loader
-    loader.style.display = 'flex';
+            loader.style.display = 'flex';
 
-    try {
-        const res = await fetch('http://localhost/ProyectoFinal/Backend/controllers/reserva.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
+            try {
+                const res = await fetch('../Backend/controllers/reserva.php', { 
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+                loader.style.display = 'none';
+
+                if (data.success) {
+                    e.target.reset();
+                    reservaData.tarjeta = null;
+
+                    const dias = diffInDays(reservaData.fecha_inicio, reservaData.fecha_fin);
+                    const serviciosStr = reservaData.servicios.length > 0 
+                        ? reservaData.servicios.map(id => servicios.find(s => s.id_servicio === id).tipo_servicio).join(', ') 
+                        : 'Ninguno';
+                    
+                    const precioHabitacionTotal = reservaData.precio * dias;
+                    const precioServiciosTotal = reservaData.servicios.reduce((t,id)=> { 
+                        const s = servicios.find(x=>x.id_servicio===id); 
+                        return t + (s?s.precio_servicio:0)*dias; 
+                    },0);
+                    const total = precioHabitacionTotal + precioServiciosTotal;
+
+                    resumenDiv.innerHTML = `
+                        <p><strong>Habitación:</strong> ${reservaData.tipo_hab || 'N/A'}</p>
+                        <p><strong>Fechas:</strong> ${new Date(reservaData.fecha_inicio + 'T00:00:00').toLocaleDateString('es-ES')} a ${new Date(reservaData.fecha_fin + 'T00:00:00').toLocaleDateString('es-ES')}</p>
+                        <p><strong>Adultos:</strong> ${reservaData.adultos}, <strong>Niños:</strong> ${reservaData.niños}</p>
+                        <p><strong>Servicios:</strong> ${serviciosStr}</p>
+                        <p><strong>Total:</strong> $${total.toLocaleString('es-ES')}</p>
+                    `;
+
+                    modal.style.display = 'block';
+
+                } else {
+                    alert(data.message || 'Error al realizar la reserva.');
+                }
+
+            } catch (err) {
+                loader.style.display = 'none';
+                console.error("Error al realizar la reserva:", err);
+                alert('Error de conexión o al procesar la reserva. Consulte la consola.');
+            }
         });
 
-        const data = await res.json();
-
-        // Ocultar loader
-        loader.style.display = 'none';
-
-        if (data.success) {
-            // Limpiar formulario
-            e.target.reset();
-            reservaData.tarjeta = null;
-            reservaData.nombre_tarjeta = null;
-            reservaData.vencimiento = null;
-            reservaData.cvc = null;
-
-            // Mostrar resumen en modal
-            const dias = diffInDays(reservaData.fecha_inicio, reservaData.fecha_fin);
-            const serviciosStr = reservaData.servicios.length > 0 ? reservaData.servicios.map(id => servicios.find(s => s.id_servicio === id).tipo_servicio).join(', ') : 'Ninguno';
-            const total = reservaData.precio * dias + reservaData.servicios.reduce((t,id)=> { const s = servicios.find(x=>x.id_servicio===id); return t + (s?s.precio_servicio:0)*dias; },0);
-
-            resumenDiv.innerHTML = `
-                <p><strong>Habitación:</strong> ${reservaData.tipo_hab || 'N/A'}</p>
-                <p><strong>Fechas:</strong> ${reservaData.fecha_inicio} a ${reservaData.fecha_fin}</p>
-                <p><strong>Adultos:</strong> ${reservaData.adultos}, <strong>Niños:</strong> ${reservaData.niños}</p>
-                <p><strong>Servicios:</strong> ${serviciosStr}</p>
-                <p><strong>Total:</strong> $${total.toLocaleString('es-ES')}</p>
-            `;
-
-            modal.style.display = 'block';
-
-        } else {
-            alert(data.message || 'Error al realizar la reserva.');
-        }
-
-    } catch (err) {
-        loader.style.display = 'none';
-        console.error("Error al realizar la reserva:", err);
-        alert('Error al realizar la reserva.');
-    }
-});
-
-// Cerrar modal
-document.getElementById('cerrar-modal').addEventListener('click', () => {
-    document.getElementById('confirm-modal').style.display = 'none';
-    // Opcional: volver al paso 1
-    currentStep = 1;
-    renderStep();
-});
-
-
+        step3.querySelector('#back-step-2').addEventListener('click', () => {
+            currentStep = 2;
+            renderStep();
+        });
+        
         return step3;
     };
 
@@ -346,7 +402,9 @@ document.getElementById('cerrar-modal').addEventListener('click', () => {
 
     const cerrarModalBtn = document.getElementById('cerrar-modal');
     cerrarModalBtn.addEventListener('click', () => {
-        window.location.href = 'index.html';
+        // No es necesario limpiar localStorage aquí porque ya se hizo en la carga
+        document.getElementById('confirm-modal').style.display = 'none';
+        window.location.href = 'index.html'; 
     });
 
 });
