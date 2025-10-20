@@ -6,7 +6,6 @@ class Reserva_servicio {
         $this->pdo = $pdo;
     }
 
-    // Obtener todos los servicios asociados a una reserva
     public function obtenerServiciosPorReserva($id_reserva) {
         $stmt = $this->pdo->prepare("
             SELECT s.id_servicio, s.tipo_servicio, s.precio_servicio
@@ -18,7 +17,6 @@ class Reserva_servicio {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Eliminar todos los servicios de una reserva (si se modifica)
     public function eliminarServiciosPorReserva($id_reserva) {
         $stmt = $this->pdo->prepare("DELETE FROM reserva_servicio WHERE id_reserva = ?");
         return $stmt->execute([$id_reserva]);
