@@ -19,3 +19,38 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 26
+[21-Oct-2025 22:28:58 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`hotel2`.`usuario`, CONSTRAINT `adminUsuario` FOREIGN KEY (`id_ci`) REFERENCES `administrador` (`ci`)) in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php:20
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php(20): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\usuario.php(14): Usuario->loginAdd('diego', 'profe', 'diegoprofe123@g...', 'notengo', 'diego123')
+#2 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(45): loginAddUser('diego', 'profe', 'diegoprofe123@g...', 'notengo', 'diego123')
+#3 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php on line 20
+[21-Oct-2025 22:29:08 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`hotel2`.`usuario`, CONSTRAINT `adminUsuario` FOREIGN KEY (`id_ci`) REFERENCES `administrador` (`ci`)) in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php:20
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php(20): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\usuario.php(14): Usuario->loginAdd('diego', 'profe', 'diegoprofe123@g...', 'notengo', 'diego123')
+#2 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(45): loginAddUser('diego', 'profe', 'diegoprofe123@g...', 'notengo', 'diego123')
+#3 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php on line 20
+[21-Oct-2025 22:29:40 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`hotel2`.`usuario`, CONSTRAINT `adminUsuario` FOREIGN KEY (`id_ci`) REFERENCES `administrador` (`ci`)) in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php:20
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php(20): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\usuario.php(14): Usuario->loginAdd('diego', 'profe', 'diegoprofe123@g...', '0988989898', 'diego123')
+#2 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(45): loginAddUser('diego', 'profe', 'diegoprofe123@g...', '0988989898', 'diego123')
+#3 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php on line 20
+[21-Oct-2025 22:30:09 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`hotel2`.`usuario`, CONSTRAINT `adminUsuario` FOREIGN KEY (`id_ci`) REFERENCES `administrador` (`ci`)) in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php:20
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php(20): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\usuario.php(14): Usuario->loginAdd('diego', 'profe', 'diegoprofe123@g...', '098898989', 'diego123')
+#2 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(45): loginAddUser('diego', 'profe', 'diegoprofe123@g...', '098898989', 'diego123')
+#3 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php on line 20
+[21-Oct-2025 22:30:17 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`hotel2`.`usuario`, CONSTRAINT `adminUsuario` FOREIGN KEY (`id_ci`) REFERENCES `administrador` (`ci`)) in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php:20
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php(20): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\usuario.php(14): Usuario->loginAdd('diego', 'profe', 'diegoprofe123@g...', '098898989', 'diego123')
+#2 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(45): loginAddUser('diego', 'profe', 'diegoprofe123@g...', '098898989', 'diego123')
+#3 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php on line 20
