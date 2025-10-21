@@ -10,49 +10,75 @@
 </head>
 <body>
 
-        <div class="language-selector">
-    <button class="language-btn" onclick="toggleDropdown()">🌐 Idioma</button>
-    <div class="language-dropdown" id="languageDropdown">
-        <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
-        <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
-        <div class="language-option" onclick="changeLanguage('fr')">🇫🇷 Français</div>
-        <div class="language-option" onclick="changeLanguage('de')">🇩🇪 Deutsch</div>
-        <div class="language-option" onclick="changeLanguage('it')">🇮🇹 Italiano</div>
-        <div class="language-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
+    <div class="language-selector">
+        <button class="language-btn" onclick="toggleDropdown()">🌐 Idioma</button>
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
+            <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
+            <div class="language-option" onclick="changeLanguage('fr')">🇫🇷 Français</div>
+            <div class="language-option" onclick="changeLanguage('de')">🇩🇪 Deutsch</div>
+            <div class="language-option" onclick="changeLanguage('it')">🇮🇹 Italiano</div>
+            <div class="language-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
+        </div>
     </div>
-</div>
+    <div id="google_translate_element" style="display: none;"></div>
 
-<!-- Div oculto requerido por Google Translate -->
-<div id="google_translate_element" style="display: none;"></div>
-
-    <div class="checkout-container">
-        <div class="order-summary">
+    <div class="page-wrapper">
+        
+        <div class="main-content">
             <h1 class="hotel-name">Reserva en Hotel Costa Colonia</h1>
-            <div class="summary-details">
-                <h3>Detalles de la Reserva</h3>
-                <div id="summary-content">
-                    <p><strong>Entrada:</strong> <span id="summary-fecha-inicio">-- / -- / --</span></p>
-                    <p><strong>Salida:</strong> <span id="summary-fecha-fin">-- / -- / --</span></p>
-                    <p><strong>Huéspedes:</strong> <span id="summary-huespedes">0 adulto(s), 0 niño(s)</span></p>
-                    <p><strong>Habitación:</strong> <span id="summary-habitacion">No seleccionada</span></p>
-                    <p><strong>Servicios:</strong> <span id="summary-servicios">Ninguno</span></p>
+            <div class="payment-form" id="app">
                 </div>
-                <div class="total-price">
-                    <p>Total Estimado</p>
+        </div>
+        
+        <div class="sidebar-summary">
+
+            <div class="room-offer-card">
+                <div id="summary-room-card">
+                    <div class="image-placeholder" style="background: url('http://localhost/ProyectoFinal/Fronted/img/Suite.jpeg') center/cover; height: 100px;"></div>
+                    <h4>Habitación y Fechas</h4>
+                    <p class="rating-info">Selecciona fechas y habitación para ver más detalles.</p>
+                </div>
+
+                <hr style="margin: 15px 0; border: none; border-top: 1px solid var(--color-border);">
+
+                <div class="summary-details">
+                    <p><strong>Fechas:</strong> <span id="summary-fecha-inicio">-- / -- / --</span> - <span id="summary-fecha-fin">-- / -- / --</span></p>
+                    <p><strong>Participantes:</strong> <span id="summary-huespedes">0 adulto(s), 0 niño(s)</span></p>
+                    <p style="font-size: 14px;">Habitación: <span id="summary-habitacion">No seleccionada</span></p>
+                    <p style="font-size: 14px;">Servicios: <span id="summary-servicios">Ninguno</span></p>
+                </div>
+            </div>
+
+            <div class="summary-price-details">
+                <h3>Detalles del precio</h3>
+                <div id="price-breakdown">
+                    <div class="detail-item">
+                        <span id="price-nights-info">0 noches x $0 USD</span>
+                        <span>$<span id="price-nights-value">0</span></span>
+                    </div>
+                    <div class="detail-item" id="price-services-row" style="display:none;">
+                        <span>Servicios Adicionales</span>
+                        <span>$<span id="price-services-value">0</span></span>
+                    </div>
+                </div>
+
+                <div class="detail-item total">
+                    <span>Total Estimado</span>
                     <span>$<span id="summary-precio-total">0</span></span>
                 </div>
             </div>
+
+            <div class="tip-box">
+                <p style="margin: 0; font-size: 14px;"><i class="fas fa-heart" style="color: var(--color-primary);"></i> ¡Haz realizado un hallazgo excepcional! El alojamiento suele estar reservado.</p>
+            </div>
         </div>
-        
-        <div class="payment-form" id="app"></div>
     </div>
 
-    <!-- Overlay y loader -->
-    <div id="loader-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
+    <div id="loader-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.7); z-index:1000; justify-content:center; align-items:center;">
         <div class="loader"></div>
     </div>
 
-    <!-- Modal de confirmación -->
     <div id="confirm-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:20px; border-radius:10px; z-index:1001; width:90%; max-width:400px; box-shadow:0 5px 15px rgba(0,0,0,0.3);">
         <h2>¡Reserva Realizada!</h2>
         <div id="resumen-reserva"></div>
@@ -60,6 +86,6 @@
     </div>
 
     <script src="js/reserva.js"></script>
-    <script src="js/translate.js"></script>
+    <script src="js/translate.js"></script> 
 </body>
 </html>

@@ -148,6 +148,7 @@ function agregarEventListeners() {
         boton.addEventListener('click', (event) => {
             const idHabitacion = event.target.dataset.id;
             
+            // ⭐ Mantiene la lógica: Guarda el ID de la habitación en localStorage
             localStorage.setItem('selected_room_id', idHabitacion); 
             
             console.log(`Botón de reserva para la habitación con ID: ${idHabitacion} clickeado. Redirigiendo a reserva.html...`);

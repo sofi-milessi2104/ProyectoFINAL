@@ -1,50 +1,92 @@
-/* Estilos generales (Inspirado en tu solicitud) */
+/* Variables de Color (Recomendado para consistencia) */
+:root {
+    --color-primary: #5469d4; /* Azul principal */
+    --color-secondary: #32325d; /* Título y texto oscuro */
+    --color-text-light: #525f7f; /* Texto secundario/labels */
+    --color-background: #f6f9fc;
+    --color-surface: #fff;
+    --color-border: #e0e6ed;
+    --color-success: #2ecc71;
+}
+
+/* Estilos generales */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background-color: #f6f9fc;
+    background-color: var(--color-background);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; 
     min-height: 100vh;
     margin: 0;
-    padding: 20px;
+    padding: 30px 20px;
     box-sizing: border-box;
 }
-.checkout-container {
+
+/* Contenedor Principal (page-wrapper) */
+.page-wrapper {
     display: flex;
-    background-color: #fff;
+    background-color: var(--color-surface);
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 1000px; /* Aumentado para mejor visualización */
-    min-height: 700px;
+    max-width: 1200px; 
+    overflow: hidden; 
 }
 
-/* Panel de Resumen (Izquierda) */
-.order-summary {
-    background-color: #f8f8f8;
+/* Contenido Principal (Formulario/Pasos) */
+.main-content {
+    flex: 2.5; 
     padding: 40px;
-    border-radius: 8px 0 0 8px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    color: #525f7f;
 }
 .hotel-name {
     font-size: 28px;
-    color: #32325d;
+    color: var(--color-secondary);
+    margin-top: 0;
     margin-bottom: 30px;
     font-weight: 600;
 }
-.summary-details {
-    width: 100%;
-    margin-bottom: 20px;
+.payment-form { /* Contenedor de la aplicación (id="app") */
+    padding: 0;
+}
+
+/* Panel de Resumen Lateral (sidebar-summary) */
+.sidebar-summary {
+    background-color: #f8f8f8; 
+    padding: 30px 25px;
+    border-radius: 0 8px 8px 0;
+    flex: 1; 
+    min-width: 300px; 
+    color: var(--color-text-light);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-left: 1px solid var(--color-border);
+}
+
+/* Estilos de la tarjeta de Habitación/Fechas */
+.room-offer-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
     padding: 15px;
-    border-radius: 6px;
-    background-color: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.room-offer-card h4 {
+    color: var(--color-secondary);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+.image-placeholder {
+    width: 100%;
+    height: 100px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+.rating-info {
+    font-size: 14px;
+    color: var(--color-text-light);
+    margin: 0;
 }
 .summary-details p {
     margin: 8px 0;
@@ -53,37 +95,73 @@ body {
     font-size: 15px;
 }
 .summary-details p strong {
-    color: #32325d;
+    color: var(--color-secondary);
     font-weight: 500;
 }
-.total-price {
-    margin-top: 20px;
-    border-top: 1px solid #e0e6ed;
-    padding-top: 20px;
+.summary-details span {
+    text-align: right;
+    max-width: 60%;
 }
-.total-price span {
-    font-size: 36px;
-    color: #32325d;
+
+/* Estilos de la sección de Precio */
+.summary-price-details {
+    padding: 15px 0;
+}
+.summary-price-details h3 {
+    font-size: 18px;
+    color: var(--color-secondary);
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: var(--color-text-light);
+}
+.detail-item span:last-child {
+    font-weight: 600;
+    color: var(--color-secondary);
+}
+.detail-item.total {
+    border-top: 2px solid var(--color-border);
+    padding-top: 15px;
+    margin-top: 15px;
+    font-size: 1.5em; 
+    font-weight: 700;
+    color: var(--color-primary);
+}
+.detail-item.total span:last-child {
+    color: var(--color-primary);
     font-weight: 700;
 }
 
-/* Panel de Formulario (Derecha) */
-.payment-form {
-    flex: 2; /* Más grande para el formulario */
-    padding: 40px;
+/* Estilos para Tip Box (caja de información) */
+.tip-box {
+    background-color: #f0f7ff; 
+    border: 1px solid #b3d9ff;
+    padding: 15px;
+    border-radius: 6px;
+    color: #004d99; 
+    margin-top: auto; 
+    font-size: 14px;
 }
+
+/* --- Estilos de Formulario (Títulos, Campos, Botones) --- */
+
 h2 {
     font-size: 24px;
-    color: #32325d;
+    color: var(--color-secondary);
     margin-top: 0;
     margin-bottom: 30px;
-    border-bottom: 2px solid #5469d4;
+    border-bottom: 2px solid var(--color-primary);
     padding-bottom: 10px;
     display: inline-block;
 }
 h3 {
     font-size: 18px;
-    color: #525f7f;
+    color: var(--color-text-light);
     margin-top: 25px;
     margin-bottom: 15px;
 }
@@ -104,25 +182,24 @@ h3 {
 label {
     display: block;
     font-size: 14px;
-    color: #525f7f;
+    color: var(--color-text-light);
     margin-bottom: 5px;
 }
-input:not([type="checkbox"]), select {
+input:not([type="checkbox"]):not([type="radio"]), select {
     width: 100%;
     padding: 12px 16px;
-    border: 1px solid #e0e6ed;
+    border: 1px solid var(--color-border);
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 16px;
-    color: #32325d;
+    color: var(--color-secondary);
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 input:not([type="checkbox"]):focus, select:focus {
-    border-color: #5469d4;
-    box-shadow: 0 0 0 1px #5469d4;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 1px var(--color-primary);
     outline: none;
 }
-/* Estilos adicionales para el Paso 3 */
 .expiration-cvc {
     display: flex;
     gap: 15px;
@@ -131,8 +208,7 @@ input:not([type="checkbox"]):focus, select:focus {
     flex: 1;
 }
 
-
-/* Estilos de la galería de habitaciones (Paso 2) */
+/* --- Galería de Habitaciones (Paso 2) --- */
 .room-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -140,8 +216,8 @@ input:not([type="checkbox"]):focus, select:focus {
     margin-bottom: 25px;
 }
 .room-card {
-    background-color: #fff;
-    border: 1px solid #e0e6ed;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 6px;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
@@ -152,7 +228,7 @@ input:not([type="checkbox"]):focus, select:focus {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 .room-card.selected {
-    border: 3px solid #5469d4;
+    border: 3px solid var(--color-primary);
     box-shadow: 0 0 10px rgba(84, 105, 212, 0.4);
 }
 .room-card img {
@@ -167,16 +243,17 @@ input:not([type="checkbox"]):focus, select:focus {
 }
 .room-info h4 {
     margin: 0 0 5px;
-    color: #32325d;
+    color: var(--color-secondary);
     font-size: 16px;
 }
-.room-info .price {
+.room-info p {
+    margin: 0;
     font-weight: 600;
-    color: #2ecc71;
-    font-size: 1.1em;
+    color: var(--color-success);
+    font-size: 14px;
 }
 
-/* Estilos para la galería de servicios (Paso 2) */
+/* --- Galería de Servicios (Paso 2) --- */
 .service-list {
     display: flex;
     flex-wrap: wrap;
@@ -190,16 +267,16 @@ input:not([type="checkbox"]):focus, select:focus {
     padding: 8px 12px;
     border-radius: 20px;
     font-size: 14px;
-    color: #32325d;
-    border: 1px solid #e0e6ed;
+    color: var(--color-secondary);
+    border: 1px solid var(--color-border);
 }
 .service-item input[type="checkbox"] {
     transform: scale(1.1);
-    accent-color: #5469d4;
+    accent-color: var(--color-primary);
     cursor: pointer;
 }
 
-/* Botones de Navegación */
+/* --- Botones de Navegación --- */
 .button-group {
     display: flex;
     justify-content: space-between;
@@ -217,34 +294,209 @@ button {
     flex: 1;
 }
 .back-btn {
-    background-color: #e0e6ed;
-    color: #525f7f;
+    background-color: var(--color-border);
+    color: var(--color-text-light);
 }
 .back-btn:hover { background-color: #d1d9e0; }
 .next-btn, #submit-btn {
-    background-color: #5469d4;
+    background-color: var(--color-primary);
     color: #fff;
 }
 .next-btn:hover, #submit-btn:hover { background-color: #4359a8; }
 
+/* Estilos para el mensaje de preselección de habitación */
+.alert.alert-info {
+    padding: 15px; 
+    background-color: #e0f7fa; 
+    border: 1px solid #b2ebf2; 
+    border-radius: 4px; 
+    color: #006064; 
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+.alert.alert-info strong {
+    font-weight: 700;
+    color: #004d40;
+}
 
-/* Media Queries para Responsive Design */
+/* --- Estilos para la Selección de Pago (Paso 3) --- */
+
+.payment-method-selection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.method-option {
+    flex: 1 1 150px; 
+    position: relative;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 10px;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    cursor: pointer; /* CLAVE: Asegura el puntero en todo el div */
+}
+
+/* El input radio se oculta visualmente pero permanece accesible para el label */
+.method-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+}
+
+.method-option label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--color-text-light);
+    cursor: pointer; 
+    text-align: center;
+    gap: 8px;
+    padding: 5px 0; /* Un poco de padding extra para la zona de clic */
+}
+
+/* Estado de Hover */
+.method-option:hover {
+    border-color: #aeb8df; 
+    background-color: #fcfcfc;
+}
+
+/* Estado Seleccionado (checked) */
+.method-option:has(input:checked) {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 5px rgba(84, 105, 212, 0.3);
+    background-color: #f0f3f6;
+}
+.method-option:has(input:checked) label {
+    color: var(--color-primary);
+}
+
+.method-option i {
+    font-size: 1.2em;
+}
+
+/* Estilos de las secciones de detalles condicionales */
+.payment-details-section {
+    display: none;
+    animation: fadeIn 0.4s ease-out;
+    padding-top: 10px;
+}
+.payment-details-section.active {
+    display: block;
+}
+
+.method-info {
+    padding: 15px;
+    background-color: #fff3e0; 
+    border: 1px solid #ffcc80;
+    border-radius: 4px;
+    color: #e65100;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+
+/* --- Loader y Modal --- */
+#loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid var(--color-primary);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Estilos del Modal */
+#confirm-modal {
+    background: var(--color-surface);
+    padding: 30px;
+    border-radius: 10px;
+    z-index: 1001;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+#confirm-modal h2 {
+    border: none;
+    font-size: 28px;
+    color: var(--color-success);
+}
+#resumen-reserva p {
+    text-align: left;
+    margin: 10px 0;
+    font-size: 16px;
+    color: var(--color-secondary);
+}
+#resumen-reserva strong {
+    color: var(--color-text-light);
+    font-weight: 500;
+    display: inline-block;
+    min-width: 100px;
+}
+#cerrar-modal {
+    background-color: var(--color-primary);
+    color: white;
+    width: 100%;
+    margin-top: 20px !important;
+}
+
+
+/* --- Media Queries (Responsive) --- */
+
 @media (max-width: 900px) {
-    .checkout-container {
+    body {
+        padding: 10px;
+    }
+    .page-wrapper {
         flex-direction: column;
+        max-width: 600px;
         min-height: auto;
     }
-    .order-summary {
+    .main-content {
+        order: 2; 
+        padding: 30px;
+    }
+    .sidebar-summary {
+        order: 1; 
         border-radius: 8px 8px 0 0;
         padding: 30px;
-        align-items: center;
-        text-align: center;
+        min-width: auto;
+        border-left: none;
+        border-bottom: 1px solid var(--color-border);
     }
     .summary-details {
-        max-width: 400px;
+        max-width: 100%; 
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
+        border-radius: 0;
     }
-    .payment-form {
-        padding: 30px;
+    .hotel-name {
+        text-align: center;
     }
 }
 @media (max-width: 500px) {
@@ -254,18 +506,16 @@ button {
     .room-gallery {
         grid-template-columns: 1fr;
     }
-}
-
-.loader {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #3498db;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    .expiration-cvc {
+        flex-direction: column;
+        gap: 0;
+    }
+    .payment-method-selection {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .method-option {
+        flex: 1 1 100%;
+        padding: 15px;
+    }
 }
