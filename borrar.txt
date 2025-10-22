@@ -1,0 +1,12 @@
+Cosas por hacer o mejorar:
+
+✔ tamaño card
+✔ suite / suit
+- login múltiples??
+✔ botón en servicios      //Click en la img
+- galeria de habitaciones
+- PERFIL⁉️               //Poder ver reservas que se hicieron antes etc
+- BD, MER (hab es un servicio & pago aparte???)
+- linkear comentarios
+- vencimiento & encriptar tarjeta
+- tabla de la presentación
