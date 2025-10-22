@@ -19,4 +19,3 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 26
-[21-Oct-2025 22:32:19 Europe/Berlin] PHP Warning:  Undefined variable $resultado in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 18
