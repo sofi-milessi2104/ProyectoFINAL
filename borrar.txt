@@ -12,3 +12,6 @@ Cosas por hacer o mejorar:
 ✔ tabla de la presentación
 ✔ FODA
 - "resumen" explicaado del código
+- diallogFlow
+- diagrama de Gantt
+- grafico de gauss
