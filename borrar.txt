@@ -9,4 +9,6 @@ Cosas por hacer o mejorar:
 - BD, MER (hab es un servicio & pago aparte???)
 - linkear comentarios
 - vencimiento & encriptar tarjeta
-- tabla de la presentación
+✔ tabla de la presentación
+✔ FODA
+- "resumen" explicaado del código
