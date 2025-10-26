@@ -17,6 +17,8 @@ Cosas por hacer o mejorar:
  - mail de confirmación
  - linkear comentarios de google maps
  - PERFIL⁉️         //Poder ver reservas que se hicieron antes etc
+ - preguntas frecuentes 
+ - todos los servicios
 
 
 *BASE DE DATOS*
@@ -28,6 +30,7 @@ Cosas por hacer o mejorar:
  - grafico de gauss
  - manual de admin
  - diallogFlow
+ - link directo a wpp
 
 
 *PRESENTACIÓN*
