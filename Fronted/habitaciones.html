@@ -3,41 +3,37 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Agrega style.css para que el header use los mismos estilos que index -->
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/hab.css">
     <link rel="stylesheet" href="css/translate2.css">
     <title>Habitaciones</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
   <body class="bg-light">
-<nav class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-2 shadow-sm sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-4 shadow-sm sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand me-5 fw-bold fs-3 h-2font" href="index.html"><img src="img/logo.png" alt="Hotel Costa Colonia" width="150" height="30"></a>
+    <a class="navbar-brand me-5 fw-bold fs-3 h-2font" href="index.html">
+      <img src="img/logo.png" alt="Hotel Costa Colonia" width="150" height="30">
+    </a>
     <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link me-2" href="index.html">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active me-2" aria-current="page" href="habitaciones.html">Habitaciones</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link me-2" href="servicios.html">Servicios</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link me-2" href="promociones.html">Promociones</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link me-2" href="restaurante.html">Restaurante</a>
-        </li>
+        <li class="nav-item"><a class="nav-link me-2" href="index.html">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active me-2" href="habitaciones.html">Habitaciones</a></li>
+        <li class="nav-item"><a class="nav-link me-2" href="servicios.html">Servicios</a></li>
+        <li class="nav-item"><a class="nav-link me-2" href="promociones.html">Promociones</a></li>
+        <li class="nav-item"><a class="nav-link me-2" href="restaurante.html">Restaurante</a></li>
       </ul>
+
       <div class="d-flex align-items-center gap-2">
         <a href="usuario.html" class="btn-login">Login</a>
-      
+
         <div class="language-selector position-relative m-0">
           <button class="language-btn" onclick="toggleDropdown()">🌐 Idioma</button>
           <div class="language-dropdown" id="languageDropdown">
@@ -49,9 +45,8 @@
             <div class="language-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
           </div>
         </div>
-        <!-- Div oculto requerido por Google Translate -->
+
         <div id="google_translate_element" style="display: none;"></div>
-     
       </div>
     </div>
   </div>
@@ -84,12 +79,12 @@
           <label class="form-check-label" for="tipo_river_loft">River Loft</label>
         </div>
         <div class="mb-2">
-          <input type="checkbox" id="tipo_suit" class="form-check-input shadow-none" value="Suit">
-          <label class="form-check-label" for="tipo_suit">Suit</label>
+          <input type="checkbox" id="tipo_suite" class="form-check-input shadow-none" value="Suite">
+          <label class="form-check-label" for="tipo_suite">Suite</label>
         </div>
         <div class="mb-2">
-          <input type="checkbox" id="tipo_river_suit" class="form-check-input shadow-none" value="River Suit">
-          <label class="form-check-label" for="tipo_river_suit">River Suit</label>
+          <input type="checkbox" id="tipo_river_suite" class="form-check-input shadow-none" value="River Suite">
+          <label class="form-check-label" for="tipo_river_suite">River Suite</label>
         </div>
         <div class="mb-2">
           <input type="checkbox" id="tipo_super_loft" class="form-check-input shadow-none" value="Super Loft">
