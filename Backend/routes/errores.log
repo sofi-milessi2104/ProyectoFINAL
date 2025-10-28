@@ -54,3 +54,37 @@ Stack trace:
 #2 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(45): loginAddUser('diego', 'profe', 'diegoprofe123@g...', '098898989', 'diego123')
 #3 {main}
   thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php on line 20
+[22-Oct-2025 22:08:04 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`hotel2`.`usuario`, CONSTRAINT `adminUsuario` FOREIGN KEY (`id_ci`) REFERENCES `administrador` (`ci`)) in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php:20
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php(20): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\usuario.php(14): Usuario->loginAdd('diego', 'profe', 'diegoprofe123@g...', 'notengo', 'tuabuela33')
+#2 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(45): loginAddUser('diego', 'profe', 'diegoprofe123@g...', 'notengo', 'tuabuela33')
+#3 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php on line 20
+[28-Oct-2025 20:34:44 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000]: General error: 2006 MySQL server has gone away in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php:13
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php(13): PDOStatement->execute()
+#1 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php(9): Habitacion->obtenerHabitacion()
+#2 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(16): obtenerHabitacion()
+#3 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php on line 13
+[28-Oct-2025 21:45:13 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method Habitacion::obtenerHabitacion() in C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php:14
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(16): obtenerHabitacion()
+#1 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php on line 14
+[28-Oct-2025 21:45:15 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method Habitacion::obtenerHabitacion() in C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php:14
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(16): obtenerHabitacion()
+#1 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php on line 14
+[28-Oct-2025 21:45:16 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method Servicio::obtenerServicio() in C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\servicio.php:10
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(20): obtenerServicio()
+#1 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\servicio.php on line 10
+[28-Oct-2025 21:45:16 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined method Promocion::obtenerPromocion() in C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\promocion.php:10
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(18): obtenerPromocion()
+#1 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\promocion.php on line 10

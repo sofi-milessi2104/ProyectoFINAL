@@ -1,0 +1,72 @@
+/* admin.css */
+body {
+    background-color: #f8f9fa; /* Fondo gris claro más típico de dashboards */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+*{
+    font-family: "Poppins", sans-serif;
+}
+.h-font{
+    font-family: 'Merienda', cursive;
+}
+
+/* Barra de Navegación */
+.navbar {
+    border-bottom: 3px solid #6689e9; /* Un borde para diferenciar del contenido */
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.75);
+    transition: color 0.3s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+    color: #fff;
+}
+
+/* Color principal del hotel para botones de acción (ej. success/primary) */
+.custom-bg{
+    background-color: #2ec1ac; /* Mantenemos el color turquesa */
+}
+.custom-bg:hover{
+    background-color: #279e8c;
+}
+
+/* Estilos de Cards en el Dashboard */
+.card {
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.card-title i {
+    font-size: 1.25rem;
+}
+
+.text-bg-primary {
+    background-color: #6689e9 !important; /* Azul más profesional */
+}
+.text-bg-success {
+    background-color: #2ec1ac !important; /* Turquesa del hotel */
+}
+.text-bg-warning {
+    background-color: #ffc107 !important; /* Amarillo de Bootstrap */
+}
+
+/* Tablas de datos */
+.table th, .table td {
+    vertical-align: middle;
+}
+
+/* Footer de la página */
+.footer {
+    margin-top: auto; /* Asegura que el footer esté al final */
+}
+
+/* Estilos de botones de acción en el panel */
+.btn-sm.shadow-none {
+    box-shadow: none !important;
+}
