@@ -19,3 +19,42 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 26
+[22-Oct-2025 22:05:27 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`hotel2`.`usuario`, CONSTRAINT `adminUsuario` FOREIGN KEY (`id_ci`) REFERENCES `administrador` (`ci`)) in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Usuario.php:20
+Stack trace:
+#0 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Usuario.php(20): PDOStatement->execute(Array)
+#1 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php(14): Usuario->loginAdd('Manuela', 'Deditos', 'manu584@gmail.c...', '258369014', 'tuabuela33')
+#2 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\routes\api.php(45): loginAddUser('Manuela', 'Deditos', 'manu584@gmail.c...', '258369014', 'tuabuela33')
+#3 {main}
+  thrown in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Usuario.php on line 20
+[23-Oct-2025 00:35:39 Europe/Berlin] PHP Warning:  Undefined variable $resultado in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 18
+[23-Oct-2025 00:38:54 Europe/Berlin] PHP Warning:  Undefined variable $resultado in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 18
+[23-Oct-2025 17:28:31 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`hotel2`.`usuario`, CONSTRAINT `adminUsuario` FOREIGN KEY (`id_ci`) REFERENCES `administrador` (`ci`)) in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Usuario.php:20
+Stack trace:
+#0 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Usuario.php(20): PDOStatement->execute(Array)
+#1 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php(14): Usuario->loginAdd('kiss', 'me', 'kizmenomore@gma...', '1254566', 'lala')
+#2 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\routes\api.php(45): loginAddUser('kiss', 'me', 'kizmenomore@gma...', '1254566', 'lala')
+#3 {main}
+  thrown in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Usuario.php on line 20
+[23-Oct-2025 17:29:21 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`hotel2`.`usuario`, CONSTRAINT `adminUsuario` FOREIGN KEY (`id_ci`) REFERENCES `administrador` (`ci`)) in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Usuario.php:20
+Stack trace:
+#0 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Usuario.php(20): PDOStatement->execute(Array)
+#1 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php(14): Usuario->loginAdd('lucia', 'burgue\xC3\xB1o', 'lucia@gmail.com', '1245368', 'lucia16')
+#2 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\routes\api.php(45): loginAddUser('lucia', 'burgue\xC3\xB1o', 'lucia@gmail.com', '1245368', 'lucia16')
+#3 {main}
+  thrown in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Usuario.php on line 20
+[23-Oct-2025 17:29:27 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`hotel2`.`usuario`, CONSTRAINT `adminUsuario` FOREIGN KEY (`id_ci`) REFERENCES `administrador` (`ci`)) in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Usuario.php:20
+Stack trace:
+#0 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Usuario.php(20): PDOStatement->execute(Array)
+#1 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php(14): Usuario->loginAdd('lucia', 'burgue\xC3\xB1o', 'lucia@gmail.com', '1245368', 'lucia16')
+#2 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\routes\api.php(45): loginAddUser('lucia', 'burgue\xC3\xB1o', 'lucia@gmail.com', '1245368', 'lucia16')
+#3 {main}
+  thrown in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Usuario.php on line 20
+[23-Oct-2025 17:29:28 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`hotel2`.`usuario`, CONSTRAINT `adminUsuario` FOREIGN KEY (`id_ci`) REFERENCES `administrador` (`ci`)) in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Usuario.php:20
+Stack trace:
+#0 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Usuario.php(20): PDOStatement->execute(Array)
+#1 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php(14): Usuario->loginAdd('lucia', 'burgue\xC3\xB1o', 'lucia@gmail.com', '1245368', 'lucia16')
+#2 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\routes\api.php(45): loginAddUser('lucia', 'burgue\xC3\xB1o', 'lucia@gmail.com', '1245368', 'lucia16')
+#3 {main}
+  thrown in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Usuario.php on line 20
+[23-Oct-2025 17:30:55 Europe/Berlin] PHP Warning:  Undefined variable $resultado in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 18
+[23-Oct-2025 18:30:44 Europe/Berlin] PHP Warning:  Undefined variable $resultado in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 18
