@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reservas | Panel de Administración</title>
+    <link rel="stylesheet" href="css/indexAdmin.css">
+    <link rel="stylesheet" href="css/resrevaAdmin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .h-font{ font-family: 'Merienda', cursive; }
+    </style>
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-lg-3 py-lg-2 shadow-sm sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand me-5 fw-bold fs-4 h-font" href="indexAdmin.html">
+            <i class="bi bi-gear-fill me-2"></i>Admin Panel
+        </a>
+        <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="adminNavbar">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link me-2" href="indexAdmin.html"><i class="bi bi-house-door-fill"></i> Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active me-2" href="reservaAdmin.html"><i class="bi bi-calendar-check-fill"></i> Reservas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link me-2" href="contenidoAdmin.html"><i class="bi bi-key-fill"></i> Gestión de Contenido</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link me-2" href="usuarioAdmin.html"><i class="bi bi-person-lines-fill"></i> Usuarios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link me-2" href="configAdmin.html"><i class="bi bi-wrench-adjustable-fill"></i> Configuración</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="salir.html"><i class="bi bi-box-arrow-right"></i> Salir</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    <div class="container-fluid py-4 px-lg-5">
+        <h2 class="mb-4 fw-bold h-font"><i class="bi bi-list-check me-2"></i> Gestión de Reservas</h2>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="indexAdmin.html" class="btn btn-sm btn-outline-secondary shadow-none">
+                <i class="bi bi-arrow-left-square-fill me-1"></i> Volver a Inicio
+            </a>
+        </div>
+        
+        <div class="card shadow mb-4">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped text-center mb-0" id="tabla-reservas">
+                        <thead class="bg-dark text-light">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Adultos</th>
+                                <th scope="col">Niños</th>
+                                <th scope="col">Check-In</th>
+                                <th scope="col">Check-Out</th>
+                                <th scope="col">Habitación</th>
+                                <th scope="col">Servicios Extra</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo-tabla-reservas">
+                            <tr><td colspan="8" class="text-center">Cargando reservas...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="modal-detalle-reserva" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detalleModalLabel">Detalles de Reserva #<span id="reserva-id-modal"></span></h5>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="fw-bold">Detalles de la Habitación:</p>
+                    <ul class="list-unstyled">
+                        <li id="detalle-habitacion"></li>
+                    </ul>
+                    <hr>
+                    <p class="fw-bold">Servicios Adicionales:</p>
+                    <ul id="lista-servicios-modal" class="list-group list-group-flush">
+                        </ul>
+                    <hr>
+                    <p class="fw-bold">Información de Pago (Solo visibles para gestión):</p>
+                    <p id="detalle-pago"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer bg-white border-top mt-5 p-3 text-center">
+        <small>
+            Panel de Administración | Hotel Costa Colonia.
+        </small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <script src="js/adminReserva.js"></script> 
+</body>
+</html>
