@@ -15,7 +15,10 @@ class Habitacion {
     }
 
     public function agregar($tipo_hab, $descripcion_hab, $disponible, $imagen, $precio) {
-        $stmt = $this->pdo->prepare("INSERT INTO habitacion (tipo_hab, descripcion_hab, disponible, imagen, precio) VALUES (:tipo_hab, :descripcion_hab, :disponible, :imagen, :precio)");
+        $stmt = $this->pdo->prepare("
+            INSERT INTO habitacion (tipo_hab, descripcion_hab, disponible, imagen, precio)
+            VALUES (:tipo_hab, :descripcion_hab, :disponible, :imagen, :precio)
+        ");
         return $stmt->execute([
             "tipo_hab" => $tipo_hab,
             "descripcion_hab" => $descripcion_hab,
@@ -29,5 +32,12 @@ class Habitacion {
         $stmt = $this->pdo->prepare("DELETE FROM habitacion WHERE id_hab = :id");
         return $stmt->execute(["id" => $id]);
     }
+
+    public function obtenerPorId($id) {
+    $stmt = $this->pdo->prepare("SELECT * FROM habitacion WHERE id_hab = :id");
+    $stmt->execute(["id" => $id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 }
 ?>

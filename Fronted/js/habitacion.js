@@ -96,8 +96,8 @@ function crearCards(habitaciones) {
                             <div class="card mb-4 border-0 shadow">
                                 <div class="row g-0 p-3 align-items-center">
                                     <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
-                                        <img src="../Fronted/img/${hab.imagen}" class="img-fluid rounded" alt="${hab.tipo_hab}">
-                                    </div>
+                                    <img src="${hab.imagen}" class="img-fluid rounded" alt="${hab.tipo_hab}">
+                                </div>
                                     <div class="col-md-5 px-lg-3 px-md-3 px-0">
                                         <h5 class="mb-3">${hab.tipo_hab}</h5>
                                         <div class="features mb-3">

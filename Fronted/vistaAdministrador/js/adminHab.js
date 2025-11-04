@@ -1,28 +1,24 @@
-// adminHab.js
+const API_BASE_URL = 'http://localhost/ProyectoFinal/Backend/routes/api.php?url=habitacion';
 
-// --- 1. Definición de la URL Base ---
-// **IMPORTANTE:** Reemplaza esta URL con la dirección real de tu controlador de API.
-const API_BASE_URL = 'http://localhost/ProyectoFinal/Backend/routes/api.php?url=habitacion'; 
+let modalHabitacion;
 
-// --- Funciones de CRUD Genéricas ---
-async function crudOperation(url, method, data, successMsg, errorMsg) {
+async function crudOperation(action, data = {}, successMsg, errorMsg) {
     try {
-        const respuesta = await fetch(url, {
-            method: method,
+        const respuesta = await fetch(API_BASE_URL, {
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: ['POST', 'PUT', 'DELETE'].includes(method) ? JSON.stringify(data) : null
+            body: JSON.stringify({ action, ...data })
         });
-        
-        // Manejar errores de servidor (HTTP 4xx, 5xx)
+
         if (!respuesta.ok) {
             const errorText = await respuesta.text();
-            console.error("Error HTTP. Respuesta del servidor:", errorText);
-            alert(errorMsg + `Error de servidor (${respuesta.status}). Revise la consola.`);
+            console.error("Error HTTP:", errorText);
+            alert(errorMsg + ` (HTTP ${respuesta.status})`);
             return false;
         }
 
-        // Se asume que el backend SIEMPRE devuelve JSON, incluso si es solo un mensaje.
         const resultado = await respuesta.json();
+        console.log("Respuesta backend:", resultado);
 
         if (resultado.success) {
             alert(successMsg);
@@ -32,45 +28,42 @@ async function crudOperation(url, method, data, successMsg, errorMsg) {
             return false;
         }
     } catch (error) {
-        console.error("Error en la operación CRUD o en la red:", error);
-        alert('Error de conexión o al procesar la solicitud.');
+        console.error("Error en CRUD:", error);
+        alert('Error de conexión con el servidor.');
         return false;
     }
 }
 
-// ------------------------------------------------------------------
-// --- Lógica de HABITACIONES (CRUD) ---
-// ------------------------------------------------------------------
-
 async function cargarHabitaciones() {
     const tbody = document.getElementById("cuerpo-tabla-habitaciones");
-    // Colspan de 6: ID, Tipo, Descripción, Precio, Imagen, Acciones
-    tbody.innerHTML = '<tr><td colspan="6" class="text-center">Cargando...</td></tr>'; 
+    const COLUMNS = 7; 
+    tbody.innerHTML = `<tr><td colspan="${COLUMNS}" class="text-center">Cargando habitaciones...</td></tr>`; 
+
     try {
-        // Usa la variable API_BASE_URL
-        const respuesta = await fetch(`${API_BASE_URL}`); 
-        const habitaciones = await respuesta.json();
+        const respuesta = await fetch(API_BASE_URL, { method: 'GET' });
+        const data = await respuesta.json();
+        console.log("Habitaciones obtenidas:", data);
 
         tbody.innerHTML = '';
-        if (!Array.isArray(habitaciones) || habitaciones.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="6" class="text-center">No hay tipos de habitación registrados.</td></tr>';
+
+        if (!Array.isArray(data) || data.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="${COLUMNS}" class="text-center">No hay tipos de habitación registrados.</td></tr>`; 
             return;
         }
 
-        habitaciones.forEach(hab => {
-            const imagenLink = hab.imagen ? `<a href="${hab.imagen}" target="_blank">Ver Imagen</a>` : 'N/A';
+        data.forEach(hab => {
             const fila = `
                 <tr>
                     <th scope="row">${hab.id_hab}</th>
                     <td>${hab.tipo_hab}</td>
                     <td>${hab.descripcion_hab.substring(0, 50)}...</td>
-                    <td>$${hab.precio} USD</td>
-                    <td>${imagenLink}</td>
-                    <td>
-                        <button type="button" class="btn btn-sm btn-warning editar-hab-btn shadow-none" data-id="${hab.id_hab}">
+                    <td>$${hab.precio}</td>
+                    <td>${hab.imagen ? `<a href="${hab.imagen}" target="_blank">Ver</a>` : 'N/A'}</td>
+                    <td>${hab.disponible}</td> <td>
+                        <button class="btn btn-sm btn-warning editar-hab-btn" data-id="${hab.id_hab}">
                             <i class="bi bi-pencil-square"></i> Editar
                         </button>
-                        <button type="button" class="btn btn-sm btn-danger eliminar-hab-btn shadow-none" data-id="${hab.id_hab}">
+                        <button class="btn btn-sm btn-danger eliminar-hab-btn" data-id="${hab.id_hab}">
                             <i class="bi bi-trash-fill"></i> Eliminar
                         </button>
                     </td>
@@ -78,78 +71,84 @@ async function cargarHabitaciones() {
             `;
             tbody.innerHTML += fila;
         });
+
         agregarListenersHabitaciones();
     } catch (error) {
         console.error("Error al cargar habitaciones:", error);
-        tbody.innerHTML = '<tr><td colspan="6" class="text-danger text-center">Error al conectar con el servidor.</td></tr>';
+        tbody.innerHTML = `<tr><td colspan="${COLUMNS}" class="text-danger text-center">Error al conectar con el servidor.</td></tr>`;
     }
 }
 
-// **CORRECCIÓN 2:** Cambiado 'form-habitacion' por 'formulario-habitacion'
+function editarHabitacion(id) {
+    const data = {
+        action: 'obtener_uno',
+        id_hab: id
+    };
+
+    fetch(API_BASE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data) 
+    })
+    .then(async res => {
+        if (!res.ok) {
+            throw new Error(`Error HTTP: ${res.status}`);
+        }
+        return res.json();
+    })
+    .then(hab => {
+        console.log("JSON parseado:", hab);
+        if (hab.success && hab.data) {
+            const h = hab.data;
+            document.getElementById('habitacionModalLabel').textContent = 'Editar Tipo de Habitación';
+            document.getElementById('hab-id').value = h.id_hab;
+            document.getElementById('hab-tipo').value = h.tipo_hab;
+            document.getElementById('hab-desc').value = h.descripcion_hab;
+            document.getElementById('hab-precio').value = h.precio;
+            document.getElementById('hab-imagen').value = h.imagen || '';
+            document.getElementById('hab-disponible').value = h.disponible;
+
+            modalHabitacion.show();
+        } else {
+            alert('No se pudieron cargar los datos de la habitación: ' + (hab.message || 'Respuesta del backend inesperada.'));
+        }
+    })
+    .catch(err => {
+        console.error("Error al obtener datos de la habitación:", err);
+        alert('Error al obtener datos de la habitación.');
+    });
+}
+
+
 document.getElementById('formulario-habitacion').addEventListener('submit', async function(e) {
     e.preventDefault();
-    // **CORRECCIÓN 3:** Ahora buscamos el ID por 'hab-id' (asumiendo que corregiste el HTML)
-    const id = document.getElementById('hab-id').value; 
-    
-    // Obtener todos los datos del formulario, incluyendo campos ocultos.
-    const data = Object.fromEntries(new FormData(e.target).entries()); 
-    
-    let url, method, successMsg, errorMsg;
 
-    if (id) {
-        url = `${API_BASE_URL}?url=habitacion&id=${id}&action=editar`;
-        method = 'POST'; 
-        successMsg = 'Tipo de habitación actualizado con éxito.';
-        errorMsg = 'Error al actualizar la habitación: ';
-    } else {
-        url = `${API_BASE_URL}?url=habitacion&action=agregar`;
-        method = 'POST';
-        successMsg = 'Tipo de habitación agregado con éxito.';
-        errorMsg = 'Error al agregar la habitación: ';
+    const id = document.getElementById('hab-id').value;
+    
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+
+    const action = id ? 'editar' : 'agregar';
+    const successMsg = id ? 'Habitación actualizada correctamente.' : 'Habitación agregada correctamente.';
+    const errorMsg = id ? 'Error al actualizar habitación: ' : 'Error al agregar habitación: ';
+
+    if (action === 'editar' && !data.id_hab) {
+        console.error("Error de edición: ID de habitación faltante.");
+        alert("Error: ID de habitación para edición no encontrado.");
+        return;
     }
+    
+    data.disponible = parseInt(data.disponible); 
 
-    // Asegúrate de que modalHabitacion esté definida (se definirá más abajo en Inicialización)
-    if (await crudOperation(url, method, data, successMsg, errorMsg)) {
-        // Se asume que modalHabitacion está definida como new bootstrap.Modal(...)
-        if (typeof modalHabitacion !== 'undefined') {
-            modalHabitacion.hide();
-        }
+    if (await crudOperation(action, data, successMsg, errorMsg)) {
+        modalHabitacion.hide();
         cargarHabitaciones();
     }
 });
 
-function editarHabitacion(id) {
-    fetch(`${API_BASE_URL}?url=habitacion&id=${id}`) 
-        .then(res => res.json())
-        .then(hab => {
-            if (hab && hab.id_hab) {
-                document.getElementById('habitacionModalLabel').textContent = 'Editar Tipo de Habitación';
-                // **CORRECCIÓN 3:** Uso de los IDs estandarizados
-                document.getElementById('hab-id').value = hab.id_hab; 
-                document.getElementById('hab-tipo').value = hab.tipo_hab;
-                document.getElementById('hab-desc').value = hab.descripcion_hab;
-                document.getElementById('hab-precio').value = hab.precio;
-                document.getElementById('hab-imagen').value = hab.imagen || '';
-                
-                // Se asume que modalHabitacion está definida (new bootstrap.Modal)
-                if (typeof modalHabitacion !== 'undefined') {
-                    modalHabitacion.show();
-                }
-            } else {
-                alert('Error al cargar datos de la habitación.');
-            }
-        }).catch(err => {
-            console.error(err);
-            alert('Error al obtener datos del servidor.');
-        });
-}
-
 async function eliminarHabitacion(id) {
-    if (!confirm(`¿Está seguro de eliminar el tipo de habitación #${id}? Esto puede afectar reservas existentes.`)) return;
-    const url = `${API_BASE_URL}?url=habitacion&id=${id}&action=eliminar`;
-    const successMsg = 'Tipo de habitación eliminado correctamente.';
-    const errorMsg = 'Error al eliminar la habitación: ';
-    if (await crudOperation(url, 'POST', {}, successMsg, errorMsg)) {
+    if (!confirm(`¿Está seguro de eliminar la habitación #${id}?`)) return;
+    if (await crudOperation('eliminar', { id_hab: id }, 'Habitación eliminada correctamente.', 'Error al eliminar habitación: ')) {
         cargarHabitaciones();
     }
 }
@@ -163,25 +162,14 @@ function agregarListenersHabitaciones() {
     });
 }
 
-// ------------------------------------------------------------------
-// --- Inicialización General ---
-// ------------------------------------------------------------------
-let modalHabitacion; // Declarar la variable para el objeto modal
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Inicializar el objeto modal de Bootstrap
-    modalHabitacion = new bootstrap.Modal(document.getElementById('modal-habitacion')); 
-    
+    modalHabitacion = new bootstrap.Modal(document.getElementById('modal-habitacion'));
     cargarHabitaciones();
 
-    // Limpieza de modales
     document.getElementById('modal-habitacion').addEventListener('hidden.bs.modal', function () {
-        // **CORRECCIÓN 2:** Cambiado 'form-habitacion' por 'formulario-habitacion'
         document.getElementById('formulario-habitacion').reset();
-        
-        // **CORRECCIÓN 3:** Uso de 'hab-id'
-        document.getElementById('hab-id').value = ''; 
-        
+        document.getElementById('hab-id').value = '';
         document.getElementById('habitacionModalLabel').textContent = 'Agregar Tipo de Habitación';
     });
 });

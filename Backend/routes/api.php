@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require "../controllers/administrador.php";
 require "../controllers/habitacion.php";
 require "../controllers/promocion.php";
@@ -6,76 +9,125 @@ require "../controllers/servicio.php";
 require "../controllers/usuario.php";
 require "../routes/log.php";
 
+header("Content-Type: application/json; charset=UTF-8");
+
 $requestMethod = $_SERVER['REQUEST_METHOD'];
+$url = $_GET["url"] ?? null;
 
-if ($requestMethod == "GET") {
-    $solicitud = $_GET["url"];
-if ($solicitud == "administrador") {
-    obtenerAdministrador();
-} else if ($solicitud == "habitacion") {
-    obtenerHabitacion();
-} else if ($solicitud == "promocion") {
-    obtenerPromocion();
-} else if ($solicitud == "servicio") {
-    obtenerServicio();
-} else if ($solicitud == "usuario") {
-    obtenerUsuario();
-}else {
-    echo json_encode(["error" => "Ruta no encontrada"]);    
+// ========================== MÉTODOS GET ==========================
+if ($requestMethod === "GET") {
+    switch ($url) {
+        case "administrador":
+            obtenerAdministrador();
+            break;
+        case "habitacion":
+            obtenerHabitacion();
+            break;
+        case "promocion":
+            obtenerPromocion();
+            break;
+        case "servicio":
+            obtenerServicio();
+            break;
+        case "usuario":
+            obtenerUsuario();
+            break;
+        default:
+            echo json_encode(["error" => "Ruta no encontrada"]);
+    }
+    exit;
 }
+
+// ========================== MÉTODOS POST ==========================
+elseif ($requestMethod === "POST") {
+    // Detectar si los datos vienen como JSON
+    $rawInput = file_get_contents("php://input");
+    $data = json_decode($rawInput, true);
+    $solicitud = $url;
+
+    // Fallback a $_POST si no vino JSON
+    if (!$data && !empty($_POST)) {
+        $data = $_POST;
+    }
+
+    // ====== LOGINES ======
+    if ($solicitud === "login") {
+        loginAdministrador($data["email"] ?? "", $data["password"] ?? "");
+        exit;
+    }
+
+    if ($solicitud === "loginUsr") {
+        loginUsuario($data["email"] ?? "", $data["password"] ?? "");
+        exit;
+    }
+
+    if ($solicitud === "loginAddUsr") {
+        loginAddUser(
+            $data["nombre"] ?? "",
+            $data["apellido"] ?? "",
+            $data["email"] ?? "",
+            $data["celular"] ?? "",
+            $data["password"] ?? ""
+        );
+        exit;
+    }
+
+    // ====== HABITACIONES ======
+    if ($solicitud === "habitacion") {
+        $action = $data["action"] ?? null;
+
+        switch ($action) {
+            case "listar":
+                $habitaciones = $habitacionController->habitacionModel->obtenerHabitacion();
+                echo json_encode([
+                    "success" => true,
+                    "habitaciones" => $habitaciones
+                ]);
+                break;
+
+            case "agregar":
+                $habitacionController->agregarHabitacion(
+                    $data["tipo_hab"] ?? "",
+                    $data["descripcion_hab"] ?? "",
+                    $data["disponible"] ?? 0,
+                    $data["imagen"] ?? "",
+                    $data["precio"] ?? 0
+                );
+                break;
+
+            case "eliminar":
+                $habitacionController->eliminarHabitacion($data["id_hab"] ?? null);
+                break;
+
+            default:
+                echo json_encode(["error" => "Acción no válida o no especificada"]);
+        }
+        exit;
+    }
+
+    // ====== PROMOCIÓN, SERVICIO, USUARIO ======
+    if ($solicitud === "promocion") {
+        agregarPromocion($data["tipo_promo"] ?? "", $data["descripcion_promo"] ?? "", $data["precio"] ?? 0);
+        exit;
+    }
+
+    if ($solicitud === "servicio") {
+        agregarServicio($data["tipo_servicio"] ?? "", $data["descripcion_servicio"] ?? "", $data["imagen"] ?? "");
+        exit;
+    }
+
+    if ($solicitud === "usuario") {
+        agregarUsuario($data["nombre"] ?? "", $data["apellido"] ?? "", $data["email"] ?? "", $data["celular"] ?? "");
+        exit;
+    }
+
+    // ====== RUTA NO ENCONTRADA ======
+    echo json_encode(["error" => "Ruta no encontrada"]);
+    exit;
 }
 
-elseif ($requestMethod == "POST") {
-    $solicitud = $_GET["url"] ?? null;
-
-    if ($solicitud == "login") {
-          $email = $_POST["email"];
-        $password = $_POST["password"];
-        loginAdministrador($email, $password);
-    } elseif ($solicitud == "loginUsr") {
-          $email = $_POST["email"];
-        $password = $_POST["password"];
-        loginUsuario($email, $password);
-    } elseif ($solicitud == "loginAddUsr") {
-          $nombre = $_POST["nombre"];
-        $apellido = $_POST["apellido"];
-        $email = $_POST["email"];
-        $celular = $_POST["celular"];
-        $password = $_POST["password"];
-        loginAddUser($nombre, $apellido, $email, $celular, $password);
-    } elseif ($solicitud == "habitacion") {
-        $tipo_hab = $_POST["tipo_hab"];
-        $descripcion_hab = $_POST["descripcion_hab"];
-        $cantidad = $_POST["cantidad"];
-        $imagen = $_POST["imagen"];
-        $precio = $_POST["precio"];
-        echo "Datos recibidos: Tipo de Habitación: $tipo_hab, Descripción: $descripcion_hab, Cantidad: $cantidad, Imagen: $imagen, Precio: $precio";
-        agregarHabitacion($tipo_hab,$descripcion_hab,$cantidad);
-        global $habitacionModel;
-    } elseif ($solicitud == "promocion") {
-        $tipo_promo = $_POST["tipo_promo"];
-        $descripcion_promo = $_POST["descripcion_promo"];
-        $precio = $_POST["precio"];
-        agregarPromocion($tipo_promo, $descripcion_promo, $precio);
-        global $promocionModel;
-    } elseif ($solicitud == "servicio") {
-        $tipo_servicio = $_POST["tipo_servicio"];
-        $descripcion_servicio = $_POST["descripcion_servicio"];
-        $imagen = $_POST["imagen"];
-        echo "Datos recibidos: Tipo de Servicio: $tipo_servicio, Descripción: $descripcion_servicio, Imagen: $imagen";
-        agregarServicio($tipo_servicio, $descripcion_servicio, $imagen);
-        global $servicioModel;
-    } elseif ($solicitud == "usuario") {
-        $nombre = $_POST["nombre"];
-        $apellido = $_POST["apellido"];
-        $email = $_POST["email"];
-        $celular = $_POST["celular"];
-        echo "Datos recibidos: Nombre: $nombre, Apellido: $apellido, Email: $email, Celular: $celular";
-        agregarUsuario($nombre, $apellido, $email, $celular);
-        global $usuarioModel;
-    }else{
-        echo json_encode(["error" => "Ruta no encontrada"]);
-    }}
-
-
+else {
+    echo json_encode(["error" => "Método HTTP no permitido"]);
+    exit;
+}
 ?>

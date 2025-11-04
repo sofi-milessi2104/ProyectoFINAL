@@ -75,38 +75,38 @@
     </div>
     
     <div class="modal fade" id="modal-servicio" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <form id="formulario-servicio">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalLabel">Editar Servicio</h5>
-                        <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" id="id_serv_oculto" name="id_serv">
+    <div class="modal-dialog">
+        <form id="formulario-servicio">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Añadir Nuevo Servicio</h5> 
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="id_serv_oculto" name="id_serv"> 
 
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Tipo de Servicio</label>
-                            <input type="text" name="tipo_servicio" id="tipo_servicio" class="form-control shadow-none" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Descripción Completa</label>
-                            <textarea name="descripcion_servicio" id="descripcion_servicio" class="form-control shadow-none" rows="5" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Imagen del Servicio</label>
-                            <input type="file" name="imagen_servicio" id="imagen_servicio" class="form-control shadow-none">
-                            <small class="text-muted">Dejar vacío si no deseas cambiar la imagen actual.</small>
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Tipo de Servicio</label>
+                        <input type="text" name="tipo_servicio" id="tipo_servicio" class="form-control shadow-none" required>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary shadow-none">Guardar Cambios</button>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Descripción Completa</label>
+                        <textarea name="descripcion_servicio" id="descripcion_servicio" class="form-control shadow-none" rows="5" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Imagen del Servicio</label>
+                        <input type="file" name="imagen_servicio" id="imagen_servicio" class="form-control shadow-none" accept="image/*"> 
+                        <small class="text-muted">Dejar vacío si no deseas cambiar la imagen actual.</small>
                     </div>
                 </div>
-            </form>
-        </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary shadow-none" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary shadow-none">Guardar Cambios</button>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
 
     <footer class="footer bg-white border-top mt-5 p-3 text-center">
         <small>
