@@ -57,3 +57,10 @@ Stack trace:
 #3 {main}
   thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php on line 20
 [30-Oct-2025 02:18:58 Europe/Berlin] PHP Warning:  Undefined array key "url" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 12
+[04-Nov-2025 21:29:51 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hotel2.servicios' doesn't exist in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Servicio.php:19
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\models\Servicio.php(19): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\servicio.php(14): Servicio->agregar('No se', 'nose', '')
+#2 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(115): agregarServicio('No se', 'nose', '')
+#3 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Servicio.php on line 19

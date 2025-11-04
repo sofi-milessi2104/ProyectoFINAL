@@ -1,77 +1,101 @@
-// --- Variables Globales y Definición de Modal ---
-const API_BASE_URL = 'http://localhost/ProyectoFinal/Backend/routes/api.php?url=servicio'; 
-const servicioModalElement = document.getElementById('modal-servicio');
-const servicioModal = new bootstrap.Modal(servicioModalElement);
+const API_BASE_URL_SERV = 'http://localhost/ProyectoFinal/Backend/routes/api.php?url=servicio';
 
-// --- Funciones de CRUD Genéricas ---
-async function crudOperation(url, method, data, successMsg, errorMsg) {
+let modalServicio;
+
+// --- Funciones de Utilidad ---
+
+// Función genérica para todas las operaciones CRUD (Agregar, Editar, Eliminar)
+async function crudOperationServicio(action, data = {}, successMsg, errorMsg) {
     try {
-        const respuesta = await fetch(url, {
-            method: method,
-            headers: { 'Content-Type': 'application/json' },
-            body: ['POST', 'PUT', 'DELETE'].includes(method) ? JSON.stringify(data) : null
-        });
+        // Para 'agregar' y 'editar' el backend podría esperar 'multipart/form-data' si incluye la carga de la imagen.
+        // Dado que el formulario de Servicios usa un input 'file', usaremos FormData en lugar de JSON.stringify.
+
+        const formData = new FormData();
+        formData.append('action', action);
         
-        // Manejar errores de servidor (HTTP 4xx, 5xx)
+        // Agregar el resto de los datos al FormData.
+        // Nota: Asume que el backend puede manejar la imagen y otros campos juntos.
+        for (const key in data) {
+            // Si el valor es un objeto File, lo adjuntamos directamente.
+            // Si no, lo adjuntamos como un campo de texto normal.
+            if (data[key] instanceof File) {
+                formData.append(key, data[key], data[key].name);
+            } else {
+                formData.append(key, data[key]);
+            }
+        }
+        
+        // La API de Habitaciones usaba POST con JSON, pero el formulario de Servicios tiene un 'file',
+        // por lo que cambiamos a FormData y no especificamos 'Content-Type'.
+        const respuesta = await fetch(API_BASE_URL_SERV, {
+            method: 'POST',
+            body: formData // Usamos FormData para enviar datos y archivos
+        });
+
         if (!respuesta.ok) {
             const errorText = await respuesta.text();
-            console.error("Error HTTP. Respuesta del servidor:", errorText);
-            alert(errorMsg + `Error de servidor (${respuesta.status}). Revise la consola.`);
+            console.error("Error HTTP:", errorText);
+            alert(errorMsg + ` (HTTP ${respuesta.status})`);
             return false;
         }
 
-        // Manejar respuesta vacía si el servidor no devuelve JSON (ej. DELETE exitoso)
-        const resultado = respuesta.status !== 204 ? await respuesta.json() : { success: true };
+        // El backend debe responder con JSON.
+        const resultado = await respuesta.json();
+        console.log("Respuesta backend:", resultado);
 
         if (resultado.success) {
             alert(successMsg);
             return true;
         } else {
-            alert(errorMsg + (resultado.message || 'Error desconocido.'));
+            alert(errorMsg + (resultado.message || 'Error desconocido en el backend.'));
             return false;
         }
     } catch (error) {
-        console.error("Error en la operación CRUD o en la red:", error);
-        alert('Error de conexión o al procesar la solicitud.');
+        console.error("Error en CRUD de Servicio:", error);
+        alert('Error de conexión con el servidor o fallo de red.');
         return false;
     }
 }
 
-// ------------------------------------------------------------------
-// --- Lógica de SERVICIOS (CRUD) ---
-// ------------------------------------------------------------------
+
+// --- Funciones de Carga y Renderización (Tabla) ---
 
 async function cargarServicios() {
     const tbody = document.getElementById("cuerpo-tabla-servicios");
-    // Colspan de 5: ID, Tipo, Descripción, Precio, Acciones (OJO: la tabla HTML tiene 5 columnas, no incluye Precio)
-    // El HTML tiene 5 columnas: #, Tipo, Descripción, Imagen, Acciones. Ajustamos la carga a 5.
-    tbody.innerHTML = '<tr><td colspan="5" class="text-center">Cargando...</td></tr>'; 
+    const COLUMNS = 5; 
+    tbody.innerHTML = `<tr><td colspan="${COLUMNS}" class="text-center">Cargando servicios...</td></tr>`; 
+
     try {
-        // La URL de lectura de tu API es la que devuelve la lista completa, sin parámetros.
-        const respuesta = await fetch(`${API_BASE_URL}`); 
-        const servicios = await respuesta.json();
+        // Solicitud GET para obtener todos los servicios
+        const respuesta = await fetch(API_BASE_URL_SERV, { method: 'GET' });
+        
+        if (!respuesta.ok) {
+            throw new Error(`Error HTTP: ${respuesta.status}`);
+        }
+
+        const data = await respuesta.json();
+        console.log("Servicios obtenidos:", data);
 
         tbody.innerHTML = '';
-        if (!Array.isArray(servicios) || servicios.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="5" class="text-center">No hay servicios registrados.</td></tr>';
+
+        if (!Array.isArray(data) || data.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="${COLUMNS}" class="text-center">No hay servicios registrados.</td></tr>`; 
             return;
         }
 
-        servicios.forEach(serv => {
-            // Se asume que la API devuelve 'imagen_url' para mostrar la imagen (o al menos un indicador)
-            const imagenColumna = serv.imagen ? `<i class="bi bi-image-fill text-success"></i>` : `<i class="bi bi-x-circle-fill text-danger"></i>`;
-            
+        // Renderizar filas de la tabla
+        data.forEach(servicio => {
             const fila = `
                 <tr>
-                    <th scope="row">${serv.id_servicio}</th>
-                    <td>${serv.tipo_servicio}</td>
-                    <td>${serv.descripcion_servicio ? serv.descripcion_servicio.substring(0, 50) + '...' : ''}</td>
-                    <td>${imagenColumna}</td> 
+                    <th scope="row">${servicio.id_serv}</th>
+                    <td>${servicio.tipo_servicio}</td>
+                    <td>${servicio.descripcion_servicio.substring(0, 70)}...</td>
+                    <td>${servicio.imagen ? `<a href="${servicio.imagen}" target="_blank">Ver Imagen</a>` : 'N/A'}</td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-warning editar-serv-btn shadow-none" data-id="${serv.id_servicio}">
+                        <button class="btn btn-sm btn-warning editar-serv-btn" data-id="${servicio.id_serv}">
                             <i class="bi bi-pencil-square"></i> Editar
                         </button>
-                        <button type="button" class="btn btn-sm btn-danger eliminar-serv-btn shadow-none" data-id="${serv.id_servicio}">
+                        <button class="btn btn-sm btn-danger eliminar-serv-btn" data-id="${servicio.id_serv}">
                             <i class="bi bi-trash-fill"></i> Eliminar
                         </button>
                     </td>
@@ -79,94 +103,143 @@ async function cargarServicios() {
             `;
             tbody.innerHTML += fila;
         });
+
         agregarListenersServicios();
     } catch (error) {
         console.error("Error al cargar servicios:", error);
-        tbody.innerHTML = '<tr><td colspan="5" class="text-danger text-center">Error al conectar con el servidor.</td></tr>';
+        tbody.innerHTML = `<tr><td colspan="${COLUMNS}" class="text-danger text-center">Error al conectar o cargar servicios.</td></tr>`;
     }
 }
 
-// El ID del formulario en el HTML es 'formulario-servicio', no 'form-servicio'.
-document.getElementById('formulario-servicio').addEventListener('submit', async function(e) { 
+
+// --- Funciones de CRUD Específicas (Editar, Eliminar) ---
+
+function editarServicio(id) {
+    const data = {
+        action: 'obtener_uno',
+        id_serv: id
+    };
+
+    fetch(API_BASE_URL_SERV, {
+        method: 'POST', // Asumo que obtener uno también es POST con action: 'obtener_uno'
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data) 
+    })
+    .then(async res => {
+        if (!res.ok) {
+            throw new Error(`Error HTTP: ${res.status}`);
+        }
+        return res.json();
+    })
+    .then(serv => {
+        console.log("JSON de servicio parseado:", serv);
+        if (serv.success && serv.data) {
+            const s = serv.data;
+            document.getElementById('modalLabel').textContent = 'Editar Servicio Existente';
+            document.getElementById('id_serv_oculto').value = s.id_serv;
+            document.getElementById('tipo_servicio').value = s.tipo_servicio;
+            document.getElementById('descripcion_servicio').value = s.descripcion_servicio;
+            // El campo de imagen (file) debe quedar vacío por defecto para no enviar nada a menos que se seleccione un archivo.
+            document.getElementById('imagen_servicio').value = ''; 
+
+            modalServicio.show();
+        } else {
+            alert('No se pudieron cargar los datos del servicio: ' + (serv.message || 'Respuesta del backend inesperada.'));
+        }
+    })
+    .catch(err => {
+        console.error("Error al obtener datos del servicio:", err);
+        alert('Error al obtener datos del servicio.');
+    });
+}
+
+async function eliminarServicio(id) {
+    if (!confirm(`¿Está seguro de eliminar el servicio #${id}? Esta acción es irreversible.`)) return;
+    
+    // Para la eliminación, podríamos volver a usar JSON, asumiendo que solo se necesita el ID y la acción.
+    const data = {
+        action: 'eliminar',
+        id_serv: id
+    };
+    
+    // Usamos el fetch con JSON.stringify directamente para eliminar, ya que no lleva archivo.
+    try {
+        const respuesta = await fetch(API_BASE_URL_SERV, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        if (!respuesta.ok) {
+            const errorText = await respuesta.text();
+            alert(`Error al eliminar: (HTTP ${respuesta.status})`);
+            console.error("Error HTTP en eliminar:", errorText);
+            return;
+        }
+
+        const resultado = await respuesta.json();
+        if (resultado.success) {
+            alert('Servicio eliminado correctamente.');
+            cargarServicios(); // Recargar la tabla
+        } else {
+            alert('Error al eliminar servicio: ' + (resultado.message || 'Error desconocido.'));
+        }
+    } catch (error) {
+        console.error("Error en la eliminación del servicio:", error);
+        alert('Error de conexión con el servidor al intentar eliminar.');
+    }
+}
+
+
+// --- Event Listeners ---
+
+document.getElementById('formulario-servicio').addEventListener('submit', async function(e) {
     e.preventDefault();
-    // OBTENEMOS LOS DATOS DEL FORMULARIO USANDO FormData
+
+    const id = document.getElementById('id_serv_oculto').value;
+    
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    
-    // El ID real en el formulario es 'id_serv_oculto'
-    const id = data.id_serv || ''; 
-    
-    // Ajuste de precio para el backend (si existe en el formulario)
-    data.precio_servicio = data.precio_servicio || 0; 
 
-    // Si el formulario contiene un campo 'file', necesitas enviarlo como FormData, 
-    // pero tu función crudOperation está diseñada para JSON.
-    // Para simplificar, asumiremos que solo se actualizan campos de texto/número.
-    // **NOTA:** La subida de archivos requiere un manejo diferente (multipart/form-data).
-    // Si necesitas subir archivos, la lógica de 'crudOperation' debe ser modificada.
-    
-    // Eliminamos la imagen si no es el campo correcto para la subida (sólo por coherencia con JSON)
-    if(data.imagen_servicio && data.imagen_servicio instanceof File && data.imagen_servicio.name === "") {
-        delete data.imagen_servicio; // No enviar si está vacío
-    } else {
-        // En un entorno de producción, aquí subirías la imagen a un servidor
-        // y enviarías solo la URL o nombre del archivo en el JSON.
-        // Por ahora, solo enviamos los campos de texto/número al backend (PHP o similar)
-        delete data.imagen_servicio; 
-    }
-    
-    let url, method, successMsg, errorMsg;
+    const action = id ? 'editar' : 'agregar';
+    const successMsg = id ? 'Servicio actualizado correctamente.' : 'Servicio agregado correctamente.';
+    const errorMsg = id ? 'Error al actualizar servicio: ' : 'Error al agregar servicio: ';
 
+    // Si es edición, nos aseguramos de que el ID esté en los datos.
     if (id) {
-        url = `${API_BASE_URL}?url=servicio&id=${id}&action=editar`;
-        method = 'POST'; 
-        successMsg = 'Servicio actualizado con éxito.';
-        errorMsg = 'Error al actualizar el servicio: ';
-    } else {
-        url = `${API_BASE_URL}?url=servicio&action=agregar`;
-        method = 'POST';
-        successMsg = 'Servicio agregado con éxito.';
-        errorMsg = 'Error al agregar el servicio: ';
+        data.id_serv = id;
     }
     
-    if (await crudOperation(url, method, data, successMsg, errorMsg)) {
-        servicioModal.hide(); // Usamos la variable global
+    // Si no se seleccionó una nueva imagen en edición, eliminamos el campo 'imagen_servicio'
+    // para que no se envíe un campo vacío al backend (que podría borrar la imagen existente).
+    // NOTA: El input 'imagen_servicio' es de tipo 'file'. Si está vacío, su valor en FormData.entries() es File { size: 0, ... }.
+    const imagenInput = document.getElementById('imagen_servicio');
+    if (imagenInput.files.length === 0 && action === 'editar') {
+        delete data.imagen_servicio;
+    }
+    
+    // Convertir el objeto plano 'data' a un formato que podamos enviar a crudOperationServicio,
+    // que es FormData para manejar la carga de archivos.
+    // Aquí usamos una variación de crudOperationServicio que recibe el objeto plano 'data'.
+    // Para simplificar, asumiremos que el backend es capaz de manejar 'multipart/form-data'
+    // y lo adaptamos para usar la función genérica con el FormData.
+
+    // Crearemos un objeto solo con los datos necesarios, incluyendo el archivo File.
+    const dataToSend = {};
+    for (const [key, value] of formData.entries()) {
+        if (key === 'imagen_servicio' && imagenInput.files.length === 0 && action === 'editar') {
+            // Ignorar el campo de imagen vacío en edición.
+            continue; 
+        }
+        dataToSend[key] = value;
+    }
+
+    if (await crudOperationServicio(action, dataToSend, successMsg, errorMsg)) {
+        modalServicio.hide();
         cargarServicios();
     }
 });
 
-function editarServicio(id) {
-    // Para obtener un servicio individual
-    fetch(`${API_BASE_URL}?url=servicio&id=${id}`) 
-        .then(res => res.json())
-        .then(serv => {
-            if (serv && serv.id_servicio) {
-                document.getElementById('modalLabel').textContent = 'Editar Servicio'; // ID correcto del título
-                document.getElementById('id_serv_oculto').value = serv.id_servicio; // ID correcto del input oculto
-                document.getElementById('tipo_servicio').value = serv.tipo_servicio; // ID correcto
-                document.getElementById('descripcion_servicio').value = serv.descripcion_servicio; // ID correcto
-                document.getElementById('serv-precio').value = serv.precio_servicio || 0; // ID correcto (asumiendo que se agregó al HTML)
-                // document.getElementById('imagen_servicio').value = ''; // No precargar archivos
-                servicioModal.show();
-            } else {
-                alert('Error al cargar datos del servicio.');
-            }
-        }).catch(err => {
-            console.error(err);
-            alert('Error al obtener datos del servidor.');
-        });
-}
-
-async function eliminarServicio(id) {
-    if (!confirm(`¿Está seguro de eliminar el servicio #${id}? Esto puede afectar reservas existentes.`)) return;
-    const url = `${API_BASE_URL}?url=servicio&id=${id}&action=eliminar`;
-    const successMsg = 'Servicio eliminado correctamente.';
-    const errorMsg = 'Error al eliminar el servicio: ';
-    // Se recomienda usar DELETE para eliminar, pero se mantiene POST para compatibilidad con la estructura de tu API.
-    if (await crudOperation(url, 'POST', {}, successMsg, errorMsg)) { 
-        cargarServicios();
-    }
-}
 
 function agregarListenersServicios() {
     document.querySelectorAll('.editar-serv-btn').forEach(btn => {
@@ -177,29 +250,25 @@ function agregarListenersServicios() {
     });
 }
 
-// ------------------------------------------------------------------
-// --- Inicialización General ---
-// ------------------------------------------------------------------
+
 document.addEventListener("DOMContentLoaded", () => {
-    // cargarHabitaciones(); // Asumo que esta función existe en otro lado
+    // Inicializar el modal de Bootstrap
+    modalServicio = new bootstrap.Modal(document.getElementById('modal-servicio'));
     
-    // Evento de tab para cargar los servicios solo cuando la pestaña es visible
-    const serviciosTab = document.getElementById('servicios-tab');
-    if (serviciosTab) {
-        serviciosTab.addEventListener('shown.bs.tab', cargarServicios);
-    }
+    // Cargar los datos iniciales en la tabla
+    cargarServicios();
 
-    // Limpieza de modales
-    if (servicioModalElement) {
-        servicioModalElement.addEventListener('hidden.bs.modal', function () {
-            document.getElementById('formulario-servicio').reset();
-            document.getElementById('id_serv_oculto').value = ''; // Limpiar el ID
-            document.getElementById('modalLabel').textContent = 'Agregar Servicio'; // Título por defecto
-        });
-    }
-
-    // Cargar la lista de servicios al inicio si está en la pestaña correcta
-    if (document.querySelector('.nav-link.active[href="contenidoAdmin.html"]')) {
-         cargarServicios();
-    }
+    // Resetear el formulario y el título al cerrar el modal
+    document.getElementById('modal-servicio').addEventListener('hidden.bs.modal', function () {
+        document.getElementById('formulario-servicio').reset();
+        document.getElementById('id_serv_oculto').value = '';
+        document.getElementById('modalLabel').textContent = 'Añadir Nuevo Servicio';
+    });
+    
+    // Configurar el botón de añadir nuevo servicio para resetear el formulario al abrir el modal
+    document.querySelector('[data-bs-target="#modal-servicio"]').addEventListener('click', function () {
+        document.getElementById('formulario-servicio').reset();
+        document.getElementById('id_serv_oculto').value = '';
+        document.getElementById('modalLabel').textContent = 'Añadir Nuevo Servicio';
+    });
 });

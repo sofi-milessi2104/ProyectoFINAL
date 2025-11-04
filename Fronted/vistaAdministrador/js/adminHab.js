@@ -4,7 +4,6 @@ let modalHabitacion;
 
 async function crudOperation(action, data = {}, successMsg, errorMsg) {
     try {
-        // En este caso, para agregar/editar/eliminar, usamos JSON
         const respuesta = await fetch(API_BASE_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -35,10 +34,8 @@ async function crudOperation(action, data = {}, successMsg, errorMsg) {
     }
 }
 
-// 1. FUNCIÓN CORREGIDA: Incluye 'disponible' y corrige colspan a 7.
 async function cargarHabitaciones() {
     const tbody = document.getElementById("cuerpo-tabla-habitaciones");
-    // Siete columnas: #, Tipo, Descripción, Precio, Imagen, Disponibles, Acciones
     const COLUMNS = 7; 
     tbody.innerHTML = `<tr><td colspan="${COLUMNS}" class="text-center">Cargando habitaciones...</td></tr>`; 
 
@@ -82,11 +79,9 @@ async function cargarHabitaciones() {
     }
 }
 
-// 2. FUNCIÓN CORREGIDA: Usa JSON para solicitar la edición y carga 'disponible'.
 function editarHabitacion(id) {
-    // Solicitud JSON para obtener los datos de una sola habitación
     const data = {
-        action: 'obtener_uno', // Acción que debe manejar tu backend
+        action: 'obtener_uno',
         id_hab: id
     };
 
@@ -111,7 +106,7 @@ function editarHabitacion(id) {
             document.getElementById('hab-desc').value = h.descripcion_hab;
             document.getElementById('hab-precio').value = h.precio;
             document.getElementById('hab-imagen').value = h.imagen || '';
-            document.getElementById('hab-disponible').value = h.disponible; // <-- Carga el valor de 'disponible'
+            document.getElementById('hab-disponible').value = h.disponible;
 
             modalHabitacion.show();
         } else {
@@ -130,7 +125,6 @@ document.getElementById('formulario-habitacion').addEventListener('submit', asyn
 
     const id = document.getElementById('hab-id').value;
     
-    // Obtenemos los datos del formulario, incluyendo 'disponible'
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
@@ -138,14 +132,12 @@ document.getElementById('formulario-habitacion').addEventListener('submit', asyn
     const successMsg = id ? 'Habitación actualizada correctamente.' : 'Habitación agregada correctamente.';
     const errorMsg = id ? 'Error al actualizar habitación: ' : 'Error al agregar habitación: ';
 
-    // Verificar si se está editando y si se pasa un id
     if (action === 'editar' && !data.id_hab) {
         console.error("Error de edición: ID de habitación faltante.");
         alert("Error: ID de habitación para edición no encontrado.");
         return;
     }
     
-    // Convertimos disponible a número para asegurar el tipo de dato
     data.disponible = parseInt(data.disponible); 
 
     if (await crudOperation(action, data, successMsg, errorMsg)) {
