@@ -57,3 +57,143 @@ Stack trace:
 #3 {main}
   thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php on line 20
 [30-Oct-2025 02:18:58 Europe/Berlin] PHP Warning:  Undefined array key "url" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 12
+[04-Nov-2025 18:23:54 Europe/Berlin] PHP Warning:  Undefined array key "tipo_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 47
+[04-Nov-2025 18:23:54 Europe/Berlin] PHP Warning:  Undefined array key "descripcion_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 48
+[04-Nov-2025 18:23:54 Europe/Berlin] PHP Warning:  Undefined array key "cantidad" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 49
+[04-Nov-2025 18:23:54 Europe/Berlin] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 50
+[04-Nov-2025 18:23:54 Europe/Berlin] PHP Warning:  Undefined array key "precio" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 51
+[04-Nov-2025 18:23:54 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function agregarHabitacion(), 3 passed in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 53 and exactly 5 expected in C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php:12
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(53): agregarHabitacion(NULL, NULL, NULL)
+#1 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php on line 12
+[04-Nov-2025 18:23:59 Europe/Berlin] PHP Warning:  Undefined array key "tipo_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 47
+[04-Nov-2025 18:23:59 Europe/Berlin] PHP Warning:  Undefined array key "descripcion_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 48
+[04-Nov-2025 18:23:59 Europe/Berlin] PHP Warning:  Undefined array key "cantidad" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 49
+[04-Nov-2025 18:23:59 Europe/Berlin] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 50
+[04-Nov-2025 18:23:59 Europe/Berlin] PHP Warning:  Undefined array key "precio" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 51
+[04-Nov-2025 18:23:59 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function agregarHabitacion(), 3 passed in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 53 and exactly 5 expected in C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php:12
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(53): agregarHabitacion(NULL, NULL, NULL)
+#1 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php on line 12
+[04-Nov-2025 18:28:23 Europe/Berlin] PHP Warning:  Undefined array key "tipo_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 47
+[04-Nov-2025 18:28:23 Europe/Berlin] PHP Warning:  Undefined array key "descripcion_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 48
+[04-Nov-2025 18:28:23 Europe/Berlin] PHP Warning:  Undefined array key "cantidad" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 49
+[04-Nov-2025 18:28:23 Europe/Berlin] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 50
+[04-Nov-2025 18:28:23 Europe/Berlin] PHP Warning:  Undefined array key "precio" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 51
+[04-Nov-2025 18:28:23 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'tipo_hab' cannot be null in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php:22
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php(22): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php(19): Habitacion->agregar(NULL, NULL, NULL, '', 0)
+#2 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php(47): HabitacionController->agregarHabitacion(NULL, NULL, NULL, '', 0)
+#3 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(53): agregarHabitacion(NULL, NULL, NULL)
+#4 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php on line 22
+[04-Nov-2025 18:28:32 Europe/Berlin] PHP Warning:  Undefined array key "tipo_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 47
+[04-Nov-2025 18:28:32 Europe/Berlin] PHP Warning:  Undefined array key "descripcion_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 48
+[04-Nov-2025 18:28:32 Europe/Berlin] PHP Warning:  Undefined array key "cantidad" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 49
+[04-Nov-2025 18:28:32 Europe/Berlin] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 50
+[04-Nov-2025 18:28:32 Europe/Berlin] PHP Warning:  Undefined array key "precio" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 51
+[04-Nov-2025 18:28:32 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'tipo_hab' cannot be null in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php:22
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php(22): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php(19): Habitacion->agregar(NULL, NULL, NULL, '', 0)
+#2 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php(47): HabitacionController->agregarHabitacion(NULL, NULL, NULL, '', 0)
+#3 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(53): agregarHabitacion(NULL, NULL, NULL)
+#4 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php on line 22
+[04-Nov-2025 18:28:37 Europe/Berlin] PHP Warning:  Undefined array key "tipo_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 47
+[04-Nov-2025 18:28:37 Europe/Berlin] PHP Warning:  Undefined array key "descripcion_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 48
+[04-Nov-2025 18:28:37 Europe/Berlin] PHP Warning:  Undefined array key "cantidad" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 49
+[04-Nov-2025 18:28:37 Europe/Berlin] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 50
+[04-Nov-2025 18:28:37 Europe/Berlin] PHP Warning:  Undefined array key "precio" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 51
+[04-Nov-2025 18:28:37 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'tipo_hab' cannot be null in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php:22
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php(22): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php(19): Habitacion->agregar(NULL, NULL, NULL, '', 0)
+#2 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php(47): HabitacionController->agregarHabitacion(NULL, NULL, NULL, '', 0)
+#3 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(53): agregarHabitacion(NULL, NULL, NULL)
+#4 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php on line 22
+[04-Nov-2025 18:30:35 Europe/Berlin] PHP Warning:  Undefined array key "tipo_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 47
+[04-Nov-2025 18:30:35 Europe/Berlin] PHP Warning:  Undefined array key "descripcion_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 48
+[04-Nov-2025 18:30:35 Europe/Berlin] PHP Warning:  Undefined array key "cantidad" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 49
+[04-Nov-2025 18:30:35 Europe/Berlin] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 50
+[04-Nov-2025 18:30:35 Europe/Berlin] PHP Warning:  Undefined array key "precio" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 51
+[04-Nov-2025 18:30:35 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'tipo_hab' cannot be null in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php:22
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php(22): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php(19): Habitacion->agregar(NULL, NULL, NULL, '', 0)
+#2 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php(47): HabitacionController->agregarHabitacion(NULL, NULL, NULL, '', 0)
+#3 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(53): agregarHabitacion(NULL, NULL, NULL)
+#4 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php on line 22
+[04-Nov-2025 18:31:06 Europe/Berlin] PHP Warning:  Undefined array key "tipo_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 47
+[04-Nov-2025 18:31:06 Europe/Berlin] PHP Warning:  Undefined array key "descripcion_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 48
+[04-Nov-2025 18:31:06 Europe/Berlin] PHP Warning:  Undefined array key "cantidad" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 49
+[04-Nov-2025 18:31:06 Europe/Berlin] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 50
+[04-Nov-2025 18:31:06 Europe/Berlin] PHP Warning:  Undefined array key "precio" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 51
+[04-Nov-2025 18:31:06 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'tipo_hab' cannot be null in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php:22
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php(22): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php(19): Habitacion->agregar(NULL, NULL, NULL, NULL, NULL)
+#2 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php(47): HabitacionController->agregarHabitacion(NULL, NULL, NULL, NULL, NULL)
+#3 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(53): agregarHabitacion(NULL, NULL, NULL, NULL, NULL)
+#4 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php on line 22
+[04-Nov-2025 18:32:45 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined function obtenerHabitacion() in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php:16
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 16
+[04-Nov-2025 18:32:48 Europe/Berlin] PHP Warning:  Undefined array key "tipo_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 47
+[04-Nov-2025 18:32:48 Europe/Berlin] PHP Warning:  Undefined array key "descripcion_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 48
+[04-Nov-2025 18:32:48 Europe/Berlin] PHP Warning:  Undefined array key "cantidad" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 49
+[04-Nov-2025 18:32:48 Europe/Berlin] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 50
+[04-Nov-2025 18:32:48 Europe/Berlin] PHP Warning:  Undefined array key "precio" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 51
+[04-Nov-2025 18:32:48 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined function agregarHabitacion() in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php:53
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 53
+[04-Nov-2025 18:32:49 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined function obtenerHabitacion() in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php:16
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 16
+[04-Nov-2025 18:33:19 Europe/Berlin] PHP Warning:  Undefined array key "tipo_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 47
+[04-Nov-2025 18:33:19 Europe/Berlin] PHP Warning:  Undefined array key "descripcion_hab" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 48
+[04-Nov-2025 18:33:19 Europe/Berlin] PHP Warning:  Undefined array key "cantidad" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 49
+[04-Nov-2025 18:33:19 Europe/Berlin] PHP Warning:  Undefined array key "imagen" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 50
+[04-Nov-2025 18:33:19 Europe/Berlin] PHP Warning:  Undefined array key "precio" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 51
+[04-Nov-2025 18:33:19 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'tipo_hab' cannot be null in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php:22
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php(22): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php(19): Habitacion->agregar(NULL, NULL, NULL, NULL, NULL)
+#2 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php(47): HabitacionController->agregarHabitacion(NULL, NULL, NULL, NULL, NULL)
+#3 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(53): agregarHabitacion(NULL, NULL, NULL, NULL, NULL)
+#4 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Habitacion.php on line 22
+[04-Nov-2025 18:36:40 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot access private property HabitacionController::$habitacionModel in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php:78
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 78
+[04-Nov-2025 18:36:57 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot access private property HabitacionController::$habitacionModel in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php:78
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 78
+[04-Nov-2025 18:39:19 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function HabitacionController::__construct(), 0 passed in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 12 and exactly 1 expected in C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php:8
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(12): HabitacionController->__construct()
+#1 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\habitacion.php on line 8
+[04-Nov-2025 18:40:15 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot access private property HabitacionController::$habitacionModel in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php:81
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 81
+[04-Nov-2025 18:40:59 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot access private property HabitacionController::$habitacionModel in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php:81
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 81
+[04-Nov-2025 18:41:04 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot access private property HabitacionController::$habitacionModel in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php:81
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 81
