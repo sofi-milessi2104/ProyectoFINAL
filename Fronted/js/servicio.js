@@ -49,7 +49,7 @@ function crearCardsServicios(servicios) {
                         <div class="card mb-4 border-0 shadow">
                             <div class="row g-0 p-3 align-items-center">
                                 <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
-                                    <img src="../Fronted/img/${servicio.imagen}" class="img-fluid rounded" alt="${servicio.tipo_servicio}">
+                                    <img src="${servicio.imagen}" class="img-fluid rounded" alt="${servicio.tipo_servicio}">
                                 </div>
                                 <div class="col-md-7 px-lg-3 px-md-3 px-0">
                                     <h5 class="mb-3">${servicio.tipo_servicio}</h5>

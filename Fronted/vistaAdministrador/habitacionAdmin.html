@@ -56,15 +56,15 @@
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover table-striped text-center mb-0" id="tabla-habitaciones">
-                        <thead class="bg-dark text-light">
+                        <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Tipo</th>
                                 <th scope="col">Descripción</th>
                                 <th scope="col">Precio</th>
                                 <th scope="col">Imagen</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
+                                <th scope="col">Disponibles</th>
+                                <th scope="col">Acciones</th></tr>
                         </thead>
                         <tbody id="cuerpo-tabla-habitaciones">
                             <tr><td colspan="6" class="text-center">Cargando habitaciones...</td></tr>
@@ -93,6 +93,11 @@
                         <div class="mb-3">
                             <label class="form-label fw-bold">Precio por Noche ($)</label>
                             <input type="number" name="precio" id="hab-precio" class="form-control shadow-none" min="0" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Unidades Disponibles</label>
+                            <input type="number" name="disponible" id="hab-disponible" class="form-control shadow-none" min="0" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Descripción</label>

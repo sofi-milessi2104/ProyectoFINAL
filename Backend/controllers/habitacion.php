@@ -9,12 +9,10 @@ class HabitacionController {
         $this->habitacionModel = new Habitacion($pdo);
     }
 
-    // === OBTENER TODAS LAS HABITACIONES ===
     public function obtenerHabitacion() {
         echo json_encode($this->habitacionModel->obtenerHabitacion());
     }
 
-    // === AGREGAR HABITACIÓN ===
     public function agregarHabitacion($tipo_hab, $descripcion_hab, $disponible, $imagen, $precio) {
         $resultado = $this->habitacionModel->agregar($tipo_hab, $descripcion_hab, $disponible, $imagen, $precio);
         echo json_encode([
@@ -23,7 +21,6 @@ class HabitacionController {
         ]);
     }
 
-    // === ELIMINAR HABITACIÓN ===
     public function eliminarHabitacion($id) {
         $resultado = $this->habitacionModel->eliminar($id);
         echo json_encode([
@@ -43,10 +40,8 @@ class HabitacionController {
 
 }
 
-// Instancia global (para mantener compatibilidad con api.php actual)
 $habitacionController = new HabitacionController($pdo);
 
-// Funciones “puente” (para que tu api.php siga funcionando igual)
 function obtenerHabitacion() {
     global $habitacionController;
     $habitacionController->obtenerHabitacion();
