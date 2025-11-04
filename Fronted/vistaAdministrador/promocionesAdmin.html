@@ -34,9 +34,6 @@
                     <a class="nav-link me-2" href="usuarioAdmin.html"><i class="bi bi-person-lines-fill"></i> Usuarios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link me-2" href="configAdmin.html"><i class="bi bi-wrench-adjustable-fill"></i> Configuración</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link text-danger" href="salir.html"><i class="bi bi-box-arrow-right"></i> Salir</a>
                 </li>
             </ul>
@@ -69,7 +66,7 @@
                             </tr>
                         </thead>
                         <tbody id="cuerpo-tabla-promociones">
-                            <tr><td colspan="6" class="text-center">Cargando promociones...</td></tr>
+                            <tr><td colspan="5" class="text-center">Cargando promociones...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -79,16 +76,13 @@
     
     <div class="modal fade" id="modal-promocion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form id="formulario-promocion">
-                <div class="modal-content">
+            <form id="formulario-promocion"> <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalLabel">Crear Promoción</h5>
                         <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" id="id_promo_oculto" name="id_promo">
-
-                        <div class="mb-3">
+                        <input type="hidden" id="id_promo_oculto" name="id_promo"> <div class="mb-3">
                             <label class="form-label fw-bold">Nombre de la Promoción</label>
                             <input type="text" name="titulo" id="titulo_promo" class="form-control shadow-none" required>
                         </div>

@@ -56,3 +56,4 @@ Stack trace:
 #2 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\routes\api.php(45): loginAddUser('lucia', 'burgue\xC3\xB1o', 'lucia@gmail.com', '1245368', 'lucia16')
 #3 {main}
   thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php on line 20
+[30-Oct-2025 02:18:58 Europe/Berlin] PHP Warning:  Undefined array key "url" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 12

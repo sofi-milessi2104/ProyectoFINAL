@@ -34,9 +34,6 @@
                     <a class="nav-link me-2" href="usuarioAdmin.html"><i class="bi bi-person-lines-fill"></i> Usuarios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link me-2" href="configAdmin.html"><i class="bi bi-wrench-adjustable-fill"></i> Configuración</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link text-danger" href="salir.html"><i class="bi bi-box-arrow-right"></i> Salir</a>
                 </li>
             </ul>
@@ -64,8 +61,8 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Tipo</th>
                                 <th scope="col">Descripción</th>
+                                <th scope="col">Precio</th>
                                 <th scope="col">Imagen</th>
-                                <th scope="col">Precio ($)</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
@@ -78,33 +75,33 @@
         </div>
     </div>
     
-    <div class="modal fade" id="modal-habitacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal-habitacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="habitacionModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form id="formulario-habitacion">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalLabel">Editar Habitación</h5>
+                        <h5 class="modal-title" id="habitacionModalLabel">Agregar Tipo de Habitación</h5>
                         <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" id="id_hab_oculto" name="id_hab">
+                        <input type="hidden" id="hab-id" name="id_hab">
 
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tipo de Habitación</label>
-                            <input type="text" name="tipo_hab" id="tipo_hab" class="form-control shadow-none" required>
+                            <input type="text" name="tipo_hab" id="hab-tipo" class="form-control shadow-none" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Precio por Noche ($)</label>
-                            <input type="number" name="precio" id="precio" class="form-control shadow-none" min="0" required>
+                            <input type="number" name="precio" id="hab-precio" class="form-control shadow-none" min="0" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-bold">Descripción (Un item por línea)</label>
-                            <textarea name="descripcion_hab" id="descripcion_hab" class="form-control shadow-none" rows="5" required></textarea>
+                            <label class="form-label fw-bold">Descripción</label>
+                            <textarea name="descripcion_hab" id="hab-desc" class="form-control shadow-none" rows="5" required></textarea>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-bold">Imagen de la Habitación</label>
-                            <input type="file" name="imagen_hab" id="imagen_hab" class="form-control shadow-none">
-                            <small class="text-muted">Dejar vacío si no deseas cambiar la imagen actual.</small>
+                            <label class="form-label fw-bold">URL Imagen (Opcional)</label>
+                            <input type="url" name="imagen" id="hab-imagen" class="form-control shadow-none">
+                            <small class="text-muted">Si el backend espera un `file` y no una `url`, necesitarás cambiar el `name` y el `type` del input y modificar la lógica de `FormData` en el JS.</small>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -115,7 +112,6 @@
             </form>
         </div>
     </div>
-
     <footer class="footer bg-white border-top mt-5 p-3 text-center">
         <small>
             Panel de Administración | Hotel Costa Colonia. Contacto IT: soporte@hotelcc.com
@@ -123,6 +119,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-    <script src="habitaciones.js"></script> 
+    <script src="js/adminHab.js"></script> 
 </body>
 </html>
