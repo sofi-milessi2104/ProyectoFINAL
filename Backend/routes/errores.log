@@ -55,6 +55,5 @@ Stack trace:
 #1 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php(14): Usuario->loginAdd('lucia', 'burgue\xC3\xB1o', 'lucia@gmail.com', '1245368', 'lucia16')
 #2 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\routes\api.php(45): loginAddUser('lucia', 'burgue\xC3\xB1o', 'lucia@gmail.com', '1245368', 'lucia16')
 #3 {main}
-  thrown in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\models\Usuario.php on line 20
-[23-Oct-2025 17:30:55 Europe/Berlin] PHP Warning:  Undefined variable $resultado in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 18
-[23-Oct-2025 18:30:44 Europe/Berlin] PHP Warning:  Undefined variable $resultado in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 18
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Usuario.php on line 20
+[30-Oct-2025 02:18:58 Europe/Berlin] PHP Warning:  Undefined array key "url" in C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php on line 12
