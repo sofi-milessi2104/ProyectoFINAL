@@ -14,7 +14,7 @@ Cosas por hacer o mejorar:
 
 *CÓDIGO*
  - galeria de habitaciones
- - corregir login múltiples y agregar mensaje de "login exitoso
+ - corregir login múltiples y agregar mensaje de "login exitoso 
  - perfil de admin 
  - linkear comentarios de google maps
  - PERFIL⁉️         //Poder ver reservas que se hicieron antes etc
