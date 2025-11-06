@@ -103,7 +103,6 @@ class Usuario {
                             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
                         '>
                             <div style='text-align: center; margin-bottom: 25px;'>
-                               <img src='https://i.ibb.co/xyz123/tu-logo.png' alt='Hotel Costa Colonia' style='width: 100px; height: auto;'>
                                <h1 style='color: #2f5d50; margin-top: 15px; font-size: 24px;'>Hotel Costa Colonia</h1>
                             </div>
 

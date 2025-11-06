@@ -1,1 +1,14 @@
 
+[06-Nov-2025 16:41:16 Europe/Berlin] PHP Warning:  Undefined variable $nombre in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 74
+[06-Nov-2025 16:41:21 Europe/Berlin] PHP Warning:  Undefined variable $nombre in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 74
+[06-Nov-2025 16:42:14 Europe/Berlin] PHP Warning:  Undefined variable $nombre in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 74
+[06-Nov-2025 16:42:54 Europe/Berlin] PHP Warning:  Undefined variable $nombre in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 74
+[06-Nov-2025 16:42:56 Europe/Berlin] PHP Warning:  Undefined variable $nombre in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 74
+[06-Nov-2025 16:50:46 Europe/Berlin] PHP Warning:  Undefined variable $nombre in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 74
+[06-Nov-2025 16:57:28 Europe/Berlin] PHP Warning:  Undefined variable $nombre in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 74
+[06-Nov-2025 17:07:53 Europe/Berlin] PHP Warning:  Undefined variable $nombre in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 74
+[06-Nov-2025 17:10:05 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function loginUsuario(), 2 passed in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\routes\api.php on line 60 and exactly 3 expected in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php:36
+Stack trace:
+#0 C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\routes\api.php(60): loginUsuario('sofia.milessi20...', 'prueba123')
+#1 {main}
+  thrown in C:\xampp_1\htdocs\ProyectoFINAL\ProyectoFINAL\Backend\controllers\usuario.php on line 36
