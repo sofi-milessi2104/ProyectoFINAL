@@ -85,20 +85,62 @@ class Usuario {
             $mail->Port       = 587;
 
            
-            $mail->setFrom('Sofia.milessi2008@gmail.com', 'Mi App Web');
+            $mail->setFrom('Sofia.milessi2008@gmail.com', 'Hotel Costa Colonia');
             $mail->addAddress($email, $nombre); 
 
            
             $mail->isHTML(true);
-            $mail->Subject = "¡Gracias por registrarte, $nombre!";
-            $mail->Body    = "
-                <div style='font-family: Arial, sans-serif; padding: 15px; background-color: #f4f8f4; border-radius: 10px;'>
-                    <h2 style='color: #3b7a57;'>🌿 ¡Hola $nombre!</h2>
-                    <p>Gracias por registrarte en nuestra aplicación.</p>
-                    <p>Estamos felices de tenerte con nosotros 💚</p>
-                    <p style='font-size: 12px; color: #888;'>Este mensaje fue enviado automáticamente, por favor no respondas.</p>
-                </div>
-            ";
+            $mail->Subject = "Gracias por registrarte, $nombre!";
+            $mail->Body = "
+                        <div style='
+                            font-family: Arial, sans-serif; 
+                            padding: 30px; 
+                            background-color: #f9fdf9; 
+                            border: 1px solid #e0eee0; 
+                            border-radius: 12px; 
+                            max-width: 600px; 
+                            margin: auto;
+                            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                        '>
+                            <div style='text-align: center; margin-bottom: 25px;'>
+                               <img src='https://i.ibb.co/xyz123/tu-logo.png' alt='Hotel Costa Colonia' style='width: 100px; height: auto;'>
+                               <h1 style='color: #2f5d50; margin-top: 15px; font-size: 24px;'>Hotel Costa Colonia</h1>
+                            </div>
+
+                            <div style='color: #333;'>
+                                <h2 style='color: #3b7a57;'>¡Bienvenido/a, $nombre!</h2>
+                                <p style='font-size: 16px; line-height: 1.6;'>
+                                    Nos complace darte la bienvenida a <strong>Hotel Costa Colonia</strong>.  
+                                    Gracias por registrarte en nuestra plataforma. A partir de ahora, podrás acceder a nuestras reservas, promociones exclusivas y todas las comodidades que ofrecemos.
+                                </p>
+
+                                <p style='font-size: 16px; line-height: 1.6;'>
+                                    Esperamos que disfrutes de una experiencia inolvidable con nosotros 🌿
+                                </p>
+
+                                <div style='margin-top: 30px; text-align: center;'>
+                                    <a href='https://hotelcostacolonia.com' 
+                                    style='
+                                        background-color: #3b7a57; 
+                                        color: white; 
+                                        padding: 12px 25px; 
+                                        text-decoration: none; 
+                                        border-radius: 25px; 
+                                        font-weight: bold;
+                                    '>
+                                    Visitar sitio web
+                                    </a>
+                                </div>
+                            </div>
+
+                            <hr style='margin-top: 35px; border: none; border-top: 1px solid #ddd;'>
+
+                            <p style='font-size: 12px; color: #888; text-align: center; margin-top: 15px;'>
+                                © Hotel Costa Colonia, Uruguay.<br>
+                                Este mensaje fue enviado automáticamente, por favor no respondas.
+                            </p>
+                        </div>
+                    ";
 
             $mail->send();
         } catch (Exception $e) {

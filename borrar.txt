@@ -12,7 +12,7 @@ Cosas por hacer o mejorar:
 
 *CÓDIGO*
  - galeria de habitaciones
- - corregir login múltiples y agregar mensaje de "login exitoso
+ - corregir login múltiples y agregar mensaje de "login exitoso 
  - perfil de admin 
  - mail de confirmación
  - linkear comentarios de google maps
