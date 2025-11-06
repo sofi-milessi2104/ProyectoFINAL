@@ -1,22 +1,18 @@
-// ⭐ ¡AJUSTA ESTA URL! Debe apuntar a tu controlador de usuarios
 const API_URL_USUARIOS = "../../Backend/routes/api.php?url=usuario"; 
 
-let listaUsuarios = []; // Almacena la lista completa de usuarios para filtrar
+let listaUsuarios = [];
 
-// --- Funciones de Utilidad ---
 function formatearFecha(fechaISO) {
     if (!fechaISO) return 'N/A';
-    // Asume formato YYYY-MM-DD HH:MM:SS
     try {
         const datePart = fechaISO.split(' ')[0];
         const [year, month, day] = datePart.split('-');
         return `${day}/${month}/${year}`;
     } catch (e) {
-        return fechaISO; // Devuelve la cadena original si falla el parseo
+        return fechaISO;
     }
 }
 
-// 1. FUNCIÓN PRINCIPAL: OBTENER DATOS
 async function obtenerUsuarios() {
     try {
         const tbody = document.getElementById("cuerpo-tabla-usuarios");
@@ -34,8 +30,8 @@ async function obtenerUsuarios() {
             throw new Error("Respuesta inválida o endpoint no devuelve un array de usuarios.");
         }
         
-        listaUsuarios = data; // Guardamos la lista completa
-        renderizarTabla(listaUsuarios); // Renderizamos por primera vez
+        listaUsuarios = data;
+        renderizarTabla(listaUsuarios);
         
     } catch (error) {
         console.error("Error al cargar usuarios:", error);
@@ -45,7 +41,6 @@ async function obtenerUsuarios() {
     }
 }
 
-// 2. FUNCIÓN PARA RENDERIZAR LA TABLA
 function renderizarTabla(usuarios) {
     const tbody = document.getElementById("cuerpo-tabla-usuarios");
     tbody.innerHTML = ''; 
@@ -57,7 +52,6 @@ function renderizarTabla(usuarios) {
 
     usuarios.forEach((usuario, index) => {
         
-        // Asumiendo que el campo para el estado es 'estado' y usa 1 (Activo) / 0 (Baneado/Inactivo)
         const estadoActivo = usuario.estado == 1;
         const estadoTexto = estadoActivo ? 'Activo' : 'Baneado';
         const badgeClass = estadoActivo ? 'bg-success' : 'bg-danger';
@@ -89,7 +83,6 @@ function renderizarTabla(usuarios) {
     agregarListenersAcciones();
 }
 
-// 3. FUNCIÓN PARA FILTRAR LA TABLA (Busqueda)
 function filtrarUsuarios(termino) {
     const terminoLowerCase = termino.toLowerCase().trim();
     if (!terminoLowerCase) {
@@ -107,9 +100,8 @@ function filtrarUsuarios(termino) {
     renderizarTabla(usuariosFiltrados);
 }
 
-// 4. LÓGICA PARA CAMBIAR EL ESTADO (Banear/Habilitar)
 async function cambiarEstadoUsuario(id, estadoActual) {
-    const nuevoEstado = estadoActual == 1 ? 0 : 1; // 1 -> 0 (Banear), 0 -> 1 (Habilitar)
+    const nuevoEstado = estadoActual == 1 ? 0 : 1;
     const accion = nuevoEstado == 0 ? 'banear' : 'habilitar';
     const confirmMsg = `¿Está seguro de querer ${accion.toUpperCase()} al usuario #${id}?`;
 
@@ -117,20 +109,18 @@ async function cambiarEstadoUsuario(id, estadoActual) {
         return;
     }
 
-    // ⭐ API_URL_USUARIOS debe responder a una acción POST
     const endpoint = `${API_URL_USUARIOS}&id=${id}&action=${accion}`; 
 
     try {
         const respuesta = await fetch(endpoint, {
             method: 'POST', 
-            // Podrías enviar datos adicionales si fuera necesario
         });
 
         const resultado = await respuesta.json();
 
         if (respuesta.ok && resultado.success) {
             alert(resultado.message);
-            obtenerUsuarios(); // Recargar la lista
+            obtenerUsuarios();
         } else {
             alert('Error al cambiar el estado: ' + (resultado.message || 'Error desconocido.'));
         }
@@ -141,9 +131,7 @@ async function cambiarEstadoUsuario(id, estadoActual) {
     }
 }
 
-// 5. FUNCIÓN AUXILIAR: Añadir Listeners
 function agregarListenersAcciones() {
-    // Listener para los botones de cambio de estado
     document.querySelectorAll('.toggle-estado-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             cambiarEstadoUsuario(this.dataset.id, this.dataset.estado);
@@ -151,16 +139,12 @@ function agregarListenersAcciones() {
     });
 }
 
-
-// 6. INICIALIZACIÓN: Carga la tabla y añade listeners de búsqueda/refresco
 document.addEventListener("DOMContentLoaded", () => {
     obtenerUsuarios();
     
-    // Listener para el campo de búsqueda
     document.getElementById('filtro-busqueda').addEventListener('keyup', (e) => {
         filtrarUsuarios(e.target.value);
     });
     
-    // Listener para el botón de refresco
     document.getElementById('btn-refrescar').addEventListener('click', obtenerUsuarios);
 });

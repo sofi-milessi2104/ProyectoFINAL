@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (category === 'all' || itemCategories.includes(category)) {
                     item.classList.remove('hidden');
                     item.style.animation = 'none';
-                    void item.offsetWidth; // reinicia animación
+                    void item.offsetWidth;
                     item.style.animation = 'fadeInUp 0.6s ease forwards';
                 } else {
                     item.classList.add('hidden');

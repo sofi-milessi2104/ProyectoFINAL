@@ -1,8 +1,7 @@
-/* Variables de color base (puedes ajustarlas a tu paleta de colores) */
 :root {
-    --color-primary: #007bff; /* Azul */
-    --color-secondary: #6c757d; /* Gris */
-    --color-success: #28a745; /* Verde */
+    --color-primary: #007bff;
+    --color-secondary: #6c757d;
+    --color-success: #28a745;
     --color-border: #ddd;
     --color-background-light: #f8f9fa;
     --color-text: #333;
@@ -26,7 +25,6 @@ body {
     overflow: hidden;
 }
 
-/* --- Contenido Principal (Formulario de Pasos) --- */
 .main-content {
     flex: 2;
     padding: 40px;
@@ -73,7 +71,6 @@ body {
     flex: 1;
 }
 
-/* --- Galería de Habitaciones (Paso 2) --- */
 .room-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -122,7 +119,6 @@ body {
     font-weight: 600;
 }
 
-/* --- Lista de Servicios (Paso 2) --- */
 .service-list {
     margin-top: 15px;
     padding: 10px;
@@ -148,7 +144,6 @@ body {
     cursor: pointer;
 }
 
-/* --- Botones de Navegación --- */
 .button-group {
     margin-top: 30px;
     display: flex;
@@ -182,8 +177,6 @@ body {
     background-color: #5a6268;
 }
 
-
-/* --- Sidebar (Resumen) --- */
 .sidebar-summary {
     flex: 1;
     padding: 40px;
@@ -241,13 +234,12 @@ body {
 .tip-box {
     margin-top: 25px;
     padding: 15px;
-    background-color: #fff3cd; /* Amarillo claro */
+    background-color: #fff3cd;
     border: 1px solid #ffeeba;
     border-radius: 4px;
     color: #856404;
 }
 
-/* Estilo para el Loader (puedes usar un CSS de spinner más elaborado si quieres) */
 .loader {
     border: 5px solid #f3f3f3;
     border-radius: 50%;
@@ -262,7 +254,6 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-/* Media Queries para responsividad */
 @media (max-width: 900px) {
     .page-wrapper {
         flex-direction: column;

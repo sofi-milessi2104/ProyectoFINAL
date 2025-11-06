@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const app = document.getElementById('app');
-    let currentStep = 1; // ⭐ AJUSTE CLAVE: Siempre comienza en el Paso 1
+    let currentStep = 1;
     
-    // 1. Definición de habitaciones y servicios
     const habitaciones = [
         { id_hab: 1, tipo_hab: 'Suit', imagen: 'http://localhost/ProyectoFinal/Fronted/img/Suite.jpeg', precio: 3438 },
         { id_hab: 2, tipo_hab: 'River Suit', imagen: 'http://localhost/ProyectoFinal/Fronted/img/River%20Suite.jpeg', precio: 6849 },
@@ -21,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { id_servicio: 7, tipo_servicio: 'Estacionamiento', precio_servicio: 0, imagen: 'http://localhost/ProyectoFinal/Fronted/img/Estacionamiento.jpg' }
     ];
 
-    // 2. Cargar datos de localStorage para preselección
     const preselectedRoomId = localStorage.getItem('selected_room_id');
     let initialRoom = {};
     if (preselectedRoomId) {
@@ -32,13 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 tipo_hab: roomFromStorage.tipo_hab,
                 precio: roomFromStorage.precio,
             };
-            // ⚠️ Importante: Mantenemos el currentStep en 1 aquí para que inicie en el Paso 1
         }
     }
     
-    // 3. Limpiamos el localStorage INMEDIATAMENTE después de cargar la habitación,
-    // para que la próxima vez que se cargue reserva.html sin venir de un botón, 
-    // no tenga una habitación preseleccionada.
     if (preselectedRoomId) {
         localStorage.removeItem('selected_room_id');
     }
@@ -48,14 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
         fecha_fin: null,
         adultos: 1,
         niños: 0,
-        id_habitacion: initialRoom.id_habitacion || null, // Se carga si existe
-        tipo_hab: initialRoom.tipo_hab || null,           // Se carga si existe
-        precio: initialRoom.precio || 0,                 // Se carga si existe
+        id_habitacion: initialRoom.id_habitacion || null,
+        tipo_hab: initialRoom.tipo_hab || null,
+        precio: initialRoom.precio || 0,
         servicios: [],
         tarjeta: null
     };
-
-    // ... (El resto de las funciones auxiliares se mantienen igual) ...
 
     const diffInDays = (date1, date2) => {
         if (!date1 || !date2) return 0;
@@ -80,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('summary-fecha-fin').textContent = reservaData.fecha_fin ? new Date(reservaData.fecha_fin + 'T00:00:00').toLocaleDateString('es-ES') : '-- / -- / --';
         document.getElementById('summary-huespedes').textContent = `${reservaData.adultos} adulto(s), ${reservaData.niños || 0} niño(s)`;
         
-        // ⭐ Clave: La habitación ya aparece en el resumen si fue preseleccionada
         const habitacionTexto = reservaData.tipo_hab 
             ? `${reservaData.tipo_hab} ($${reservaData.precio.toLocaleString('es-ES')} x ${dias} noches)` 
             : 'No seleccionada';
@@ -179,9 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const createStep2 = () => {
-        const roomPreselected = !!initialRoom.id_habitacion; // Usa 'initialRoom' para verificar si fue preseleccionada
+        const roomPreselected = !!initialRoom.id_habitacion;
         
-        // Contenido condicional: Oculta la galería si la habitación fue preseleccionada
         const roomSelectionContent = roomPreselected 
             ? `
                 <div class="alert alert-info" style="
@@ -214,7 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
-        // Renderizar galería de habitaciones SOLO si no hay una preseleccionada
         if (!roomPreselected) {
             const roomGallery = step2.querySelector('.room-gallery');
             habitaciones.forEach(hab => {
@@ -314,28 +303,53 @@ document.addEventListener('DOMContentLoaded', () => {
             </form>
         `;
 
-        step3.querySelector('#step3-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
+step3.querySelector('#step3-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-            reservaData.tarjeta = e.target.querySelector('#tarjeta').value;
-            reservaData.nombre_tarjeta = e.target.querySelector('#nombre').value;
-            reservaData.vencimiento = e.target.querySelector('#vencimiento').value;
-            reservaData.cvc = e.target.querySelector('#cvc').value;
+    const tarjetaInput = e.target.querySelector('#tarjeta').value;
+    const nombreInput = e.target.querySelector('#nombre').value;
+    const vencimientoInput = e.target.querySelector('#vencimiento').value;
+    const cvcInput = e.target.querySelector('#cvc').value;
 
-            const payload = {
-                action: 'agregarReserva',
-                id_usuario: null, 
-                adultos: reservaData.adultos.toString(),
-                niños: reservaData.niños.toString(),
-                fecha_inicio: reservaData.fecha_inicio,
-                fecha_fin: reservaData.fecha_fin,
-                id_habitacion: reservaData.id_habitacion,
-                servicios: reservaData.servicios,
-                tarjeta: reservaData.tarjeta,
-                nombre_tarjeta: reservaData.nombre_tarjeta,
-                vencimiento: reservaData.vencimiento,
-                cvc: reservaData.cvc
-            };
+    if (vencimientoInput) {
+        const partes = vencimientoInput.split('/'); 
+        if (partes.length === 2) {
+            const mes = parseInt(partes[0]);
+            const anioCorto = parseInt(partes[1]);
+            
+            const anioCompleto = 2000 + anioCorto; 
+            
+            const fechaLimite = new Date(anioCompleto, mes, 1); 
+            const hoy = new Date();
+
+            if (fechaLimite <= hoy) {
+                alert('La tarjeta ha expirado. Por favor, verifique la fecha de vencimiento o use otra tarjeta.');
+                return;
+            }
+        } else {
+
+        }
+    }
+
+    reservaData.tarjeta = tarjetaInput;
+    reservaData.nombre_tarjeta = nombreInput;
+    reservaData.vencimiento = vencimientoInput;
+    reservaData.cvc = cvcInput;
+
+    const payload = {
+        action: 'agregarReserva',
+        id_usuario: null, 
+        adultos: reservaData.adultos.toString(),
+        niños: reservaData.niños.toString(),
+        fecha_inicio: reservaData.fecha_inicio,
+        fecha_fin: reservaData.fecha_fin,
+        id_habitacion: reservaData.id_habitacion,
+        servicios: reservaData.servicios,
+        tarjeta: reservaData.tarjeta,
+        nombre_tarjeta: reservaData.nombre_tarjeta,
+        vencimiento: reservaData.vencimiento,
+        cvc: reservaData.cvc
+    };
 
             const loader = document.getElementById('loader-overlay');
             const modal = document.getElementById('confirm-modal');
@@ -402,7 +416,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const cerrarModalBtn = document.getElementById('cerrar-modal');
     cerrarModalBtn.addEventListener('click', () => {
-        // No es necesario limpiar localStorage aquí porque ya se hizo en la carga
         document.getElementById('confirm-modal').style.display = 'none';
         window.location.href = 'index.html'; 
     });

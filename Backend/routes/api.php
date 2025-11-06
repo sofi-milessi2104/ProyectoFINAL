@@ -14,7 +14,6 @@ header("Content-Type: application/json; charset=UTF-8");
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $url = $_GET["url"] ?? null;
 
-// ========================== MÉTODOS GET ==========================
 if ($requestMethod === "GET") {
     switch ($url) {
         case "administrador":
@@ -38,19 +37,15 @@ if ($requestMethod === "GET") {
     exit;
 }
 
-// ========================== MÉTODOS POST ==========================
 elseif ($requestMethod === "POST") {
-    // Detectar si los datos vienen como JSON
     $rawInput = file_get_contents("php://input");
     $data = json_decode($rawInput, true);
     $solicitud = $url;
 
-    // Fallback a $_POST si no vino JSON
     if (!$data && !empty($_POST)) {
         $data = $_POST;
     }
 
-    // ====== LOGINES ======
     if ($solicitud === "login") {
         loginAdministrador($data["email"] ?? "", $data["password"] ?? "");
         exit;
@@ -72,7 +67,6 @@ elseif ($requestMethod === "POST") {
         exit;
     }
 
-    // ====== HABITACIONES ======
     if ($solicitud === "habitacion") {
         $action = $data["action"] ?? null;
 
@@ -105,7 +99,6 @@ elseif ($requestMethod === "POST") {
         exit;
     }
 
-    // ====== PROMOCIÓN, SERVICIO, USUARIO ======
     if ($solicitud === "promocion") {
         agregarPromocion($data["tipo_promo"] ?? "", $data["descripcion_promo"] ?? "", $data["precio"] ?? 0);
         exit;
@@ -121,7 +114,6 @@ elseif ($requestMethod === "POST") {
         exit;
     }
 
-    // ====== RUTA NO ENCONTRADA ======
     echo json_encode(["error" => "Ruta no encontrada"]);
     exit;
 }

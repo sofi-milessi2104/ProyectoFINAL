@@ -7,14 +7,12 @@ async function obtenerHabitacion() {
 
         console.log("Respuesta cruda del backend:", data);
 
-        // ✅ El backend devuelve directamente un array
         if (!Array.isArray(data)) {
             throw new Error("El backend no devolvió un array de habitaciones");
         }
 
         const habitacionesBD = data;
 
-        // ✅ Nombres corregidos para coincidir con el backend
         const serviciosPorHabitacion = {
             "Suite": ["Wifi", "TV", "Doble Balcón", "Minibar", "Microondas", "Mesas y Sillas"],
             "River Suite": ["Wifi", "TV", "Balcón Privado", "Minibar", "Microondas", "Mesas y Sillas"],
@@ -24,7 +22,6 @@ async function obtenerHabitacion() {
         };
 
         todasLasHabitaciones = habitacionesBD.map(hab => {
-            // Nota: Corregimos 'Suit Loft' a 'Super Loft' si es necesario
             const tipoHabitacionCorrecto = hab.tipo_hab === 'Suit Loft' ? 'Super Loft' : hab.tipo_hab; 
             
             return {
@@ -73,7 +70,7 @@ function aplicarFiltros() {
         const precio = parseFloat(hab.precio.toString().replace('.', ''));
         const coincidePrecio = (!precioMin || precio >= parseFloat(precioMin)) && (!precioMax || precio <= parseFloat(precioMax));
 
-        const coincideFechas = true; // Aquí podrías validar disponibilidad por fechas si tu backend lo soporta
+        const coincideFechas = true;
 
         return coincideTipo && coincidePrecio && coincideFechas;
     });
@@ -148,7 +145,6 @@ function agregarEventListeners() {
         boton.addEventListener('click', (event) => {
             const idHabitacion = event.target.dataset.id;
             
-            // ⭐ Mantiene la lógica: Guarda el ID de la habitación en localStorage
             localStorage.setItem('selected_room_id', idHabitacion); 
             
             console.log(`Botón de reserva para la habitación con ID: ${idHabitacion} clickeado. Redirigiendo a reserva.html...`);
