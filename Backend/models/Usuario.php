@@ -38,14 +38,12 @@ class Usuario {
             "email" => $email,
             "celular" => $celular,
             "password" => $hash,
-            "token" => $token,       // <-- Nuevo
-            "expiry" => $expiry      // <-- Nuevo
+            "token" => $token,
+            "expiry" => $expiry
         ]);
     }
     
-    // NUEVO MÉTODO: Buscar y verificar el token
     public function verificarToken($token) {
-        // 1. Buscar usuario, verificar que el token sea correcto y que NO haya expirado
         $stmt = $this->pdo->prepare("
             SELECT id_usuario FROM usuario 
             WHERE verification_token = :token 
@@ -56,17 +54,15 @@ class Usuario {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$user) {
-            return false; // Token inválido o expirado
+            return false;
         }
         
-        // 2. Si es válido, actualizar is_verified y limpiar token
         $updateStmt = $this->pdo->prepare("
             UPDATE usuario 
             SET is_verified = 1, verification_token = NULL, token_expiry = NULL 
             WHERE id_usuario = :id
         ");
         
-        // Retornamos true si la actualización fue exitosa
         return $updateStmt->execute(["id" => $user['id_usuario']]);
     }
 
