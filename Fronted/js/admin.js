@@ -14,6 +14,7 @@ async function obtenerAdministrador() {
 
 function agregarEventoForm() {
     let form = document.querySelector("#frmAdministrador");
+
     if (!form) return;
     form.onsubmit = (e) => {
         e.preventDefault();
@@ -43,7 +44,7 @@ async function iniciarSesionAdministrador(email, password) {
             alert("No tienes permisos de administrador o los datos son incorrectos.");
         }
     } catch (error) {
-        alert("Error al iniciar sesión.");
+        alert("Error al iniciar sesión." + error);
     }
 }
 

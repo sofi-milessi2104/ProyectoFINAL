@@ -10,20 +10,16 @@ Cosas por hacer o mejorar:
 ✔ diagrama de Gantt
 ✔ mail de confirmación
 ✔ vencimiento y encriptar tarjeta
-
+✔ galeria de habitaciones
+✔ BD, MER (hab es un servicio & pago aparte???)
 
 *CÓDIGO*
- - galeria de habitaciones
- - corregir login múltiples y agregar mensaje de "login exitoso 
- - perfil de admin 
+ - corregir login múltiples y agregar mensaje de "login exitoso"
+ ± perfil de admin 
  - linkear comentarios de google maps
- - PERFIL⁉️         //Poder ver reservas que se hicieron antes etc
+ - PERFIL⁉️         //Poder ver reservas que se hicieron antes etc al hacer login
  - preguntas frecuentes 
  - todos los servicios
-
-
-*BASE DE DATOS*
- - BD, MER (hab es un servicio & pago aparte???)
 
 
 *INTEGRAR*
@@ -36,8 +32,7 @@ Cosas por hacer o mejorar:
 *PRESENTACIÓN*
  - "resumen" explicando lo más importante del código
  - orden del micrófono
- - video para explicar la web y testing
- - mostrar tamaños (responsividad) 
- - término web app (web es solo frontend y nosotros tenemos backend) 
- - carpeta
- - PREGUNTAR POR DEFENSA REPETIR
+ - video para explicar la web y testing ((mostrar tamaños (responsividad))) //para no tener que estar ingresando datos ahí
+ - término WEB APP (web es solo frontend y nosotros tenemos backend) 
+ - carpeta impresa
+ - PREGUNTAR POR DEFENSA REPETIR PRESENTACION 
