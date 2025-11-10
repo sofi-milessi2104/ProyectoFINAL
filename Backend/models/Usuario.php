@@ -21,7 +21,7 @@ class Usuario {
     }
 
     
-    public function loginAdd($nombre, $apellido, $email, $celular, $password) {
+public function loginAdd($nombre, $apellido, $email, $celular, $password) {
     $hash = password_hash($password, PASSWORD_DEFAULT);
     $token = bin2hex(random_bytes(16));
     $expiry = date("Y-m-d H:i:s", strtotime("+1 day"));
@@ -42,8 +42,14 @@ class Usuario {
         "expiry" => $expiry
     ]);
 
-    // ✅ DEVOLVER RESULTADO
-    return $ok;
+    if ($ok) {
+        // devuelve true + id insertado para poder usarlo desde el controller
+        return ["ok" => true, "id" => $this->pdo->lastInsertId()];
+    } else {
+        // devuelve errorInfo para depuración
+        $err = $stmt->errorInfo(); // [SQLSTATE, driverCode, driverMessage]
+        return ["ok" => false, "error" => $err];
+    }
 }
 
     
