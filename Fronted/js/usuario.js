@@ -53,7 +53,7 @@ async function iniciarSesionUsuario(email, password) {
 
         if (resultado.status == true) {
             window.localStorage.setItem("sesionUser", JSON.stringify(resultado.data));
-            window.location.href = "../fronted/index.html";
+            window.location.href = "../Fronted/index.html";
         } else {
             alert("No tienes permisos de usuario o los datos son incorrectos.");
         }
@@ -81,7 +81,8 @@ async function loginAddUser(nombre, apellido, email, celular, password) {
 
         if (resultado.status == true) {
             window.localStorage.setItem("sesionUser", JSON.stringify(resultado.data));
-            window.location.href = "../fronted/index.html";
+            window.location.href = "../Fronted/index.html";
+
         } else {
             alert("No pudiste crear una cuenta correctamente");
         }
