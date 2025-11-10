@@ -17,31 +17,28 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-4 shadow-sm sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand me-5 fw-bold fs-3 h-2font" href="index.html"><img src="img/logo.png" alt="Hotel Costa Colonia" width="150" height="30"></a>
-    <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand me-5 fw-bold fs-3 h-2font" href="index.html">
+      <img src="img/logo.png" alt="Hotel Costa Colonia" width="150" height="30">
+    </a>
+    <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active me-2" aria-current="page" href="#">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link me-2" href="habitaciones.html">Habitaciones</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link me-2" href="servicios.html">Servicios</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link me-2" href="promociones.html">Promociones</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link me-2" href="restaurante.html">Restaurante</a>
-        </li>
+        <li class="nav-item"><a class="nav-link active me-2" href="#">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link me-2" href="habitaciones.html">Habitaciones</a></li>
+        <li class="nav-item"><a class="nav-link me-2" href="servicios.html">Servicios</a></li>
+        <li class="nav-item"><a class="nav-link me-2" href="promociones.html">Promociones</a></li>
+        <li class="nav-item"><a class="nav-link me-2" href="restaurante.html">Restaurante</a></li>
       </ul>
+
       <div class="d-flex align-items-center gap-2">
-        <a href="usuario.html" class="btn-login">Login</a>
-      
+        <!-- Botón Login -->
+        <a href="usuario.html" id="btnLogin" class="btn-login">Login</a>
+        <!-- Botón Logout (oculto por defecto) -->
+        <button id="btnLogout" class="btn-login d-none" onclick="cerrarSesion()">Cerrar sesión</button>
+
         <div class="language-selector position-relative m-0">
           <button class="language-btn" onclick="toggleDropdown()">Idioma</button>
           <div class="language-dropdown" id="languageDropdown">
@@ -53,11 +50,10 @@
             <div class="language-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
           </div>
         </div>
-        <!-- Div oculto requerido por Google Translate -->
+
+        <!-- Div oculto de Google Translate -->
         <div id="google_translate_element" style="display: none;"></div>
-     
       </div>
-      
     </div>
   </div>
 </nav>
