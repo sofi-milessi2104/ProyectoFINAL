@@ -23,10 +23,45 @@ async function obtenerHabitacion() {
 
         todasLasHabitaciones = habitacionesBD.map(hab => {
             const tipoHabitacionCorrecto = hab.tipo_hab === 'Suit Loft' ? 'Super Loft' : hab.tipo_hab; 
-            
+
+            // <-- definir aquí las imágenes por tipo o por id (ajusta rutas según tu estructura)
+            const imagenesPorTipo = {
+                "Suite": [
+                    "http://localhost/ProyectoFinal/Fronted/img/Suite.jpeg",
+                    "http://localhost/ProyectoFinal/Fronted/img/Suite 2.jpeg", 
+                    "http://localhost/ProyectoFinal/Fronted/img/Suite 3.jpeg"
+                ],
+                "River Suite": [
+                    "http://localhost/ProyectoFinal/Fronted/img/River Suite.jpeg",
+                    "http://localhost/ProyectoFinal/Fronted/img/River Suite 2.jpeg",
+                ],
+                "Loft": [
+                    "http://localhost/ProyectoFinal/Fronted/img/Loft.jpeg",
+                    "http://localhost/ProyectoFinal/Fronted/img/Loft 2.jpeg",
+                    "http://localhost/ProyectoFinal/Fronted/img/Loft 3.jpeg",
+                ],
+                "River Loft": [
+                    "http://localhost/ProyectoFinal/Fronted/img/River Loft.jpeg",
+                    "http://localhost/ProyectoFinal/Fronted/img/River Loft 2.jpeg",
+                    "http://localhost/ProyectoFinal/Fronted/img/River Loft 3.jpeg",
+                    "http://localhost/ProyectoFinal/Fronted/img/River Loft 4.jpeg"
+                ],
+                "Super Loft": [
+                    "http://localhost/ProyectoFinal/Fronted/img/Super Loft.jpeg",
+                    "http://localhost/ProyectoFinal/Fronted/img/Super Loft 2.jpeg",
+                    
+                ]
+            };
+
+            // Si la API ya trae imagenes, las usamos; si no, asignamos las de ejemplo por tipo
+            const imagenesAsignadas = Array.isArray(hab.imagen) && hab.imagen.length
+                ? hab.imagen
+                : (imagenesPorTipo[tipoHabitacionCorrecto] || ["https://via.placeholder.com/800x500?text=Sin+imagen"]);
+
             return {
                 ...hab,
-                servicios_hab: serviciosPorHabitacion[tipoHabitacionCorrecto] || []
+                servicios_hab: serviciosPorHabitacion[tipoHabitacionCorrecto] || [],
+                imagen: imagenesAsignadas
             };
         });
 
@@ -79,6 +114,59 @@ function aplicarFiltros() {
 }
 
 function crearCards(habitaciones) {
+    const placeholder = 'https://via.placeholder.com/800x500?text=Sin+imagen';
+    const crearCarousel = (hab) => {
+        // Normalizar a array de imágenes
+        let images = [];
+        if (Array.isArray(hab.imagen)) {
+            images = hab.imagen;
+        } else if (typeof hab.imagen === 'string') {
+            try {
+                const parsed = JSON.parse(hab.imagen);
+                if (Array.isArray(parsed)) images = parsed;
+                else images = hab.imagen.split(',').map(s => s.trim()).filter(Boolean);
+            } catch (e) {
+                images = hab.imagen.split(',').map(s => s.trim()).filter(Boolean);
+            }
+        }
+        // Saneamiento: si las rutas son relativas y faltan ../, ajusta aquí según tu estructura
+        images = images.map(img => img && !img.startsWith('http') ? img.replace(/^\/+/, '') : img).filter(Boolean);
+
+        if (images.length === 0) images = [placeholder];
+
+        // DEBUG: ver qué imágenes se usan para cada habitación
+        console.log(`Imágenes para hab ${hab.id_hab}:`, images);
+
+        const id = `carousel-${hab.id_hab}`;
+
+        return `
+            <div id="${id}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000" data-bs-touch="true">
+                <div class="carousel-indicators">
+                    ${images.map((_, i) => `
+                        <button type="button" data-bs-target="#${id}" data-bs-slide-to="${i}" class="${i === 0 ? 'active' : ''}" aria-current="${i === 0 ? 'true' : 'false'}" aria-label="Slide ${i+1}"></button>
+                    `).join('')}
+                </div>
+                <div class="carousel-inner">
+                    ${images.map((img, idx) => `
+                        <div class="carousel-item ${idx === 0 ? 'active' : ''}">
+                            <img src="${img}" class="d-block w-100 rounded" alt="${hab.tipo_hab} - imagen ${idx + 1}">
+                        </div>
+                    `).join('')}
+                </div>
+                ${images.length > 1 ? `
+                    <button class="carousel-control-prev" type="button" data-bs-target="#${id}" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#${id}" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                ` : ''}
+            </div>
+        `;
+    };
+
     return `
         <div class="container">
             <div class="row">
@@ -93,8 +181,8 @@ function crearCards(habitaciones) {
                             <div class="card mb-4 border-0 shadow">
                                 <div class="row g-0 p-3 align-items-center">
                                     <div class="col-md-5 mb-lg-0 mb-md-0 mb-3">
-                                    <img src="${hab.imagen}" class="img-fluid rounded" alt="${hab.tipo_hab}">
-                                </div>
+                                        ${crearCarousel(hab)}
+                                    </div>
                                     <div class="col-md-5 px-lg-3 px-md-3 px-0">
                                         <h5 class="mb-3">${hab.tipo_hab}</h5>
                                         <div class="features mb-3">
