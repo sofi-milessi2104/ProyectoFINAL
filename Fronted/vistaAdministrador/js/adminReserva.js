@@ -1,16 +1,10 @@
-// Variable global para almacenar el endpoint de tu API de Reservas
-// ATENCIÓN: Esta URL se mantiene por contexto.
 const API_URL_BASE = "http://localhost/ProyectoFinal/Backend/routes/api.php?url=reserva"; 
 const API_URL_RESERVAS = `${API_URL_BASE}`; 
-// ⭐ RUTA ASUMIDA CORRECTA: Saliendo dos niveles para llegar al controlador PHP
 const API_CONTROLLER_PATH = '../../Backend/controllers/reserva.php'; 
-// Asegúrate de que este elemento exista en tu HTML
 const modalDetalle = new bootstrap.Modal(document.getElementById('modal-detalle-reserva'));
 
-// --- Funciones de Utilidad ---
 function formatearFecha(fechaISO) {
     if (!fechaISO) return 'N/A';
-    // Formato YYYY-MM-DD a DD/MM/YYYY
     const date = new Date(fechaISO + 'T00:00:00'); 
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -18,23 +12,18 @@ function formatearFecha(fechaISO) {
     return `${day}/${month}/${year}`;
 }
 
-// --- Funciones de Fetch Genéricas para Lectura ---
-
 async function fetchReservasData() { 
     const tbody = document.getElementById("cuerpo-tabla-reservas");
-    // Colspan ajustado a 10
     tbody.innerHTML = '<tr><td colspan="10" class="text-center">Cargando reservas...</td></tr>'; 
     try {
-        // ⭐ CORRECCIÓN CLAVE: Agregamos explícitamente action=listar a la URL para la lectura inicial.
         const respuesta = await fetch(`${API_CONTROLLER_PATH}?action=listar`);
         
         if (!respuesta.ok) {
             throw new Error(`Error HTTP: ${respuesta.status} - ${respuesta.statusText}`);
         }
         
-        const resultado = await respuesta.json(); // Respuesta es un objeto: {success: true, data: [...]} o {success: false, message: ...}
+        const resultado = await respuesta.json();
         
-        // Intenta obtener el array desde la propiedad 'data' o usa el objeto completo si ya es un array
         const dataArray = Array.isArray(resultado) ? resultado : resultado.data;
 
         if (!Array.isArray(dataArray)) {
@@ -46,7 +35,6 @@ async function fetchReservasData() {
 
     } catch (error) {
         console.error("Error en la operación de fetch:", error);
-        // Colspan ajustado a 10
         tbody.innerHTML = `
             <tr><td colspan="10" class="text-danger text-center">Error: ${error.message}. Verifica la API.</td></tr>
         `;
@@ -54,14 +42,10 @@ async function fetchReservasData() {
     }
 }
 
-
-// 1. FUNCIÓN PRINCIPAL: OBTENER Y MOSTRAR DATOS EN LA TABLA
 async function obtenerYRenderizarReservas() {
     const tbody = document.getElementById("cuerpo-tabla-reservas");
-    // Colspan ajustado a 10
     tbody.innerHTML = '<tr><td colspan="10" class="text-center">Cargando reservas...</td></tr>'; 
     
-    // Llama a la función sin argumento de URL
     const reservas = await fetchReservasData(); 
     
     if (!reservas) {
@@ -71,7 +55,6 @@ async function obtenerYRenderizarReservas() {
     tbody.innerHTML = ''; 
 
     if (reservas.length === 0) {
-        // Colspan ajustado a 10
         tbody.innerHTML = '<tr><td colspan="10" class="text-center">No hay reservas pendientes o activas.</td></tr>';
         return;
     }
@@ -101,7 +84,6 @@ async function obtenerYRenderizarReservas() {
                 break;
         }
 
-        // Fila con 10 celdas
         const fila = `
                 <tr>
                     <th scope="row">${reserva.id_reserva}</th> 
@@ -133,11 +115,8 @@ async function obtenerYRenderizarReservas() {
     agregarListenersAcciones();
 }
 
-
-// 2. FUNCIÓN PARA MOSTRAR DETALLES Y SERVICIOS 
 async function mostrarDetallesReserva(id) {
     try {
-        // Uso de la ruta corregida para detalles (también necesita la acción)
         const respuesta = await fetch(`${API_CONTROLLER_PATH}?id=${id}&action=detalles`);
         
         if (!respuesta.ok) {
@@ -151,10 +130,8 @@ async function mostrarDetallesReserva(id) {
             return;
         }
 
-        // Cargar detalles de reserva
         document.getElementById('reserva-id-modal').textContent = id;
         
-        // Cargar detalles de habitación
         document.getElementById('detalle-habitacion').innerHTML = `
             <li>**Tipo:** ${detalle.tipo_hab}</li>
             <li>**Descripción:** ${detalle.descripcion_hab || 'N/A'}</li>
@@ -162,7 +139,6 @@ async function mostrarDetallesReserva(id) {
             <li>**Estadía:** Del ${formatearFecha(detalle.fecha_inicio)} al ${formatearFecha(detalle.fecha_fin)}</li>
         `;
         
-        // Cargar servicios adicionales
         const listaServicios = document.getElementById('lista-servicios-modal');
         listaServicios.innerHTML = '';
 
@@ -174,7 +150,6 @@ async function mostrarDetallesReserva(id) {
             listaServicios.innerHTML = '<li class="list-group-item text-muted">No se contrataron servicios adicionales.</li>';
         }
         
-        // Cargar detalles de pago
         const ultimosDigitos = detalle.tarjeta || 'XXXX';
         document.getElementById('detalle-pago').textContent = `**** **** **** ${ultimosDigitos.slice(-4)}`;
 
@@ -186,14 +161,12 @@ async function mostrarDetallesReserva(id) {
     }
 }
 
-// 3. LÓGICA PARA CAMBIAR EL ESTADO (Check-in/Cancelación)
 async function cambiarEstadoReserva(id, nuevaAccion) {
     const estadoTexto = nuevaAccion === 'cancelar' ? 'CANCELAR' : 'MARCAR CHECK-IN';
     if (!confirm(`¿Está seguro de querer ${estadoTexto} la reserva #${id}?`)) {
         return;
     }
 
-    // Uso de la ruta corregida para POST
     const endpoint = API_CONTROLLER_PATH;
 
     try {
@@ -203,20 +176,19 @@ async function cambiarEstadoReserva(id, nuevaAccion) {
         };
 
         const respuesta = await fetch(endpoint, {
-            method: 'POST', // Usamos POST para acciones de modificación
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
         
         let resultado = { success: false, message: 'Respuesta vacía o error.' };
-        // Si el servidor responde OK (200-299), intentamos leer el JSON.
         if (respuesta.ok) {
              resultado = await respuesta.json();
         } 
 
         if (resultado && resultado.success) {
             alert(resultado.message || `Reserva #${id} actualizada con éxito.`);
-            obtenerYRenderizarReservas(); // Recargar la tabla
+            obtenerYRenderizarReservas();
         } else {
             alert('Error al actualizar el estado: ' + (resultado.message || `Error del servidor (${respuesta.status}).`));
         }
@@ -227,7 +199,6 @@ async function cambiarEstadoReserva(id, nuevaAccion) {
     }
 }
 
-// 4. FUNCIÓN AUXILIAR: Añadir Listeners a los botones (Sin cambios)
 function agregarListenersAcciones() {
     document.querySelectorAll('.detalle-servicios-btn').forEach(btn => {
         btn.addEventListener('click', function() {
@@ -246,6 +217,4 @@ function agregarListenersAcciones() {
     });
 }
 
-
-// INICIALIZACIÓN: Carga la tabla al iniciar la página
 document.addEventListener("DOMContentLoaded", obtenerYRenderizarReservas);

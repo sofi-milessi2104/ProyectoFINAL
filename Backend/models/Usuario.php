@@ -41,17 +41,31 @@ class Usuario {
             "token" => $token,
             "expiry" => $expiry
         ]);
+    }
+    
+    public function verificarToken($token) {
+        $stmt = $this->pdo->prepare("
+            SELECT id_usuario FROM usuario 
+            WHERE verification_token = :token 
+            AND is_verified = 0 
+            AND token_expiry > NOW()
+        ");
+        $stmt->execute(["token" => $token]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($ok) {
-            
-            $this->enviarCorreoAgradecimiento($email, $nombre);
-            return true;
-        } else {
+        if (!$user) {
             return false;
         }
+        
+        $updateStmt = $this->pdo->prepare("
+            UPDATE usuario 
+            SET is_verified = 1, verification_token = NULL, token_expiry = NULL 
+            WHERE id_usuario = :id
+        ");
+        
+        return $updateStmt->execute(["id" => $user['id_usuario']]);
     }
 
-    
     public function eliminar($id) {
         $stmt = $this->pdo->prepare("DELETE FROM usuario WHERE id_usuario = :id");
         return $stmt->execute(["id" => $id]);

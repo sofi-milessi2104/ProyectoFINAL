@@ -1,22 +1,34 @@
 <?php
-require "../controllers/reserva.php";
-require "../routes/log.php";
+require_once "../controllers/reserva.php"; 
+require_once "../routes/log.php";
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
+
 if ($requestMethod == "GET") {
-    $solicitud = $_GET["url"];
-if ($solicitud == "reserva") {
-    obtenerReserva();
-}else {
-    echo json_encode(["error" => "Ruta no encontrada"]);    
-}
+    $solicitud = $_GET["url"] ?? null;
+    $action = $_GET["action"] ?? null;
+
+    if ($solicitud == "reserva") {
+        
+
+        if ($action == 'count_today' || $action == 'list_today') {
+            exit; 
+        } else {
+            obtenerReserva(); 
+            exit;
+        }
+
+    } else {
+        echo json_encode(["error" => "Ruta no encontrada para GET"]);    
+    }
 }
 
 elseif ($requestMethod == "POST") {
     $solicitud = $_GET["url"] ?? null;
 
     if ($solicitud == "reserva") {
+        
         $nombre = $_POST["nombre"];
         $apellido = $_POST["apellido"];
         $email = $_POST["email"];
@@ -32,7 +44,11 @@ elseif ($requestMethod == "POST") {
         echo "Datos recibidos: Nombre: $nombre, Apellido: $apellido, Email: $email, Adultos: $adultos, Niños: $niños, Fecha Inicio: $fecha_inicio, Fecha Fin: $fecha_fin, Tipo de Habitación: $tipo_hab, Tipo de Servicio: $tipo_servicio, Promoción: $promoción, Huesped: $huesped, Tarjeta: $tarjeta";
         agregarReserva($nombre, $apellido, $email, $adultos, $niños, $fecha_inicio, $fecha_fin, $tipo_hab, $tipo_servicio, $promoción, $huesped, $tarjeta);
         global $reservaModel;
-    }else{
-        echo json_encode(["error" => "Ruta no encontrada"]);
-    }}
+        exit;
+    } else {
+        echo json_encode(["error" => "Ruta no encontrada para POST"]);
+    }
+} else {
+    echo json_encode(["error" => "Método de solicitud no soportado"]);
+}
 ?>

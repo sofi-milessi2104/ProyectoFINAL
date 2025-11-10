@@ -1,15 +1,13 @@
-/* Variables de Color (Recomendado para consistencia) */
 :root {
-    --color-primary: #5469d4; /* Azul principal */
-    --color-secondary: #32325d; /* Título y texto oscuro */
-    --color-text-light: #525f7f; /* Texto secundario/labels */
+    --color-primary: #5469d4;
+    --color-secondary: #32325d;
+    --color-text-light: #525f7f;
     --color-background: #f6f9fc;
     --color-surface: #fff;
     --color-border: #e0e6ed;
     --color-success: #2ecc71;
 }
 
-/* Estilos generales */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: var(--color-background);
@@ -22,7 +20,6 @@ body {
     box-sizing: border-box;
 }
 
-/* Contenedor Principal (page-wrapper) */
 .page-wrapper {
     display: flex;
     background-color: var(--color-surface);
@@ -33,7 +30,6 @@ body {
     overflow: hidden; 
 }
 
-/* Contenido Principal (Formulario/Pasos) */
 .main-content {
     flex: 2.5; 
     padding: 40px;
@@ -45,11 +41,10 @@ body {
     margin-bottom: 30px;
     font-weight: 600;
 }
-.payment-form { /* Contenedor de la aplicación (id="app") */
+.payment-form {
     padding: 0;
 }
 
-/* Panel de Resumen Lateral (sidebar-summary) */
 .sidebar-summary {
     background-color: #f8f8f8; 
     padding: 30px 25px;
@@ -63,7 +58,6 @@ body {
     border-left: 1px solid var(--color-border);
 }
 
-/* Estilos de la tarjeta de Habitación/Fechas */
 .room-offer-card {
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -103,7 +97,6 @@ body {
     max-width: 60%;
 }
 
-/* Estilos de la sección de Precio */
 .summary-price-details {
     padding: 15px 0;
 }
@@ -137,7 +130,6 @@ body {
     font-weight: 700;
 }
 
-/* Estilos para Tip Box (caja de información) */
 .tip-box {
     background-color: #f0f7ff; 
     border: 1px solid #b3d9ff;
@@ -147,8 +139,6 @@ body {
     margin-top: auto; 
     font-size: 14px;
 }
-
-/* --- Estilos de Formulario (Títulos, Campos, Botones) --- */
 
 h2 {
     font-size: 24px;
@@ -208,7 +198,6 @@ input:not([type="checkbox"]):focus, select:focus {
     flex: 1;
 }
 
-/* --- Galería de Habitaciones (Paso 2) --- */
 .room-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -253,7 +242,6 @@ input:not([type="checkbox"]):focus, select:focus {
     font-size: 14px;
 }
 
-/* --- Galería de Servicios (Paso 2) --- */
 .service-list {
     display: flex;
     flex-wrap: wrap;
@@ -276,7 +264,6 @@ input:not([type="checkbox"]):focus, select:focus {
     cursor: pointer;
 }
 
-/* --- Botones de Navegación --- */
 .button-group {
     display: flex;
     justify-content: space-between;
@@ -304,7 +291,6 @@ button {
 }
 .next-btn:hover, #submit-btn:hover { background-color: #4359a8; }
 
-/* Estilos para el mensaje de preselección de habitación */
 .alert.alert-info {
     padding: 15px; 
     background-color: #e0f7fa; 
@@ -318,8 +304,6 @@ button {
     font-weight: 700;
     color: #004d40;
 }
-
-/* --- Estilos para la Selección de Pago (Paso 3) --- */
 
 .payment-method-selection {
     display: flex;
@@ -335,10 +319,9 @@ button {
     border-radius: 4px;
     padding: 10px;
     transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
-    cursor: pointer; /* CLAVE: Asegura el puntero en todo el div */
+    cursor: pointer;
 }
 
-/* El input radio se oculta visualmente pero permanece accesible para el label */
 .method-option input[type="radio"] {
     position: absolute;
     opacity: 0;
@@ -359,16 +342,14 @@ button {
     cursor: pointer; 
     text-align: center;
     gap: 8px;
-    padding: 5px 0; /* Un poco de padding extra para la zona de clic */
+    padding: 5px 0;
 }
 
-/* Estado de Hover */
 .method-option:hover {
     border-color: #aeb8df; 
     background-color: #fcfcfc;
 }
 
-/* Estado Seleccionado (checked) */
 .method-option:has(input:checked) {
     border-color: var(--color-primary);
     box-shadow: 0 0 5px rgba(84, 105, 212, 0.3);
@@ -382,7 +363,6 @@ button {
     font-size: 1.2em;
 }
 
-/* Estilos de las secciones de detalles condicionales */
 .payment-details-section {
     display: none;
     animation: fadeIn 0.4s ease-out;
@@ -403,7 +383,6 @@ button {
 }
 
 
-/* --- Loader y Modal --- */
 #loader-overlay {
     position: fixed;
     top: 0;
@@ -429,7 +408,6 @@ button {
     100% { transform: rotate(360deg); }
 }
 
-/* Estilos del Modal */
 #confirm-modal {
     background: var(--color-surface);
     padding: 30px;
@@ -463,9 +441,6 @@ button {
     width: 100%;
     margin-top: 20px !important;
 }
-
-
-/* --- Media Queries (Responsive) --- */
 
 @media (max-width: 900px) {
     body {

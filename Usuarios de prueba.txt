@@ -1,0 +1,28 @@
+-* USUARIOS: -*
+
+Usuario: María Mendendez
+Gmail: mari21@example.com
+Contraseña:maria21
+
+email:valentina.fernandez@emaple.com
+Contraseña: ferval125
+
+
+
+-* ADMINISTRADORES: -*
+
+Email: laura.fernandez@empresa.com
+Contraseña: Laura123Fer
+
+Email: carlos.gomez@empresa.com
+Contraseña: CarlosMellamo58
+
+Email: ana.torres@empresa.com
+Contraseña: TorresSoyyo9647
+
+
+
+-* CUENTA USUARIO DE PRUEBA: *-
+
+Cuenta Gmail: pruebauserhcc@gmail.com
+Contraseña: Prueba123

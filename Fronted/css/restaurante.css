@@ -1,4 +1,3 @@
-/*Nav*/
 body{
   background-color: #faf3e0;
 }
@@ -38,7 +37,6 @@ body{
   margin-top: 15px;
 }
 
-/*Título*/
 .hero-section {
   position: relative; 
   width: 100%;
@@ -84,7 +82,6 @@ body{
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
-/*Presentación*/
 .two-column-layout {
   display: flex; 
   align-items: center;
@@ -176,8 +173,6 @@ body{
   }
 }
 
-
-
 .centered-text-block {
   max-width: 820px; 
   margin: auto; 
@@ -198,50 +193,44 @@ body{
   color: #555;
 }
 
-
-
-
 .menu-two-column-layout {
-  display: flex; /* Habilita Flexbox */
-  justify-content: center; /* Centra el contenido en pantallas grandes */
-  align-items: center; /* Centra verticalmente los elementos de las columnas */
-  padding: 80px 50px; /* Espaciado general de la sección */
-  max-width: 1300px; /* Ancho máximo para toda la sección */
-  margin: 0 auto; /* Centra la sección en la página */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 50px;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
 .menu-image-column {
-  flex: 1; /* Ocupa un espacio flexible */
-  padding-right: 50px; /* Espacio entre la imagen y la tarjeta de menú */
-  display: flex; /* Para centrar la imagen si es más pequeña que la columna */
+  flex: 1;
+  padding-right: 50px;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .menu-image-column img {
-  max-width: 100%; /* Asegura que la imagen no se desborde */
-  height: auto; /* Mantiene la proporción */
+  max-width: 100%;
+  height: auto;
   display: block;
-  border-radius: 10px; /* Bordes redondeados */
-  /* Ajuste de tamaño específico para la imagen si es necesario */
-  /* width: 450px;  height: 550px; /* Valores de ejemplo si quieres un tamaño más controlado */
-  object-fit: cover; /* Para que la imagen cubra el espacio sin deformarse si usas height fijo */
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Sombra suave para la imagen */
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 .menu-content-column {
-  flex: 1.2; /* Ocupa un poco más de espacio que la imagen para el contenido del menú */
-  display: flex; /* Para centrar la tarjeta dentro de esta columna si es necesario */
-  justify-content: flex-start; /* Alinea la tarjeta al inicio de la columna */
+  flex: 1.2;
+  display: flex;
+  justify-content: flex-start;
 }
 
-/* El estilo de la tarjeta de menú, ahora dentro de menu-content-column */
 .menu-card {
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra un poco más pronunciada */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   padding: 40px;
-  max-width: 550px; /* Limita el ancho de la tarjeta interna */
+  max-width: 550px;
   width: 100%;
 }
 
@@ -266,10 +255,9 @@ body{
   color: #666;
 }
 
-/* --- Media Queries para Responsividad --- */
 @media (max-width: 992px) {
   .menu-two-column-layout {
-    flex-direction: column; /* Apila las columnas en pantallas más pequeñas */
+    flex-direction: column;
     padding: 50px 20px;
   }
   .menu-image-column,
@@ -278,12 +266,12 @@ body{
     padding: 0;
   }
   .menu-image-column {
-    margin-bottom: 40px; /* Espacio entre la imagen y el menú apilados */
+    margin-bottom: 40px;
   }
   .menu-image-column img {
-    max-width: 80%; /* Hace la imagen un poco más pequeña en móvil */
+    max-width: 80%;
   }
   .menu-card {
-    max-width: 100%; /* La tarjeta ocupa todo el ancho disponible */
+    max-width: 100%;
   }
 }

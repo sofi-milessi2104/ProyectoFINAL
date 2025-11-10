@@ -12,7 +12,6 @@ async function obtenerUsuario() {
 
 }
 
-
 function agregarEventoForm() {
     let form = document.querySelector("#frmUsuario");
      let formAdd = document.querySelector("#frmAddUsuario");
@@ -24,6 +23,7 @@ function agregarEventoForm() {
         let password = form.password.value;
         iniciarSesionUsuario(email, password);
     }
+
     if (!formAdd) return;
     formAdd.onsubmit = (e) => {
         e.preventDefault();
@@ -49,7 +49,8 @@ async function iniciarSesionUsuario(email, password) {
             body: data
         });
         const resultado = await respuesta.json();
-     
+        console.log("loginUsr response:", resultado); // <-- añadir
+
         if (resultado.status == true) {
             window.localStorage.setItem("sesionUser", JSON.stringify(resultado.data));
             window.location.href = "../fronted/index.html";
@@ -76,7 +77,8 @@ async function loginAddUser(nombre, apellido, email, celular, password) {
             body: data
         });
         const resultado = await respuesta.json();
-     
+        console.log("loginAddUsr response:", resultado); // <-- añadir
+
         if (resultado.status == true) {
             window.localStorage.setItem("sesionUser", JSON.stringify(resultado.data));
             window.location.href = "../fronted/index.html";
@@ -96,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (registerBtn) {
         registerBtn.addEventListener('click', () => {
             container.classList.add("active");
-
         });
     }
 
@@ -109,4 +110,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     agregarEventoForm();
 });
-

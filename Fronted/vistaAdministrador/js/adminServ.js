@@ -2,22 +2,13 @@ const API_BASE_URL_SERV = 'http://localhost/ProyectoFinal/Backend/routes/api.php
 
 let modalServicio;
 
-// --- Funciones de Utilidad ---
-
-// Función genérica para todas las operaciones CRUD (Agregar, Editar, Eliminar)
 async function crudOperationServicio(action, data = {}, successMsg, errorMsg) {
     try {
-        // Para 'agregar' y 'editar' el backend podría esperar 'multipart/form-data' si incluye la carga de la imagen.
-        // Dado que el formulario de Servicios usa un input 'file', usaremos FormData en lugar de JSON.stringify.
 
         const formData = new FormData();
         formData.append('action', action);
         
-        // Agregar el resto de los datos al FormData.
-        // Nota: Asume que el backend puede manejar la imagen y otros campos juntos.
         for (const key in data) {
-            // Si el valor es un objeto File, lo adjuntamos directamente.
-            // Si no, lo adjuntamos como un campo de texto normal.
             if (data[key] instanceof File) {
                 formData.append(key, data[key], data[key].name);
             } else {
@@ -25,11 +16,9 @@ async function crudOperationServicio(action, data = {}, successMsg, errorMsg) {
             }
         }
         
-        // La API de Habitaciones usaba POST con JSON, pero el formulario de Servicios tiene un 'file',
-        // por lo que cambiamos a FormData y no especificamos 'Content-Type'.
         const respuesta = await fetch(API_BASE_URL_SERV, {
             method: 'POST',
-            body: formData // Usamos FormData para enviar datos y archivos
+            body: formData
         });
 
         if (!respuesta.ok) {
@@ -39,7 +28,6 @@ async function crudOperationServicio(action, data = {}, successMsg, errorMsg) {
             return false;
         }
 
-        // El backend debe responder con JSON.
         const resultado = await respuesta.json();
         console.log("Respuesta backend:", resultado);
 
@@ -57,16 +45,12 @@ async function crudOperationServicio(action, data = {}, successMsg, errorMsg) {
     }
 }
 
-
-// --- Funciones de Carga y Renderización (Tabla) ---
-
 async function cargarServicios() {
     const tbody = document.getElementById("cuerpo-tabla-servicios");
     const COLUMNS = 5; 
     tbody.innerHTML = `<tr><td colspan="${COLUMNS}" class="text-center">Cargando servicios...</td></tr>`; 
 
     try {
-        // Solicitud GET para obtener todos los servicios
         const respuesta = await fetch(API_BASE_URL_SERV, { method: 'GET' });
         
         if (!respuesta.ok) {
@@ -83,7 +67,6 @@ async function cargarServicios() {
             return;
         }
 
-        // Renderizar filas de la tabla
         data.forEach(servicio => {
             const fila = `
                 <tr>
@@ -111,9 +94,6 @@ async function cargarServicios() {
     }
 }
 
-
-// --- Funciones de CRUD Específicas (Editar, Eliminar) ---
-
 function editarServicio(id) {
     const data = {
         action: 'obtener_uno',
@@ -121,7 +101,7 @@ function editarServicio(id) {
     };
 
     fetch(API_BASE_URL_SERV, {
-        method: 'POST', // Asumo que obtener uno también es POST con action: 'obtener_uno'
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data) 
     })
@@ -139,7 +119,6 @@ function editarServicio(id) {
             document.getElementById('id_serv_oculto').value = s.id_serv;
             document.getElementById('tipo_servicio').value = s.tipo_servicio;
             document.getElementById('descripcion_servicio').value = s.descripcion_servicio;
-            // El campo de imagen (file) debe quedar vacío por defecto para no enviar nada a menos que se seleccione un archivo.
             document.getElementById('imagen_servicio').value = ''; 
 
             modalServicio.show();
@@ -155,14 +134,11 @@ function editarServicio(id) {
 
 async function eliminarServicio(id) {
     if (!confirm(`¿Está seguro de eliminar el servicio #${id}? Esta acción es irreversible.`)) return;
-    
-    // Para la eliminación, podríamos volver a usar JSON, asumiendo que solo se necesita el ID y la acción.
     const data = {
         action: 'eliminar',
         id_serv: id
     };
     
-    // Usamos el fetch con JSON.stringify directamente para eliminar, ya que no lleva archivo.
     try {
         const respuesta = await fetch(API_BASE_URL_SERV, {
             method: 'POST',
@@ -180,7 +156,7 @@ async function eliminarServicio(id) {
         const resultado = await respuesta.json();
         if (resultado.success) {
             alert('Servicio eliminado correctamente.');
-            cargarServicios(); // Recargar la tabla
+            cargarServicios();
         } else {
             alert('Error al eliminar servicio: ' + (resultado.message || 'Error desconocido.'));
         }
@@ -189,9 +165,6 @@ async function eliminarServicio(id) {
         alert('Error de conexión con el servidor al intentar eliminar.');
     }
 }
-
-
-// --- Event Listeners ---
 
 document.getElementById('formulario-servicio').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -204,31 +177,18 @@ document.getElementById('formulario-servicio').addEventListener('submit', async 
     const action = id ? 'editar' : 'agregar';
     const successMsg = id ? 'Servicio actualizado correctamente.' : 'Servicio agregado correctamente.';
     const errorMsg = id ? 'Error al actualizar servicio: ' : 'Error al agregar servicio: ';
-
-    // Si es edición, nos aseguramos de que el ID esté en los datos.
     if (id) {
         data.id_serv = id;
     }
     
-    // Si no se seleccionó una nueva imagen en edición, eliminamos el campo 'imagen_servicio'
-    // para que no se envíe un campo vacío al backend (que podría borrar la imagen existente).
-    // NOTA: El input 'imagen_servicio' es de tipo 'file'. Si está vacío, su valor en FormData.entries() es File { size: 0, ... }.
     const imagenInput = document.getElementById('imagen_servicio');
     if (imagenInput.files.length === 0 && action === 'editar') {
         delete data.imagen_servicio;
     }
-    
-    // Convertir el objeto plano 'data' a un formato que podamos enviar a crudOperationServicio,
-    // que es FormData para manejar la carga de archivos.
-    // Aquí usamos una variación de crudOperationServicio que recibe el objeto plano 'data'.
-    // Para simplificar, asumiremos que el backend es capaz de manejar 'multipart/form-data'
-    // y lo adaptamos para usar la función genérica con el FormData.
 
-    // Crearemos un objeto solo con los datos necesarios, incluyendo el archivo File.
     const dataToSend = {};
     for (const [key, value] of formData.entries()) {
         if (key === 'imagen_servicio' && imagenInput.files.length === 0 && action === 'editar') {
-            // Ignorar el campo de imagen vacío en edición.
             continue; 
         }
         dataToSend[key] = value;
@@ -252,20 +212,16 @@ function agregarListenersServicios() {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Inicializar el modal de Bootstrap
     modalServicio = new bootstrap.Modal(document.getElementById('modal-servicio'));
     
-    // Cargar los datos iniciales en la tabla
     cargarServicios();
 
-    // Resetear el formulario y el título al cerrar el modal
     document.getElementById('modal-servicio').addEventListener('hidden.bs.modal', function () {
         document.getElementById('formulario-servicio').reset();
         document.getElementById('id_serv_oculto').value = '';
         document.getElementById('modalLabel').textContent = 'Añadir Nuevo Servicio';
     });
     
-    // Configurar el botón de añadir nuevo servicio para resetear el formulario al abrir el modal
     document.querySelector('[data-bs-target="#modal-servicio"]').addEventListener('click', function () {
         document.getElementById('formulario-servicio').reset();
         document.getElementById('id_serv_oculto').value = '';
