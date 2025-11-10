@@ -22,26 +22,30 @@ class Usuario {
 
     
     public function loginAdd($nombre, $apellido, $email, $celular, $password) {
-        $hash = password_hash($password, PASSWORD_DEFAULT);
-        $token = bin2hex(random_bytes(16));
-        $expiry = date("Y-m-d H:i:s", strtotime("+1 day"));
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+    $token = bin2hex(random_bytes(16));
+    $expiry = date("Y-m-d H:i:s", strtotime("+1 day"));
 
-        $stmt = $this->pdo->prepare("
-            INSERT INTO usuario 
-            (nombre, apellido, email, celular, password, verification_token, token_expiry, is_verified) 
-            VALUES (:nombre, :apellido, :email, :celular, :password, :token, :expiry, 0)
-        ");
+    $stmt = $this->pdo->prepare("
+        INSERT INTO usuario 
+        (nombre, apellido, email, celular, password, verification_token, token_expiry, is_verified) 
+        VALUES (:nombre, :apellido, :email, :celular, :password, :token, :expiry, 0)
+    ");
 
-        $ok = $stmt->execute([
-            "nombre" => $nombre,
-            "apellido" => $apellido,
-            "email" => $email,
-            "celular" => $celular,
-            "password" => $hash,
-            "token" => $token,
-            "expiry" => $expiry
-        ]);
-    }
+    $ok = $stmt->execute([
+        "nombre" => $nombre,
+        "apellido" => $apellido,
+        "email" => $email,
+        "celular" => $celular,
+        "password" => $hash,
+        "token" => $token,
+        "expiry" => $expiry
+    ]);
+
+    // ✅ DEVOLVER RESULTADO
+    return $ok;
+}
+
     
     public function verificarToken($token) {
         $stmt = $this->pdo->prepare("

@@ -22,16 +22,25 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
         if ($usuarioModel->loginAdd($nombre, $apellido, $email, $celular, $password)) {
             echo json_encode([
                 "status" => true,
-                "rol" => "usuario"
+                "rol" => "usuario",
+                "data" => [
+                    "nombre" => $nombre,
+                    "email" => $email
+                ]
             ]);
         } else {
-            echo json_encode(["status" => false, "message" => "Error al agregar el usuario."]);
+            echo json_encode([
+                "status" => false,
+                "message" => "Error al agregar el usuario."
+            ]);
         }
     } catch (Throwable $t) {
-        echo json_encode(["status" => false, "message" => "Error interno: " . $t->getMessage()]);
+        echo json_encode([
+            "status" => false,
+            "message" => "Error interno: " . $t->getMessage()
+        ]);
     }
 }
-
 
 function loginUsuario($email, $password) {
     global $usuarioModel;
