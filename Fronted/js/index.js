@@ -41,35 +41,56 @@ var swiper = new Swiper(".swiper-reseñas", {
   },
 });
 
-// 🧠 Control de sesión del usuario (Login / Logout)
 document.addEventListener("DOMContentLoaded", () => {
-  const btnLogin = document.querySelector(".btn-login[href='usuario.html']");
-  const navbar = document.querySelector(".navbar .d-flex");
+  const loginLink = document.getElementById("loginLink");
+  const userMenuContainer = document.getElementById("userMenuContainer");
+  const userAvatar = document.getElementById("userAvatar");
+  const userDropdown = document.getElementById("userDropdown");
+  const userEmail = document.getElementById("userEmail");
+  const logoutBtn = document.getElementById("logoutBtn");
 
-  // Crear botón de cerrar sesión dinámico
-  const btnLogout = document.createElement("button");
-  btnLogout.textContent = "Cerrar sesión";
-  btnLogout.classList.add("btn-login");
-  btnLogout.style.display = "none";
-  navbar.appendChild(btnLogout);
-
-  // Verificar si hay usuario logueado
-  const sesionUser = localStorage.getItem("sesionUser");
-
-  if (sesionUser) {
-    // Si hay usuario, ocultamos login y mostramos logout
-    btnLogin.style.display = "none";
-    btnLogout.style.display = "inline-block";
-  } else {
-    // Si no hay usuario, mostrar login
-    btnLogin.style.display = "inline-block";
-    btnLogout.style.display = "none";
+  // Intentamos obtener datos del usuario guardado
+  let sesionUser = null;
+  try {
+    sesionUser = JSON.parse(localStorage.getItem("sesionUser"));
+  } catch (e) {
+    console.error("Error leyendo sesión del usuario:", e);
   }
 
-  // Cerrar sesión (borrar localStorage)
-  btnLogout.addEventListener("click", () => {
-    localStorage.removeItem("sesionUser");
-    alert("Sesión cerrada correctamente");
-    location.reload();
-  });
+  // Si hay sesión activa
+  if (sesionUser && sesionUser.email) {
+    loginLink.style.display = "none"; // ocultar botón login
+    userMenuContainer.style.display = "inline-block"; // mostrar avatar
+
+    // Inicial del nombre
+    const inicial = sesionUser.nombre
+      ? sesionUser.nombre.charAt(0).toUpperCase()
+      : sesionUser.email.charAt(0).toUpperCase();
+
+    userAvatar.textContent = inicial;
+    userEmail.textContent = sesionUser.email;
+
+    // Abrir/cerrar menú
+    userAvatar.addEventListener("click", () => {
+      userDropdown.classList.toggle("hidden");
+    });
+
+    // Cerrar sesión
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("sesionUser");
+      alert("Sesión cerrada correctamente.");
+      location.reload();
+    });
+
+    // Cerrar el menú si clickea afuera
+    document.addEventListener("click", (e) => {
+      if (!userMenuContainer.contains(e.target)) {
+        userDropdown.classList.add("hidden");
+      }
+    });
+  } else {
+    // No hay sesión, mostrar login
+    loginLink.style.display = "inline-block";
+    userMenuContainer.style.display = "none";
+  }
 });
