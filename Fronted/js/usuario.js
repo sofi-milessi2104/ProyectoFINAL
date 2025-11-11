@@ -49,7 +49,7 @@ async function iniciarSesionUsuario(email, password) {
             body: data
         });
         const resultado = await respuesta.json();
-        console.log("loginUsr response:", resultado); // <-- añadir
+        console.log("loginUsr response:", resultado); 
 
         if (resultado.status == true) {
             window.localStorage.setItem("sesionUser", JSON.stringify(resultado.data));
@@ -77,7 +77,7 @@ async function loginAddUser(nombre, apellido, email, celular, password) {
             body: data
         });
         const resultado = await respuesta.json();
-        console.log("loginAddUsr response:", resultado); // <-- añadir
+        console.log("loginAddUsr response:", resultado); 
 
         if (resultado.status == true) {
             window.localStorage.setItem("sesionUser", JSON.stringify(resultado.data));

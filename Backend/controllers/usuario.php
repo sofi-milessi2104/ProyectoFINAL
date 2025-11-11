@@ -21,14 +21,14 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
     try {
         if ($usuarioModel->loginAdd($nombre, $apellido, $email, $celular, $password)) {
 
-            // ✉️ Envío de correo de bienvenida
+            
             $mail = new PHPMailer(true);
             try {
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
                 $mail->Username   = 'sofia.milessi2008@gmail.com';
-                $mail->Password   = 'sshyxbeijzqnmzjl'; // ⚠️ Contraseña de aplicación
+                $mail->Password   = 'sshyxbeijzqnmzjl'; 
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
 
@@ -97,7 +97,7 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
                 error_log("Error al enviar correo de registro: {$mail->ErrorInfo}");
             }
 
-            // ✅ Respuesta exitosa
+           
             echo json_encode([
                 "status" => true,
                 "rol" => "usuario",

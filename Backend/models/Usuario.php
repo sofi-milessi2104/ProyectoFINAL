@@ -43,11 +43,11 @@ public function loginAdd($nombre, $apellido, $email, $celular, $password) {
     ]);
 
     if ($ok) {
-        // devuelve true + id insertado para poder usarlo desde el controller
+       
         return ["ok" => true, "id" => $this->pdo->lastInsertId()];
     } else {
-        // devuelve errorInfo para depuración
-        $err = $stmt->errorInfo(); // [SQLSTATE, driverCode, driverMessage]
+       
+        $err = $stmt->errorInfo(); 
         return ["ok" => false, "error" => $err];
     }
 }
