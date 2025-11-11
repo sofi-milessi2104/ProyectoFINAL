@@ -1,5 +1,5 @@
 <?php
-require "../config/database.php";
+require "..Backend/config/database.php";
 
 class Habitacion {
     private $pdo;
