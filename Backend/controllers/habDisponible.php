@@ -25,8 +25,6 @@ $db = $database->getConnection();
 // Instanciar el modelo
 $habitacion = new HabDisponible($db);
 
-// Obtener habitaciones disponibles
-$resultado = $habitacion->obtenerDisponibles($fechaInicio, $fechaFin);
 
 // Devolver resultado como JSON
 echo json_encode($resultado);
