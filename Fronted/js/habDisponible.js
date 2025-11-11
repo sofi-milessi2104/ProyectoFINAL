@@ -113,6 +113,11 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener('DOMContentLoaded', function () {
     const habitaciones= JSON.parse(localStorage.getItem('habitacionesDisponibles'));
 
+if (!habitaciones || !Array.isArray(habitaciones)) {
+    contenedor.innerHTML = '<p>No hay habitaciones disponibles o hubo un error al cargar los datos.</p>';
+    return;
+}
+
     const contenedor = document.querySelector('#contenedor-habitaciones');
     habitaciones.forEach(hab => {
         const div = document.createElement('div');
@@ -146,6 +151,70 @@ document.querySelector('.btn-buscardisponibilidad').addEventListener('click', fu
         } else {
             alert('Error: ' + data.message);
         }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const habitaciones = JSON.parse(localStorage.getItem('habitacionesDisponibles'));
+    const contenedor = document.querySelector('#contenedor-habitaciones');
+
+    // Verificar si hay habitaciones disponibles
+    if (!habitaciones || !Array.isArray(habitaciones) || habitaciones.length === 0) {
+        contenedor.innerHTML = `
+            <div class="mensaje-sin-disponibilidad">
+                <h2>No hay habitaciones disponibles</h2>
+                <p>Lo sentimos, no encontramos habitaciones para las fechas seleccionadas.</p>
+                <a href="../../index.html" class="btn-volver">Volver a intentar</a>
+            </div>
+        `;
+        return;
+    }
+
+    // Mostrar habitaciones disponibles
+    habitaciones.forEach(hab => {
+        const div = document.createElement('div');
+        div.classList.add('card-habitacion');
+        div.innerHTML = `
+            <h3>${hab.tipo_hab}</h3>
+            <p>${hab.descripcion_hab}</p>
+            <img src="${hab.imagen}" alt="${hab.tipo_hab}" />
+            <p>Precio: $${hab.precio}</p>
+        `;
+        contenedor.appendChild(div);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const habitaciones = JSON.parse(localStorage.getItem('habitacionesDisponibles'));
+    const contenedor = document.querySelector('#contenedor-habitaciones');
+
+    if (!habitaciones || !Array.isArray(habitaciones) || habitaciones.length === 0) {
+        contenedor.innerHTML = `
+            <div class="mensaje-sin-disponibilidad">
+                <h2>No hay habitaciones disponibles</h2>
+                <p>Lo sentimos, no encontramos habitaciones para las fechas seleccionadas.</p>
+                <p>Serás redirigido automáticamente en 5 segundos...</p>
+            </div>
+        `;
+
+        // Redirigir automáticamente después de 5 segundos
+        setTimeout(() => {
+            window.location.href = '../../index.html';
+        }, 5000);
+
+        return;
+    }
+
+    habitaciones.forEach(hab => {
+        const div = document.createElement('div');
+        div.classList.add('card-habitacion');
+        div.innerHTML = `
+            <h3>${hab.tipo_hab}</h3>
+            <p>${hab.descripcion_hab}</p>
+            <img src="${hab.imagen}" alt="${hab.tipo_hab}" />
+            <p>Precio: $${hab.precio}</p>
+        `;
+        contenedor.appendChild(div);
     });
 });
 
