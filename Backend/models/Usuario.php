@@ -8,6 +8,7 @@ require "../config/database.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
 require __DIR__ . "/../../vendor/autoload.php"; 
 
