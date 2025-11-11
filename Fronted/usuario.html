@@ -5,13 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/translate2.css">
 
  <title>Sesión</title>
 </head>
 
 <body>
 
-    <a id="btn"  href="Ingles/usuarioING.html"> Traducir <i class='bx bx-transfer'></i></a>
+     <!-- IDIOMA -->
+        <div class="language-selector position-relative m-0">
+          <button class="language-btn" onclick="toggleDropdown()">Idioma</button>
+          <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
+            <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
+            <div class="language-option" onclick="changeLanguage('fr')">🇫🇷 Français</div>
+            <div class="language-option" onclick="changeLanguage('de')">🇩🇪 Deutsch</div>
+            <div class="language-option" onclick="changeLanguage('it')">🇮🇹 Italiano</div>
+            <div class="language-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
+          </div>
+        </div>
+
+        <!-- Div oculto de Google Translate -->
+        <div id="google_translate_element" style="display: none;"></div>
+
 
     <div class="container" id="container">
         <div class="form-container sign-up">
@@ -65,6 +81,7 @@
             </div>
         </div>
     </div>
+    <script src="js/translate.js"></script>
 <script type="module" src="./js/usuario.js"></script>
 </body>
 </html>
