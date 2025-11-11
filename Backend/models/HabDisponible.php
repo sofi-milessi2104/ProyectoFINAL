@@ -6,7 +6,7 @@ class HabDisponible {
         $this->conn = $db;
     }
 
-    public function obtenerHabitacionesDisponibles($fechaInicio, $fechaFin) {
+    public function obtenerDisponibles($fechaInicio, $fechaFin) {
         try {
             $sql = "
                 SELECT * FROM habitaciones h

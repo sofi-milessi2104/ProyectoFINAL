@@ -26,7 +26,7 @@ $db = $database->getConnection();
 $habitacion = new HabDisponible($db);
 
 // Obtener habitaciones disponibles
-$resultado = $habitacion->obtenerHabitacionesDisponibles($fechaInicio, $fechaFin);
+$resultado = $habitacion->obtenerDisponibles($fechaInicio, $fechaFin);
 
 // Devolver resultado como JSON
 echo json_encode($resultado);

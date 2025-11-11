@@ -1,7 +1,7 @@
 let todasLasHabitaciones = [];
 let parametrosBusqueda = {};
 
-async function obtenerHabitacionesDisponibles() {
+async function obtenerDisponibles() {
     try {
         const urlParams = new URLSearchParams(window.location.search);
         const checkin = urlParams.get('checkin');
@@ -106,7 +106,7 @@ function agregarEventListeners() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    obtenerHabitacionesDisponibles();
+    obtenerDisponibles();
 });
 
 
@@ -115,9 +115,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const habitaciones= JSON.parse(localStorage.getItem('habitacionesDisponibles'));
 
 if (!habitaciones || !Array.isArray(habitaciones)) {
-    contenedor.innerHTML = '<p>No hay habitaciones disponibles.</p>';
+    contenedor.innerHTML = 'No hay habitaciones disponibles.';
     setTimeout(() => {
-        window.location.href = '../../index.html';
+        window.location.href = '../Frontend/index.html';
     }, 5000);
     return;
 }
@@ -140,7 +140,7 @@ document.querySelector('.btn-buscardisponibilidad').addEventListener('click', fu
 
     console.log('Enviando fechas:', fechaInicio, fechaFin);
 
-    fetch('Backend/controllers/HabDisponibleController.php', {
+    fetch('../Backend/controllers/habDisponible.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -153,7 +153,7 @@ document.querySelector('.btn-buscardisponibilidad').addEventListener('click', fu
     .then(data => {
         if (data.success) {
             localStorage.setItem('habitacionesDisponibles', JSON.stringify(data.data));
-            window.location.href = 'Frontend/pages/habDisponible.html';
+            window.location.href = '../Frontend/habDisponible.html';
         } else {
             alert('Error: ' + data.message);
         }
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
         `;
         setTimeout(() => {
-            window.location.href = '../../index.html';
+            window.location.href = '../Frontend/index.html';
         }, 5000);
         return;
     }
