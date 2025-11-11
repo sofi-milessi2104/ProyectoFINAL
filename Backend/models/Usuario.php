@@ -1,4 +1,9 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+header('Content-Type: application/json');
+
 require "../config/database.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -43,11 +48,11 @@ public function loginAdd($nombre, $apellido, $email, $celular, $password) {
     ]);
 
     if ($ok) {
-       
+        // devuelve true + id insertado para poder usarlo desde el controller
         return ["ok" => true, "id" => $this->pdo->lastInsertId()];
     } else {
-       
-        $err = $stmt->errorInfo(); 
+        // devuelve errorInfo para depuración
+        $err = $stmt->errorInfo(); // [SQLSTATE, driverCode, driverMessage]
         return ["ok" => false, "error" => $err];
     }
 }

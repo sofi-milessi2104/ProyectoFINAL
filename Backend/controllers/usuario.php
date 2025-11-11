@@ -1,4 +1,10 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+header('Content-Type: application/json');
+
+
 require "../config/database.php";
 require "../models/Usuario.php";
 
@@ -21,14 +27,14 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
     try {
         if ($usuarioModel->loginAdd($nombre, $apellido, $email, $celular, $password)) {
 
-            
+            // ✉️ Envío de correo de bienvenida
             $mail = new PHPMailer(true);
             try {
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
                 $mail->Username   = 'sofia.milessi2008@gmail.com';
-                $mail->Password   = 'sshyxbeijzqnmzjl'; 
+                $mail->Password   = 'sshyxbeijzqnmzjl'; // ⚠️ Contraseña de aplicación
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
 
@@ -36,7 +42,7 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
                 $mail->addAddress($email);
 
                 $mail->isHTML(true);
-                $mail->Subject = "Bienvenido/a $nombre a Hotel Costa Colonia!";
+                $mail->Subject = '¡Bienvenido/a a Hotel Costa Colonia!';
 
                 $mail->Body = "
                     <div style='
@@ -57,16 +63,12 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
                             <h2 style='color: #3b7a57;'>¡Hola $nombre!</h2>
                             <p style='font-size: 16px; line-height: 1.6;'>
                                 ¡Bienvenido/a a <strong>Hotel Costa Colonia</strong>!  
-                                Tu cuenta se creó exitosamente. A partir de ahora podés iniciar sesión y disfrutar de todos nuestros servicios únicos diseñados para ti.
+                                Tu cuenta se creó exitosamente. A partir de ahora podés iniciar sesión y disfrutar de todos nuestros servicios.
                             </p>
 
                             <p style='font-size: 16px; line-height: 1.6;'>
-                           <strong> Disfrute de una estadía inigualable con nosotros </strong>
-                            <br>
-                            <br>
-                            Lo invitamos a aprovechar nuestras promociones exclusivas, servicios personalizados 
-                            y el entorno incomparable que hacen de Hotel Costa Colonia un lugar ideal para su descanso y bienestar.
-                        </p>
+                                Te esperamos con nuestras mejores promociones y experiencias únicas frente al río 🌿
+                            </p>
 
                             <div style='margin-top: 30px; text-align: center;'>
                                 <a href='https://hotelcostacolonia.com' 
@@ -97,7 +99,7 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
                 error_log("Error al enviar correo de registro: {$mail->ErrorInfo}");
             }
 
-           
+            // ✅ Respuesta exitosa
             echo json_encode([
                 "status" => true,
                 "rol" => "usuario",
@@ -125,14 +127,14 @@ function loginUsuario($email, $password) {
     $resultado = $usuarioModel->login($email, $password);
 
     if ($resultado) {
-
+        // ✉️ Envío de correo de inicio de sesión exitoso
         $mail = new PHPMailer(true);
         try {
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
             $mail->Username   = 'sofia.milessi2008@gmail.com';
-            $mail->Password   = 'sshyxbeijzqnmzjl';
+            $mail->Password   = 'sshyxbeijzqnmzjl'; // ⚠️ Contraseña de aplicación
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
@@ -154,22 +156,18 @@ function loginUsuario($email, $password) {
                     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
                 '>
                     <div style='text-align: center; margin-bottom: 25px;'>
-                       <h1 style='color: #2f5d50; margin-top: 15px; font-size: 24px;'>Hotel Costa Colonia</h1>
+                        <h1 style='color: #2f5d50; margin-top: 15px; font-size: 24px;'>Hotel Costa Colonia</h1>
                     </div>
 
                     <div style='color: #333;'>
                         <h2 style='color: #3b7a57;'>¡Hola de nuevo!</h2>
                         <p style='font-size: 16px; line-height: 1.6;'>
-                            Nos complace darle la bienvenida nuevamente a <strong>Hotel Costa Colonia</strong>.  
-                            Su inicio de sesión fue exitoso, ya puedes seguir disfrutando de la calidez, el confort y 
-                            de las experiencias únicas frente al río de nuestro Hotel.
+                            Nos alegra verte regresar a <strong>Hotel Costa Colonia</strong>.  
+                            Tu inicio de sesión fue exitoso, ya podés continuar disfrutando de nuestras experiencias únicas frente al río.
                         </p>
 
                         <p style='font-size: 16px; line-height: 1.6;'>
-                            <strong> Viví lo mejor con nosotros 🌿</strong>
-                            <br>
-                            <br>
-                        Lo invitamos a aprovechar nuestra nuestras promociones exclusivas, beneficios especiales y el servicio personalizado que nos distingue. Tu proxima escapada comienza aquí 🍀
+                            Te esperamos con nuestras mejores promociones y servicios exclusivos 🌿
                         </p>
 
                         <div style='margin-top: 30px; text-align: center;'>
@@ -201,24 +199,19 @@ function loginUsuario($email, $password) {
             error_log("Error al enviar correo de inicio de sesión: {$mail->ErrorInfo}");
         }
 
+        // ✅ Enviar respuesta exitosa
         echo json_encode([
             "status" => true,
             "rol" => "usuario",
             "data" => $resultado
         ]);
     } else {
-        echo json_encode(["status" => false, "message" => "Credenciales incorrectas"]);
+        echo json_encode([
+            "status" => false,
+            "message" => "Credenciales incorrectas"
+        ]);
     }
 }
 
-function eliminarUsuario($id) {
-    global $usuarioModel;
-    if ($usuarioModel->eliminar($id)) {
-        echo json_encode(["message" => "Usuario eliminado correctamente."]);
-    } else {
-        echo json_encode(["message" => "Error al eliminar el usuario."]);
-    }
-}
+
 ?>
-
-

@@ -123,7 +123,7 @@ else {
     exit;
 }
 
-<?php
+
 header('Content-Type: application/json');
 
 $url = isset($_GET['url']) ? $_GET['url'] : '';
