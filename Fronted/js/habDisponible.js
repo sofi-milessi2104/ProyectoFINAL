@@ -111,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 document.addEventListener('DOMContentLoaded', function () {
+    const contenedor = document.querySelector('#contenedor-habDisponibles');
     const habitaciones= JSON.parse(localStorage.getItem('habitacionesDisponibles'));
 
 if (!habitaciones || !Array.isArray(habitaciones)) {
@@ -121,7 +122,6 @@ if (!habitaciones || !Array.isArray(habitaciones)) {
     return;
 }
 
-    const contenedor = document.querySelector('#contenedor-habitaciones');
     habitaciones.forEach(hab => {
         const div = document.createElement('div');
         div.innerHTML = `
@@ -160,6 +160,7 @@ document.querySelector('.btn-buscardisponibilidad').addEventListener('click', fu
     });
 });
 
+
 document.addEventListener('DOMContentLoaded', function () {
     const habitaciones = JSON.parse(localStorage.getItem('habitacionesDisponibles'));
     const contenedor = document.querySelector('#contenedor-habitaciones');
@@ -194,39 +195,5 @@ document.addEventListener('DOMContentLoaded', function () {
         contenedor.appendChild(div);
     });
 });
-
-document.addEventListener('DOMContentLoaded', function () {
-    const habitaciones = JSON.parse(localStorage.getItem('habitacionesDisponibles'));
-    const contenedor = document.querySelector('#contenedor-habitaciones');
-
-    if (!habitaciones || !Array.isArray(habitaciones) || habitaciones.length === 0) {
-        contenedor.innerHTML = `
-            <div class="mensaje-sin-disponibilidad">
-                <h2>No hay habitaciones disponibles</h2>
-                <p>Lo sentimos, no encontramos habitaciones para las fechas seleccionadas.</p>
-                <p>Serás redirigido automáticamente en 5 segundos...</p>
-            </div>
-        `;
-
-        // Redirigir automáticamente después de 5 segundos
-        setTimeout(() => {
-            window.location.href = '../../index.html';
-        }, 5000);
-
-        return;
-    }
-
-    habitaciones.forEach(hab => {
-        const div = document.createElement('div');
-        div.classList.add('card-habitacion');
-        div.innerHTML = `
-            <h3>${hab.tipo_hab}</h3>
-            <p>${hab.descripcion_hab}</p>
-            <img src="${hab.imagen}" alt="${hab.tipo_hab}" />
-            <p>Precio: $${hab.precio}</p>
-        `;
-        contenedor.appendChild(div);
-    });
 });
 
-});

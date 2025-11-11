@@ -103,10 +103,13 @@ document.querySelector('.btn-buscardisponibilidad').addEventListener('click', fu
     const fechaInicio = document.querySelector('#fecha_inicio').value;
     const fechaFin = document.querySelector('#fecha_fin').value;
 
-    fetch('Backend/controllers/HabDisponibleController.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fecha_inicio: fechaInicio, fecha_fin: fechaFin })
+    fetch('Backend/controllers/habDisponible.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        fecha_inicio: fechaInicio,
+        fecha_fin: fechaFin
+    })
     })
     .then(response => response.json())
     .then(data => {
