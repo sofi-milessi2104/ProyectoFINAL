@@ -92,7 +92,7 @@ document.querySelector('.btn-buscardisponibilidad').addEventListener('click', fu
 
     console.log('Enviando fechas:', fechaInicio, fechaFin);
 
-    fetch('../Backend/controllers/habDisponible.php', {
+    fetch('../Backend/routes/habDisponible.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
