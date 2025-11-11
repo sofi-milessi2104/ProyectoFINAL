@@ -108,3 +108,45 @@ function agregarEventListeners() {
 document.addEventListener("DOMContentLoaded", function() {
     obtenerHabitacionesDisponibles();
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const habitaciones= JSON.parse(localStorage.getItem('habitacionesDisponibles'));
+
+    const contenedor = document.querySelector('#contenedor-habitaciones');
+    habitaciones.forEach(hab => {
+        const div = document.createElement('div');
+        div.innerHTML = `
+            <h3>${hab.tipo_hab}</h3>
+            <p>${hab.descripcion_hab}</p>
+            <img src="${hab.imagen}" alt="${hab.tipo_hab}" />
+            <p>Precio: $${hab.precio}</p>
+        `;
+        contenedor.appendChild(div);
+    });
+
+
+document.querySelector('.btn-buscardisponibilidad').addEventListener('click', function () {
+    const fechaInicio = document.querySelector('#fecha_inicio').value;
+    const fechaFin = document.querySelector('#fecha_fin').value;
+
+    fetch('Backend/controllers/HabDisponibleController.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            fecha_inicio: fechaInicio,
+            fecha_fin: fechaFin
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            localStorage.setItem('habitacionesDisponibles', JSON.stringify(data.data));
+            window.location.href = 'Frontend/pages/habDisponible.html';
+        } else {
+            alert('Error: ' + data.message);
+        }
+    });
+});
+
+});

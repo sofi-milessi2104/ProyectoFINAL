@@ -11,25 +11,37 @@ class HabDisponible {
     /**
      * Obtiene habitaciones disponibles según los parámetros de búsqueda
      */
-    public function obtenerDisponibles($fecha_inicio, $fecha_fin, $adultos = null, $ninos = null) {
+    public function obtenerHabitacionesDisponibles($fechaInicio, $fechaFin) {
+    try {
         $sql = "
-            SELECT h.*
-            FROM {$this->table_habitaciones} h
+            SELECT * FROM habitaciones h
             WHERE h.id_hab NOT IN (
-                SELECT DISTINCT r.id_habitacion
-                FROM {$this->table_reservas} r
-                WHERE r.estado = 'confirmada'
-                AND (r.fecha_inicio < :fecha_fin AND r.fecha_fin > :fecha_inicio)
+                SELECT r.id_habitacion
+                FROM reservas r
+                WHERE NOT (
+                    r.fecha_fin < :fechaInicio OR
+                    r.fecha_inicio > :fechaFin
+                )
             )
-            ORDER BY h.precio ASC
         ";
 
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':fecha_inicio', $fecha_inicio);
-        $stmt->bindParam(':fecha_fin', $fecha_fin);
+        $stmt->bindParam(':fechaInicio', $fechaInicio);
+        $stmt->bindParam(':fechaFin', $fechaFin);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $habitaciones = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return ['success' => true, 'data' => $habitaciones];
+
+    } catch (PDOException $e) {
+        return [
+            'success' => false,
+            'message' => 'Error: ' . $e->getMessage(),
+            'file' => __FILE__,
+            'line' => __LINE__
+        ];
     }
+}
 
     /**
      * Verifica si una habitación específica está disponible en un rango de fechas
