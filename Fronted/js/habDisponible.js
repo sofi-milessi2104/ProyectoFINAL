@@ -1,50 +1,6 @@
 let todasLasHabitaciones = [];
 let parametrosBusqueda = {};
 
-async function obtenerDisponibles() {
-    try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const checkin = urlParams.get('checkin');
-        const checkout = urlParams.get('checkout');
-        const adultos = urlParams.get('adultos');
-        const ninios = urlParams.get('ninios') || urlParams.get('ninos') || urlParams.get('niños');
-
-        parametrosBusqueda = { checkin, checkout, adultos, ninios };
-
-        let url = '../Backend/controllers/habDisponible.php?action=obtenerDisponibles';
-        if (checkin && checkout) {
-            url += `&fecha_inicio=${encodeURIComponent(checkin)}&fecha_fin=${encodeURIComponent(checkout)}`;
-            if (adultos !== null && adultos !== undefined) url += `&adultos=${encodeURIComponent(adultos)}`;
-            if (ninios !== null && ninios !== undefined) url += `&ninios=${encodeURIComponent(ninios)}`;
-        }
-
-        console.log("URL de solicitud:", url);
-        const respuesta = await fetch(url);
-
-        const texto = await respuesta.text(); // siempre leer el cuerpo
-        console.log("Cuerpo respuesta servidor:", texto);
-
-        if (!respuesta.ok) {
-            // muestra el HTML/ERROR devuelto por PHP
-            throw new Error(`HTTP ${respuesta.status}: ${texto.substring(0, 500)}`);
-        }
-
-        const data = JSON.parse(texto);
-        if (!data.success || !Array.isArray(data.data)) {
-            throw new Error(data.message || "No se pudieron obtener las habitaciones");
-        }
-
-        todasLasHabitaciones = data.data;
-        renderizarHabitaciones(todasLasHabitaciones);
-
-    } catch (error) {
-        console.error("Error al obtener habitaciones:", error);
-        const contenedor = document.getElementById("contenedor-habDisponible");
-        if (contenedor) {
-            contenedor.innerHTML = `<div class="alert alert-danger text-center" role="alert">Ocurrió un error al cargar las habitaciones. ${error.message}</div>`;
-        }
-    }
-}
 
 function renderizarHabitaciones(habitaciones) {
     const contenedor = document.getElementById("contenedor-habDisponible");
@@ -163,7 +119,7 @@ document.querySelector('.btn-buscardisponibilidad').addEventListener('click', fu
 
 document.addEventListener('DOMContentLoaded', function () {
     const habitaciones = JSON.parse(localStorage.getItem('habitacionesDisponibles'));
-    const contenedor = document.querySelector('#contenedor-habitaciones');
+    const contenedor = document.querySelector('#contenedor-habDisponibles');
 
     if (!contenedor) {
         console.error('No se encontró el contenedor de habitaciones');
