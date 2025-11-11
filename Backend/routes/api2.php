@@ -1,7 +1,12 @@
 <?php
+// api.php
+// Este archivo actúa como enrutador principal y pasa el control al controlador.
+
+// Asegúrate de que esta ruta sea correcta para tu ubicación:
 require_once "../controllers/reserva.php"; 
-require_once "../controllers/ingresos.php"; // ✅ Asegurate que se llame así
-require_once "../routes/log.php";
+require_once "../routes/log.php"; // Incluye el archivo de log si lo usas
+
+header("Content-Type: application/json; charset=UTF-8");
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
@@ -10,37 +15,37 @@ if ($requestMethod == "GET") {
     $action = $_GET["action"] ?? null;
 
     if ($solicitud == "reserva") {
-
+        // Al incluir "../controllers/reserva.php" al inicio,
+        // todo su código se ejecuta. Este código ya contiene la lógica
+        // para manejar las acciones 'count_today' y 'list_today' basadas en $_GET.
+        
+        // Si la acción es de hoy, no hacemos nada más en api.php.
+        // El controlador de reserva.php (incluido al inicio) ya detectó la acción
+        // y envió la respuesta JSON.
         if ($action == 'count_today' || $action == 'list_today') {
-            exit; 
+            // No se pone 'exit;' aquí. Permitimos que el flujo continúe 
+            // hasta que el script de 'reserva.php' envíe la respuesta y termine la ejecución.
         } else {
+            // Asumiendo que esta es una función definida en otro lugar 
+            // (o dentro de reserva.php) para obtener una reserva específica
             obtenerReserva(); 
             exit;
         }
 
     } 
-    // ✅ RUTA PARA INGRESOS
-    elseif ($solicitud == "ingresos") {
-        $controller = new IngresosController();
-
-        if ($action == "mes") {
-            $controller->obtenerIngresosMensuales();
-        } 
-        else {
-            echo json_encode(["error" => "Acción de ingresos no válida"]);
-        }
-        exit;
-    } 
     
-    else {
-        echo json_encode(["error" => "Ruta no encontrada para GET"]);    
-    }
+    // Si la solicitud no es "reserva", el flujo continúa.
+
 }
 
+// La lógica POST se mantiene igual, ya que no parecía tener problemas:
 elseif ($requestMethod == "POST") {
     $solicitud = $_GET["url"] ?? null;
 
     if ($solicitud == "reserva") {
+        // Nota: Si el controlador 'reserva.php' ya está incluido y maneja el POST, 
+        // podrías simplificar este bloque, pero se mantiene la estructura original:
+        
         $nombre = $_POST["nombre"];
         $apellido = $_POST["apellido"];
         $email = $_POST["email"];
@@ -61,6 +66,7 @@ elseif ($requestMethod == "POST") {
         echo json_encode(["error" => "Ruta no encontrada para POST"]);
     }
 } else {
+    // Esto se ejecuta si el método no es GET ni POST (ej: PUT, DELETE)
     echo json_encode(["error" => "Método de solicitud no soportado"]);
 }
 ?>

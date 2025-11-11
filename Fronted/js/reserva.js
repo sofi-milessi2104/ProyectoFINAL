@@ -421,3 +421,35 @@ step3.querySelector('#step3-form').addEventListener('submit', async (e) => {
     });
 
 });
+document.addEventListener("DOMContentLoaded", function() {
+    // Obtiene el ID de la habitación desde localStorage
+    const idHabitacion = localStorage.getItem('selected_room_id');
+    
+    if (idHabitacion) {
+        console.log(`ID de habitación seleccionada: ${idHabitacion}`);
+        // Aquí cargas los detalles de la habitación
+        cargarDetallesHabitacion(idHabitacion);
+    } else {
+        console.error("No se encontró un ID de habitación en localStorage.");
+        document.getElementById("app").innerHTML = `
+            <div class="alert alert-warning">
+                No se seleccionó una habitación. Por favor, selecciona una habitación primero.
+                <a href="habDisponible.html">Volver a habitaciones disponibles</a>
+            </div>
+        `;
+    }
+});
+
+async function cargarDetallesHabitacion(idHabitacion) {
+    try {
+        const respuesta = await fetch(`../Backend/routes/api.php?url=habitacion&id=${idHabitacion}`);
+        const habitacion = await respuesta.json();
+        
+        // Aquí rellenas los detalles de la habitación en la página
+        document.getElementById('summary-habitacion').textContent = habitacion.tipo_hab;
+        document.getElementById('summary-precio-total').textContent = habitacion.precio;
+        // ... más detalles según necesites
+    } catch (error) {
+        console.error("Error al cargar detalles de la habitación: " + error);
+    }
+}
