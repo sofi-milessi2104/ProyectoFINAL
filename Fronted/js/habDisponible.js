@@ -61,10 +61,6 @@ function agregarEventListeners() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    obtenerDisponibles();
-});
-
 
 document.addEventListener('DOMContentLoaded', function () {
     const contenedor = document.querySelector('#contenedor-habDisponibles');
