@@ -97,7 +97,7 @@ function agregarEventListeners() {
             const idHabitacion = this.dataset.idHabitacion;
             
             // Guardar en localStorage
-            localStorage.setItem('selected_room_id', idHabitacion);
+            localStorage.setItem('habitacionesDisponibles', JSON.stringify(data.data));
             
             // Redirigir a reserva
             window.location.href = 'reserva.html';
@@ -114,7 +114,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const habitaciones= JSON.parse(localStorage.getItem('habitacionesDisponibles'));
 
 if (!habitaciones || !Array.isArray(habitaciones)) {
-    contenedor.innerHTML = '<p>No hay habitaciones disponibles o hubo un error al cargar los datos.</p>';
+    contenedor.innerHTML = '<p>No hay habitaciones disponibles.</p>';
+    setTimeout(() => {
+        window.location.href = '../../index.html';
+    }, 5000);
     return;
 }
 
@@ -135,6 +138,8 @@ document.querySelector('.btn-buscardisponibilidad').addEventListener('click', fu
     const fechaInicio = document.querySelector('#fecha_inicio').value;
     const fechaFin = document.querySelector('#fecha_fin').value;
 
+    console.log('Enviando fechas:', fechaInicio, fechaFin);
+
     fetch('Backend/controllers/HabDisponibleController.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -143,6 +148,7 @@ document.querySelector('.btn-buscardisponibilidad').addEventListener('click', fu
             fecha_fin: fechaFin
         })
     })
+
     .then(response => response.json())
     .then(data => {
         if (data.success) {
@@ -158,19 +164,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const habitaciones = JSON.parse(localStorage.getItem('habitacionesDisponibles'));
     const contenedor = document.querySelector('#contenedor-habitaciones');
 
-    // Verificar si hay habitaciones disponibles
+    if (!contenedor) {
+        console.error('No se encontró el contenedor de habitaciones');
+        return;
+    }
+
     if (!habitaciones || !Array.isArray(habitaciones) || habitaciones.length === 0) {
         contenedor.innerHTML = `
             <div class="mensaje-sin-disponibilidad">
                 <h2>No hay habitaciones disponibles</h2>
-                <p>Lo sentimos, no encontramos habitaciones para las fechas seleccionadas.</p>
-                <a href="../../index.html" class="btn-volver">Volver a intentar</a>
+                <p>Serás redirigido automáticamente en 5 segundos...</p>
             </div>
         `;
+        setTimeout(() => {
+            window.location.href = '../../index.html';
+        }, 5000);
         return;
     }
 
-    // Mostrar habitaciones disponibles
     habitaciones.forEach(hab => {
         const div = document.createElement('div');
         div.classList.add('card-habitacion');
