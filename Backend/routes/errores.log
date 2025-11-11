@@ -1,7 +1,1 @@
 
-[11-Nov-2025 18:17:55 Europe/Berlin] PHP Deprecated:  Creation of dynamic property PHPMailer\PHPMailer\SMTP::$last_reply is deprecated in C:\xampp\htdocs\ProyectoFINAL\vendor\phpmailer\phpmailer\src\PHPMailer.php on line 315
-[11-Nov-2025 18:18:05 Europe/Berlin] Error al enviar correo de registro: SMTP authentication failed
-[11-Nov-2025 18:18:13 Europe/Berlin] PHP Deprecated:  Creation of dynamic property PHPMailer\PHPMailer\SMTP::$last_reply is deprecated in C:\xampp\htdocs\ProyectoFINAL\vendor\phpmailer\phpmailer\src\PHPMailer.php on line 315
-[11-Nov-2025 18:18:24 Europe/Berlin] Error al enviar correo de registro: SMTP authentication failed
-[11-Nov-2025 18:20:17 Europe/Berlin] PHP Deprecated:  Creation of dynamic property PHPMailer\PHPMailer\SMTP::$last_reply is deprecated in C:\xampp\htdocs\ProyectoFINAL\vendor\phpmailer\phpmailer\src\PHPMailer.php on line 315
-[11-Nov-2025 18:20:27 Europe/Berlin] Error al enviar correo de inicio de sesión: SMTP authentication failed
