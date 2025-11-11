@@ -12,13 +12,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
+
   <body class="bg-light">
+
 <nav class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-4 shadow-sm sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand me-5 fw-bold fs-3 h-2font" href="index.html">
       <img src="img/logo.png" alt="Hotel Costa Colonia" width="150" height="30">
     </a>
-    <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -31,11 +33,14 @@
         <li class="nav-item"><a class="nav-link me-2" href="restaurante.html">Restaurante</a></li>
       </ul>
 
-      <div class="d-flex align-items-center gap-2">
-        <a href="usuario.html" class="btn-login">Login</a>
+          <div class="d-flex align-items-center gap-2 ms-auto">
 
+        <!-- LOGIN NORMAL -->
+        <a href="usuario.html" class="btn-login" id="loginLink">Login</a>
+
+        <!-- IDIOMA -->
         <div class="language-selector position-relative m-0">
-          <button class="language-btn" onclick="toggleDropdown()">🌐 Idioma</button>
+          <button class="language-btn" onclick="toggleDropdown()">Idioma</button>
           <div class="language-dropdown" id="languageDropdown">
             <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
             <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
@@ -46,8 +51,21 @@
           </div>
         </div>
 
+        <!-- PERFIL DE USUARIO (a la derecha del idioma) -->
+        <div class="user-menu" id="userMenuContainer" style="display: none;">
+          <div class="user-avatar" id="userAvatar">S</div>
+          <div class="dropdown hidden" id="userDropdown">
+            <p id="userEmail" class="user-email"></p>
+            <a href="reservas.html" class="user-option">Mis reservas</a>
+            <button id="logoutBtn" class="user-option logout">Cerrar sesión</button>
+          </div>
+        </div>
+
+        <!-- Div oculto de Google Translate -->
         <div id="google_translate_element" style="display: none;"></div>
+
       </div>
+
     </div>
   </div>
 </nav>
