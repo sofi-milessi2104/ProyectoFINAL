@@ -20,6 +20,84 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
 
     try {
         if ($usuarioModel->loginAdd($nombre, $apellido, $email, $celular, $password)) {
+
+            // ✉️ Envío de correo de bienvenida
+            $mail = new PHPMailer(true);
+            try {
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'sofia.milessi2008@gmail.com';
+                $mail->Password   = 'sshyxbeijzqnmzjl'; // ⚠️ Contraseña de aplicación
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port       = 587;
+
+                $mail->setFrom('sofia.milessi2008@gmail.com', 'Hotel Costa Colonia');
+                $mail->addAddress($email);
+
+                $mail->isHTML(true);
+                $mail->Subject = "Bienvenido/a $nombre a Hotel Costa Colonia!";
+
+                $mail->Body = "
+                    <div style='
+                        font-family: Arial, sans-serif;
+                        padding: 30px;
+                        background-color: #f9fdf9;
+                        border: 1px solid #e0eee0;
+                        border-radius: 12px;
+                        max-width: 600px;
+                        margin: auto;
+                        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                    '>
+                        <div style='text-align: center; margin-bottom: 25px;'>
+                            <h1 style='color: #2f5d50; margin-top: 15px; font-size: 24px;'>Hotel Costa Colonia</h1>
+                        </div>
+
+                        <div style='color: #333;'>
+                            <h2 style='color: #3b7a57;'>¡Hola $nombre!</h2>
+                            <p style='font-size: 16px; line-height: 1.6;'>
+                                ¡Bienvenido/a a <strong>Hotel Costa Colonia</strong>!  
+                                Tu cuenta se creó exitosamente. A partir de ahora podés iniciar sesión y disfrutar de todos nuestros servicios únicos diseñados para ti.
+                            </p>
+
+                            <p style='font-size: 16px; line-height: 1.6;'>
+                           <strong> Disfrute de una estadía inigualable con nosotros </strong>
+                            <br>
+                            <br>
+                            Lo invitamos a aprovechar nuestras promociones exclusivas, servicios personalizados 
+                            y el entorno incomparable que hacen de Hotel Costa Colonia un lugar ideal para su descanso y bienestar.
+                        </p>
+
+                            <div style='margin-top: 30px; text-align: center;'>
+                                <a href='https://hotelcostacolonia.com' 
+                                   style='
+                                       background-color: #3b7a57; 
+                                       color: white; 
+                                       padding: 12px 25px; 
+                                       text-decoration: none; 
+                                       border-radius: 25px; 
+                                       font-weight: bold;
+                                   '>
+                                   Ir al sitio
+                                </a>
+                            </div>
+                        </div>
+
+                        <hr style='margin-top: 35px; border: none; border-top: 1px solid #ddd;'>
+
+                        <p style='font-size: 12px; color: #888; text-align: center; margin-top: 15px;'>
+                            © Hotel Costa Colonia, Uruguay.<br>
+                            Este mensaje fue enviado automáticamente, por favor no respondas.
+                        </p>
+                    </div>
+                ";
+
+                $mail->send();
+            } catch (Exception $e) {
+                error_log("Error al enviar correo de registro: {$mail->ErrorInfo}");
+            }
+
+            // ✅ Respuesta exitosa
             echo json_encode([
                 "status" => true,
                 "rol" => "usuario",
@@ -82,12 +160,16 @@ function loginUsuario($email, $password) {
                     <div style='color: #333;'>
                         <h2 style='color: #3b7a57;'>¡Hola de nuevo!</h2>
                         <p style='font-size: 16px; line-height: 1.6;'>
-                            Nos alegra verte regresar a <strong>Hotel Costa Colonia</strong>.  
-                            Tu inicio de sesión fue exitoso y ya puedes continuar disfrutando de nuestras experiencias únicas frente al río.
+                            Nos complace darle la bienvenida nuevamente a <strong>Hotel Costa Colonia</strong>.  
+                            Su inicio de sesión fue exitoso, ya puedes seguir disfrutando de la calidez, el confort y 
+                            de las experiencias únicas frente al río de nuestro Hotel.
                         </p>
 
                         <p style='font-size: 16px; line-height: 1.6;'>
-                            Te esperamos con nuestras mejores promociones y servicios exclusivos 🌿
+                            <strong> Viví lo mejor con nosotros 🌿</strong>
+                            <br>
+                            <br>
+                        Lo invitamos a aprovechar nuestra nuestras promociones exclusivas, beneficios especiales y el servicio personalizado que nos distingue. Tu proxima escapada comienza aquí 🍀
                         </p>
 
                         <div style='margin-top: 30px; text-align: center;'>
