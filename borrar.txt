@@ -1,6 +1,5 @@
 Cosas por hacer o mejorar:
 
-
 *HECHO*
 ✔ tamaño card
 ✔ suite / suit
@@ -15,22 +14,18 @@ Cosas por hacer o mejorar:
 ✔ corregir login múltiples y agregar mensaje de "login exitoso"
 ✔ grafico de gauss
 ✔ PERFIL (login)
+✔ Poder ver reservas que se hicieron antes etc al hacer login
+✔ perfil de admin
+✔ preguntas frecuentes 
 
 *CÓDIGO*
- ± perfil de admin 
- - Poder ver reservas que se hicieron antes etc al hacer login
- - preguntas frecuentes 
- - todos los servicios
  - Menú hacer responsive
-
 
 *INTEGRAR*
  - manual de admin
  - diallogFlow
 
-
 *PRESENTACIÓN*
  - "resumen" explicando lo más importante del código
- - orden del micrófono
  - video para explicar la web y testing ((mostrar tamaños (responsividad))) //para no tener que estar ingresando datos ahí
  - carpeta impresa

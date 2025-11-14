@@ -4,15 +4,16 @@ body {
     font-family: 'Open Sans', sans-serif;
     background-color: #f8f3ef;
     color: #4b4b4b;
-    padding: 20px;
+    padding: 10px;
     line-height: 1.6;
+    margin: 0;
 }
 
 .menu-container {
     max-width: 900px;
     margin: 0 auto;
     background-color: #fffaf5;
-    padding: 60px 40px;
+    padding: 30px 20px;
     border-radius: 16px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
     border: 1px solid #eae0d5;
@@ -21,9 +22,9 @@ body {
 .menu-title {
     font-family: 'Playfair Display', serif;
     text-align: center;
-    font-size: 3.2em;
+    font-size: 2em;
     font-weight: 700;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     color: #7b4b2a;
     position: relative;
 }
@@ -174,3 +175,87 @@ body {
     }
 }
 
+/* RESPONSIVO */
+@media (min-width: 768px) {
+    body {
+        padding: 20px;
+    }
+    
+    .menu-container {
+        padding: 60px 40px;
+    }
+    
+    .menu-title {
+        font-size: 3.2em !important;
+        margin-bottom: 50px !important;
+    }
+    
+    .menu-header {
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 40px;
+    }
+    
+    .menu-logo {
+        max-width: 80px;
+    }
+    
+    .filter-buttons {
+        margin-bottom: 45px;
+    }
+}
+
+@media (max-width: 767px) {
+    .menu-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .menu-logo {
+        max-width: 60px;
+    }
+    
+    .filter-buttons {
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+    
+    .filter-btn {
+        padding: 8px 16px;
+        font-size: 0.85em;
+    }
+    
+    .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .item-name {
+        font-size: 1.2em;
+    }
+    
+    .item-description {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-container {
+        padding: 20px 15px;
+        border-radius: 8px;
+    }
+    
+    .menu-title {
+        font-size: 1.8em !important;
+    }
+    
+    .menu-logo {
+        max-width: 50px;
+    }
+    
+    .filter-btn {
+        padding: 6px 12px;
+        font-size: 0.8em;
+    }
+}
