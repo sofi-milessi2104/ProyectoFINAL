@@ -26,6 +26,38 @@ try {
         throw new Exception("La conexión a la base de datos no está disponible.");
     }
 
+    // Verificar si es una petición POST para eliminar
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $input = json_decode(file_get_contents('php://input'), true);
+        
+        if (isset($input['action']) && $input['action'] === 'eliminar') {
+            $id_reserva = $input['id_reserva'] ?? null;
+            
+            if (!$id_reserva) {
+                responder(['success' => false, 'message' => 'ID de reserva no proporcionado'], 400);
+            }
+            
+            // Iniciar transacción
+            $pdo->beginTransaction();
+            
+            try {
+                // Eliminar primero los servicios asociados
+                $stmtServ = $pdo->prepare("DELETE FROM reserva_servicio WHERE id_reserva = ?");
+                $stmtServ->execute([$id_reserva]);
+                
+                // Luego eliminar la reserva
+                $stmtReserva = $pdo->prepare("DELETE FROM reserva WHERE id_reserva = ?");
+                $stmtReserva->execute([$id_reserva]);
+                
+                $pdo->commit();
+                responder(['success' => true, 'message' => 'Reserva eliminada correctamente'], 200);
+            } catch (Exception $e) {
+                $pdo->rollBack();
+                responder(['success' => false, 'message' => 'Error al eliminar: ' . $e->getMessage()], 500);
+            }
+        }
+    }
+
     // Query: obtener reservas con usuario (si existe), habitación y servicios (resumido)
     $sql = "
         SELECT

@@ -91,6 +91,11 @@ async function cargarReservas() {
                 <td>${reserva.check_out}</td>
                 <td>${reserva.habitacion}</td>
                 <td>${reserva.servicios_extra_resumen}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm shadow-none" onclick="eliminarReserva(${reserva.id})">
+                        <i class="bi bi-trash-fill"></i>
+                    </button>
+                </td>
             `;
             cuerpoTabla.appendChild(fila);
         });
@@ -104,6 +109,41 @@ async function cargarReservas() {
             : error.message;
 
         cuerpoTabla.innerHTML = `<tr><td colspan="9" class="text-center text-danger">Error: ${mensajeError}</td></tr>`;
+    }
+}
+
+/**
+ * Eliminar una reserva
+ * @param {number} id - ID de la reserva a eliminar
+ */
+async function eliminarReserva(id) {
+    if (!confirm(`¿Está seguro de eliminar la reserva #${id}?`)) {
+        return;
+    }
+
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                action: 'eliminar',
+                id_reserva: id
+            })
+        });
+
+        const resultado = await response.json();
+
+        if (resultado.success) {
+            mostrarAlerta('Reserva eliminada correctamente', 'success');
+            cargarReservas();
+        } else {
+            mostrarAlerta(resultado.message || 'Error al eliminar la reserva', 'danger');
+        }
+    } catch (error) {
+        console.error('Error al eliminar reserva:', error);
+        mostrarAlerta('Error de conexión al eliminar la reserva', 'danger');
     }
 }
 // Las demás funciones (mostrarDetalles, actualizarEstado) no requieren cambios.
