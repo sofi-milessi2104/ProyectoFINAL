@@ -25,7 +25,10 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
     header('Content-Type: application/json; charset=utf-8');
 
     try {
-        if ($usuarioModel->loginAdd($nombre, $apellido, $email, $celular, $password)) {
+        $res = $usuarioModel->loginAdd($nombre, $apellido, $email, $celular, $password);
+
+        if (is_array($res) && !empty($res['ok'])) {
+            $nuevoId = $res['id'] ?? null;
 
             if (class_exists('PHPMailer\PHPMailer\PHPMailer')) {
                 $mail = new PHPMailer(true);
@@ -110,14 +113,19 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
                 "status" => true,
                 "rol" => "usuario",
                 "data" => [
+                    "id_usuario" => $nuevoId,
                     "nombre" => $nombre,
-                    "email" => $email
+                    "apellido" => $apellido,
+                    "email" => $email,
+                    "celular" => $celular
                 ]
             ]);
         } else {
+            $detalle = is_array($res) ? json_encode($res) : '';
             echo json_encode([
                 "status" => false,
-                "message" => "Error al agregar el usuario."
+                "message" => "Error al agregar el usuario.",
+                "debug" => $detalle
             ]);
         }
     } catch (Throwable $t) {

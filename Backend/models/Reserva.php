@@ -75,6 +75,15 @@ class Reserva {
         try {
             $this->pdo->beginTransaction();
 
+            // Validación: exigir usuario logueado para asociar la reserva
+            if (empty($data['id_usuario'])) {
+                $this->pdo->rollBack();
+                return [
+                    'success' => false,
+                    'message' => 'Debe iniciar sesión para realizar la reserva (id_usuario faltante)'
+                ];
+            }
+
             // Encriptar la tarjeta antes de guardarla
             $tarjetaEncriptada = $this->encryptData($data['tarjeta'] ?? '');
 
@@ -86,7 +95,7 @@ class Reserva {
             ");
 
             $stmt->execute([
-                $data['id_usuario'] ?? null,
+                $data['id_usuario'],
                 $data['adultos'] ?? '1',
                 $data['niños'] ?? '0',
                 $data['fecha_inicio'],
@@ -122,6 +131,66 @@ class Reserva {
             return [
                 'success' => false,
                 'message' => 'Error al guardar la reserva: ' . $e->getMessage()
+            ];
+        }
+    }
+
+    /**
+     * Obtener todas las reservas de un usuario específico
+     * @param int $id_usuario ID del usuario
+     * @return array Lista de reservas con datos de habitación y servicios
+     */
+    public function obtenerReservasPorUsuario($id_usuario) {
+        try {
+            // Obtener las reservas del usuario con información de la habitación
+            $stmt = $this->pdo->prepare("
+                SELECT 
+                    r.id_reserva,
+                    r.adultos,
+                    r.niños,
+                    r.fecha_inicio,
+                    r.fecha_fin,
+                    r.id_habitacion,
+                    h.tipo_hab,
+                    h.precio,
+                    h.imagen,
+                    DATEDIFF(r.fecha_fin, r.fecha_inicio) as noches,
+                    (h.precio * DATEDIFF(r.fecha_fin, r.fecha_inicio)) as precio_habitacion
+                FROM reserva r
+                LEFT JOIN habitacion h ON r.id_habitacion = h.id_hab
+                WHERE r.id_usuario = ?
+                ORDER BY r.fecha_inicio DESC
+            ");
+            
+            $stmt->execute([$id_usuario]);
+            $reservas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Para cada reserva, obtener sus servicios y calcular precio total
+            foreach ($reservas as &$reserva) {
+                $stmtServ = $this->pdo->prepare("
+                    SELECT 
+                        s.id_servicio,
+                        s.tipo_servicio,
+                        s.descripcion_servicio
+                    FROM reserva_servicio rs
+                    INNER JOIN servicio s ON rs.id_servicio = s.id_servicio
+                    WHERE rs.id_reserva = ?
+                ");
+                $stmtServ->execute([$reserva['id_reserva']]);
+                $reserva['servicios'] = $stmtServ->fetchAll(PDO::FETCH_ASSOC);
+                
+                // Calcular precio total (habitación + servicios no están en DB, usar precio_habitacion)
+                $reserva['precio_total'] = $reserva['precio_habitacion'];
+            }
+
+            return [
+                'success' => true,
+                'reservas' => $reservas
+            ];
+        } catch (PDOException $e) {
+            return [
+                'success' => false,
+                'message' => 'Error al obtener reservas: ' . $e->getMessage()
             ];
         }
     }

@@ -1,0 +1,129 @@
+/* Estilos para la página de Mis Reservas */
+
+.reserva-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.reserva-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.reserva-imagen {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.reserva-body {
+    padding: 20px;
+}
+
+.reserva-titulo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.reserva-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.info-item i {
+    margin-right: 10px;
+    color: #5084C1;
+    width: 20px;
+}
+
+.estado-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.estado-proxima {
+    background-color: #28a745;
+    color: white;
+}
+
+.estado-pasada {
+    background-color: #6c757d;
+    color: white;
+}
+
+.estado-activa {
+    background-color: #007bff;
+    color: white;
+}
+
+.servicios-lista {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.servicios-titulo {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.servicio-tag {
+    display: inline-block;
+    background-color: #f0f4f8;
+    color: #5084C1;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.precio-total {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #5084C1;
+    text-align: right;
+    margin-top: 15px;
+}
+
+.sin-reservas {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.sin-reservas i {
+    font-size: 4rem;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .reserva-imagen {
+        height: 150px;
+    }
+    
+    .precio-total {
+        font-size: 1.5rem;
+        text-align: left;
+    }
+}

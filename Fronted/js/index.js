@@ -99,26 +99,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //Disponibilidad de habitaciones
 
-document.querySelector('.btn-buscardisponibilidad').addEventListener('click', function () {
-    const fechaInicio = document.querySelector('#fecha_inicio').value;
-    const fechaFin = document.querySelector('#fecha_fin').value;
+const formDisponibilidad = document.getElementById('formDisponibilidad');
 
-    fetch('Backend/controllers/habDisponible.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-        fecha_inicio: fechaInicio,
-        fecha_fin: fechaFin
-    })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Guardar en localStorage para usar en habDisponible.html
-            localStorage.setItem('habitacionesDisponibles', JSON.stringify(data.data));
-            window.location.href = 'Frontend/pages/habDisponible.html';
-        } else {
-            alert('No se pudo obtener disponibilidad: ' + data.message);
+if (formDisponibilidad) {
+    formDisponibilidad.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        
+        const fechaInicio = document.getElementById('fecha_inicio').value;
+        const fechaFin = document.getElementById('fecha_fin').value;
+        const adultos = document.getElementById('adultos').value;
+        const ninos = document.getElementById('ninos').value;
+
+        // Validar que las fechas estén completas
+        if (!fechaInicio || !fechaFin) {
+            alert('Por favor, selecciona ambas fechas');
+            return;
+        }
+
+        // Validar que la fecha de salida sea posterior a la de entrada
+        if (new Date(fechaFin) <= new Date(fechaInicio)) {
+            alert('La fecha de salida debe ser posterior a la fecha de entrada');
+            return;
+        }
+
+        try {
+            const response = await fetch('../Backend/routes/habDisponibles.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    fecha_inicio: fechaInicio,
+                    fecha_fin: fechaFin
+                })
+            });
+
+            const data = await response.json();
+            console.log('Respuesta del servidor:', data);
+
+            if (data.success) {
+                // Guardar en localStorage las fechas y habitaciones disponibles
+                localStorage.setItem('busquedaDisponibilidad', JSON.stringify({
+                    fecha_inicio: fechaInicio,
+                    fecha_fin: fechaFin,
+                    adultos: adultos,
+                    ninos: ninos,
+                    habitaciones: data.habitaciones || []
+                }));
+                window.location.href = 'habDisponible.html';
+            } else {
+                alert('No se pudo obtener disponibilidad: ' + data.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error al consultar disponibilidad. Por favor, inténtelo de nuevo.');
         }
     });
-});
+}
