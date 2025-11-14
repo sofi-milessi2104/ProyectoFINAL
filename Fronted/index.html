@@ -3,769 +3,800 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Hotel Costa Colonia</title>
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/translate2.css">
-    <title>Hotel Costa Colonia</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  </head>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">   
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  </head>
 
   <body class="bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-4 shadow-sm sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand me-5 fw-bold fs-3 h-2font" href="index.html">
-      <img src="img/logo.png" alt="Hotel Costa Colonia" width="150" height="30">
-    </a>
-    <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <!-- Nav--> //
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link active me-2" href="#">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link me-2" href="habitaciones.html">Habitaciones</a></li>
-        <li class="nav-item"><a class="nav-link me-2" href="servicios.html">Servicios</a></li>
-        <li class="nav-item"><a class="nav-link me-2" href="promociones.html">Promociones</a></li>
-        <li class="nav-item"><a class="nav-link me-2" href="restaurante.html">Restaurante</a></li>
-      </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-4 shadow-sm sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand me-5 fw-bold fs-3 h-2font" href="index.html">
+          <img src="img/logo.png" alt="Hotel Costa Colonia" width="150" height="30">
+        </a>
+
+        <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active me-2" href="#">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link me-2" href="habitaciones.html">Habitaciones</a></li>
+            <li class="nav-item"><a class="nav-link me-2" href="servicios.html">Servicios</a></li>
+            <li class="nav-item"><a class="nav-link me-2" href="promociones.html">Promociones</a></li>
+            <li class="nav-item"><a class="nav-link me-2" href="restaurante.html">Restaurante</a></li>
+          </ul>
 
           <div class="d-flex align-items-center gap-2 ms-auto">
 
-        <!-- LOGIN NORMAL -->
-        <a href="usuario.html" class="btn-login" id="loginLink">Inicia Sesión</a>
+            <!-- LOGIN NORMAL -->
+            <a href="usuario.html" class="btn-login" id="loginLink">Inicia Sesión</a>
 
-        <!-- IDIOMA -->
-        <div class="language-selector position-relative m-0">
-          <button class="language-btn" onclick="toggleDropdown()">Idioma</button>
-          <div class="language-dropdown" id="languageDropdown">
-            <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
-            <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
-            <div class="language-option" onclick="changeLanguage('fr')">🇫🇷 Français</div>
-            <div class="language-option" onclick="changeLanguage('de')">🇩🇪 Deutsch</div>
-            <div class="language-option" onclick="changeLanguage('it')">🇮🇹 Italiano</div>
-            <div class="language-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
-          </div>
-        </div>
+            <!-- IDIOMA -->
+            <div class="language-selector position-relative m-0">
+              <button class="language-btn" onclick="toggleDropdown()">Idioma</button>
 
-        <!-- PERFIL DE USUARIO (a la derecha del idioma) -->
-        <div class="user-menu" id="userMenuContainer" style="display: none;">
-          <div class="user-avatar" id="userAvatar">S</div>
-          <div class="dropdown hidden" id="userDropdown">
-            <p id="userEmail" class="user-email"></p>
-            <a href="reservas.html" class="user-option">Mis reservas</a>
-            <button id="logoutBtn" class="user-option logout">Cerrar sesión</button>
-          </div>
-        </div>
-
-        <!-- Div oculto de Google Translate -->
-        <div id="google_translate_element" style="display: none;"></div>
-
-      </div>
-
-    </div>
-  </div>
-</nav>
-
- <!-- Carrusel de fotos Hotel-->
-
- <div class="container-fluid px-lg-4 mt-a">
- <div class="swiper swiper-container">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <img src="img/Piscina al aire libre de noche.jpeg" />
-      </div>
-       <div class="swiper-slide">
-        <img src="img/Entrada.jpeg" />
-      </div>
-       <div class="swiper-slide">
-        <img src="img/Comida.jpeg" />
-      </div>
-       <div class="swiper-slide">
-        <img src="img/Piscina al aire libre.jpeg" />
-      </div>
-       <div class="swiper-slide">
-        <img src="img/Gimnasio.jpeg" />
-      </div>
-    </div>
- </div>
- </div>
-    
-<!-- Checking el form de Habitaciones-->
-
-<div class="container availability-form">
-  <div class="row">
-    <div class="col-lg-12 bg-white shadow p-4 rounded">
-      <h5 class="mb-4">Consultar disponibilidad</h5>
-      <form >
-        <div class="row align-items-end">
-          <div class="col-lg-3 mb-3">
-            <label class="form-label" name="checkin" id="formFechas"> Registro de entrada</label>
-            <input type="date" class="form-control shadow-none">
-          </div>
-           <div class="col-lg-3 mb-3">
-            <label class="form-label" name="checkout" id="formFechas"> Registro de salida</label>
-            <input type="date" class="form-control shadow-none">
-          </div>
-          <div class="col-lg-3 mb-3">
-            <label class="form-label" name="adultos">Adultos</label>
-            <select class="form-select shadow-none" >
-              <option value="1">Uno</option>
-              <option value="2">Dos</option>
-              <option value="3">Tres</option>
-
-            </select>
-          </div>
-           <div class="col-lg-2 mb-3">
-            <label class="form-label">Niños</label>
-            <select name="ninios" class="form-select shadow-none" >
-              <option value="0">Ninguno</option>
-              <option value="1">Uno</option>
-              <option value="2">Dos</option>
-            </select>
-          </div>
-          <div class="col-lg-1 mb-lg-3 mt-2">
-            <button type="submit" class="btn-buscardisponibilidad">Buscar</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div> 
-
- <!-- Habitaciones -->
-
- <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Nuestras Habitaciones</h2>
-
- <div class="container">
-  <div class="row">
-
-<!-- Inicio nueva card -->
-
-    <div class="col-lg-4 col-md-6 mb-5 px-4">
-
-       <div class="card border-0 shadow h-100" style="max-width:350px; margin:auto;" >
-         <img src="img/Loft.jpeg" class="card-img-top" >
-      
-         <div class="card-body">
-          <h5>Loft</h5>
-
-          <div class="Caracteristicas mb-4">
-            <h6 class=" mb-1">Caracteristicas</h6>
-            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-              Cocina
-            </span>
-            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-              Terraza
-            </span>
-            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-              Televisión
-            </span>
-            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-              Baño Privado
-            </span>
-            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-              Conexión Wi-Fi
-            </span>
-          </div>
-
-          <div class="facilities mb-4">
-          </div>
-
-          <div class="rating mb-4">
-            <h6 class="mb-1">Rating</h6>
-            <span class="badge rounded-pill bg-light">
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-half text-warning"></i>
-              <i class="bi bi-star text-warning"></i>
-            </span>
-          </div>
-
-         <div class="d-flex justify-content-evenly mb-2">
-            <a href="reserva.html" class="btn btn-primary">Reservar ahora</a> 
-            <a href="habitaciones.html" class="btn btn-primary custom-bg shadow-none">Ver más</a>
-         </div>
-          
-         </div>
-       </div>
-
-    </div>
-
-<!-- Inicio nueva card -->
-
-    <div class="col-lg-4 col-md-6 mb-5 px-4">
-
-        <div class="card border-0 shadow h-100" style="max-width:350px; margin:auto;">
-         <img src="img/River Loft.jpeg" class="card-img-top" >
-
-         <div class="card-body">
-          <h5>River Loft</h5>
-
-          <div class="Caracteristicas mb-4">
-            <h6 class=" mb-1">Caracteristicas</h6>
-            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-              TV
-            </span>
-            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-              Cocina
-            </span>
-            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-              Balcón Doble
-            </span>
-            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-              Conexión Wi-Fi
-            </span>
-            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-              Balcón
-            </span>
-          </div>
-
-          <div class="facilities mb-4">
-          </div>
-
-          <div class="rating mb-4">
-            <h6 class="mb-1">Rating</h6>
-            <span class="badge rounded-pill bg-light">
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-half text-warning"></i>
-              <i class="bi bi-star text-warning"></i>
-            </span>
-          </div>
-
-         <div class="d-flex justify-content-evenly mb-2">
-            <a href="reserva.html" class="btn btn-primary">Reservar ahora</a> 
-            <a href="habitaciones.html" class="btn btn-primary custom-bg shadow-none">Ver más</a>
-         </div>
-          
-         </div>
-        </div>
-
-    </div>
-
-<!-- Inicio nueva card -->
-
-    <div class="col-lg-4 col-md-6 mb-5 px-4">
-
-        <div class="card border-0 shadow h-100" style="max-width:350px; margin:auto;">
-         <img src="img/Suite.jpeg" class="card-img-top" > 
-      
-         <div class="card-body">
-          <h5>Suite</h5>
-
-          <div class="Caracteristicas mb-4">
-            <h6 class=" mb-1">Caracteristicas</h6>
-            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-              Albornoz
-            </span>
-            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-              Sala de estar espaciosa
-            </span>
-            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-              Cocina
-            </span>
-            <span class="badge rounded-pill bg-light text-dark text-wrap ">
-              Conexión Wifi
-            </span>
-          </div>
-
-          <div class="facilities mb-4">
-          </div>
-
-          <div class="rating mb-4">
-            <h6 class="mb-1">Rating</h6>
-            <span class="badge rounded-pill bg-light">
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-half text-warning"></i>
-              <i class="bi bi-star text-warning"></i>
-            </span>
-          </div>
-
-         <div class="d-flex justify-content-evenly mb-2">
-            <a href="reserva.html" class="btn btn-primary">Reservar ahora</a> 
-            <a href="habitaciones.html" class="btn btn-primary custom-bg shadow-none">Ver más</a>
-         </div>
-          
-         </div>
-        </div>
-
-    </div>
-
-  </div>
-
-    <div class="col-lg-12 text-center mt-5">
-       <a href="habitaciones.html"class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">Mas Habitaciones >>></a>
-    </div>
-
-</div>
-
-
-<!-- Servicios -->
-
- <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Nuestros Servicios</h2>
-
-  <div class="container">
-    <div class="row justify-content-evenly px-lg-0 px-md-0 px-5">
-
-      <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
-        <a href="servicios.html">
-          <i><svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px" fill="#5084C1"><path d="M480-120q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM254-346l-84-86q59-59 138.5-93.5T480-560q92 0 171.5 35T790-430l-84 84q-44-44-102-69t-124-25q-66 0-124 25t-102 69ZM84-516 0-600q92-94 215-147t265-53q142 0 265 53t215 147l-84 84q-77-77-178.5-120.5T480-680q-116 0-217.5 43.5T84-516Z"/></svg></i>
-        </a>
-        <h5 class="mt-3">Wi-Fi Gratis</h5>
-      </div>
-
-      <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
-        <a href="servicios.html">
-          <i><svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px" fill="#5084C1"><path d="M80-120v-80q38 0 57-20t75-20q56 0 77 20t57 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 57-20t77-20q56 0 75 20t57 20v80q-59 0-77.5-20T748-160q-36 0-57 20t-77 20q-56 0-77-20t-57-20q-36 0-57 20t-77 20q-56 0-77-20t-57-20q-36 0-54.5 20T80-120Zm0-180v-80q38 0 57-20t75-20q56 0 77.5 20t56.5 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 57-20t77-20q56 0 75 20t57 20v80q-59 0-77.5-20T748-340q-36 0-55.5 20T614-300q-57 0-77.5-20T480-340q-38 0-56.5 20T346-300q-59 0-78.5-20T212-340q-36 0-54.5 20T80-300Zm196-204 133-133-40-40q-33-33-70-48t-91-15v-100q75 0 124 16.5t96 63.5l256 256q-17 11-33 17.5t-37 6.5q-36 0-57-20t-77-20q-56 0-77 20t-57 20q-21 0-37-6.5T276-504Zm392-336q42 0 71 29.5t29 70.5q0 42-29 71t-71 29q-42 0-71-29t-29-71q0-41 29-70.5t71-29.5Z"/></svg></i>
-        </a>
-        <h5 class="mt-3">Piscina al aire libre</h5>
-      </div>
-
-      <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
-        <a href="servicios.html">
-          <i><svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px" fill="#5084C1"><path d="m536-84-56-56 142-142-340-340-142 142-56-56 56-58-56-56 84-84-56-58 56-56 58 56 84-84 56 56 58-56 56 56-142 142 340 340 142-142 56 56-56 58 56 56-84 84 56 58-56 56-58-56-84 84-56-56-58 56Z"/></svg></i>
-        </a>
-        <h5 class="mt-3">Gimnasio</h5>
-      </div>
-      
-      <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
-        <a href="servicios.html">
-          <i><svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px" fill="#5084C1"><path d="M280-80v-366q-51-14-85.5-56T160-600v-280h80v280h40v-280h80v280h40v-280h80v280q0 56-34.5 98T360-446v366h-80Zm400 0v-320H560v-280q0-83 58.5-141.5T760-880v800h-80Z"/></svg></i>
-        </a>
-        <h5 class="mt-3">Restaurante</h5>
-      </div>
-
-      <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
-        <a href="servicios.html">
-         <i><svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px" fill="#5084C1"><path d="M480-80q-73-9-145-39.5T206.5-207Q150-264 115-351T80-560v-40h40q51 0 105 13t101 39q12-86 54.5-176.5T480-880q57 65 99.5 155.5T634-548q47-26 101-39t105-13h40v40q0 122-35 209t-91.5 144q-56.5 57-128 87.5T480-80Zm-2-82q-11-166-98.5-251T162-518q11 171 101.5 255T478-162Zm2-254q15-22 36.5-45.5T558-502q-2-57-22.5-119T480-742q-35 59-55.5 121T402-502q20 17 42 40.5t36 45.5Zm78 236q37-12 77-35t74.5-62.5q34.5-39.5 59-98.5T798-518q-94 14-165 62.5T524-332q12 32 20.5 70t13.5 82Zm-78-236Zm78 236Zm-80 18Zm46-170ZM480-80Z"/></svg></i>
-        </a>  
-        <h5 class="mt-3">Spa</h5>
-      </div>
-
-      <div class="col-lg-12 text-center mt-5">
-       <a href="servicios.html"class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">Mas Servicios >>></a>
-      </div>
-
-    </div>
-  </div>
-
-<!-- Reseñas -->
-
- <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Nuestras Reseñas</h2>
-
-  <div class="container mt-5">
-    <!-- Swiper --> 
-    <div class="swiper-reseñas">
-      <div class="swiper-wrapper mb-5">
-
-        <!-- Inicio nueva reseña -->
-          <div class="swiper-slide bg-white p-4">
-              <div class="profile d-flex align-items-center p-4">
-                <img src="img/Reseña1.png" width="30px" height="30px" class="rounded-circle"> <!-- CAMBIAR POR PERFIL, NO EXISTE LA IMG-->
-                <h6 class="m-0 ms-2">Laura Ortega</h6>
+              <div class="language-dropdown" id="languageDropdown">
+                <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
+                <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
+                <div class="language-option" onclick="changeLanguage('fr')">🇫🇷 Français</div>
+                <div class="language-option" onclick="changeLanguage('de')">🇩🇪 Deutsch</div>
+                <div class="language-option" onclick="changeLanguage('it')">🇮🇹 Italiano</div>
+                <div class="language-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
               </div>
 
-              <p>
-                "Pasamos un fin de semana espectacular. La vista al río desde la habitación era increíble, y el spa nos encantó.
-                 Todo estaba impecable y el personal fue muy amable. Recomendadísimo para escapadas románticas."</p>
-              </p>
- 
-              <div class="rating"> 
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-half text-warning"></i>
-                <i class="bi bi-star text-warning"></i>
+            </div>
+
+            <!-- PERFIL DE USUARIO (a la derecha del idioma) -->
+            <div class="user-menu" id="userMenuContainer" style="display: none;">
+              <div class="user-avatar" id="userAvatar">S</div>
+
+              <div class="dropdown hidden" id="userDropdown">
+                <p id="userEmail" class="user-email"></p>
+                <a href="reservas.html" class="user-option">Mis reservas</a>
+                <button id="logoutBtn" class="user-option logout">Cerrar sesión</button>
               </div>
-              
+
+            </div>
+
+            <!-- Div oculto de Google Translate -->
+            <div id="google_translate_element" style="display: none;"></div>
+
           </div>
 
-        <!-- Inicio nueva reseña -->
-          <div class="swiper-slide bg-white p-4">
-              <div class="profile d-flex align-items-center p-4">
-                <img src="img/Reseña2.png" width="30px" height="30px" class="rounded-circle"> <!-- CAMBIAR POR PERFIL, NO EXISTE LA IMG-->
-                <h6 class="m-0 ms-2">Adrián García</h6>
-              </div>
-
-              <p>
-                "El hotel está bien ubicado y la habitación era cómoda, pero esperaba un poco más por el precio. 
-                El desayuno era correcto pero sin mucha variedad. Volvería, pero no es un hotel que deslumbre."
-              </p>
-             
- 
-              <div class="rating"> 
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-half text-warning"></i>
-                <i class="bi bi-star text-warning"></i>
-              </div>
-              
-          </div>
-
-        <!-- Inicio nueva reseña -->
-          <div class="swiper-slide bg-white p-4">
-              <div class="profile d-flex align-items-center p-4">
-                <img src="img/Reseña5.png" width="30px" height="30px" class="rounded-circle"> <!-- CAMBIAR POR PERFIL, NO EXISTE LA IMG-->
-                <h6 class="m-0 ms-2">Benjamín La Torres</h6>
-              </div>
-
-              <p>
-                "Un hotel moderno y tranquilo, ideal para descansar. 
-                El gimnasio y la piscina climatizada fueron un plus. El desayuno tenía opciones para todos los gustos.
-                 El centro histórico queda cerca en taxi o caminando."
-
-              </p>
- 
-              <div class="rating"> 
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-half text-warning"></i>
-                <i class="bi bi-star text-warning"></i>
-              </div>
-              
-          </div>
-
-        <!-- Inicio nueva reseña -->
-          <div class="swiper-slide bg-white p-4">
-              <div class="profile d-flex align-items-center p-4">
-                <img src="img/Reseña3.png" width="30px" height="30px" class="rounded-circle"> <!-- CAMBIAR POR PERFIL, NO EXISTE LA IMG-->
-                <h6 class="m-0 ms-2">Maximiliano Perez</h6>
-              </div>
-
-              <p>
-                "Mala relación calidad-precio. La habitación tenía una linda vista pero las instalaciones se ven desgastadas. Además,
-                 el servicio de limpieza fue deficiente. No volvería."
-              </p>
- 
-              <div class="rating"> 
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star text-warning"></i>
-                <i class="bi bi-star text-warning"></i>
-                <i class="bi bi-star text-warning"></i>
-              </div>
-              
-          </div>
-
-        <!-- Inicio nueva reseña --> 
-          <div class="swiper-slide bg-white p-4">
-              <div class="profile d-flex align-items-center p-4">
-                <img src="img/Reseña4.png" width="30px" height="30px" class="rounded-circle"> <!-- CAMBIAR POR PERFIL, NO EXISTE LA IMG-->
-                <h6 class="m-0 ms-2">Juana María Hernandez</h6>
-              </div>
-
-              <p>
-                "Un hotel moderno y tranquilo, ideal para descansar. 
-                El gimnasio y la piscina climatizada fueron un plus. 
-                El desayuno tenía opciones para todos los gustos. El centro histórico queda cerca en taxi o caminando."
-
-              </p>
- 
-              <div class="rating"> 
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-half text-warning"></i>
-                <i class="bi bi-star text-warning"></i>
-              </div>
-              
-          </div>
-              
-              
-            
-          <div class="swiper-pagination">
-
-          </div>
+        </div>
 
       </div>
-    </div>
+    </nav>
 
+    <!-- Carrusel de fotos Hotel--> //
 
-<!-- Preguntas frecuentes-->
-
-<div class="frecuentes">
-
-<h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Preguntas Frecuentes</h2>
-<p class="text-center" >Encontrá respuestas a las preguntas más comunes sobre tu estadía </p>
-
-    <div class="container">
-      <div class="accordion" id="accordionExample">
-
-          <!-- Pregunta 1-->
-        <div class="accordion-item">
-
-          <h2 class="accordion-header" id="headingUno">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUno" aria-expanded="true" aria-controls="collapseUno">
-              ¿El estacionamiento es gratuito?
-            </button>
-          </h2>
-
-          <div id="collapseUno" class="accordion-collapse collapse" aria-labelledby="headingUno" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              Sí. Hay estacionamiento al aire libre gratuito, sujeto a disponibilidad.
+    <div class="container-fluid px-lg-4 mt-a">
+      <div class="swiper swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="img/Piscina al aire libre de noche.jpeg" />
             </div>
-          </div> 
-        </div>
 
-          <!-- Pregunta 2-->
-        <div class="accordion-item">
+            <div class="swiper-slide">
+              <img src="img/Entrada.jpeg" />
+            </div>
 
-          <h2 class="accordion-header" id="headingDos">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDos" aria-expanded="false" aria-controls="collapseDos">
-              ¿Cuáles son los horarios del servicio a la habitación?
-            </button>
-          </h2>
+            <div class="swiper-slide">
+              <img src="img/Comida.jpeg" />
+            </div>
 
-          <div id="collapseDos" class="accordion-collapse collapse" aria-labelledby="headingDos" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              Desde 13hs hasta 21hs.
+            <div class="swiper-slide">
+              <img src="img/Piscina al aire libre.jpeg" />
+            </div>
+
+            <div class="swiper-slide">
+              <img src="img/Gimnasio.jpeg" />
             </div>
           </div>
-        </div>
-
-        <!-- Pregunta 3-->
-        <div class="accordion-item">
-
-          <h2 class="accordion-header" id="headingTres">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTres" aria-expanded="false" aria-controls="collapseTres">
-              ¿Cuáles son los horarios de check-in y check-out?
-            </button>
-          </h2>
-
-          <div id="collapseTres" class="accordion-collapse collapse" aria-labelledby="headingTres" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              Check-in: 3:00 p.m. Check-out: 11:00 a.m.
-            </div>
-          </div>
-        </div>
-
-        <!-- Pregunta 4-->
-        <div class="accordion-item">
-
-          <h2 class="accordion-header" id="headingCuatro">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCuatro" aria-expanded="false" aria-controls="collapseCuatro">
-              ¿El desayuno está incluido en la tarifa de la habitación?
-            </button>
-          </h2>
-
-          <div id="collapseCuatro" class="accordion-collapse collapse" aria-labelledby="headingCuatro" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              Sí. El desayuno buffet está incluido en todas las tarifas de habitación.
-            </div>
-          </div>
-        </div>
-
-        <!-- Pregunta 5-->
-        <div class="accordion-item">
-
-          <h2 class="accordion-header" id="headingCinco">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCinco" aria-expanded="false" aria-controls="collapseCinco">
-              ¿Cuándo están disponibles las piscinas?
-            </button>
-          </h2>
-
-          <div id="collapseCinco" class="accordion-collapse collapse" aria-labelledby="headingCinco" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              La piscina cubierta climatizada está disponible todo el año. La piscina al aire libre 
-              climatizada funciona durante la temporada de verano.
-            </div>
-          </div>
-        </div>
-
-        <!-- Pregunta 6-->
-        <div class="accordion-item">
-
-          <h2 class="accordion-header" id="headingSeis">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeis" aria-expanded="false" aria-controls="collapseSeis">
-              Tengo restricciones alimentarias: ¿hay opciones disponibles?
-            </button>
-          </h2>
-
-          <div id="collapseSeis" class="accordion-collapse collapse" aria-labelledby="headingSeis" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              Sí, podemos ofrecer opciones sin gluten, así como comidas adecuadas 
-              para diabéticos y opciones sin lactosa. Por favor, avísanos al hacer tu reserva.
-            </div>
-          </div>
-        </div>
-
-        <!-- Pregunta 7-->
-        <div class="accordion-item">
-
-          <h2 class="accordion-header" id="headingSiete">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSiete" aria-expanded="false" aria-controls="collapseSiete">
-              ¿Ofrecen cunas o camas adicionales?
-            </button>
-          </h2>
-
-          <div id="collapseSiete" class="accordion-collapse collapse" aria-labelledby="headingSiete" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              Cunas: se pueden agregar a todos los tipos de habitación sin cargo, sujeto a disponibilidad.
-              Cama extra: para ocupación triple y planes familiares, por favor reservá las categorías Suite, 
-              River Suite o Super Loft, que incluyen un sofá cama.
-            </div>
-          </div>
-        </div>
-
-        <!-- Pregunta 8-->
-        <div class="accordion-item">
-
-          <h2 class="accordion-header" id="headingOcho">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOcho" aria-expanded="false" aria-controls="collapseOcho">
-              ¿Aceptan mascotas?
-            </button>
-          </h2>
-
-          <div id="collapseOcho" class="accordion-collapse collapse" aria-labelledby="headingOcho" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              No, excepto para animales de servicio o asistencia certificados. 
-            </div>
-          </div>
-        </div>
-
-        <!-- Pregunta 9-->
-        <div class="accordion-item">
-
-          <h2 class="accordion-header" id="headingNueve">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNueve" aria-expanded="false" aria-controls="collapseNueve">
-              ¿Qué idiomas habla el personal?
-            </button>
-          </h2>
-
-          <div id="collapseNueve" class="accordion-collapse collapse" aria-labelledby="headingNueve" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              Nuestro personal habla español e inglés. 
-            </div>
-          </div>
-        </div>
-
-        <!-- Pregunta 10-->
-        <div class="accordion-item">
-
-          <h2 class="accordion-header" id="headingDiez">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDiez" aria-expanded="false" aria-controls="collapseDiez">
-              ¿Cómo se aplica el IVA?
-            </button>
-          </h2>
-
-          <div id="collapseDiez" class="accordion-collapse collapse" aria-labelledby="headingDiez" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              Los huéspedes extranjeros están exentos de pagar impuestos sobre el alojamiento y gastos adicionales, 
-              siempre que presenten un pasaporte válido o documento de identificación que acredite su nacionalidad al hacer el check-in.
-              Los huéspedes uruguayos están exentos de estos impuestos durante la temporada baja. Fuera de este período, 
-              se aplicará un impuesto del 10% sobre la tarifa de la habitación.
-
-              Si se requiere una factura a nombre de una empresa uruguaya registrada para el IVA (con RUT), se añadirá un 10% de IVA
-              a los servicios facturados.
-            </div>
-          </div>
-        </div>
-
-
       </div>
     </div>
-</div>
+        
+    <!-- Checking el form de Habitaciones--> //
 
-
-<!--Ubicacion-->
-<h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Ubicación</h2>
-
-    <div class="container">
+    <div class="container availability-form">
       <div class="row">
-        <div class="col-lg-6 col-md-6 p-4 mb-lg-0 mb-3 bg-white rounded">
-          <iframe class="w-100 rounded" height="550" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3289.89991762935!2d-57.847579925221865!3d-34.45468834964132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a31361622efd89%3A0x23c9ed881b1ed9c8!2sCosta%20Colonia%20Boutique%20Hotel!5e0!3m2!1ses!2suy!4v1761437737813!5m2!1ses!2suy"></iframe>
+        <div class="col-lg-12 bg-white shadow p-4 rounded">
+
+          <h5 class="mb-4">Consultar disponibilidad</h5>
+
+          <form >
+            <div class="row align-items-end">
+
+              <div class="col-lg-3 mb-3">
+                <label class="form-label" name="checkin" id="formFechas"> Registro de entrada</label>
+                <input type="date" class="form-control shadow-none">
+              </div>
+
+              <div class="col-lg-3 mb-3">
+                <label class="form-label" name="checkout" id="formFechas"> Registro de salida</label>
+                <input type="date" class="form-control shadow-none">
+              </div>
+
+              <div class="col-lg-3 mb-3">
+                <label class="form-label" name="adultos">Adultos</label>
+                <select class="form-select shadow-none" >
+                  <option value="1">Uno</option>
+                  <option value="2">Dos</option>
+                  <option value="3">Tres</option>
+                </select>
+              </div>
+
+              <div class="col-lg-2 mb-3">
+                <label class="form-label">Niños</label>
+                <select name="ninios" class="form-select shadow-none" >
+                  <option value="0">Ninguno</option>
+                  <option value="1">Uno</option>
+                  <option value="2">Dos</option>
+                </select>
+              </div>
+
+              <div class="col-lg-1 mb-lg-3 mt-2">
+                <button type="submit" class="btn-buscardisponibilidad">Buscar</button>
+              </div>
+
+            </div>
+          </form>
+
+        </div>
       </div>
-      
-      <div class="col-lg-4 col-md-4">
-        <div class="bg-white p-4 rounded mb-4">
-          <h5>Ubicación</h5>
-          <a href="https://maps.app.goo.gl/A6HZECh4EeRrhEHKA" class="d-inline-block mb-2 text-dark text-decoration-none text-dark" target="_blank" rel="noopener noreferrer">
-            <strong>Joaquín Torres García 1102, 70000, Colonia del Sacramento, Departamento de Colonia</strong>
-          </a>
-          <a>
-            Costa Colonia Boutique Hotel está ubicado sobre la rambla, justo frente a la playa.
-            Desde aquí, podés caminar o andar en bicicleta hasta el Barrio Histórico o la Plaza de Toros.
-            El puerto y la terminal de ómnibus se encuentran a solo 2 km.
-            Su privilegiada ubicación a orillas del río ofrece vistas espectaculares del atardecer y la bahía, 
-            mientras que su distancia del centro de la ciudad garantiza un ambiente tranquilo y relajante. 
-          </a>
+    </div> 
+
+    <!-- Habitaciones --> //
+
+    <div class="container">
+      <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Nuestras Habitaciones</h2>
+
+        <div class="row">
+
+          <!-- Inicio nueva card -->
+
+              <div class="col-lg-4 col-md-6 mb-5 px-4">
+
+                <div class="card border-0 shadow h-100" style="max-width:350px; margin:auto;" >
+                  <img src="img/Loft.jpeg" class="card-img-top" >
+                
+                  <div class="card-body">
+                    <h5>Loft</h5>
+
+                    <div class="Caracteristicas mb-4">
+                      <h6 class=" mb-1">Caracteristicas</h6>
+                      <span class="badge rounded-pill bg-light text-dark text-wrap ">
+                        Cocina
+                      </span>
+                      <span class="badge rounded-pill bg-light text-dark text-wrap ">
+                        Terraza
+                      </span>
+                      <span class="badge rounded-pill bg-light text-dark text-wrap ">
+                        Televisión
+                      </span>
+                      <span class="badge rounded-pill bg-light text-dark text-wrap ">
+                        Baño Privado
+                      </span>
+                      <span class="badge rounded-pill bg-light text-dark text-wrap ">
+                        Conexión Wi-Fi
+                      </span>
+                    </div>
+
+                    <div class="rating mb-4">
+                      <h6 class="mb-1">Rating</h6>
+                      <span class="badge rounded-pill bg-light">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-half text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                      </span>
+                    </div>
+
+                  <div class="d-flex justify-content-evenly mb-2">
+                      <a href="reserva.html" class="btn btn-primary">Reservar ahora</a> 
+                      <a href="habitaciones.html" class="btn btn-primary custom-bg shadow-none">Ver más</a>
+                  </div>
+                    
+                  </div>
+
+                </div>
+
+              </div>
+
+          <!-- Inicio nueva card -->
+
+              <div class="col-lg-4 col-md-6 mb-5 px-4">
+
+                  <div class="card border-0 shadow h-100" style="max-width:350px; margin:auto;">
+                  <img src="img/River Loft.jpeg" class="card-img-top" >
+
+                  <div class="card-body">
+                    <h5>River Loft</h5>
+
+                    <div class="Caracteristicas mb-4">
+                      <h6 class=" mb-1">Caracteristicas</h6>
+                      <span class="badge rounded-pill bg-light text-dark text-wrap ">
+                        TV
+                      </span>
+                      <span class="badge rounded-pill bg-light text-dark text-wrap ">
+                        Cocina
+                      </span>
+                      <span class="badge rounded-pill bg-light text-dark text-wrap ">
+                        Balcón Doble
+                      </span>
+                      <span class="badge rounded-pill bg-light text-dark text-wrap ">
+                        Conexión Wi-Fi
+                      </span>
+                      <span class="badge rounded-pill bg-light text-dark text-wrap ">
+                        Balcón
+                      </span>
+                    </div>
+
+                    <div class="rating mb-4">
+                      <h6 class="mb-1">Rating</h6>
+                      <span class="badge rounded-pill bg-light">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-half text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                      </span>
+                    </div>
+
+                  <div class="d-flex justify-content-evenly mb-2">
+                      <a href="reserva.html" class="btn btn-primary">Reservar ahora</a> 
+                      <a href="habitaciones.html" class="btn btn-primary custom-bg shadow-none">Ver más</a>
+                  </div>
+                    
+                  </div>
+
+                  </div>
+
+              </div>
+
+          <!-- Inicio nueva card -->
+
+              <div class="col-lg-4 col-md-6 mb-5 px-4">
+
+                  <div class="card border-0 shadow h-100" style="max-width:350px; margin:auto;">
+                  <img src="img/Suite.jpeg" class="card-img-top" > 
+                
+                  <div class="card-body">
+                    <h5>Suite</h5>
+
+                    <div class="Caracteristicas mb-4">
+                      <h6 class=" mb-1">Caracteristicas</h6>
+                      <span class="badge rounded-pill bg-light text-dark text-wrap ">
+                        Albornoz
+                      </span>
+                      <span class="badge rounded-pill bg-light text-dark text-wrap ">
+                        Sala de estar espaciosa
+                      </span>
+                      <span class="badge rounded-pill bg-light text-dark text-wrap ">
+                        Cocina
+                      </span>
+                      <span class="badge rounded-pill bg-light text-dark text-wrap ">
+                        Conexión Wifi
+                      </span>
+                    </div>
+
+                    <div class="rating mb-4">
+                      <h6 class="mb-1">Rating</h6>
+                      <span class="badge rounded-pill bg-light">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-half text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                      </span>
+                    </div>
+
+                  <div class="d-flex justify-content-evenly mb-2">
+                      <a href="reserva.html" class="btn btn-primary">Reservar ahora</a> 
+                      <a href="habitaciones.html" class="btn btn-primary custom-bg shadow-none">Ver más</a>
+                  </div>
+                    
+                  </div>
+                  
+                  </div>
+
+              </div>
+
         </div>
 
-        <div class="bg-white p-4 rounded mb-4">
-          <h5>Contáctanos</h5>
-          <a href="#footer" class="d-inline-block mb-2 text-dark text-decoration-none text-dark">
-            Si tienes alguna pregunta o necesitas más información, no dudes en <strong>contactarnos aqui</strong>.
-          </a>
+        <div class="col-lg-12 text-center mt-5">
+          <a href="habitaciones.html"class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">Mas Habitaciones >>></a>
+        </div>
 
-          <a href="tel:+59812345678" class="d-inline-block mb-2 text-dark text-decoration-none text-dark">
-            O si lo prefieres llámanos: <strong>+598 1234 5678</strong>.
-          </a>
-        </div> 
-      </div> 
+    </div>
+
+
+    <!-- Servicios --> //
+
+    <div class="container">
+      <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Nuestros Servicios</h2>
       
+      <div class="row justify-content-evenly px-lg-0 px-md-0 px-5">
+
+        <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
+          <a href="servicios.html">
+            <i>
+              <svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px" fill="#5084C1">
+              <path d="M480-120q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM254-346l-84-86q59-59 138.5-93.5T480-560q92 0 171.5 35T790-430l-84 84q-44-44-102-69t-124-25q-66 0-124 25t-102 69ZM84-516 0-600q92-94 215-147t265-53q142 0 265 53t215 147l-84 84q-77-77-178.5-120.5T480-680q-116 0-217.5 43.5T84-516Z"/>
+              </svg>
+            </i>
+          </a>
+          <h5 class="mt-3">Wi-Fi Gratis</h5>
+        </div>
+
+        <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
+          <a href="servicios.html">
+            <i>
+              <svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px" fill="#5084C1">
+                <path d="M80-120v-80q38 0 57-20t75-20q56 0 77 20t57 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 57-20t77-20q56 0 75 20t57 20v80q-59 0-77.5-20T748-160q-36 0-57 20t-77 20q-56 0-77-20t-57-20q-36 0-57 20t-77 20q-56 0-77-20t-57-20q-36 0-54.5 20T80-120Zm0-180v-80q38 0 57-20t75-20q56 0 77.5 20t56.5 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 57-20t77-20q56 0 75 20t57 20v80q-59 0-77.5-20T748-340q-36 0-55.5 20T614-300q-57 0-77.5-20T480-340q-38 0-56.5 20T346-300q-59 0-78.5-20T212-340q-36 0-54.5 20T80-300Zm196-204 133-133-40-40q-33-33-70-48t-91-15v-100q75 0 124 16.5t96 63.5l256 256q-17 11-33 17.5t-37 6.5q-36 0-57-20t-77-20q-56 0-77 20t-57 20q-21 0-37-6.5T276-504Zm392-336q42 0 71 29.5t29 70.5q0 42-29 71t-71 29q-42 0-71-29t-29-71q0-41 29-70.5t71-29.5Z"/>
+              </svg>
+            </i>
+          </a>
+          <h5 class="mt-3">Piscina al aire libre</h5>
+        </div>
+
+        <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
+          <a href="servicios.html">
+            <i>
+              <svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px" fill="#5084C1"><path d="m536-84-56-56 142-142-340-340-142 142-56-56 56-58-56-56 84-84-56-58 56-56 58 56 84-84 56 56 58-56 56 56-142 142 340 340 142-142 56 56-56 58 56 56-84 84 56 58-56 56-58-56-84 84-56-56-58 56Z"/>
+              </svg>
+            </i>
+          </a>
+          <h5 class="mt-3">Gimnasio</h5>
+        </div>
+        
+        <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
+          <a href="servicios.html">
+            <i>
+              <svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px" fill="#5084C1">
+                <path d="M280-80v-366q-51-14-85.5-56T160-600v-280h80v280h40v-280h80v280h40v-280h80v280q0 56-34.5 98T360-446v366h-80Zm400 0v-320H560v-280q0-83 58.5-141.5T760-880v800h-80Z"/>
+              </svg>
+            </i>
+          </a>
+          <h5 class="mt-3">Restaurante</h5>
+        </div>
+
+        <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
+          <a href="servicios.html">
+            <i>
+              <svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px" fill="#5084C1">
+                <path d="M480-80q-73-9-145-39.5T206.5-207Q150-264 115-351T80-560v-40h40q51 0 105 13t101 39q12-86 54.5-176.5T480-880q57 65 99.5 155.5T634-548q47-26 101-39t105-13h40v40q0 122-35 209t-91.5 144q-56.5 57-128 87.5T480-80Zm-2-82q-11-166-98.5-251T162-518q11 171 101.5 255T478-162Zm2-254q15-22 36.5-45.5T558-502q-2-57-22.5-119T480-742q-35 59-55.5 121T402-502q20 17 42 40.5t36 45.5Zm78 236q37-12 77-35t74.5-62.5q34.5-39.5 59-98.5T798-518q-94 14-165 62.5T524-332q12 32 20.5 70t13.5 82Zm-78-236Zm78 236Zm-80 18Zm46-170ZM480-80Z"/>
+              </svg>
+            </i>
+          </a>  
+          <h5 class="mt-3">Spa</h5>
+        </div>
+
+        <div class="col-lg-12 text-center mt-5">
+          <a href="servicios.html"class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">Mas Servicios >>></a>
+        </div>
+
+      </div>
     </div>
 
+    <!-- Reseñas --> //
 
-<br><br><br>
+      <div class="container mt-5">
+        <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Nuestras Reseñas</h2>
 
-<a href="habDisponible.html">Disponible</a>  
+        <!-- Swiper --> 
+        <div class="swiper-reseñas">
+          <div class="swiper-wrapper mb-5">
 
+            <!-- Inicio nueva reseña -->
+              <div class="swiper-slide bg-white p-4">
+                  <div class="profile d-flex align-items-center p-4">
+                    <img src="img/Reseña1.png" width="30px" height="30px" class="rounded-circle"> 
+                    <h6 class="m-0 ms-2">Laura Ortega</h6>
+                  </div>
 
-<footer class="footer" id="footer">
-<div class="container-fluid bg-white mt-5">
-  <div class="row">
-    <div class="col-lg-4 p-4">
-      <h3 class="h-font fw-bold fs-3 mb-2">Hotel Costa Colonia</h3>
-        <p>
-        Disfruta de una experiencia única entre historia, confort y naturaleza.
+                    <p>
+                      "Pasamos un fin de semana espectacular. La vista al río desde la habitación era increíble, y el spa nos encantó.
+                      Todo estaba impecable y el personal fue muy amable. Recomendadísimo para escapadas románticas."
+                    </p>
     
-        <a href="tel:+59812345678" class="d-inline-block mb-2 text-dark text-decoration-none text-dark">
-            Contacto: <strong>+598 1234 5678</strong>.
-        </a>
-        <br>
-        <br>
-        © 2025 Hotel Costa Colonia. Todos los derechos reservados.
-        </p>
+                  <div class="rating"> 
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-half text-warning"></i>
+                    <i class="bi bi-star text-warning"></i>
+                  </div>
+              </div>
+
+            <!-- Inicio nueva reseña -->
+              <div class="swiper-slide bg-white p-4">
+                  <div class="profile d-flex align-items-center p-4">
+                    <img src="img/Reseña2.png" width="30px" height="30px" class="rounded-circle"> 
+                    <h6 class="m-0 ms-2">Adrián García</h6>
+                  </div>
+
+                  <p>
+                    "El hotel está bien ubicado y la habitación era cómoda, pero esperaba un poco más por el precio. 
+                    El desayuno era correcto pero sin mucha variedad. Volvería, pero no es un hotel que deslumbre."
+                  </p>
+                
+                  <div class="rating"> 
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-half text-warning"></i>
+                    <i class="bi bi-star text-warning"></i>
+                  </div>
+              </div>
+
+            <!-- Inicio nueva reseña -->
+              <div class="swiper-slide bg-white p-4">
+                  <div class="profile d-flex align-items-center p-4">
+                    <img src="img/Reseña5.png" width="30px" height="30px" class="rounded-circle"> 
+                    <h6 class="m-0 ms-2">Benjamín La Torres</h6>
+                  </div>
+
+                  <p>
+                    "Un hotel moderno y tranquilo, ideal para descansar. 
+                    El gimnasio y la piscina climatizada fueron un plus. El desayuno tenía opciones para todos los gustos.
+                    El centro histórico queda cerca en taxi o caminando."
+                  </p>
+    
+                  <div class="rating"> 
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-half text-warning"></i>
+                    <i class="bi bi-star text-warning"></i>
+                  </div>            
+              </div>
+
+            <!-- Inicio nueva reseña -->
+              <div class="swiper-slide bg-white p-4">
+                  <div class="profile d-flex align-items-center p-4">
+                    <img src="img/Reseña3.png" width="30px" height="30px" class="rounded-circle"> 
+                    <h6 class="m-0 ms-2">Maximiliano Perez</h6>
+                  </div>
+
+                  <p>
+                    "Mala relación calidad-precio. La habitación tenía una linda vista pero las instalaciones se ven desgastadas. Además,
+                    el servicio de limpieza fue deficiente. No volvería."
+                  </p>
+    
+                  <div class="rating"> 
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star text-warning"></i>
+                    <i class="bi bi-star text-warning"></i>
+                    <i class="bi bi-star text-warning"></i>
+                  </div>             
+              </div>
+
+            <!-- Inicio nueva reseña --> 
+              <div class="swiper-slide bg-white p-4">
+                  <div class="profile d-flex align-items-center p-4">
+                    <img src="img/Reseña4.png" width="30px" height="30px" class="rounded-circle"> 
+                    <h6 class="m-0 ms-2">Juana María Hernandez</h6>
+                  </div>
+
+                  <p>
+                    "Un hotel moderno y tranquilo, ideal para descansar. 
+                    El gimnasio y la piscina climatizada fueron un plus. 
+                    El desayuno tenía opciones para todos los gustos. El centro histórico queda cerca en taxi o caminando."
+                  </p>
+    
+                  <div class="rating"> 
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-fill text-warning"></i>
+                    <i class="bi bi-star-half text-warning"></i>
+                    <i class="bi bi-star text-warning"></i>
+                  </div>             
+              </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    <!-- Preguntas frecuentes-->
+
+    <div class="frecuentes">
+
+      <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Preguntas Frecuentes</h2>
+      <p class="text-center" >Encontrá respuestas a las preguntas más comunes sobre tu estadía </p>
+
+          <div class="container">
+            <div class="accordion" id="accordionExample">
+
+                <!-- Pregunta 1-->
+              <div class="accordion-item">
+
+                <h2 class="accordion-header" id="headingUno">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUno" aria-expanded="true" aria-controls="collapseUno">
+                    ¿El estacionamiento es gratuito?
+                  </button>
+                </h2>
+
+                <div id="collapseUno" class="accordion-collapse collapse" aria-labelledby="headingUno" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Sí. Hay estacionamiento al aire libre gratuito, sujeto a disponibilidad.
+                  </div>
+                </div> 
+              </div>
+
+                <!-- Pregunta 2-->
+              <div class="accordion-item">
+
+                <h2 class="accordion-header" id="headingDos">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDos" aria-expanded="false" aria-controls="collapseDos">
+                    ¿Cuáles son los horarios del servicio a la habitación?
+                  </button>
+                </h2>
+
+                <div id="collapseDos" class="accordion-collapse collapse" aria-labelledby="headingDos" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Desde 13hs hasta 21hs.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pregunta 3-->
+              <div class="accordion-item">
+
+                <h2 class="accordion-header" id="headingTres">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTres" aria-expanded="false" aria-controls="collapseTres">
+                    ¿Cuáles son los horarios de check-in y check-out?
+                  </button>
+                </h2>
+
+                <div id="collapseTres" class="accordion-collapse collapse" aria-labelledby="headingTres" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Check-in: 3:00 p.m. Check-out: 11:00 a.m.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pregunta 4-->
+              <div class="accordion-item">
+
+                <h2 class="accordion-header" id="headingCuatro">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCuatro" aria-expanded="false" aria-controls="collapseCuatro">
+                    ¿El desayuno está incluido en la tarifa de la habitación?
+                  </button>
+                </h2>
+
+                <div id="collapseCuatro" class="accordion-collapse collapse" aria-labelledby="headingCuatro" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Sí. El desayuno buffet está incluido en todas las tarifas de habitación.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pregunta 5-->
+              <div class="accordion-item">
+
+                <h2 class="accordion-header" id="headingCinco">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCinco" aria-expanded="false" aria-controls="collapseCinco">
+                    ¿Cuándo están disponibles las piscinas?
+                  </button>
+                </h2>
+
+                <div id="collapseCinco" class="accordion-collapse collapse" aria-labelledby="headingCinco" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    La piscina cubierta climatizada está disponible todo el año. La piscina al aire libre 
+                    climatizada funciona durante la temporada de verano.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pregunta 6-->
+              <div class="accordion-item">
+
+                <h2 class="accordion-header" id="headingSeis">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeis" aria-expanded="false" aria-controls="collapseSeis">
+                    Tengo restricciones alimentarias: ¿hay opciones disponibles?
+                  </button>
+                </h2>
+
+                <div id="collapseSeis" class="accordion-collapse collapse" aria-labelledby="headingSeis" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Sí, podemos ofrecer opciones sin gluten, así como comidas adecuadas 
+                    para diabéticos y opciones sin lactosa. Por favor, avísanos al hacer tu reserva.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pregunta 7-->
+              <div class="accordion-item">
+
+                <h2 class="accordion-header" id="headingSiete">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSiete" aria-expanded="false" aria-controls="collapseSiete">
+                    ¿Ofrecen cunas o camas adicionales?
+                  </button>
+                </h2>
+
+                <div id="collapseSiete" class="accordion-collapse collapse" aria-labelledby="headingSiete" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Cunas: se pueden agregar a todos los tipos de habitación sin cargo, sujeto a disponibilidad.
+                    Cama extra: para ocupación triple y planes familiares, por favor reservá las categorías Suite, 
+                    River Suite o Super Loft, que incluyen un sofá cama.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pregunta 8-->
+              <div class="accordion-item">
+
+                <h2 class="accordion-header" id="headingOcho">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOcho" aria-expanded="false" aria-controls="collapseOcho">
+                    ¿Aceptan mascotas?
+                  </button>
+                </h2>
+
+                <div id="collapseOcho" class="accordion-collapse collapse" aria-labelledby="headingOcho" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    No, excepto para animales de servicio o asistencia certificados. 
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pregunta 9-->
+              <div class="accordion-item">
+
+                <h2 class="accordion-header" id="headingNueve">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNueve" aria-expanded="false" aria-controls="collapseNueve">
+                    ¿Qué idiomas habla el personal?
+                  </button>
+                </h2>
+
+                <div id="collapseNueve" class="accordion-collapse collapse" aria-labelledby="headingNueve" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Nuestro personal habla español e inglés. 
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pregunta 10-->
+              <div class="accordion-item">
+
+                <h2 class="accordion-header" id="headingDiez">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDiez" aria-expanded="false" aria-controls="collapseDiez">
+                    ¿Cómo se aplica el IVA?
+                  </button>
+                </h2>
+
+                <div id="collapseDiez" class="accordion-collapse collapse" aria-labelledby="headingDiez" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    Los huéspedes extranjeros están exentos de pagar impuestos sobre el alojamiento y gastos adicionales, 
+                    siempre que presenten un pasaporte válido o documento de identificación que acredite su nacionalidad al hacer el check-in.
+                    Los huéspedes uruguayos están exentos de estos impuestos durante la temporada baja. Fuera de este período, 
+                    se aplicará un impuesto del 10% sobre la tarifa de la habitación.
+
+                    Si se requiere una factura a nombre de una empresa uruguaya registrada para el IVA (con RUT), se añadirá un 10% de IVA
+                    a los servicios facturados.
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
 
     </div>
-    <div class="col-lg-4 p-4">
-      <h5 class="mb-3">Links</h5>
-      <a href="index.html" class="d-inline-block mb-2 text-dark text-decoration-none">Inicio</a> <br>
-      <a href="habitaciones.html" class="d-inline-block mb-2 text-dark text-decoration-none">Habitaciones</a> <br>
-      <a href="servicios.html" class="d-inline-block mb-2 text-dark text-decoration-none">Servicios</a> <br>
-      <a href="promociones.html" class="d-inline-block mb-2 text-dark text-decoration-none">Promociones</a> <br>
-      <a href="restaurante.html" class="d-inline-block mb-2 text-dark text-decoration-none">Restaurante</a> <br>
-      <a href="" class="d-inline-block mb-2 text-dark text-decoration-none">Contacto</a> <br>
+
+
+    <!--Ubicacion-->
+
+    <div class="container">
+    <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Ubicación</h2>
+
+    <div class="row">
+      <div class="col-lg-6 col-md-6 p-4 mb-lg-0 mb-3 bg-white rounded">
+        <iframe class="w-100 rounded" height="550" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3289.89991762935!2d-57.847579925221865!3d-34.45468834964132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a31361622efd89%3A0x23c9ed881b1ed9c8!2sCosta%20Colonia%20Boutique%20Hotel!5e0!3m2!1ses!2suy!4v1761437737813!5m2!1ses!2suy"></iframe>
     </div>
-    <div class="col-lg-4 p-4"> 
-      <h5 class="mb-3">Encuentranos en:</h5> 
+
+    <div class="col-lg-4 col-md-4">
+      <div class="bg-white p-4 rounded mb-4">
+        <h5>Ubicación</h5>
+        <a href="https://maps.app.goo.gl/A6HZECh4EeRrhEHKA" class="d-inline-block mb-2 text-dark text-decoration-none text-dark" target="_blank" rel="noopener noreferrer">
+          <strong>Joaquín Torres García 1102, 70000, Colonia del Sacramento, Departamento de Colonia</strong>
+        </a>
+        <a>
+          Costa Colonia Boutique Hotel está ubicado sobre la rambla, justo frente a la playa.
+          Desde aquí, podés caminar o andar en bicicleta hasta el Barrio Histórico o la Plaza de Toros.
+          El puerto y la terminal de ómnibus se encuentran a solo 2 km.
+          Su privilegiada ubicación a orillas del río ofrece vistas espectaculares del atardecer y la bahía, 
+          mientras que su distancia del centro de la ciudad garantiza un ambiente tranquilo y relajante. 
+        </a>
+      </div>
+
+      <div class="bg-white p-4 rounded mb-4">
+        <h5>Contáctanos</h5>
+        <a href="#footer" class="d-inline-block mb-2 text-dark text-decoration-none text-dark">
+          Si tienes alguna pregunta o necesitas más información, no dudes en <strong>contactarnos aqui</strong>.
+        </a>
+
+        <a href="tel:+59812345678" class="d-inline-block mb-2 text-dark text-decoration-none text-dark">
+          O si lo prefieres llámanos: <strong>+598 1234 5678</strong>.
+        </a>
+      </div> 
+    </div> 
+
+    </div>
+    </div>
+
+
+    <br><br><br>
+
+    <a href="habDisponible.html">Disponible</a>  
+
+
+    <footer class="footer" id="footer" width="100%">
+      <div class="container-fluid mt-5">
+        <div class="row">
+          <div class="col-lg-4 p-4">
+            <h3 class="h-font fw-bold fs-3 mb-2">Hotel Costa Colonia</h3>
+            <p>
+              Disfruta de una experiencia única entre historia, confort y naturaleza.
+              <a href="tel:+59812345678" class="d-inline-block mb-2 text-dark text-decoration-none text-dark">
+                Contacto: <strong>+598 1234 5678</strong>.
+              </a>
+              <br><br>
+              © 2025 Hotel Costa Colonia. Todos los derechos reservados.
+            </p>
+          </div>
+
+          <div class="col-lg-4 p-4">
+            <h5 class="mb-3">Links</h5>
+            <a href="index.html" class="d-inline-block mb-2 text-dark text-decoration-none">Inicio</a><br>
+            <a href="habitaciones.html" class="d-inline-block mb-2 text-dark text-decoration-none">Habitaciones</a><br>
+            <a href="servicios.html" class="d-inline-block mb-2 text-dark text-decoration-none">Servicios</a><br>
+            <a href="promociones.html" class="d-inline-block mb-2 text-dark text-decoration-none">Promociones</a><br>
+            <a href="restaurante.html" class="d-inline-block mb-2 text-dark text-decoration-none">Restaurante</a><br>
+            <a href="" class="d-inline-block mb-2 text-dark text-decoration-none">Contacto</a><br>
+          </div>
+
+          <div class="col-lg-4 p-4">
+            <h5 class="mb-3">Encuentranos en:</h5>
 
             <a href="https://www.facebook.com/" class="d-inline-block text-dark text-decoration-none mb-2" target="_blank" rel="noopener noreferrer">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/></svg> Facebook
-      </a><br>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+              </svg> Facebook
+            </a><br>
 
             <a href="https://www.instagram.com/hotelcostacolonia/" class="d-inline-block text-dark text-decoration-none mb-2" target="_blank" rel="noopener noreferrer">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/></svg> Instagram
-      </a><br>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+              </svg> Instagram
+            </a><br>
 
             <a href="#" class="d-inline-block text-dark text-decoration-none mb-2" target="_blank" rel="noopener noreferrer">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="#1f1f1f"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/></svg>Email
-      </a><br>
-
-    </div>
-  </div>
-</div>
-</footer>
+              <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="#1f1f1f">
+                <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/>
+              </svg>Email
+            </a><br>
+          </div>
+        </div>
+      </div>
+    </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -774,5 +805,5 @@
   <script src="js/translate.js"></script>
 
   
-</body>
+  </body>
 </html>

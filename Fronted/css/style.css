@@ -234,7 +234,10 @@ body {
   top: 0px !important;
 }
 
-
+.footer {
+  background-color: #9bf3e5;  
+  width: 100%;
+}
 
 /* Sección de preguntas frecuentes */
 .accordion-item {
@@ -274,11 +277,12 @@ body {
 
 /* Cuerpo del acordeón */
 .accordion-body {
-  background-color: #53c7b6;
+  background-color: #bce4de;
   padding: 1rem 1.25rem;
   font-size: 1rem;
   color: #555;
   line-height: 1.6;
+
 }
 
 /* Transición suave */
