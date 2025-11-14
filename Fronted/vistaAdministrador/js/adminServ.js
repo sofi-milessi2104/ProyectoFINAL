@@ -1,4 +1,25 @@
-const API_BASE_URL_SERV = 'http://localhost/ProyectoFinal/Backend/routes/api.php?url=servicio';
+const API_PROMO_URL = 'http://localhost/ProyectoFINAL/Backend/routes/api.php?url=promocion';
+
+async function cargarPromocionesSelect() {
+    const select = document.getElementById('id_promo');
+    if (!select) return;
+    select.innerHTML = '<option value="">Seleccione una promoción...</option>';
+    try {
+        const res = await fetch(API_PROMO_URL);
+        const promos = await res.json();
+        if (Array.isArray(promos)) {
+            promos.forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p.id_promo;
+                opt.textContent = `${p.tipo_promo} (${p.precio_promo})`;
+                select.appendChild(opt);
+            });
+        }
+    } catch (e) {
+        console.error('Error cargando promociones:', e);
+    }
+}
+const API_BASE_URL_SERV = 'http://localhost/ProyectoFINAL/Backend/routes/api.php?url=servicio';
 
 let modalServicio;
 
@@ -70,15 +91,15 @@ async function cargarServicios() {
         data.forEach(servicio => {
             const fila = `
                 <tr>
-                    <th scope="row">${servicio.id_serv}</th>
+                    <th scope="row">${servicio.id_servicio}</th>
                     <td>${servicio.tipo_servicio}</td>
                     <td>${servicio.descripcion_servicio.substring(0, 70)}...</td>
                     <td>${servicio.imagen ? `<a href="${servicio.imagen}" target="_blank">Ver Imagen</a>` : 'N/A'}</td>
                     <td>
-                        <button class="btn btn-sm btn-warning editar-serv-btn" data-id="${servicio.id_serv}">
+                        <button class="btn btn-sm btn-warning editar-serv-btn" data-id="${servicio.id_servicio}">
                             <i class="bi bi-pencil-square"></i> Editar
                         </button>
-                        <button class="btn btn-sm btn-danger eliminar-serv-btn" data-id="${servicio.id_serv}">
+                        <button class="btn btn-sm btn-danger eliminar-serv-btn" data-id="${servicio.id_servicio}">
                             <i class="bi bi-trash-fill"></i> Eliminar
                         </button>
                     </td>
@@ -97,7 +118,7 @@ async function cargarServicios() {
 function editarServicio(id) {
     const data = {
         action: 'obtener_uno',
-        id_serv: id
+        id_servicio: id
     };
 
     fetch(API_BASE_URL_SERV, {
@@ -116,9 +137,10 @@ function editarServicio(id) {
         if (serv.success && serv.data) {
             const s = serv.data;
             document.getElementById('modalLabel').textContent = 'Editar Servicio Existente';
-            document.getElementById('id_serv_oculto').value = s.id_serv;
+            document.getElementById('id_serv_oculto').value = s.id_servicio;
             document.getElementById('tipo_servicio').value = s.tipo_servicio;
             document.getElementById('descripcion_servicio').value = s.descripcion_servicio;
+            document.getElementById('id_promo').value = s.id_promo || '';
             document.getElementById('imagen_servicio').value = ''; 
 
             modalServicio.show();
@@ -136,7 +158,7 @@ async function eliminarServicio(id) {
     if (!confirm(`¿Está seguro de eliminar el servicio #${id}? Esta acción es irreversible.`)) return;
     const data = {
         action: 'eliminar',
-        id_serv: id
+        id_servicio: id
     };
     
     try {
@@ -170,27 +192,20 @@ document.getElementById('formulario-servicio').addEventListener('submit', async 
     e.preventDefault();
 
     const id = document.getElementById('id_serv_oculto').value;
-    
     const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
+
+    // Si es edición, agregar el id
+    if (id) {
+        formData.append('id_servicio', id);
+    }
 
     const action = id ? 'editar' : 'agregar';
     const successMsg = id ? 'Servicio actualizado correctamente.' : 'Servicio agregado correctamente.';
     const errorMsg = id ? 'Error al actualizar servicio: ' : 'Error al agregar servicio: ';
-    if (id) {
-        data.id_serv = id;
-    }
-    
-    const imagenInput = document.getElementById('imagen_servicio');
-    if (imagenInput.files.length === 0 && action === 'editar') {
-        delete data.imagen_servicio;
-    }
 
+    // Convertir FormData a objeto para crudOperationServicio
     const dataToSend = {};
     for (const [key, value] of formData.entries()) {
-        if (key === 'imagen_servicio' && imagenInput.files.length === 0 && action === 'editar') {
-            continue; 
-        }
         dataToSend[key] = value;
     }
 
@@ -213,18 +228,23 @@ function agregarListenersServicios() {
 
 document.addEventListener("DOMContentLoaded", () => {
     modalServicio = new bootstrap.Modal(document.getElementById('modal-servicio'));
-    
     cargarServicios();
+    cargarPromocionesSelect();
+
+    document.getElementById('modal-servicio').addEventListener('shown.bs.modal', function () {
+        cargarPromocionesSelect();
+    });
 
     document.getElementById('modal-servicio').addEventListener('hidden.bs.modal', function () {
         document.getElementById('formulario-servicio').reset();
         document.getElementById('id_serv_oculto').value = '';
         document.getElementById('modalLabel').textContent = 'Añadir Nuevo Servicio';
     });
-    
+
     document.querySelector('[data-bs-target="#modal-servicio"]').addEventListener('click', function () {
         document.getElementById('formulario-servicio').reset();
         document.getElementById('id_serv_oculto').value = '';
         document.getElementById('modalLabel').textContent = 'Añadir Nuevo Servicio';
+        cargarPromocionesSelect();
     });
 });

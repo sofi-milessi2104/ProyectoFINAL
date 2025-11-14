@@ -39,7 +39,7 @@ async function iniciarSesionAdministrador(email, password) {
 
         if (resultado.status == true) {
             window.localStorage.setItem("sesionAdmin", JSON.stringify(resultado.data));
-            window.location.href = "../fronted/index.html";
+            window.location.href = "../fronted/vistaAdministrador/indexAdmin.html";
         } else {
             alert("No tienes permisos de administrador o los datos son incorrectos.");
         }

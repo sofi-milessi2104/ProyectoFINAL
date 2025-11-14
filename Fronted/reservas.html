@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reservas.css">
+    <title>Mis Reservas - Hotel Costa Colonia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-4 shadow-sm sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand me-5 fw-bold fs-3 h-2font" href="index.html">
+      <img src="img/logo.png" alt="Hotel Costa Colonia" width="150" height="30">
+    </a>
+    <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link me-2" href="index.html">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link me-2" href="habitaciones.html">Habitaciones</a></li>
+        <li class="nav-item"><a class="nav-link me-2" href="servicios.html">Servicios</a></li>
+        <li class="nav-item"><a class="nav-link me-2" href="promociones.html">Promociones</a></li>
+        <li class="nav-item"><a class="nav-link me-2" href="restaurante.html">Restaurante</a></li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-2 ms-auto">
+        <a href="usuario.html" class="btn-login" id="loginLink">Inicia Sesión</a>
+
+        <div class="user-menu" id="userMenuContainer" style="display: none;">
+          <div class="user-avatar" id="userAvatar">S</div>
+          <div class="dropdown hidden" id="userDropdown">
+            <p id="userEmail" class="user-email"></p>
+            <a href="reservas.html" class="user-option">Mis reservas</a>
+            <button id="logoutBtn" class="user-option logout">Cerrar sesión</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container my-5">
+    <h1 class="text-center fw-bold mb-4 h-font">Mis Reservas</h1>
+    
+    <div id="mensajeNoReservas" class="alert alert-info text-center" style="display: none;">
+        <i class="bi bi-info-circle me-2"></i>
+        No tienes reservas registradas. <a href="habitaciones.html">Haz tu primera reserva aquí</a>
+    </div>
+
+    <div id="contenedorReservas" class="row">
+        <!-- Las reservas se cargarán aquí dinámicamente -->
+    </div>
+
+    <div id="spinnerCarga" class="text-center my-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="mt-2">Cargando tus reservas...</p>
+    </div>
+</div>
+
+<footer class="footer mt-5">
+<div class="container-fluid bg-white">
+  <div class="row">
+    <div class="col-lg-4 p-4">
+      <h3 class="h-font fw-bold fs-3 mb-2">Hotel Costa Colonia</h3>
+        <p>
+        Disfruta de una experiencia única entre historia, confort y naturaleza.
+    
+        <a href="tel:+59812345678" class="d-inline-block mb-2 text-dark text-decoration-none text-dark">
+            Contacto: <strong>+598 1234 5678</strong>.
+        </a>
+        <br>
+        <br>
+        © 2025 Hotel Costa Colonia. Todos los derechos reservados.
+        </p>
+    </div>
+    <div class="col-lg-4 p-4">
+      <h5 class="mb-3">Links</h5>
+      <a href="index.html" class="d-inline-block mb-2 text-dark text-decoration-none">Inicio</a> <br>
+      <a href="habitaciones.html" class="d-inline-block mb-2 text-dark text-decoration-none">Habitaciones</a> <br>
+      <a href="servicios.html" class="d-inline-block mb-2 text-dark text-decoration-none">Servicios</a> <br>
+      <a href="promociones.html" class="d-inline-block mb-2 text-dark text-decoration-none">Promociones</a> <br>
+      <a href="restaurante.html" class="d-inline-block mb-2 text-dark text-decoration-none">Restaurante</a> <br>
+    </div>
+    <div class="col-lg-4 p-4"> 
+      <h5 class="mb-3">Encuentranos en:</h5> 
+      <a href="https://www.facebook.com/" class="d-inline-block text-dark text-decoration-none mb-2" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-facebook"></i> Facebook
+      </a><br>
+      <a href="https://www.instagram.com/hotelcostacolonia/" class="d-inline-block text-dark text-decoration-none mb-2" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-instagram"></i> Instagram
+      </a><br>
+      <a href="#" class="d-inline-block text-dark text-decoration-none mb-2">
+        <i class="bi bi-envelope"></i> Email
+      </a><br>
+    </div>
+  </div>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="js/reservas.js"></script>
+
+</body>
+</html>

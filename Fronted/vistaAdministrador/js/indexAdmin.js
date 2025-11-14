@@ -1,5 +1,6 @@
 const API_BASE_URL = "../../Backend/routes/api.php"; 
-const API_INGRESOS_URL = "../../Backend/routes/ingresos.php"; // <--- NUEVA URL DE INGRESOS
+const API_INGRESOS_URL = "../../Backend/routes/ingresos.php";
+const API_RESERVAS_URL = "../../Backend/routes/reservasAdmin.php"; // URL para contar reservas
 
 async function actualizarConteoUsuarios() {
     const elementoConteo = document.getElementById('total-usuarios');
@@ -73,28 +74,102 @@ async function actualizarIngresosMes() {
     }
 }
 
+// NUEVA FUNCIÓN: Carga dinámicamente el total de reservas
 async function actualizarReservasHoy() {
     const elementoReservas = document.getElementById('reservas-hoy');
     if (!elementoReservas) return;
-    // Esto debería ser una llamada a la API, pero por ahora se deja fijo/pendiente
-    elementoReservas.textContent = '12'; 
+    
+    elementoReservas.textContent = '...'; // Indicador de carga
+
+    try {
+        const respuesta = await fetch(API_RESERVAS_URL);
+        
+        if (!respuesta.ok) throw new Error(`Error de servidor. Código HTTP: ${respuesta.status}`);
+        
+        const reservas = await respuesta.json();
+
+        // Verificar que sea un array y contar el total
+        if (Array.isArray(reservas)) {
+            elementoReservas.textContent = reservas.length;
+            console.log("Total de reservas actualizado:", reservas.length);
+        } else {
+            elementoReservas.textContent = '0';
+            console.error("Error: El API de reservas no devolvió un array", reservas);
+        }
+
+    } catch (error) {
+        console.error("Fallo la llamada al conteo de reservas:", error);
+        elementoReservas.textContent = 'Falla';
+    }
 }
 
-async function cargarTareasPendientes() {
-    const totalPendientes = 2; // Esto debería venir de la API
-    const contador = document.getElementById('contador-pendientes');
-    if (contador) contador.textContent = `(${totalPendientes})`;
-
-    const tbody = document.getElementById('cuerpo-tabla-pendientes');
-    if (!tbody) return;
-    // Aquí iría la lógica para cargar las filas de la tabla desde la API
+// Cargar resumen del día
+async function cargarResumenDia() {
+    try {
+        // Obtener reservas y habitaciones
+        const [respuestaReservas, respuestaHabitaciones] = await Promise.all([
+            fetch(API_RESERVAS_URL),
+            fetch(`${API_BASE_URL}?url=habitacion`)
+        ]);
+        
+        const reservas = await respuestaReservas.json();
+        const habitaciones = await respuestaHabitaciones.json();
+        
+        // Obtener fecha de hoy en formato YYYY-MM-DD
+        const hoy = new Date();
+        const año = hoy.getFullYear();
+        const mes = String(hoy.getMonth() + 1).padStart(2, '0');
+        const dia = String(hoy.getDate()).padStart(2, '0');
+        const fechaHoy = `${año}-${mes}-${dia}`;
+        
+        console.log("Fecha de hoy:", fechaHoy);
+        console.log("Reservas:", reservas);
+        
+        // Calcular métricas
+        const habitacionesOcupadas = Array.isArray(reservas) ? reservas.filter(r => {
+            const checkIn = r.check_in.split(' ')[0]; // Por si viene con hora
+            const checkOut = r.check_out.split(' ')[0];
+            return checkIn <= fechaHoy && checkOut >= fechaHoy;
+        }).length : 0;
+        
+        const totalHabitaciones = Array.isArray(habitaciones) ? habitaciones.length : 40;
+        const tasaOcupacion = totalHabitaciones > 0 ? Math.round((habitacionesOcupadas / totalHabitaciones) * 100) : 0;
+        
+        const checkinsHoy = Array.isArray(reservas) ? reservas.filter(r => {
+            const checkIn = r.check_in.split(' ')[0];
+            console.log("Comparando check_in:", checkIn, "con", fechaHoy);
+            return checkIn === fechaHoy;
+        }).length : 0;
+        
+        const checkoutsHoy = Array.isArray(reservas) ? reservas.filter(r => {
+            const checkOut = r.check_out.split(' ')[0];
+            return checkOut === fechaHoy;
+        }).length : 0;
+        
+        console.log("Check-ins hoy:", checkinsHoy);
+        console.log("Check-outs hoy:", checkoutsHoy);
+        
+        // Actualizar UI
+        const elemHabOcupadas = document.getElementById('habitaciones-ocupadas');
+        const elemCheckins = document.getElementById('checkins-dia');
+        const elemCheckouts = document.getElementById('checkouts-dia');
+        const elemTasa = document.getElementById('tasa-ocupacion');
+        
+        if (elemHabOcupadas) elemHabOcupadas.textContent = habitacionesOcupadas;
+        if (elemCheckins) elemCheckins.textContent = checkinsHoy;
+        if (elemCheckouts) elemCheckouts.textContent = checkoutsHoy;
+        if (elemTasa) elemTasa.textContent = `${tasaOcupacion}%`;
+        
+    } catch (error) {
+        console.error("Error al cargar resumen del día:", error);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     actualizarConteoUsuarios();
     actualizarReservasHoy();
-    actualizarIngresosMes(); // <--- Ahora carga el valor dinámico
-    cargarTareasPendientes();
+    actualizarIngresosMes();
+    cargarResumenDia();
     
     console.log("Panel de Administración cargado. Listo para gestionar el hotel.");
 });

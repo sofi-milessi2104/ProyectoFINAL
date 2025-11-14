@@ -4,14 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/loginAdmin.css">
+    <link rel="stylesheet" href="css/translate.css">
 <script type="module" src="./js/admin.js"></script>   
  <title>Sesión</title>
 </head>
 
 <body>
 
-    <a id="btn"  href="Ingles/adminING.html"> Traducir <i class='bx bx-transfer'></i></a>
+      <!-- IDIOMA -->
+        <div class="language-selector position-relative m-0">
+          <button class="language-btn" onclick="toggleDropdown()">Idioma</button>
+          <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
+            <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
+            <div class="language-option" onclick="changeLanguage('fr')">🇫🇷 Français</div>
+            <div class="language-option" onclick="changeLanguage('de')">🇩🇪 Deutsch</div>
+            <div class="language-option" onclick="changeLanguage('it')">🇮🇹 Italiano</div>
+            <div class="language-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
+          </div>
+        </div>
+
+        <!-- Div oculto de Google Translate -->
+        <div id="google_translate_element" style="display: none;"></div>
 
     <div class="container" id="container">
 
@@ -29,23 +44,11 @@
                <input type="password" id="password" name="password" placeholder="Contraseña" required>
                 <a href="#">¿Olvidaste tu contraseña?</a>
                 <input type="submit" id="Iniciar_button" value="iniciar">
-
             </form>
         </div>
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="toggle-panel toggle-left">
-                    <h1>¡Bienvenido de Vuelta!</h1>
-                    <p>Inicie sesión con  sus datos personales para utilizar todas las funciones del sitio</p>
-                    <button class="hidden" id="login">Iniciar Sesión</button>
-                </div>
-                <div class="toggle-panel toggle-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>Inicia sesión como administrador para acceder a todas las funciones del sitio</p>
-                </div>
-            </div>
-        </div>
     </div>
+
+    <script src="js/translate.js"></script>
 
 </body>
 </html>

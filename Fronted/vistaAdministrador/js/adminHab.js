@@ -1,35 +1,57 @@
-const API_BASE_URL = 'http://localhost/ProyectoFinal/Backend/routes/api.php?url=habitacion';
+const API_BASE_URL = 'http://localhost/ProyectoFINAL/Backend/routes/api.php?url=habitacion';
 
 let modalHabitacion;
 
 async function crudOperation(action, data = {}, successMsg, errorMsg) {
     try {
-        const respuesta = await fetch(API_BASE_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action, ...data })
-        });
+        // Si el data es FormData (para imagen), no poner Content-Type
+        let fetchOptions;
+        if (data instanceof FormData) {
+            data.append('action', action);
+            fetchOptions = {
+                method: 'POST',
+                body: data
+            };
+        } else {
+            data.action = action;
+            fetchOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            };
+        }
+
+        const respuesta = await fetch(API_BASE_URL, fetchOptions);
 
         if (!respuesta.ok) {
             const errorText = await respuesta.text();
-            console.error("Error HTTP:", errorText);
-            alert(errorMsg + ` (HTTP ${respuesta.status})`);
+            console.error("Error HTTP:", respuesta.status, errorText);
+            alert(errorMsg + `(HTTP ${respuesta.status})`);
             return false;
         }
 
-        const resultado = await respuesta.json();
+        let resultado;
+        try {
+            resultado = await respuesta.json();
+        } catch (parseError) {
+            console.error("Error al parsear JSON:", parseError);
+            alert(errorMsg + "(Error al procesar respuesta del servidor)");
+            return false;
+        }
+
         console.log("Respuesta backend:", resultado);
 
         if (resultado.success) {
             alert(successMsg);
             return true;
         } else {
-            alert(errorMsg + (resultado.message || 'Error desconocido.'));
+            const mensaje = resultado.message || resultado.error || 'Error desconocido.';
+            alert(errorMsg + mensaje);
             return false;
         }
     } catch (error) {
         console.error("Error en CRUD:", error);
-        alert('Error de conexión con el servidor.');
+        alert(errorMsg + error.message);
         return false;
     }
 }
@@ -58,8 +80,9 @@ async function cargarHabitaciones() {
                     <td>${hab.tipo_hab}</td>
                     <td>${hab.descripcion_hab.substring(0, 50)}...</td>
                     <td>$${hab.precio}</td>
-                    <td>${hab.imagen ? `<a href="${hab.imagen}" target="_blank">Ver</a>` : 'N/A'}</td>
-                    <td>${hab.disponible}</td> <td>
+                    <td>${hab.imagen ? `<a href="${hab.imagen}" target="_blank">Ver imagen</a>` : 'N/A'}</td>
+                    <td>${hab.disponible}</td>
+                    <td>
                         <button class="btn btn-sm btn-warning editar-hab-btn" data-id="${hab.id_hab}">
                             <i class="bi bi-pencil-square"></i> Editar
                         </button>
@@ -123,24 +146,22 @@ function editarHabitacion(id) {
 document.getElementById('formulario-habitacion').addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const id = document.getElementById('hab-id').value;
-    
+    const id = document.getElementById('hab-id').value.trim();
     const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
+
+    // Si es edición, agregar el id
+    if (id) {
+        formData.append('id_hab', id);
+    }
+
+    // Asegurarse de que disponible sea número
+    formData.set('disponible', parseInt(formData.get('disponible')) || 0);
 
     const action = id ? 'editar' : 'agregar';
     const successMsg = id ? 'Habitación actualizada correctamente.' : 'Habitación agregada correctamente.';
     const errorMsg = id ? 'Error al actualizar habitación: ' : 'Error al agregar habitación: ';
 
-    if (action === 'editar' && !data.id_hab) {
-        console.error("Error de edición: ID de habitación faltante.");
-        alert("Error: ID de habitación para edición no encontrado.");
-        return;
-    }
-    
-    data.disponible = parseInt(data.disponible); 
-
-    if (await crudOperation(action, data, successMsg, errorMsg)) {
+    if (await crudOperation(action, formData, successMsg, errorMsg)) {
         modalHabitacion.hide();
         cargarHabitaciones();
     }

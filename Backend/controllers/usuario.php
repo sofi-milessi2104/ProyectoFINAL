@@ -4,7 +4,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 header('Content-Type: application/json');
 
-// ⚠️ El autoloader DEBE estar primero
 require __DIR__ . '/../../vendor/autoload.php';
 
 require "../config/database.php";
@@ -26,9 +25,11 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
     header('Content-Type: application/json; charset=utf-8');
 
     try {
-        if ($usuarioModel->loginAdd($nombre, $apellido, $email, $celular, $password)) {
+        $res = $usuarioModel->loginAdd($nombre, $apellido, $email, $celular, $password);
 
-            // ✉️ Envío de correo de bienvenida
+        if (is_array($res) && !empty($res['ok'])) {
+            $nuevoId = $res['id'] ?? null;
+
             if (class_exists('PHPMailer\PHPMailer\PHPMailer')) {
                 $mail = new PHPMailer(true);
                 try {
@@ -36,7 +37,7 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
                     $mail->Host       = 'smtp.gmail.com';
                     $mail->SMTPAuth   = true;
                     $mail->Username   = 'sofia.milessi2008@gmail.com';
-                    $mail->Password   = 'sshyxbeijzqnmzjl'; // ⚠️ Contraseña de aplicación
+                    $mail->Password   = 'sshyxbeijzqnmzjl';
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                     $mail->Port       = 587;
 
@@ -65,11 +66,17 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
                                 <h2 style='color: #3b7a57;'>¡Hola $nombre!</h2>
                                 <p style='font-size: 16px; line-height: 1.6;'>
                                     ¡Bienvenido/a a <strong>Hotel Costa Colonia</strong>!  
-                                    Tu cuenta se creó exitosamente. A partir de ahora podés iniciar sesión y disfrutar de todos nuestros servicios.
+                                    Tu cuenta se creó exitosamente. A partir de ahora podés iniciar sesión y disfrutar de todos nuestros servicios únicos diseñados para ti.
                                 </p>
 
                                 <p style='font-size: 16px; line-height: 1.6;'>
-                                    Te esperamos con nuestras mejores promociones y experiencias únicas frente al río 🌿
+                                    <strong>Disfrute de una estadía inigualable con nosotros</strong>
+                                     <br>
+                                     <br>
+                                    Lo invitamos a aprovechar nuestras promociones exclusivas, servicios
+                                     personalizados y el entorno incomparable que hacen 
+                                     de Hotel Costa Colonia un lugar ideal para su descanso
+                                      y bienestar.
                                 </p>
 
                                 <div style='margin-top: 30px; text-align: center;'>
@@ -102,19 +109,23 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
                 }
             }
 
-            // ✅ Respuesta exitosa
             echo json_encode([
                 "status" => true,
                 "rol" => "usuario",
                 "data" => [
+                    "id_usuario" => $nuevoId,
                     "nombre" => $nombre,
-                    "email" => $email
+                    "apellido" => $apellido,
+                    "email" => $email,
+                    "celular" => $celular
                 ]
             ]);
         } else {
+            $detalle = is_array($res) ? json_encode($res) : '';
             echo json_encode([
                 "status" => false,
-                "message" => "Error al agregar el usuario."
+                "message" => "Error al agregar el usuario.",
+                "debug" => $detalle
             ]);
         }
     } catch (Throwable $t) {
@@ -130,7 +141,6 @@ function loginUsuario($email, $password) {
     $resultado = $usuarioModel->login($email, $password);
 
     if ($resultado) {
-        // ✉️ Envío de correo de inicio de sesión exitoso
         if (class_exists('PHPMailer\PHPMailer\PHPMailer')) {
             $mail = new PHPMailer(true);
             try {
@@ -138,7 +148,7 @@ function loginUsuario($email, $password) {
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
                 $mail->Username   = 'sofia.milessi2008@gmail.com';
-                $mail->Password   = 'sshyxbeijzqnmzjl'; // ⚠️ Contraseña de aplicación
+                $mail->Password   = 'sshyxbeijzqnmzjl';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
 
@@ -167,11 +177,16 @@ function loginUsuario($email, $password) {
                             <h2 style='color: #3b7a57;'>¡Hola de nuevo!</h2>
                             <p style='font-size: 16px; line-height: 1.6;'>
                                 Nos alegra verte regresar a <strong>Hotel Costa Colonia</strong>.  
-                                Tu inicio de sesión fue exitoso, ya podés continuar disfrutando de nuestras experiencias únicas frente al río.
+                                Su inicio de sesión fue exitoso, ya puedes seguir disfrutando de la calidez, el confort y de las experiencias únicas frente al río.
                             </p>
 
                             <p style='font-size: 16px; line-height: 1.6;'>
-                                Te esperamos con nuestras mejores promociones y servicios exclusivos 🌿
+                                <srtrong> Viví lo mejor con nosotros 🌿 </srtrong>
+                                <br>
+                                <br>
+                            Lo invitamos a aprovechar nuestras promociones exclusivas, 
+                            beneficios especiales y el servicio personalizado que nos distingue.
+                            Tu proxima escapada comienza aquí 🍀.
                             </p>
 
                             <div style='margin-top: 30px; text-align: center;'>
@@ -204,7 +219,6 @@ function loginUsuario($email, $password) {
             }
         }
 
-        // ✅ Enviar respuesta exitosa
         echo json_encode([
             "status" => true,
             "rol" => "usuario",

@@ -34,9 +34,29 @@ class Habitacion {
     }
 
     public function obtenerPorId($id) {
-    $stmt = $this->pdo->prepare("SELECT * FROM habitacion WHERE id_hab = :id");
-    $stmt->execute(["id" => $id]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = $this->pdo->prepare("SELECT * FROM habitacion WHERE id_hab = :id");
+        $stmt->execute(["id" => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function editar($id, $tipo_hab, $descripcion_hab, $disponible, $imagen, $precio) {
+        $stmt = $this->pdo->prepare("
+            UPDATE habitacion 
+            SET tipo_hab = :tipo_hab, 
+                descripcion_hab = :descripcion_hab, 
+                disponible = :disponible, 
+                imagen = :imagen, 
+                precio = :precio 
+            WHERE id_hab = :id
+        ");
+        return $stmt->execute([
+            "id" => $id,
+            "tipo_hab" => $tipo_hab,
+            "descripcion_hab" => $descripcion_hab,
+            "disponible" => $disponible,
+            "imagen" => $imagen,
+            "precio" => $precio
+        ]);
     }
 
 }

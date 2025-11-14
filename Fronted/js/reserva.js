@@ -336,9 +336,17 @@ step3.querySelector('#step3-form').addEventListener('submit', async (e) => {
     reservaData.vencimiento = vencimientoInput;
     reservaData.cvc = cvcInput;
 
+    // Obtener el usuario logueado
+    let usuarioLogueado = null;
+    try {
+        usuarioLogueado = JSON.parse(localStorage.getItem("sesionUser"));
+    } catch (e) {
+        console.error("Error leyendo sesión del usuario:", e);
+    }
+
     const payload = {
         action: 'agregarReserva',
-        id_usuario: null, 
+        id_usuario: usuarioLogueado ? usuarioLogueado.id_usuario : null, 
         adultos: reservaData.adultos.toString(),
         niños: reservaData.niños.toString(),
         fecha_inicio: reservaData.fecha_inicio,
@@ -351,21 +359,30 @@ step3.querySelector('#step3-form').addEventListener('submit', async (e) => {
         cvc: reservaData.cvc
     };
 
-            const loader = document.getElementById('loader-overlay');
-            const modal = document.getElementById('confirm-modal');
-            const resumenDiv = document.getElementById('resumen-reserva');
+    console.log('Payload a enviar:', payload);
 
-            loader.style.display = 'flex';
+    const loader = document.getElementById('loader-overlay');
+    const modal = document.getElementById('confirm-modal');
+    const resumenDiv = document.getElementById('resumen-reserva');
 
-            try {
-                const res = await fetch('../Backend/controllers/reserva.php', { 
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
+    loader.style.display = 'flex';
 
-                const data = await res.json();
-                loader.style.display = 'none';
+    try {
+        const jsonPayload = JSON.stringify(payload);
+        console.log('JSON stringify:', jsonPayload);
+        
+        const res = await fetch('../Backend/controllers/reserva.php', { 
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: jsonPayload
+        });
+
+        const data = await res.json();
+        console.log('Respuesta del servidor:', data);
+        loader.style.display = 'none';
 
                 if (data.success) {
                     e.target.reset();
@@ -394,6 +411,7 @@ step3.querySelector('#step3-form').addEventListener('submit', async (e) => {
                     modal.style.display = 'block';
 
                 } else {
+                    console.error('Error en la respuesta:', data);
                     alert(data.message || 'Error al realizar la reserva.');
                 }
 
@@ -421,35 +439,3 @@ step3.querySelector('#step3-form').addEventListener('submit', async (e) => {
     });
 
 });
-document.addEventListener("DOMContentLoaded", function() {
-    // Obtiene el ID de la habitación desde localStorage
-    const idHabitacion = localStorage.getItem('selected_room_id');
-    
-    if (idHabitacion) {
-        console.log(`ID de habitación seleccionada: ${idHabitacion}`);
-        // Aquí cargas los detalles de la habitación
-        cargarDetallesHabitacion(idHabitacion);
-    } else {
-        console.error("No se encontró un ID de habitación en localStorage.");
-        document.getElementById("app").innerHTML = `
-            <div class="alert alert-warning">
-                No se seleccionó una habitación. Por favor, selecciona una habitación primero.
-                <a href="habDisponible.html">Volver a habitaciones disponibles</a>
-            </div>
-        `;
-    }
-});
-
-async function cargarDetallesHabitacion(idHabitacion) {
-    try {
-        const respuesta = await fetch(`../Backend/routes/api.php?url=habitacion&id=${idHabitacion}`);
-        const habitacion = await respuesta.json();
-        
-        // Aquí rellenas los detalles de la habitación en la página
-        document.getElementById('summary-habitacion').textContent = habitacion.tipo_hab;
-        document.getElementById('summary-precio-total').textContent = habitacion.precio;
-        // ... más detalles según necesites
-    } catch (error) {
-        console.error("Error al cargar detalles de la habitación: " + error);
-    }
-}

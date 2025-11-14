@@ -1,13 +1,19 @@
  const API_BASE_URL = 'http://localhost/ProyectoFinal/Backend/routes/api.php?url=promocion';
- const modalPromocion = new bootstrap.Modal(document.getElementById('modal-promocion'));
+ let modalPromocion;
 
 async function crudOperation(url, method, data, successMsg, errorMsg) {
     try {
-        const respuesta = await fetch(url, {
-            method: method,
-            headers: { 'Content-Type': 'application/json' },
-            body: ['POST', 'PUT', 'DELETE'].includes(method) ? JSON.stringify(data) : null
-        });
+        let fetchOptions = { method: method };
+        
+        // Si data es FormData, no poner Content-Type
+        if (data instanceof FormData) {
+            fetchOptions.body = data;
+        } else if (['POST', 'PUT', 'DELETE'].includes(method)) {
+            fetchOptions.headers = { 'Content-Type': 'application/json' };
+            fetchOptions.body = JSON.stringify(data);
+        }
+        
+        const respuesta = await fetch(url, fetchOptions);
         
         if (!respuesta.ok) {
             const errorText = await respuesta.text();
@@ -63,7 +69,7 @@ async function cargarPromociones() {
                             <th scope="row">${promo.id_promo}</th>
                             <td>${promo.tipo_promo}</td>
                             <td>${promo.descripcion_promo ? promo.descripcion_promo.substring(0, 50) + '...' : 'N/A'}</td>
-                            <td>${promo.img_promo ? '<i class="bi bi-image-fill text-success"></i>' : 'N/A'}</td>
+                            <td>${promo.img_promo ? `<a href="${promo.img_promo}" target="_blank">Ver imagen</a>` : 'N/A'}</td>
                             <td>
                                 <button type="button" class="btn btn-sm btn-warning editar-promo-btn shadow-none" data-id="${promo.id_promo}">
                                     <i class="bi bi-pencil-square"></i> Editar
@@ -86,29 +92,21 @@ async function cargarPromociones() {
 document.getElementById('formulario-promocion').addEventListener('submit', async function(e) {
     e.preventDefault();
     
-    const data = {};
     const formData = new FormData(e.target);
-    for (let [key, value] of formData.entries()) {
-        data[key] = value;
-    }
-
     const id = document.getElementById('id_promo_oculto').value;
     
-    let url, method, successMsg, errorMsg;
-
+    // Determinar acción y agregar al FormData
+    const action = id ? 'editar' : 'agregar';
+    formData.append('action', action);
+    
     if (id) {
-        url = `${API_BASE_URL}?url=promocion&id=${id}&action=editar`;
-        method = 'POST'; 
-        successMsg = 'Promoción actualizada con éxito.';
-        errorMsg = 'Error al actualizar la promoción: ';
-    } else {
-        url = `${API_BASE_URL}?url=promocion&action=agregar`;
-        method = 'POST';
-        successMsg = 'Promoción creada con éxito.';
-        errorMsg = 'Error al crear la promoción: ';
+        formData.append('id_promo', id);
     }
+    
+    const successMsg = id ? 'Promoción actualizada con éxito.' : 'Promoción creada con éxito.';
+    const errorMsg = id ? 'Error al actualizar la promoción: ' : 'Error al crear la promoción: ';
 
-    if (await crudOperation(url, method, data, successMsg, errorMsg)) {
+    if (await crudOperation(API_BASE_URL, 'POST', formData, successMsg, errorMsg)) {
         if (typeof modalPromocion !== 'undefined' && modalPromocion.hide) {
             modalPromocion.hide();
         }
@@ -117,7 +115,16 @@ document.getElementById('formulario-promocion').addEventListener('submit', async
 });
 
 function editarPromocion(id) {
-    fetch(`${API_BASE_URL}?url=promocion&id=${id}`) 
+    const data = {
+        action: 'obtener_uno',
+        id_promo: id
+    };
+
+    fetch(API_BASE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
         .then(res => res.json())
         .then(promo => {
             if (promo && promo.id_promo) { 
@@ -125,6 +132,8 @@ function editarPromocion(id) {
                 document.getElementById('id_promo_oculto').value = promo.id_promo;
                 document.getElementById('titulo_promo').value = promo.tipo_promo;
                 document.getElementById('descripcion_promo').value = promo.descripcion_promo;
+                document.getElementById('precio_promo').value = promo.precio_promo || 0;
+                document.getElementById('imagen_promo').value = '';
                  if (typeof modalPromocion !== 'undefined' && modalPromocion.show) {
                     modalPromocion.show();
                 }
@@ -140,11 +149,15 @@ function editarPromocion(id) {
 async function eliminarPromocion(id) {
     if (!confirm(`¿Está seguro de eliminar la promoción #${id}?`)) return;
 
-    const url = `${API_BASE_URL}?url=promocion&id=${id}&action=eliminar`;
+    const data = {
+        action: 'eliminar',
+        id_promo: id
+    };
+    
     const successMsg = 'Promoción eliminada correctamente.';
     const errorMsg = 'Error al eliminar la promoción: ';
     
-    if (await crudOperation(url, 'POST', {}, successMsg, errorMsg)) {
+    if (await crudOperation(API_BASE_URL, 'POST', data, successMsg, errorMsg)) {
         cargarPromociones();
     }
 }
@@ -159,6 +172,7 @@ function agregarListenersPromociones() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    modalPromocion = new bootstrap.Modal(document.getElementById('modal-promocion'));
     cargarPromociones();
 
     document.getElementById('modal-promocion').addEventListener('hidden.bs.modal', function () {
@@ -166,8 +180,4 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('id_promo_oculto').value = '';
         document.getElementById('modalLabel').textContent = 'Crear Promoción';
     });
-    
-    if (typeof bootstrap !== 'undefined') {
-        window.modalPromocion = new bootstrap.Modal(document.getElementById('modal-promocion'));
-    }
 });

@@ -36,7 +36,7 @@
           <div class="d-flex align-items-center gap-2 ms-auto">
 
         <!-- LOGIN NORMAL -->
-        <a href="usuario.html" class="btn-login" id="loginLink">Login</a>
+        <a href="usuario.html" class="btn-login" id="loginLink">Inicia Sesión</a>
 
         <!-- IDIOMA -->
         <div class="language-selector position-relative m-0">
@@ -103,11 +103,11 @@
       <form >
         <div class="row align-items-end">
           <div class="col-lg-3 mb-3">
-            <label class="form-label" name="checkin"> Registro de entrada</label>
+            <label class="form-label" name="checkin" id="formFechas"> Registro de entrada</label>
             <input type="date" class="form-control shadow-none">
           </div>
            <div class="col-lg-3 mb-3">
-            <label class="form-label" name="checkout"> Registro de salida</label>
+            <label class="form-label" name="checkout" id="formFechas"> Registro de salida</label>
             <input type="date" class="form-control shadow-none">
           </div>
           <div class="col-lg-3 mb-3">
@@ -317,35 +317,35 @@
 
       <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
         <a href="servicios.html">
-           <img src="img/wifi.jpg" width="100px">  <!-- CAMBIAR POR LOGO, NO EXISTE LA IMG-->
+          <i><svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px" fill="#5084C1"><path d="M480-120q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM254-346l-84-86q59-59 138.5-93.5T480-560q92 0 171.5 35T790-430l-84 84q-44-44-102-69t-124-25q-66 0-124 25t-102 69ZM84-516 0-600q92-94 215-147t265-53q142 0 265 53t215 147l-84 84q-77-77-178.5-120.5T480-680q-116 0-217.5 43.5T84-516Z"/></svg></i>
         </a>
         <h5 class="mt-3">Wi-Fi Gratis</h5>
       </div>
 
       <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
         <a href="servicios.html">
-          <img src="img/Piscina al aire libre de noche.jpeg" width="100px">
+          <i><svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px" fill="#5084C1"><path d="M80-120v-80q38 0 57-20t75-20q56 0 77 20t57 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 57-20t77-20q56 0 75 20t57 20v80q-59 0-77.5-20T748-160q-36 0-57 20t-77 20q-56 0-77-20t-57-20q-36 0-57 20t-77 20q-56 0-77-20t-57-20q-36 0-54.5 20T80-120Zm0-180v-80q38 0 57-20t75-20q56 0 77.5 20t56.5 20q36 0 57-20t77-20q56 0 77 20t57 20q36 0 57-20t77-20q56 0 75 20t57 20v80q-59 0-77.5-20T748-340q-36 0-55.5 20T614-300q-57 0-77.5-20T480-340q-38 0-56.5 20T346-300q-59 0-78.5-20T212-340q-36 0-54.5 20T80-300Zm196-204 133-133-40-40q-33-33-70-48t-91-15v-100q75 0 124 16.5t96 63.5l256 256q-17 11-33 17.5t-37 6.5q-36 0-57-20t-77-20q-56 0-77 20t-57 20q-21 0-37-6.5T276-504Zm392-336q42 0 71 29.5t29 70.5q0 42-29 71t-71 29q-42 0-71-29t-29-71q0-41 29-70.5t71-29.5Z"/></svg></i>
         </a>
         <h5 class="mt-3">Piscina al aire libre</h5>
       </div>
 
       <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
         <a href="servicios.html">
-          <img src="img/Gimnasio.jpeg" width="100px">
+          <i><svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px" fill="#5084C1"><path d="m536-84-56-56 142-142-340-340-142 142-56-56 56-58-56-56 84-84-56-58 56-56 58 56 84-84 56 56 58-56 56 56-142 142 340 340 142-142 56 56-56 58 56 56-84 84 56 58-56 56-58-56-84 84-56-56-58 56Z"/></svg></i>
         </a>
         <h5 class="mt-3">Gimnasio</h5>
       </div>
       
       <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
         <a href="servicios.html">
-          <img src="img/Restaurante.jpeg" width="100px">
+          <i><svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px" fill="#5084C1"><path d="M280-80v-366q-51-14-85.5-56T160-600v-280h80v280h40v-280h80v280h40v-280h80v280q0 56-34.5 98T360-446v366h-80Zm400 0v-320H560v-280q0-83 58.5-141.5T760-880v800h-80Z"/></svg></i>
         </a>
         <h5 class="mt-3">Restaurante</h5>
       </div>
 
       <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
         <a href="servicios.html">
-          <img src="img/Spa.jpeg" width="100px">
+         <i><svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px" fill="#5084C1"><path d="M480-80q-73-9-145-39.5T206.5-207Q150-264 115-351T80-560v-40h40q51 0 105 13t101 39q12-86 54.5-176.5T480-880q57 65 99.5 155.5T634-548q47-26 101-39t105-13h40v40q0 122-35 209t-91.5 144q-56.5 57-128 87.5T480-80Zm-2-82q-11-166-98.5-251T162-518q11 171 101.5 255T478-162Zm2-254q15-22 36.5-45.5T558-502q-2-57-22.5-119T480-742q-35 59-55.5 121T402-502q20 17 42 40.5t36 45.5Zm78 236q37-12 77-35t74.5-62.5q34.5-39.5 59-98.5T798-518q-94 14-165 62.5T524-332q12 32 20.5 70t13.5 82Zm-78-236Zm78 236Zm-80 18Zm46-170ZM480-80Z"/></svg></i>
         </a>  
         <h5 class="mt-3">Spa</h5>
       </div>
@@ -489,6 +489,192 @@
 
       </div>
     </div>
+
+
+<!-- Preguntas frecuentes-->
+
+<div class="frecuentes">
+
+<h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Preguntas Frecuentes</h2>
+<p class="text-center" >Encontrá respuestas a las preguntas más comunes sobre tu estadía </p>
+
+    <div class="container">
+      <div class="accordion" id="accordionExample">
+
+          <!-- Pregunta 1-->
+        <div class="accordion-item">
+
+          <h2 class="accordion-header" id="headingUno">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUno" aria-expanded="true" aria-controls="collapseUno">
+              ¿El estacionamiento es gratuito?
+            </button>
+          </h2>
+
+          <div id="collapseUno" class="accordion-collapse collapse" aria-labelledby="headingUno" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              Sí. Hay estacionamiento al aire libre gratuito, sujeto a disponibilidad.
+            </div>
+          </div> 
+        </div>
+
+          <!-- Pregunta 2-->
+        <div class="accordion-item">
+
+          <h2 class="accordion-header" id="headingDos">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDos" aria-expanded="false" aria-controls="collapseDos">
+              ¿Cuáles son los horarios del servicio a la habitación?
+            </button>
+          </h2>
+
+          <div id="collapseDos" class="accordion-collapse collapse" aria-labelledby="headingDos" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              Desde 13hs hasta 21hs.
+            </div>
+          </div>
+        </div>
+
+        <!-- Pregunta 3-->
+        <div class="accordion-item">
+
+          <h2 class="accordion-header" id="headingTres">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTres" aria-expanded="false" aria-controls="collapseTres">
+              ¿Cuáles son los horarios de check-in y check-out?
+            </button>
+          </h2>
+
+          <div id="collapseTres" class="accordion-collapse collapse" aria-labelledby="headingTres" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              Check-in: 3:00 p.m. Check-out: 11:00 a.m.
+            </div>
+          </div>
+        </div>
+
+        <!-- Pregunta 4-->
+        <div class="accordion-item">
+
+          <h2 class="accordion-header" id="headingCuatro">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCuatro" aria-expanded="false" aria-controls="collapseCuatro">
+              ¿El desayuno está incluido en la tarifa de la habitación?
+            </button>
+          </h2>
+
+          <div id="collapseCuatro" class="accordion-collapse collapse" aria-labelledby="headingCuatro" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              Sí. El desayuno buffet está incluido en todas las tarifas de habitación.
+            </div>
+          </div>
+        </div>
+
+        <!-- Pregunta 5-->
+        <div class="accordion-item">
+
+          <h2 class="accordion-header" id="headingCinco">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCinco" aria-expanded="false" aria-controls="collapseCinco">
+              ¿Cuándo están disponibles las piscinas?
+            </button>
+          </h2>
+
+          <div id="collapseCinco" class="accordion-collapse collapse" aria-labelledby="headingCinco" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              La piscina cubierta climatizada está disponible todo el año. La piscina al aire libre 
+              climatizada funciona durante la temporada de verano.
+            </div>
+          </div>
+        </div>
+
+        <!-- Pregunta 6-->
+        <div class="accordion-item">
+
+          <h2 class="accordion-header" id="headingSeis">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeis" aria-expanded="false" aria-controls="collapseSeis">
+              Tengo restricciones alimentarias: ¿hay opciones disponibles?
+            </button>
+          </h2>
+
+          <div id="collapseSeis" class="accordion-collapse collapse" aria-labelledby="headingSeis" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              Sí, podemos ofrecer opciones sin gluten, así como comidas adecuadas 
+              para diabéticos y opciones sin lactosa. Por favor, avísanos al hacer tu reserva.
+            </div>
+          </div>
+        </div>
+
+        <!-- Pregunta 7-->
+        <div class="accordion-item">
+
+          <h2 class="accordion-header" id="headingSiete">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSiete" aria-expanded="false" aria-controls="collapseSiete">
+              ¿Ofrecen cunas o camas adicionales?
+            </button>
+          </h2>
+
+          <div id="collapseSiete" class="accordion-collapse collapse" aria-labelledby="headingSiete" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              Cunas: se pueden agregar a todos los tipos de habitación sin cargo, sujeto a disponibilidad.
+              Cama extra: para ocupación triple y planes familiares, por favor reservá las categorías Suite, 
+              River Suite o Super Loft, que incluyen un sofá cama.
+            </div>
+          </div>
+        </div>
+
+        <!-- Pregunta 8-->
+        <div class="accordion-item">
+
+          <h2 class="accordion-header" id="headingOcho">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOcho" aria-expanded="false" aria-controls="collapseOcho">
+              ¿Aceptan mascotas?
+            </button>
+          </h2>
+
+          <div id="collapseOcho" class="accordion-collapse collapse" aria-labelledby="headingOcho" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              No, excepto para animales de servicio o asistencia certificados. 
+            </div>
+          </div>
+        </div>
+
+        <!-- Pregunta 9-->
+        <div class="accordion-item">
+
+          <h2 class="accordion-header" id="headingNueve">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNueve" aria-expanded="false" aria-controls="collapseNueve">
+              ¿Qué idiomas habla el personal?
+            </button>
+          </h2>
+
+          <div id="collapseNueve" class="accordion-collapse collapse" aria-labelledby="headingNueve" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              Nuestro personal habla español e inglés. 
+            </div>
+          </div>
+        </div>
+
+        <!-- Pregunta 10-->
+        <div class="accordion-item">
+
+          <h2 class="accordion-header" id="headingDiez">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDiez" aria-expanded="false" aria-controls="collapseDiez">
+              ¿Cómo se aplica el IVA?
+            </button>
+          </h2>
+
+          <div id="collapseDiez" class="accordion-collapse collapse" aria-labelledby="headingDiez" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              Los huéspedes extranjeros están exentos de pagar impuestos sobre el alojamiento y gastos adicionales, 
+              siempre que presenten un pasaporte válido o documento de identificación que acredite su nacionalidad al hacer el check-in.
+              Los huéspedes uruguayos están exentos de estos impuestos durante la temporada baja. Fuera de este período, 
+              se aplicará un impuesto del 10% sobre la tarifa de la habitación.
+
+              Si se requiere una factura a nombre de una empresa uruguaya registrada para el IVA (con RUT), se añadirá un 10% de IVA
+              a los servicios facturados.
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+</div>
 
 
 <!--Ubicacion-->
