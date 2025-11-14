@@ -1,29 +1,46 @@
-body{
+/* === Estilos base === */
+body {
   background-color: #faf3e0;
   top: 0px !important;
 }
 
-/*=== Buscar Disponibilidad ===*/
+.goog-te-banner-frame {
+  display: none !important;
+}
 
+/* === Formulario: Buscar Disponibilidad === */
 .form-label {
   font-weight: 500;
 }
 
-.custom-bg{
+.availability-form {
+  margin-top: -50px;
+  z-index: 2;
+  position: relative;
+}
+
+@media screen and (max-width: 575px) {
+  .availability-form {
+    margin-top: 25px;
+    padding: 0 35px;
+  }
+}
+
+.custom-bg {
   background-color: #2ec1ac;
 }
 
-.custom-bg:hover{
+.custom-bg:hover {
   background-color: #279e8c;
 }
 
-.btn-buscardisponibilidad{
+.btn-buscardisponibilidad {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background-color: #2ec1ac; 
+  background-color: #2ec1ac;
   color: #e5e7eb;
   border: none;
-  border-radius: 0.375rem; 
+  border-radius: 0.375rem;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   text-decoration: none;
@@ -31,17 +48,11 @@ body{
 }
 
 .btn-buscardisponibilidad:hover {
-  background-color: #279e8c; 
+  background-color: #279e8c;
   color: #fff;
 }
 
-.availability-form {
-  margin-top: -50px ;
-  z-index: 2;
-  position: relative;
-}
-
-/* === Contenedor de botones (login, idioma, perfil) === */
+/* === Botones de Login, Idioma y Perfil === */
 .navbar .d-flex.align-items-center {
   display: flex;
   align-items: center;
@@ -49,7 +60,7 @@ body{
   gap: 15px;
 }
 
-/* === Alinear el botón de idioma y el círculo === */
+/* === Botón de idioma === */
 .language-selector {
   position: relative;
 }
@@ -69,7 +80,7 @@ body{
   background: linear-gradient(to right, #4a96ff, #59b5ff);
 }
 
-/* === Avatar de usuario === */
+/* === Avatar y Menú de Usuario === */
 .user-menu {
   position: relative;
 }
@@ -95,7 +106,6 @@ body{
   background-color: #8ad8a1;
 }
 
-/* === Menú desplegable === */
 .dropdown {
   position: absolute;
   right: 0;
@@ -145,58 +155,31 @@ body{
   background-color: #ffeaea;
 }
 
-/* Ocultar dropdown por defecto */
 .hidden {
   display: none !important;
 }
 
-
-/*=== Login ===*/
-
+/* === Botón de Login === */
 .btn-login {
   display: inline-block;
   padding: 0.5rem 1rem;
   margin-left: 8px;
-  background-color: #6689e9; 
+  background-color: #6689e9;
   color: #e5e7eb;
   border: none;
-  border-radius: 0.375rem; 
+  border-radius: 0.375rem;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
 
-
 .btn-login:hover {
-  background-color: #9adaf0; 
+  background-color: #9adaf0;
   color: #fff;
 }
 
-/*=== ?? ===*/
-
-@media screen and (max-width: 575px) {
-  .availability-form {
-    margin-top: 25px;
-    padding: 0 35px;
-  }
-}
-
-.goog-te-banner-frame { display: none !important; }
-body { top: 0px !important; }
-
-/*=== Swiper Reseñas ===*/
-
-.swiper-slide img {
-  width: 100%;         
-  height: 450px;      
-  object-fit: cover;  
-  border-radius: 40px;
-  display: block;
-  margin-top: 15px;
-}
-
-
+/* === Swiper: Reseñas === */
 .swiper {
   width: 100%;
   padding-top: 50px;
@@ -211,8 +194,12 @@ body { top: 0px !important; }
 }
 
 .swiper-slide img {
-  display: block;
   width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 40px;
+  display: block;
+  margin-top: 15px;
 }
 
 .swiper-reseñas .profile {
@@ -229,8 +216,8 @@ body { top: 0px !important; }
   object-fit: cover;
   border-radius: 50%;
   flex-shrink: 0;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1); /* sutil sombra */
-  border: 2px solid #e0e0e0; /* borde suave */
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  border: 2px solid #e0e0e0;
 }
 
 .profile-img:hover {
@@ -244,11 +231,10 @@ body { top: 0px !important; }
   font-weight: 500;
   line-height: 1;
   display: flex;
-  align-items: center;   
+  align-items: center;
 }
 
-/*=== Sección de preguntas frecuentes ===*/
-
+/* === Preguntas Frecuentes (FAQ) === */
 .accordion-item {
   border: none;
   border-radius: 8px;
@@ -258,7 +244,6 @@ body { top: 0px !important; }
   border-color: #279e8c;
 }
 
-/* Encabezado del acordeón */
 .accordion-button {
   background-color: #f8f9fa;
   color: #333;
@@ -270,37 +255,31 @@ body { top: 0px !important; }
   box-shadow: none;
 }
 
-/* Hover y foco */
 .accordion-button:hover,
 .accordion-button:focus {
   background-color: #e2e6ea;
   color: #2ec1ac;
 }
 
-/* Botón cuando está activo (acordeón abierto) */
 .accordion-button:not(.collapsed) {
   background-color: #dee2e6;
   color: #2ec1ac;
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
 }
 
-/* Cuerpo del acordeón */
 .accordion-body {
   background-color: #bce4de;
   padding: 1rem 1.25rem;
   font-size: 1rem;
   color: #555;
   line-height: 1.6;
-
 }
 
-/* Transición suave */
 .accordion-collapse {
   transition: height 0.3s ease;
 }
 
-/*=== Footer ===*/
-
+/* === Footer === */
 .footer {
   background-color: #279e8c;
   color: #ffffff;
