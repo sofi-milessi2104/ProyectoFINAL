@@ -269,3 +269,51 @@ body{
     margin-top: 10px;
     cursor: pointer;
 }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        min-height: auto;
+        padding: 20px;
+        flex-direction: column;
+    }
+    
+    .toggle-container {
+        display: none;
+    }
+    
+    .form-container {
+        width: 100% !important;
+        padding: 30px 20px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .input-field {
+        font-size: 0.9rem;
+    }
+    
+    .btn {
+        padding: 10px 35px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+        border-radius: 0;
+        padding: 15px;
+    }
+    
+    .form-container {
+        padding: 20px 15px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+}

@@ -17,9 +17,7 @@ Cosas por hacer o mejorar:
 ✔ Poder ver reservas que se hicieron antes etc al hacer login
 ✔ perfil de admin
 ✔ preguntas frecuentes 
-
-*CÓDIGO*
- - Menú hacer responsive
+✔ Menú hacer responsive
 
 *INTEGRAR*
  - manual de admin
