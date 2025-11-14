@@ -247,24 +247,3 @@ else {
 }
 
 
-header('Content-Type: application/json');
-
-$url = isset($_GET['url']) ? $_GET['url'] : '';
-
-switch ($url) {
-    case 'habDisponible':
-        require_once '../Backend/controllers/habDisponible.php';
-        break;
-    case 'habitacion':
-        require_once '../Backend/models/HabDisponible.php';
-        $_GET['action'] = 'por-id';
-        $controller = new DisponibilidadController();
-        echo $controller->obtenerPorId();
-        exit;
-        break;
-    default:
-        http_response_code(404);
-        echo json_encode(['error' => 'Endpoint no encontrado']);
-        break;
-}
-?>
