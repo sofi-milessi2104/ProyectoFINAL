@@ -11,19 +11,40 @@ function obtenerServicio() {
 
 function agregarServicio($tipo_servicio, $descripcion_servicio, $imagen) {
     global $servicioModel;
-    if ($servicioModel->agregar($tipo_servicio, $descripcion_servicio, $imagen)) {
-        echo json_encode(["message" => "Servicio agregado correctamente."]);
+    $id_promo = func_num_args() > 3 ? func_get_arg(3) : null;
+    $resultado = $servicioModel->agregar($tipo_servicio, $descripcion_servicio, $imagen, $id_promo);
+    if ($resultado === true) {
+        echo json_encode(["success" => true, "message" => "Servicio agregado correctamente."]);
     } else {
-        echo json_encode(["message" => "Error al agregar el servicio."]);
+        echo json_encode(["success" => false, "message" => "Error al agregar el servicio.", "error" => $resultado]);
     }
 }
 
 function eliminarServicio($id) {
     global $servicioModel;
     if ($servicioModel->eliminar($id)) {
-        echo json_encode(["message" => "Servicio eliminado correctamente."]);
+        echo json_encode(["success" => true, "message" => "Servicio eliminado correctamente."]);
     } else {
-        echo json_encode(["message" => "Error al eliminar el servicio."]);
+        echo json_encode(["success" => false, "message" => "Error al eliminar el servicio."]);
+    }
+}
+
+function editarServicio($id, $tipo_servicio, $descripcion_servicio, $imagen) {
+    global $servicioModel;
+    if ($servicioModel->editar($id, $tipo_servicio, $descripcion_servicio, $imagen)) {
+        echo json_encode(["success" => true, "message" => "Servicio actualizado correctamente."]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Error al actualizar el servicio."]);
+    }
+}
+
+function obtenerServicioPorId($id) {
+    global $servicioModel;
+    $servicio = $servicioModel->obtenerPorId($id);
+    if ($servicio) {
+        echo json_encode(["success" => true, "data" => $servicio]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Servicio no encontrado."]);
     }
 }
 ?>

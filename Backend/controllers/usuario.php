@@ -4,7 +4,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 header('Content-Type: application/json');
 
-// ⚠️ El autoloader DEBE estar primero
 require __DIR__ . '/../../vendor/autoload.php';
 
 require "../config/database.php";
@@ -28,7 +27,6 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
     try {
         if ($usuarioModel->loginAdd($nombre, $apellido, $email, $celular, $password)) {
 
-            // ✉️ Envío de correo de bienvenida
             if (class_exists('PHPMailer\PHPMailer\PHPMailer')) {
                 $mail = new PHPMailer(true);
                 try {
@@ -36,7 +34,7 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
                     $mail->Host       = 'smtp.gmail.com';
                     $mail->SMTPAuth   = true;
                     $mail->Username   = 'sofia.milessi2008@gmail.com';
-                    $mail->Password   = 'sshyxbeijzqnmzjl'; // ⚠️ Contraseña de aplicación
+                    $mail->Password   = 'sshyxbeijzqnmzjl';
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                     $mail->Port       = 587;
 
@@ -102,7 +100,6 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
                 }
             }
 
-            // ✅ Respuesta exitosa
             echo json_encode([
                 "status" => true,
                 "rol" => "usuario",
@@ -130,7 +127,6 @@ function loginUsuario($email, $password) {
     $resultado = $usuarioModel->login($email, $password);
 
     if ($resultado) {
-        // ✉️ Envío de correo de inicio de sesión exitoso
         if (class_exists('PHPMailer\PHPMailer\PHPMailer')) {
             $mail = new PHPMailer(true);
             try {
@@ -138,7 +134,7 @@ function loginUsuario($email, $password) {
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
                 $mail->Username   = 'sofia.milessi2008@gmail.com';
-                $mail->Password   = 'sshyxbeijzqnmzjl'; // ⚠️ Contraseña de aplicación
+                $mail->Password   = 'sshyxbeijzqnmzjl';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
 
@@ -204,7 +200,6 @@ function loginUsuario($email, $password) {
             }
         }
 
-        // ✅ Enviar respuesta exitosa
         echo json_encode([
             "status" => true,
             "rol" => "usuario",

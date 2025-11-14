@@ -29,13 +29,21 @@ class HabitacionController {
         ]);
     }
 
-    public function obtenerHabitacionPorId($id) {
-    $habitacion = $this->habitacionModel->obtenerPorId($id);
-    if ($habitacion) {
-        echo json_encode(["success" => true, "data" => $habitacion]);
-    } else {
-        echo json_encode(["success" => false, "message" => "Habitación no encontrada."]);
+    public function editarHabitacion($id, $tipo_hab, $descripcion_hab, $disponible, $imagen, $precio) {
+        $resultado = $this->habitacionModel->editar($id, $tipo_hab, $descripcion_hab, $disponible, $imagen, $precio);
+        echo json_encode([
+            "success" => $resultado,
+            "message" => $resultado ? "Habitación actualizada correctamente." : "Error al actualizar la habitación."
+        ]);
     }
+
+    public function obtenerHabitacionPorId($id) {
+        $habitacion = $this->habitacionModel->obtenerPorId($id);
+        if ($habitacion) {
+            echo json_encode(["success" => true, "data" => $habitacion]);
+        } else {
+            echo json_encode(["success" => false, "message" => "Habitación no encontrada."]);
+        }
     }
 
 }
@@ -55,6 +63,11 @@ function agregarHabitacion($tipo_hab, $descripcion_hab, $disponible, $imagen = "
 function eliminarHabitacion($id) {
     global $habitacionController;
     $habitacionController->eliminarHabitacion($id);
+}
+
+function editarHabitacion($id, $tipo_hab, $descripcion_hab, $disponible, $imagen = "", $precio = 0) {
+    global $habitacionController;
+    $habitacionController->editarHabitacion($id, $tipo_hab, $descripcion_hab, $disponible, $imagen, $precio);
 }
 
 function obtenerHabitacionPorId($id) {

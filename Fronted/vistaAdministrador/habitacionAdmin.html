@@ -104,9 +104,9 @@
                             <textarea name="descripcion_hab" id="hab-desc" class="form-control shadow-none" rows="5" required></textarea>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-bold">URL Imagen (Opcional)</label>
-                            <input type="url" name="imagen" id="hab-imagen" class="form-control shadow-none">
-                            <small class="text-muted">Si el backend espera un `file` y no una `url`, necesitarás cambiar el `name` y el `type` del input y modificar la lógica de `FormData` en el JS.</small>
+                            <label class="form-label fw-bold">Imagen de la Habitación</label>
+                            <input type="file" name="imagen_hab" id="hab-imagen" class="form-control shadow-none" accept="image/*">
+                            <small class="text-muted">Dejar vacío si no deseas cambiar la imagen actual.</small>
                         </div>
                     </div>
                     <div class="modal-footer">

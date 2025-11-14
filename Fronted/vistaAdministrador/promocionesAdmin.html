@@ -84,15 +84,19 @@
                     <div class="modal-body">
                         <input type="hidden" id="id_promo_oculto" name="id_promo"> <div class="mb-3">
                             <label class="form-label fw-bold">Nombre de la Promoción</label>
-                            <input type="text" name="titulo" id="titulo_promo" class="form-control shadow-none" required>
+                            <input type="text" name="titulo_promo" id="titulo_promo" class="form-control shadow-none" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Descripción</label>
-                            <textarea name="descripcion" id="descripcion_promo" class="form-control shadow-none" rows="3" required></textarea>
+                            <textarea name="descripcion_promo" id="descripcion_promo" class="form-control shadow-none" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Precio</label>
+                            <input type="number" name="precio_promo" id="precio_promo" class="form-control shadow-none" step="0.01" min="0" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Imagen Promocional</label>
-                            <input type="file" name="imagen_promo" id="imagen_promo" class="form-control shadow-none">
+                            <input type="file" name="imagen_promo" id="imagen_promo" class="form-control shadow-none" accept="image/*">
                             <small class="text-muted">Dejar vacío si no deseas cambiar la imagen actual.</small>
                         </div>
                     </div>
