@@ -62,7 +62,7 @@ try {
     $sql = "
         SELECT
             r.id_reserva AS id,
-            COALESCE(CONCAT(u.nombre, ' ', u.apellido), 'Invitado') AS usuario,
+            COALESCE(CONCAT(u.nombre, ' ', u.apellido), 'No registrado') AS usuario,
             r.adultos AS adultos,
             r.niños AS ninos,
             r.fecha_inicio AS check_in,
