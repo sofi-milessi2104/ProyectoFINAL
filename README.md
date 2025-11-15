@@ -373,19 +373,6 @@ try {
 
 ---
 
-## 📸 Capturas de Pantalla
-
-### Página Principal
-![Homepage](docs/screenshots/homepage.png)
-
-### Panel de Administración
-![Admin Dashboard](docs/screenshots/admin-dashboard.png)
-
-### Sistema de Reservas
-![Booking System](docs/screenshots/booking.png)
-
----
-
 ## 📝 Conclusiones
 
 Este proyecto ha permitido aplicar de manera integral los conocimientos adquiridos en el Bachillerato Tecnológico en Tecnologías de la Información, abarcando:
