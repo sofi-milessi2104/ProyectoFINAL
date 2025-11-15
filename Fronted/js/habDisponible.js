@@ -1,3 +1,17 @@
+// Configurar botón volver a inicio (fuera del DOMContentLoaded principal)
+document.addEventListener('DOMContentLoaded', () => {
+  const btnVolverInicio = document.getElementById('btnVolverInicio');
+  if (btnVolverInicio) {
+    btnVolverInicio.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Limpiar localStorage
+      localStorage.removeItem('busquedaDisponibilidad');
+      // Redirigir a inicio
+      window.location.href = 'index.html';
+    });
+  }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   // Obtener elementos del DOM
   const contenedor = document.getElementById('contenedor-habDisponible');

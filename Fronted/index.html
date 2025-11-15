@@ -118,22 +118,22 @@
       <div class="row">
         <div class="col-lg-12 bg-white shadow p-4 rounded">
           <h5 class="mb-4">Consultar disponibilidad</h5>
-          <form >
+          <form id="formDisponibilidad">
             <div class="row align-items-end">
 
               <div class="col-lg-3 mb-3">
-                <label class="form-label" name="checkin" id="formFechas"> Registro de entrada</label>
-                <input type="date" class="form-control shadow-none">
+                <label class="form-label" for="fecha_inicio"> Registro de entrada</label>
+                <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control shadow-none" required>
               </div>
 
               <div class="col-lg-3 mb-3">
-                <label class="form-label" name="checkout" id="formFechas"> Registro de salida</label>
-                <input type="date" class="form-control shadow-none">
+                <label class="form-label" for="fecha_fin"> Registro de salida</label>
+                <input type="date" id="fecha_fin" name="fecha_fin" class="form-control shadow-none" required>
               </div>
 
               <div class="col-lg-3 mb-3">
-                <label class="form-label" name="adultos">Adultos</label>
-                <select class="form-select shadow-none" >
+                <label class="form-label" for="adultos">Adultos</label>
+                <select id="adultos" name="adultos" class="form-select shadow-none">
                   <option value="1">Uno</option>
                   <option value="2">Dos</option>
                   <option value="3">Tres</option>             
@@ -141,8 +141,8 @@
               </div>
 
               <div class="col-lg-2 mb-3">
-                <label class="form-label">Niños</label>
-                <select name="ninios" class="form-select shadow-none" >
+                <label class="form-label" for="ninos">Niños</label>
+                <select id="ninos" name="ninos" class="form-select shadow-none">
                   <option value="0">Ninguno</option>
                   <option value="1">Uno</option>
                   <option value="2">Dos</option>

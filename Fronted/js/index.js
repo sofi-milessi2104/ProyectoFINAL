@@ -39,6 +39,12 @@ var swiper = new Swiper(".swiper-reseñas", {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Limpiar formulario si venimos de habDisponible
+  const formDisponibilidad = document.getElementById('formDisponibilidad');
+  if (formDisponibilidad && !localStorage.getItem('busquedaDisponibilidad')) {
+    formDisponibilidad.reset();
+  }
+  
   const loginLink = document.getElementById("loginLink");
   const userMenuContainer = document.getElementById("userMenuContainer");
   const userAvatar = document.getElementById("userAvatar");
