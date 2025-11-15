@@ -8,7 +8,6 @@ email:valentina.fernandez@emaple.com
 Contraseña: ferval125
 
 
-
 -* ADMINISTRADORES: -*
 
 Email: laura.fernandez@empresa.com
@@ -19,7 +18,6 @@ Contraseña: CarlosMellamo58
 
 Email: ana.torres@empresa.com
 Contraseña: TorresSoyyo9647
-
 
 
 -* CUENTA USUARIO DE PRUEBA: *-
