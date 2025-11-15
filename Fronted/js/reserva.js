@@ -20,28 +20,44 @@ document.addEventListener('DOMContentLoaded', () => {
         { id_servicio: 7, tipo_servicio: 'Estacionamiento', precio_servicio: 0, imagen: 'http://localhost/ProyectoFinal/Fronted/img/Estacionamiento.jpg' }
     ];
 
-    const preselectedRoomId = localStorage.getItem('selected_room_id');
+    // Verificar si hay datos de reserva temporal (desde habDisponible)
+    const reservaTemp = localStorage.getItem('reservaTemp');
     let initialRoom = {};
-    if (preselectedRoomId) {
-        const roomFromStorage = habitaciones.find(h => h.id_hab.toString() === preselectedRoomId);
-        if (roomFromStorage) {
-            initialRoom = {
-                id_habitacion: roomFromStorage.id_hab,
-                tipo_hab: roomFromStorage.tipo_hab,
-                precio: roomFromStorage.precio,
-            };
-        }
-    }
     
-    if (preselectedRoomId) {
-        localStorage.removeItem('selected_room_id');
+    if (reservaTemp) {
+        const datosReserva = JSON.parse(reservaTemp);
+        initialRoom = {
+            id_habitacion: datosReserva.id_habitacion,
+            tipo_hab: datosReserva.tipo_habitacion,
+            precio: datosReserva.precio,
+            fecha_inicio: datosReserva.fecha_inicio,
+            fecha_fin: datosReserva.fecha_fin,
+            adultos: datosReserva.adultos,
+            ninos: datosReserva.ninos
+        };
+        // Limpiar después de usar
+        localStorage.removeItem('reservaTemp');
+    } else {
+        // Método antiguo con selected_room_id
+        const preselectedRoomId = localStorage.getItem('selected_room_id');
+        if (preselectedRoomId) {
+            const roomFromStorage = habitaciones.find(h => h.id_hab.toString() === preselectedRoomId);
+            if (roomFromStorage) {
+                initialRoom = {
+                    id_habitacion: roomFromStorage.id_hab,
+                    tipo_hab: roomFromStorage.tipo_hab,
+                    precio: roomFromStorage.precio,
+                };
+            }
+            localStorage.removeItem('selected_room_id');
+        }
     }
 
     const reservaData = {
-        fecha_inicio: null,
-        fecha_fin: null,
-        adultos: 1,
-        niños: 0,
+        fecha_inicio: initialRoom.fecha_inicio || null,
+        fecha_fin: initialRoom.fecha_fin || null,
+        adultos: initialRoom.adultos || 1,
+        niños: initialRoom.ninos || 0,
         id_habitacion: initialRoom.id_habitacion || null,
         tipo_hab: initialRoom.tipo_hab || null,
         precio: initialRoom.precio || 0,
@@ -170,7 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const createStep2 = () => {
-        const roomPreselected = !!initialRoom.id_habitacion;
+        // Verificar si hay habitación seleccionada en reservaData (no en initialRoom)
+        const roomPreselected = !!reservaData.id_habitacion;
         
         const roomSelectionContent = roomPreselected 
             ? `
@@ -182,8 +199,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     color: #006064; 
                     margin-bottom: 25px;
                 ">
-                    Ya ha seleccionado la habitación <strong>${reservaData.tipo_hab}</strong>. 
-                    Proceda a seleccionar servicios adicionales. Si desea cambiar la habitación, use el botón "Atrás".
+                    Ya ha seleccionado la habitación <strong>${reservaData.tipo_hab}</strong> ($${reservaData.precio.toLocaleString('es-ES')} por noche). 
+                    Proceda a seleccionar servicios adicionales.
                 </div>
               `
             : `

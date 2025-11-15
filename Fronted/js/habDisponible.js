@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <small class="text-muted">por noche</small>
               </div>
             </div>
-            <a href="reserva.html?id=${hab.id_hab}" class="btn btn-primary w-100">Reservar ahora</a>
+            <a href="#" class="btn btn-primary w-100 btn-reservar" data-id="${hab.id_hab}" data-tipo="${hab.tipo_hab}" data-precio="${hab.precio}">Reservar ahora</a>
           </div>
         </div>
       `;
@@ -100,6 +100,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     contenedor.appendChild(row);
+    
+    // Agregar eventos a los botones de reservar
+    document.querySelectorAll('.btn-reservar').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const idHab = btn.getAttribute('data-id');
+        const tipoHab = btn.getAttribute('data-tipo');
+        const precio = btn.getAttribute('data-precio');
+        
+        // Guardar datos de la reserva en localStorage
+        localStorage.setItem('reservaTemp', JSON.stringify({
+          id_habitacion: idHab,
+          tipo_habitacion: tipoHab,
+          precio: precio,
+          fecha_inicio: busqueda.fecha_inicio,
+          fecha_fin: busqueda.fecha_fin,
+          adultos: busqueda.adultos,
+          ninos: busqueda.ninos
+        }));
+        
+        // Redirigir a la página de reserva
+        window.location.href = `reserva.html?id=${idHab}`;
+      });
+    });
   }
 
   function aplicarFiltros() {
