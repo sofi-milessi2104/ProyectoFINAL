@@ -8,19 +8,17 @@
 
 ## 📋 Tabla de Contenidos
 
-- [Descripción del Proyecto](#descripción-del-proyecto)
-- [Objetivos](#objetivos)
-- [Equipo de Desarrollo - owlTech](#equipo-de-desarrollo---owltech)
-- [Tecnologías Utilizadas](#tecnologías-utilizadas)
-- [Arquitectura del Sistema](#arquitectura-del-sistema)
-- [Funcionalidades Principales](#funcionalidades-principales)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Base de Datos](#base-de-datos)
-- [Instalación y Configuración](#instalación-y-configuración)
-- [Guía de Uso](#guía-de-uso)
-- [Características Técnicas](#características-técnicas)
-- [Capturas de Pantalla](#capturas-de-pantalla)
-- [Conclusiones](#conclusiones)
+- Descripción del Proyecto
+- Objetivos
+- Equipo de Desarrollo - owlTech
+- Tecnologías Utilizadas
+- Arquitectura del Sistema
+- Funcionalidades Principales
+- Estructura del Proyecto
+- Instalación y Configuración
+- Guía de Uso
+- Características Técnicas
+- Conclusiones
 
 ---
 
