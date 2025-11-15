@@ -216,6 +216,8 @@ body { top: 0px !important; }
 .swiper-reseñas {
   width: 100%;
   padding: 40px 20px;
+  position: relative;
+  padding-bottom: 60px;
 }
 
 .swiper-reseñas .swiper-wrapper {
@@ -228,6 +230,12 @@ body { top: 0px !important; }
   height: auto;
   display: flex;
   justify-content: center;
+}
+
+.swiper-reseñas .swiper-pagination {
+  position: relative;
+  margin-top: 20px;
+  bottom: 0;
 }
 
 /* === Diseño horizontal compacto (imagen de referencia) === */
