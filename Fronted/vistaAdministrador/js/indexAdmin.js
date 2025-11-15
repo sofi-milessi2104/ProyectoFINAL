@@ -171,5 +171,24 @@ document.addEventListener('DOMContentLoaded', () => {
     actualizarIngresosMes();
     cargarResumenDia();
     
+    // Configurar botón de salir
+    const btnSalir = document.getElementById('btnSalir');
+    if (btnSalir) {
+        btnSalir.addEventListener('click', (e) => {
+            e.preventDefault();
+            cerrarSesionAdmin();
+        });
+    }
+    
     console.log("Panel de Administración cargado. Listo para gestionar el hotel.");
 });
+
+// Función para cerrar sesión del administrador
+function cerrarSesionAdmin() {
+    // Eliminar datos de sesión del administrador
+    localStorage.removeItem('administrador');
+    sessionStorage.removeItem('administrador');
+    
+    // Redirigir a la página de login de administrador
+    window.location.href = '../admin.html';
+}
