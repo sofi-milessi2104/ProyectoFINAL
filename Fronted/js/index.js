@@ -11,33 +11,30 @@ var swiper = new Swiper(".swiper-container", {
 
 // 🌀 Carrusel reseñas
 var swiper = new Swiper(".swiper-reseñas", {
-  spaceBetween: 30,
-  effect: "fade",
+  slidesPerView: 1,
+  spaceBetween: 20,
   loop: true,
   autoplay: {
-    delay: 3500,
+    delay: 4000,
     disableOnInteraction: false,
-  },
-
-  effect: "coverflow",
-  grabCursor: true,
-  centeredSlides: true,
-  slidesPerView: 3,
-  coverflowEffect: {  
-    rotate: 50,
-    stretch: 0,
-    depth: 100,
-    modifier: 1,
-    slideShadows: true,
   },
   pagination: {
     el: ".swiper-pagination",
+    clickable: true,
   },
   breakpoints: {
-    320: { slidesPerView: 1 },
-    640: { slidesPerView: 1 },
-    768: { slidesPerView: 2 },
-    1024: { slidesPerView: 3 },
+    640: {
+      slidesPerView: 1,
+      spaceBetween: 20,
+    },
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 30,
+    },
+    1024: {
+      slidesPerView: 3,
+      spaceBetween: 30,
+    },
   },
 });
 
