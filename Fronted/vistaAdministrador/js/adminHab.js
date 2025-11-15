@@ -1,4 +1,22 @@
-const API_BASE_URL = 'http://localhost/ProyectoFINAL/Backend/routes/api.php?url=habitacion';
+// Función para cerrar sesión del administrador
+function cerrarSesionAdmin() {
+    localStorage.removeItem('administrador');
+    sessionStorage.removeItem('administrador');
+    window.location.href = '../admin.html';
+}
+
+// Configurar botón de salir
+document.addEventListener('DOMContentLoaded', () => {
+    const btnSalir = document.getElementById('btnSalir');
+    if (btnSalir) {
+        btnSalir.addEventListener('click', (e) => {
+            e.preventDefault();
+            cerrarSesionAdmin();
+        });
+    }
+});
+
+const API_BASE_URL = "../../Backend/routes/api.php";
 
 let modalHabitacion;
 
