@@ -185,7 +185,7 @@ function loginUsuario($email, $password) {
                 $mail->isHTML(true);
                 $mail->Subject = 'Inicio de Sesión Exitoso en Hotel Costa Colonia';
 
-                // CUERPO DEL CORREO DE INICIO DE SESIÓN MEJORADO
+                
                 $mail->Body = "
                     <!DOCTYPE html>
                     <html lang='es'>
@@ -211,19 +211,19 @@ function loginUsuario($email, $password) {
                                                 <table border='0' cellpadding='0' cellspacing='0' width='100%'>
                                                     <tr>
                                                         <td style='color: #3b7a57; font-family: Arial, sans-serif; font-size: 24px;'>
-                                                            <b>¡Hola de nuevo!</b> 👋
+                                                            <b>¡Hola de nuevo!</b> 
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td style='padding: 20px 0 30px 0; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 22px;'>
-                                                            Nos alegra verte regresar a **Hotel Costa Colonia**. 
+                                                            Nos alegra verte regresar a Hotel Costa Colonia. 
                                                             <br>
-                                                            Tu inicio de sesión fue **exitoso**. Puedes seguir disfrutando de la calidez, el confort y de las experiencias únicas frente al río.
+                                                            Tu inicio de sesión fue exitoso. Puedes seguir disfrutando de la calidez, el confort y de las experiencias únicas frente al río.
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td style='color: #555555; font-family: Arial, sans-serif; font-size: 16px; line-height: 22px;'>
-                                                            **Viví lo mejor con nosotros 🌿**
+                                                            Viví lo mejor con nosotros 🌿
                                                             <br><br>
                                                             Tu próxima escapada comienza aquí. Te invitamos a aprovechar promociones exclusivas, beneficios especiales y el servicio personalizado que nos distingue.
                                                         </td>
