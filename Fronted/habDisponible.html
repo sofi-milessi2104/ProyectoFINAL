@@ -13,84 +13,87 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
+
   <body class="bg-light">
-<nav class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-4 shadow-sm sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand me-5 fw-bold fs-3 h-2font" href="index.html">
-      <img src="img/logo.png" alt="Hotel Costa Colonia" width="150" height="30">
-    </a>
-    <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-4 shadow-sm sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand me-5 fw-bold fs-3 h-2font" href="index.html">
+          <img src="img/logo.png" alt="Hotel Costa Colonia" width="150" height="30">
+        </a>
+        <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
 
-      <div class="d-flex align-items-center gap-2">
+          <div class="d-flex align-items-center gap-2">
 
-        <div class="language-selector position-relative m-0">
-          <button class="language-btn" onclick="toggleDropdown()">🌐 Idioma</button>
-          <div class="language-dropdown" id="languageDropdown">
-            <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
-            <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
-            <div class="language-option" onclick="changeLanguage('fr')">🇫🇷 Français</div>
-            <div class="language-option" onclick="changeLanguage('de')">🇩🇪 Deutsch</div>
-            <div class="language-option" onclick="changeLanguage('it')">🇮🇹 Italiano</div>
-            <div class="language-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
+            <div class="language-selector position-relative m-0">
+              <button class="language-btn" onclick="toggleDropdown()">🌐 Idioma</button>
+              <div class="language-dropdown" id="languageDropdown">
+                <div class="language-option" onclick="changeLanguage('es')">🇪🇸 Español</div>
+                <div class="language-option" onclick="changeLanguage('en')">🇺🇸 English</div>
+                <div class="language-option" onclick="changeLanguage('fr')">🇫🇷 Français</div>
+                <div class="language-option" onclick="changeLanguage('de')">🇩🇪 Deutsch</div>
+                <div class="language-option" onclick="changeLanguage('it')">🇮🇹 Italiano</div>
+                <div class="language-option" onclick="changeLanguage('pt')">🇵🇹 Português</div>
+              </div>
+            </div>
+
+            <div id="google_translate_element" style="display: none;"></div>
           </div>
         </div>
+      </div>
+    </nav>
 
-        <div id="google_translate_element" style="display: none;"></div>
+    <div class="my-5 px-4">
+      <h2 class="fw-bold h-font text-center">Habitaciones disponibles</h2>
+      <div class="h-line bg-dark"></div>
+      <div class="text-center mt-3">
+        <button id="btnVolverInicio" class="btn btn-outline-primary">
+          <i class="bi bi-arrow-left"></i> Volver a Inicio
+        </button>
       </div>
     </div>
-  </div>
-</nav>
 
-<div class="my-5 px-4">
-  <h2 class="fw-bold h-font text-center">Habitaciones disponibles</h2>
-  <div class="h-line bg-dark"></div>
-  <div class="text-center mt-3">
-    <button id="btnVolverInicio" class="btn btn-outline-primary">
-      <i class="bi bi-arrow-left"></i> Volver a Inicio
-    </button>
-  </div>
-</div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-4 mb-lg-0 mb-4">
+          <nav class="navbar navbar-expand-lg navbar-light bg-white rounded shadow">
+            <div class="container-fluid flex-lg-column align-items-stretch">
+              <h4 class="mt-2">Filtros</h4>
+              <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#filterDropdown" aria-controls="filterDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="filterDropdown">
+                
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-3 col-md-4 mb-lg-0 mb-4">
-  <nav class="navbar navbar-expand-lg navbar-light bg-white rounded shadow">
-    <div class="container-fluid flex-lg-column align-items-stretch">
-      <h4 class="mt-2">Filtros</h4>
-      <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#filterDropdown" aria-controls="filterDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="filterDropdown">
-        
+                <div class="border bg-light p-3 rounded mb-3">
+                  <h5 class="mb-3" style="font-size: 18px;">Precio por Noche</h5>
+                  <label for="precio-min" class="form-label">Precio Mínimo</label>
+                  <input type="number" class="form-control shadow-none mb-3" id="precio-min" min="0" placeholder="Ej: 3000">
+                  <label for="precio-max" class="form-label">Precio Máximo</label>
+                  <input type="number" class="form-control shadow-none" id="precio-max" min="0" placeholder="Ej: 15000">
+                </div>
 
-        <div class="border bg-light p-3 rounded mb-3">
-          <h5 class="mb-3" style="font-size: 18px;">Precio por Noche</h5>
-          <label for="precio-min" class="form-label">Precio Mínimo</label>
-          <input type="number" class="form-control shadow-none mb-3" id="precio-min" min="0" placeholder="Ej: 3000">
-          <label for="precio-max" class="form-label">Precio Máximo</label>
-          <input type="number" class="form-control shadow-none" id="precio-max" min="0" placeholder="Ej: 15000">
+              </div>
+            </div>
+          </nav>
+        </div>
+
+        <!-- Columna derecha (Habitaciones) -->
+        <div class="col-lg-9 col-md-8">
+          <div id="contenedor-habDisponible"></div>
         </div>
 
       </div>
     </div>
-  </nav>
-</div>
-
-    <!-- Columna derecha (Habitaciones) -->
-    <div class="col-lg-9 col-md-8">
-      <div id="contenedor-habDisponible"></div>
-    </div>
-  </div>
-</div>
 
 
 
 
 
-<footer class="footer" id="footer" width="100%">
+    <footer class="footer" id="footer" width="100%">
 
       <div class="container-fluid mt-5">
         <div class="row">
@@ -142,8 +145,8 @@
     </footer>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-   <script src="js/translate.js"></script>
-   <script src="js/habDisponible.js"></script>
+    <script src="js/translate.js"></script>
+    <script src="js/habDisponible.js"></script>
   </body>
 </html>
 

@@ -232,5 +232,4 @@ function loginUsuario($email, $password) {
     }
 }
 
-
 ?>
