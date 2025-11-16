@@ -36,9 +36,8 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
                     $mail->isSMTP();
                     $mail->Host       = 'smtp.gmail.com';
                     $mail->SMTPAuth   = true;
-                    // **NOTA: REEMPLAZA ESTAS CREDENCIALES CON LAS TUYAS PROPIAS DE ENVÍO**
                     $mail->Username   = 'sofia.milessi2008@gmail.com'; 
-                    $mail->Password   = 'sshyxbeijzqnmzjl'; // Contraseña de aplicación o token
+                    $mail->Password   = 'sshyxbeijzqnmzjl'; 
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                     $mail->Port       = 587;
 
@@ -47,8 +46,6 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
 
                     $mail->isHTML(true);
                     $mail->Subject = '¡Bienvenido/a a Hotel Costa Colonia!';
-
-                    // CUERPO DEL CORREO DE BIENVENIDA MEJORADO
                     $mail->Body = "
                         <!DOCTYPE html>
                         <html lang='es'>
@@ -74,19 +71,19 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
                                                     <table border='0' cellpadding='0' cellspacing='0' width='100%'>
                                                         <tr>
                                                             <td style='color: #3b7a57; font-family: Arial, sans-serif; font-size: 24px;'>
-                                                                <b>¡Hola $nombre!</b> 🎉
+                                                                <b>¡Hola $nombre!</b> 
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style='padding: 20px 0 30px 0; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 22px;'>
-                                                                ¡Bienvenido/a a **Hotel Costa Colonia**! Tu cuenta ha sido creada exitosamente. A partir de ahora podés iniciar sesión y disfrutar de todos nuestros servicios exclusivos diseñados para ti.
+                                                                Bienvenido/a a Hotel Costa Colonia! Tu cuenta ha sido creada exitosamente. A partir de ahora podés iniciar sesión y disfrutar de todos nuestros servicios exclusivos diseñados para ti.
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style='color: #555555; font-family: Arial, sans-serif; font-size: 16px; line-height: 22px;'>
-                                                                **Tu estadía inigualable te espera:**
+                                                                Tu estadía inigualable te espera:
                                                                 <br><br>
-                                                                Te invitamos a explorar nuestra web, aprovechar promociones exclusivas y sumergirte en el confort, el servicio personalizado y el entorno incomparable que hacen de **Hotel Costa Colonia** el lugar ideal para tu descanso y bienestar.
+                                                                Te invitamos a explorar nuestra web, aprovechar promociones exclusivas y sumergirte en el confort, el servicio personalizado y el entorno incomparable que hacen de Hotel Costa Colonia el lugar ideal para tu descanso y bienestar.
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -173,7 +170,6 @@ function loginUsuario($email, $password) {
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
-                // **NOTA: REEMPLAZA ESTAS CREDENCIALES CON LAS TUYAS PROPIAS DE ENVÍO**
                 $mail->Username   = 'sofia.milessi2008@gmail.com';
                 $mail->Password   = 'sshyxbeijzqnmzjl';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
