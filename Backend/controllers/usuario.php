@@ -65,7 +65,7 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
                             <div style='color: #333;'>
                                 <h2 style='color: #3b7a57;'>¡Hola $nombre!</h2>
                                 <p style='font-size: 16px; line-height: 1.6;'>
-                                    ¡Bienvenido/a a <strong>Hotel Costa Colonia</strong>!  
+                                    Bienvenido/a a <strong>Hotel Costa Colonia</strong>!  
                                     Tu cuenta se creó exitosamente. A partir de ahora podés iniciar sesión y disfrutar de todos nuestros servicios únicos diseñados para ti.
                                 </p>
 
