@@ -283,5 +283,4 @@ function loginUsuario($email, $password) {
     }
 }
 
-
 ?>
