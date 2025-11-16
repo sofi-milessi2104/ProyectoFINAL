@@ -56,20 +56,8 @@ async function obtenerHabitacion() {
                 ]
             };
 
-            // Si la API trae una imagen válida, úsala; si no, usa las predeterminadas del tipo
-            let imagenesAsignadas;
-            if (hab.imagen && hab.imagen.trim() !== '') {
-                // Si viene una imagen de la BD, verificar si es un array JSON o una string
-                try {
-                    const parsed = JSON.parse(hab.imagen);
-                    imagenesAsignadas = Array.isArray(parsed) ? parsed : [hab.imagen];
-                } catch {
-                    imagenesAsignadas = [hab.imagen];
-                }
-            } else {
-                // Si no hay imagen en BD, usar las del tipo
-                imagenesAsignadas = imagenesPorTipo[tipoHabitacionCorrecto] || ["img/placeholder.jpg"];
-            }
+            // Usar siempre las imágenes predefinidas del tipo en lugar de las de BD
+            let imagenesAsignadas = imagenesPorTipo[tipoHabitacionCorrecto] || ["img/placeholder.jpg"];
 
             return {
                 ...hab,
@@ -101,6 +89,29 @@ function renderizarHabitaciones(habitaciones) {
         `;
     } else {
         contenedor.innerHTML = crearCards(habitaciones);
+        
+        // Inicializar manualmente los carruseles de Bootstrap después de renderizar
+        setTimeout(() => {
+            const carousels = document.querySelectorAll('.carousel');
+            console.log(`Inicializando ${carousels.length} carruseles...`);
+            carousels.forEach((carouselElement, index) => {
+                try {
+                    if (typeof bootstrap !== 'undefined') {
+                        const carousel = new bootstrap.Carousel(carouselElement, {
+                            interval: 4000,
+                            ride: 'carousel',
+                            touch: true,
+                            wrap: true
+                        });
+                        console.log(`Carrusel ${index + 1} inicializado correctamente`);
+                    } else {
+                        console.error('Bootstrap no está disponible');
+                    }
+                } catch (error) {
+                    console.error(`Error al inicializar carrusel ${index + 1}:`, error);
+                }
+            });
+        }, 200);
     }
     agregarEventListeners();
 }
