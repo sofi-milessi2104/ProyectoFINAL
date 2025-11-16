@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-const API_BASE_URL = "../../Backend/routes/api.php";
+const API_BASE_URL = "../../Backend/routes/api.php?url=habitacion";
 
 let modalHabitacion;
 
@@ -146,7 +146,12 @@ function editarHabitacion(id) {
             document.getElementById('hab-tipo').value = h.tipo_hab;
             document.getElementById('hab-desc').value = h.descripcion_hab;
             document.getElementById('hab-precio').value = h.precio;
-            document.getElementById('hab-imagen').value = h.imagen || '';
+            // NO se puede establecer valor en input file por seguridad
+            // Solo limpiar el campo si existe
+            const inputImagen = document.getElementById('hab-imagen');
+            if (inputImagen && inputImagen.type === 'file') {
+                inputImagen.value = ''; // Solo se puede limpiar
+            }
             document.getElementById('hab-disponible').value = h.disponible;
 
             modalHabitacion.show();

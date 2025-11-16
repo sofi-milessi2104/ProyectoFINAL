@@ -8,6 +8,15 @@ body {
   display: none !important;
 }
 
+/* === Navbar === */
+.navbar {
+  overflow: visible !important;
+}
+
+.navbar-collapse {
+  overflow: visible !important;
+}
+
 /* === Formulario: Buscar Disponibilidad === */
 .form-label {
   font-weight: 500;
@@ -83,6 +92,7 @@ body {
 /* === Avatar y Menú de Usuario === */
 .user-menu {
   position: relative;
+  display: inline-block;
 }
 
 .user-avatar {
@@ -108,8 +118,8 @@ body {
 
 .dropdown {
   position: absolute;
+  top: calc(100% + 10px);
   right: 0;
-  margin-top: 10px;
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
@@ -117,7 +127,6 @@ body {
   text-align: left;
   overflow: hidden;
   z-index: 999;
-  animation: fadeIn 0.2s ease-in-out;
 }
 
 .user-email {

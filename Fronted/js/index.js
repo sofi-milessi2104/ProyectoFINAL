@@ -157,3 +157,50 @@ if (formDisponibilidad) {
         }
     });
 }
+
+// Botones de reserva de las tarjetas estáticas en index.html
+document.addEventListener("DOMContentLoaded", () => {
+    const reservarButtons = document.querySelectorAll('a[href="reserva.html"]');
+    
+    reservarButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Buscar la tarjeta padre para obtener el tipo de habitación
+            const card = this.closest('.card');
+            if (!card) return;
+            
+            const tipoHab = card.querySelector('h5').textContent.trim();
+            
+            // Mapeo de nombres a IDs y precios según la base de datos
+            const habitacionesMap = {
+                'Suite': { id: 1, precio: 3.438 },
+                'River Suite': { id: 2, precio: 6.849 },
+                'Loft': { id: 3, precio: 10.273 },
+                'River Loft': { id: 4, precio: 13.755 },
+                'Super Loft': { id: 5, precio: 17.123 }
+            };
+            
+            const habInfo = habitacionesMap[tipoHab];
+            if (!habInfo) {
+                console.error('No se encontró información para:', tipoHab);
+                window.location.href = 'reserva.html';
+                return;
+            }
+            
+            // Guardar información de la habitación en localStorage
+            localStorage.setItem('reservaTemp', JSON.stringify({
+                id_habitacion: habInfo.id,
+                tipo_habitacion: tipoHab,
+                precio: habInfo.precio,
+                fecha_inicio: null,
+                fecha_fin: null,
+                adultos: 1,
+                ninos: 0
+            }));
+            
+            // Redirigir a reserva
+            window.location.href = 'reserva.html';
+        });
+    });
+});

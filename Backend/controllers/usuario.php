@@ -36,8 +36,8 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
                     $mail->isSMTP();
                     $mail->Host       = 'smtp.gmail.com';
                     $mail->SMTPAuth   = true;
-                    $mail->Username   = 'sofia.milessi2008@gmail.com';
-                    $mail->Password   = 'sshyxbeijzqnmzjl';
+                    $mail->Username   = 'sofia.milessi2008@gmail.com'; 
+                    $mail->Password   = 'sshyxbeijzqnmzjl'; 
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                     $mail->Port       = 587;
 
@@ -46,61 +46,84 @@ function loginAddUser($nombre, $apellido, $email, $celular, $password) {
 
                     $mail->isHTML(true);
                     $mail->Subject = '¡Bienvenido/a a Hotel Costa Colonia!';
-
                     $mail->Body = "
-                        <div style='
-                            font-family: Arial, sans-serif;
-                            padding: 30px;
-                            background-color: #f9fdf9;
-                            border: 1px solid #e0eee0;
-                            border-radius: 12px;
-                            max-width: 600px;
-                            margin: auto;
-                            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-                        '>
-                            <div style='text-align: center; margin-bottom: 25px;'>
-                                <h1 style='color: #2f5d50; margin-top: 15px; font-size: 24px;'>Hotel Costa Colonia</h1>
-                            </div>
+                        <!DOCTYPE html>
+                        <html lang='es'>
+                        <head>
+                            <meta charset='UTF-8'>
+                            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                            <title>Bienvenido/a a Hotel Costa Colonia</title>
+                        </head>
+                        <body style='margin: 0; padding: 0; background-color: #f0f4f0;'>
+                            <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                                <tr>
+                                    <td style='padding: 20px 0 30px 0;'>
+                                        <table align='center' border='0' cellpadding='0' cellspacing='0' width='600' style='border-collapse: collapse; border: 1px solid #e0eee0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); background-color: #ffffff;'>
+                                            
+                                            <tr>
+                                                <td align='center' bgcolor='#2f5d50' style='padding: 30px 0 30px 0; color: #ffffff; font-size: 28px; font-weight: bold; font-family: Arial, sans-serif;'>
+                                                    Hotel Costa Colonia
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td bgcolor='#ffffff' style='padding: 40px 30px 40px 30px;'>
+                                                    <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                                                        <tr>
+                                                            <td style='color: #3b7a57; font-family: Arial, sans-serif; font-size: 24px;'>
+                                                                <b>¡Hola $nombre!</b> 
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style='padding: 20px 0 30px 0; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 22px;'>
+                                                                Bienvenido/a a Hotel Costa Colonia! Tu cuenta ha sido creada exitosamente. A partir de ahora podés iniciar sesión y disfrutar de todos nuestros servicios exclusivos diseñados para ti.
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style='color: #555555; font-family: Arial, sans-serif; font-size: 16px; line-height: 22px;'>
+                                                                Tu estadía inigualable te espera:
+                                                                <br><br>
+                                                                Te invitamos a explorar nuestra web, aprovechar promociones exclusivas y sumergirte en el confort, el servicio personalizado y el entorno incomparable que hacen de Hotel Costa Colonia el lugar ideal para tu descanso y bienestar.
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td align='center' style='padding: 40px 0 30px 0;'>
+                                                                <table border='0' cellpadding='0' cellspacing='0'>
+                                                                    <tr>
+                                                                        <td align='center' bgcolor='#3b7a57' style='border-radius: 25px;'>
+                                                                            <a href='https://hotelcostacolonia.com' target='_blank' style='font-size: 16px; font-family: Arial, sans-serif; color: #ffffff; text-align: center; text-decoration: none; padding: 12px 25px; border: 1px solid #3b7a57; display: inline-block; border-radius: 25px; font-weight: bold;'>
+                                                                                Ir al sitio Web
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td bgcolor='#f9f9f9' style='padding: 20px 30px 20px 30px;'>
+                                                    <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                                                        <tr>
+                                                            <td align='center' style='color: #888888; font-family: Arial, sans-serif; font-size: 12px; line-height: 18px;'>
+                                                                <p style='margin: 0;'>
+                                                                    © Hotel Costa Colonia, Uruguay.<br>
+                                                                    Este mensaje fue enviado automáticamente, por favor no respondas a esta dirección de correo.
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
 
-                            <div style='color: #333;'>
-                                <h2 style='color: #3b7a57;'>¡Hola $nombre!</h2>
-                                <p style='font-size: 16px; line-height: 1.6;'>
-                                    ¡Bienvenido/a a <strong>Hotel Costa Colonia</strong>!  
-                                    Tu cuenta se creó exitosamente. A partir de ahora podés iniciar sesión y disfrutar de todos nuestros servicios únicos diseñados para ti.
-                                </p>
-
-                                <p style='font-size: 16px; line-height: 1.6;'>
-                                    <strong>Disfrute de una estadía inigualable con nosotros</strong>
-                                     <br>
-                                     <br>
-                                    Lo invitamos a aprovechar nuestras promociones exclusivas, servicios
-                                     personalizados y el entorno incomparable que hacen 
-                                     de Hotel Costa Colonia un lugar ideal para su descanso
-                                      y bienestar.
-                                </p>
-
-                                <div style='margin-top: 30px; text-align: center;'>
-                                    <a href='https://hotelcostacolonia.com' 
-                                       style='
-                                           background-color: #3b7a57; 
-                                           color: white; 
-                                           padding: 12px 25px; 
-                                           text-decoration: none; 
-                                           border-radius: 25px; 
-                                           font-weight: bold;
-                                       '>
-                                       Ir al sitio
-                                    </a>
-                                </div>
-                            </div>
-
-                            <hr style='margin-top: 35px; border: none; border-top: 1px solid #ddd;'>
-
-                            <p style='font-size: 12px; color: #888; text-align: center; margin-top: 15px;'>
-                                © Hotel Costa Colonia, Uruguay.<br>
-                                Este mensaje fue enviado automáticamente, por favor no respondas.
-                            </p>
-                        </div>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </body>
+                        </html>
                     ";
 
                     $mail->send();
@@ -156,61 +179,89 @@ function loginUsuario($email, $password) {
                 $mail->addAddress($email);
 
                 $mail->isHTML(true);
-                $mail->Subject = 'Bienvenido/a nuevamente a Hotel Costa Colonia';
+                $mail->Subject = 'Inicio de Sesión Exitoso en Hotel Costa Colonia';
 
+                
                 $mail->Body = "
-                    <div style='
-                        font-family: Arial, sans-serif;
-                        padding: 30px;
-                        background-color: #f9fdf9;
-                        border: 1px solid #e0eee0;
-                        border-radius: 12px;
-                        max-width: 600px;
-                        margin: auto;
-                        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-                    '>
-                        <div style='text-align: center; margin-bottom: 25px;'>
-                            <h1 style='color: #2f5d50; margin-top: 15px; font-size: 24px;'>Hotel Costa Colonia</h1>
-                        </div>
+                    <!DOCTYPE html>
+                    <html lang='es'>
+                    <head>
+                        <meta charset='UTF-8'>
+                        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                        <title>Inicio de Sesión Exitoso en Hotel Costa Colonia</title>
+                    </head>
+                    <body style='margin: 0; padding: 0; background-color: #f0f4f0;'>
+                        <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                            <tr>
+                                <td style='padding: 20px 0 30px 0;'>
+                                    <table align='center' border='0' cellpadding='0' cellspacing='0' width='600' style='border-collapse: collapse; border: 1px solid #e0eee0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); background-color: #ffffff;'>
+                                        
+                                        <tr>
+                                            <td align='center' bgcolor='#2f5d50' style='padding: 30px 0 30px 0; color: #ffffff; font-size: 28px; font-weight: bold; font-family: Arial, sans-serif;'>
+                                                 Hotel Costa Colonia
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td bgcolor='#ffffff' style='padding: 40px 30px 40px 30px;'>
+                                                <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                                                    <tr>
+                                                        <td style='color: #3b7a57; font-family: Arial, sans-serif; font-size: 24px;'>
+                                                            <b>¡Hola de nuevo!</b> 
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style='padding: 20px 0 30px 0; color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 22px;'>
+                                                            Nos alegra verte regresar a Hotel Costa Colonia. 
+                                                            <br>
+                                                            Tu inicio de sesión fue exitoso. Puedes seguir disfrutando de la calidez, el confort y de las experiencias únicas frente al río.
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style='color: #555555; font-family: Arial, sans-serif; font-size: 16px; line-height: 22px;'>
+                                                            Viví lo mejor con nosotros 🌿
+                                                            <br><br>
+                                                            Tu próxima escapada comienza aquí. Te invitamos a aprovechar promociones exclusivas, beneficios especiales y el servicio personalizado que nos distingue.
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align='center' style='padding: 40px 0 30px 0;'>
+                                                            <table border='0' cellpadding='0' cellspacing='0'>
+                                                                <tr>
+                                                                    <td align='center' bgcolor='#3b7a57' style='border-radius: 25px;'>
+                                                                        <a href='https://hotelcostacolonia.com' target='_blank' style='font-size: 16px; font-family: Arial, sans-serif; color: #ffffff; text-align: center; text-decoration: none; padding: 12px 25px; border: 1px solid #3b7a57; display: inline-block; border-radius: 25px; font-weight: bold;'>
+                                                                            Volver al sitio
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td bgcolor='#f9f9f9' style='padding: 20px 30px 20px 30px;'>
+                                                <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                                                    <tr>
+                                                        <td align='center' style='color: #888888; font-family: Arial, sans-serif; font-size: 12px; line-height: 18px;'>
+                                                            <p style='margin: 0;'>
+                                                                © Hotel Costa Colonia, Uruguay.<br>
+                                                                Este mensaje fue enviado automáticamente, por favor no respondas a esta dirección de correo.
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
 
-                        <div style='color: #333;'>
-                            <h2 style='color: #3b7a57;'>¡Hola de nuevo!</h2>
-                            <p style='font-size: 16px; line-height: 1.6;'>
-                                Nos alegra verte regresar a <strong>Hotel Costa Colonia</strong>.  
-                                Su inicio de sesión fue exitoso, ya puedes seguir disfrutando de la calidez, el confort y de las experiencias únicas frente al río.
-                            </p>
-
-                            <p style='font-size: 16px; line-height: 1.6;'>
-                                <srtrong> Viví lo mejor con nosotros 🌿 </srtrong>
-                                <br>
-                                <br>
-                            Lo invitamos a aprovechar nuestras promociones exclusivas, 
-                            beneficios especiales y el servicio personalizado que nos distingue.
-                            Tu proxima escapada comienza aquí 🍀.
-                            </p>
-
-                            <div style='margin-top: 30px; text-align: center;'>
-                                <a href='https://hotelcostacolonia.com' 
-                                   style='
-                                       background-color: #3b7a57; 
-                                       color: white; 
-                                       padding: 12px 25px; 
-                                       text-decoration: none; 
-                                       border-radius: 25px; 
-                                       font-weight: bold;
-                                   '>
-                                   Ir al sitio
-                                </a>
-                            </div>
-                        </div>
-
-                        <hr style='margin-top: 35px; border: none; border-top: 1px solid #ddd;'>
-
-                        <p style='font-size: 12px; color: #888; text-align: center; margin-top: 15px;'>
-                            © Hotel Costa Colonia, Uruguay.<br>
-                            Este mensaje fue enviado automáticamente, por favor no respondas.
-                        </p>
-                    </div>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </body>
+                    </html>
                 ";
 
                 $mail->send();

@@ -29,3 +29,10 @@ Stack trace:
 #2 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(26): obtenerPromocion()
 #3 {main}
   thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Promocion.php on line 13
+[15-Nov-2025 23:51:07 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`hotel2`.`reserva_servicio`, CONSTRAINT `reserva_servicio_ibfk_2` FOREIGN KEY (`id_servicio`) REFERENCES `servicio` (`id_servicio`)) in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Servicio.php:34
+Stack trace:
+#0 C:\xampp\htdocs\ProyectoFINAL\Backend\models\Servicio.php(34): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\ProyectoFINAL\Backend\controllers\servicio.php(25): Servicio->eliminar('7')
+#2 C:\xampp\htdocs\ProyectoFINAL\Backend\routes\api.php(215): eliminarServicio('7')
+#3 {main}
+  thrown in C:\xampp\htdocs\ProyectoFINAL\Backend\models\Servicio.php on line 34

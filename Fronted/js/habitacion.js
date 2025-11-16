@@ -27,36 +27,49 @@ async function obtenerHabitacion() {
             // <-- definir aquí las imágenes por tipo o por id (ajusta rutas según tu estructura)
             const imagenesPorTipo = {
                 "Suite": [
-                    "http://localhost/ProyectoFinal/Fronted/img/Suite.jpeg",
-                    "http://localhost/ProyectoFinal/Fronted/img/Suite 2.jpeg", 
-                    "http://localhost/ProyectoFinal/Fronted/img/Suite 3.jpeg"
+                    "img/Suite.jpeg",
+                    "img/Suite 2.jpeg", 
+                    "img/Suite 3.jpeg"
                 ],
                 "River Suite": [
-                    "http://localhost/ProyectoFinal/Fronted/img/River Suite.jpeg",
-                    "http://localhost/ProyectoFinal/Fronted/img/River Suite 2.jpeg",
+                    "img/River Suite.jpeg",
+                    "img/River Suite 2.jpeg",
                 ],
                 "Loft": [
-                    "http://localhost/ProyectoFinal/Fronted/img/Loft.jpeg",
-                    "http://localhost/ProyectoFinal/Fronted/img/Loft 2.jpeg",
-                    "http://localhost/ProyectoFinal/Fronted/img/Loft 3.jpeg",
+                    "img/Loft.jpeg",
+                    "img/Loft 2.jpeg",
+                    "img/Loft 3.jpeg",
                 ],
                 "River Loft": [
-                    "http://localhost/ProyectoFinal/Fronted/img/River Loft.jpeg",
-                    "http://localhost/ProyectoFinal/Fronted/img/River Loft 2.jpeg",
-                    "http://localhost/ProyectoFinal/Fronted/img/River Loft 3.jpeg",
-                    "http://localhost/ProyectoFinal/Fronted/img/River Loft 4.jpeg"
+                    "img/River Loft.jpeg",
+                    "img/River Loft 2.jpeg",
+                    "img/River Loft 3.jpeg",
+                    "img/River Loft 4.jpeg"
                 ],
                 "Super Loft": [
-                    "http://localhost/ProyectoFinal/Fronted/img/Super Loft.jpeg",
-                    "http://localhost/ProyectoFinal/Fronted/img/Super Loft 2.jpeg",
+                    "img/Super Loft.jpeg",
+                    "img/Super Loft 2.jpeg",
                     
+                ],
+                "Mound": [
+                    "img/Mound - imagen 1.png"
                 ]
             };
 
-            // Si la API ya trae imagenes, las usamos; si no, asignamos las de ejemplo por tipo
-            const imagenesAsignadas = Array.isArray(hab.imagen) && hab.imagen.length
-                ? hab.imagen
-                : (imagenesPorTipo[tipoHabitacionCorrecto] || ["https://via.placeholder.com/800x500?text=Sin+imagen"]);
+            // Si la API trae una imagen válida, úsala; si no, usa las predeterminadas del tipo
+            let imagenesAsignadas;
+            if (hab.imagen && hab.imagen.trim() !== '') {
+                // Si viene una imagen de la BD, verificar si es un array JSON o una string
+                try {
+                    const parsed = JSON.parse(hab.imagen);
+                    imagenesAsignadas = Array.isArray(parsed) ? parsed : [hab.imagen];
+                } catch {
+                    imagenesAsignadas = [hab.imagen];
+                }
+            } else {
+                // Si no hay imagen en BD, usar las del tipo
+                imagenesAsignadas = imagenesPorTipo[tipoHabitacionCorrecto] || ["img/placeholder.jpg"];
+            }
 
             return {
                 ...hab,
@@ -233,9 +246,23 @@ function agregarEventListeners() {
         boton.addEventListener('click', (event) => {
             const idHabitacion = event.target.dataset.id;
             
-            localStorage.setItem('selected_room_id', idHabitacion); 
+            // Buscar la habitación completa
+            const habitacion = todasLasHabitaciones.find(h => h.id_hab.toString() === idHabitacion);
             
-            console.log(`Botón de reserva para la habitación con ID: ${idHabitacion} clickeado. Redirigiendo a reserva.html...`);
+            if (habitacion) {
+                // Guardar datos completos de la reserva en localStorage
+                localStorage.setItem('reservaTemp', JSON.stringify({
+                    id_habitacion: habitacion.id_hab,
+                    tipo_habitacion: habitacion.tipo_hab,
+                    precio: habitacion.precio,
+                    fecha_inicio: null, // No hay fechas predefinidas desde habitaciones
+                    fecha_fin: null,
+                    adultos: 1,
+                    ninos: 0
+                }));
+                
+                console.log(`Habitación ${habitacion.tipo_hab} seleccionada. Redirigiendo a reserva.html...`);
+            }
             
             window.location.href = 'reserva.html';
         });
