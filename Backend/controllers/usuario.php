@@ -179,7 +179,7 @@ function loginUsuario($email, $password) {
                 $mail->addAddress($email);
 
                 $mail->isHTML(true);
-                $mail->Subject = 'Inicio de Sesión Exitoso en Hotel Costa Colonia';
+                $mail->Subject = 'Inicio de Sesion Exitoso en Hotel Costa Colonia';
 
                 
                 $mail->Body = "
