@@ -52,12 +52,31 @@ async function obtenerHabitacion() {
                     
                 ],
                 "Mound": [
-                    "img/Mound - imagen 1.png"
+                    "img/21.jpeg",
                 ]
             };
 
-            // Usar siempre las imágenes predefinidas del tipo en lugar de las de BD
-            let imagenesAsignadas = imagenesPorTipo[tipoHabitacionCorrecto] || ["img/placeholder.jpg"];
+            // Preferir las imágenes de BD si existen; si no, usar las del tipo
+            let imagenesAsignadas;
+            if (hab.imagen && String(hab.imagen).trim() !== '') {
+                try {
+                    const parsed = JSON.parse(hab.imagen);
+                    if (Array.isArray(parsed)) {
+                        imagenesAsignadas = parsed;
+                    } else {
+                        imagenesAsignadas = [String(hab.imagen).trim()];
+                    }
+                } catch (e) {
+                    const imgStr = String(hab.imagen).trim();
+                    if (imgStr.includes(',')) {
+                        imagenesAsignadas = imgStr.split(',').map(s => s.trim()).filter(Boolean);
+                    } else {
+                        imagenesAsignadas = [imgStr];
+                    }
+                }
+            } else {
+                imagenesAsignadas = imagenesPorTipo[tipoHabitacionCorrecto] || ["img/placeholder.jpg"];
+            }
 
             return {
                 ...hab,
@@ -173,7 +192,8 @@ function crearCards(habitaciones) {
                 <div class="carousel-inner">
                     ${images.map((img, idx) => `
                         <div class="carousel-item ${idx === 0 ? 'active' : ''}">
-                            <img src="${img}" class="d-block w-100 rounded" alt="${hab.tipo_hab} - imagen ${idx + 1}">
+                            <img src="${img}" class="d-block w-100 rounded" alt="${hab.tipo_hab} - imagen ${idx + 1}"
+                                 onerror="this.onerror=null; this.src='${placeholder}';">
                         </div>
                     `).join('')}
                 </div>
